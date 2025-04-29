@@ -320,16 +320,26 @@
 }  /*utils*/
 
 
+
+
 @layer theme {
-  .light {
-    --color-scheme: light;
+  :root[data-theme="system"],
+  :root:has(#theme-system:checked) {
+    color-scheme: light dark;
   }
-  .dark {
-    --color-scheme: dark;
+
+  :root[data-theme="light"],
+  :root:has(#theme-light:checked) {
+    color-scheme: light;
+  }
+
+  :root[data-theme="dark"],
+  :root:has(#theme-dark:checked) {
+    color-scheme: dark;
   }
 
   :where(html) {
-    color-scheme: var(--color-scheme, light dark);
+    color-scheme: light dark;
     --palette-hue: var(--oklch-cyan);
     --palette-hue-rotate-by: 5;
     --palette-chroma: 0.89;
@@ -376,7 +386,7 @@
 
     /* Borders */
     --border-color: light-dark(var(--gray-4), var(--gray-12));
-    --border-radius: var(--size-2);
+    --border-radius: var(--size-1);
     --border-width: 1px;
 
     /* Input Field */
@@ -386,14 +396,16 @@
     --field-size: 2.3lh;
     --field-size-small: 1.9lh;
 
+    /* Button */
     --button-border-radius: var(--radius-round);
+    /* Ripple effect */
     @media (prefers-reduced-motion: no-preference) {
       --button-ripple-size: 100%;
       --button-ripple-duration: 0.5s;
     }
   }
 
-
+  /* Highlight colors */
   :where(.red, .error, del) {
     --palette-hue: var(--oklch-red, 25);
     --palette-chroma: 1;
@@ -422,6 +434,7 @@
     --orange: oklch(from var(--color-7) l 0.2 75);
   }
 
+  /* Gray palette */
   :where(html) {
     --gray-chroma: 0.01;
     --gray-lightness: 255;
@@ -475,7 +488,8 @@
       from var(--color-16) l var(--gray-chroma) var(--gray-lightness)
     );
   }
-}  /* THEME */
+}
+  /* THEME */
 
 @layer components.base {
   :where(.button) {
@@ -752,6 +766,116 @@
     margin-inline-end: var(--size-relative-6);
   }
 }  /* BUTTON */
+
+@layer components.base {
+  :where(.chip) {
+    --_bg-color: var(--surface-tonal);
+    --_border-color: var(--border-color);
+    --_color: var(--text-color-1);
+
+    align-items: center;
+    background: var(--_bg-color) var(--ripple, none);
+    border: 1px solid var(--_border-color);
+    border-radius: var(--radius-2, 0.5rem);
+    color: var(--_color);
+    display: inline-flex;
+    font-size: var(--font-size-0, 0.75rem);
+    gap: var(--size-1);
+    block-size: var(--size-7, 2rem);
+    padding-inline: var(--size-2);
+    text-decoration: none;
+
+    /* Variants */
+    &.tonal {
+      --_bg-color: var(--surface-tonal);
+      --_color: var(--text-color-1);
+    }
+
+    &.outlined {
+      --_bg-color: var(--surface-default);
+      --_color: var(--text-color-1);
+    }
+
+    /* Colors */
+    &.red,
+    &.blue,
+    &.green,
+    &.orange,
+    &.primary {
+        --_bg-color: var(--color-5);
+        --_border-color: color-mix( in lch, var(--_bg-color), black 20% );
+        --_color: color-mix( in srgb, lch(from var(--_bg-color) calc((50 - l) * infinity) 0 0 ), var(--_bg-color) 10% );
+
+        /* Colors */
+        &:hover {
+        --_bg-color: var(--color-9);
+        --_border-color: color-mix( in lch, var(--_bg-color), black 40% );
+        --_color: color-mix( in srgb, lch(from var(--_bg-color) calc((50 - l) * infinity) 0 0 ), var(--_bg-color) 10% );
+        }
+    }
+
+
+    &:where(button, a):where(:not([disabled])) {
+      &:where(:not(:active)):hover {
+        --_bg-color: light-dark(
+          oklch(from var(--surface-tonal) calc(l * 0.98) c h),
+          oklch(from var(--surface-tonal) calc(l * 1.1) c h)
+        );
+      }
+    }
+
+    /* Icon */
+    &:has(svg:first-child) {
+      padding-inline: var(--size-1) var(--size-2);
+    }
+    &:has(svg:last-child) {
+      padding-inline: var(--size-2) var(--size-1);
+    }
+
+    &:has(svg) {
+      svg {
+        flex-shrink: 0;
+        inline-size: var(--size-3);
+      }
+    }
+
+    /* Sizes */
+    &.small {
+      block-size: var(--size-5);
+    }
+    &.multiline {
+      block-size: auto;
+    }
+
+    /* Ripple effect */
+    background-position: center;
+
+    &:where(:not([disabled])) {
+      &:where(:not(:active):hover) {
+        --ripple: radial-gradient(circle, transparent 1%, var(--_bg-color) 1%)
+          center/15000%;
+
+        transition: background var(--button-ripple-duration);
+      }
+
+      &:where(:hover:active) {
+        background-size: var(--button-ripple-size);
+        transition: background 0s;
+      }
+    }
+
+    /* Disabled */
+    &:where([disabled]) {
+      opacity: 0.64;
+      --_text-color: color-mix(
+        in oklch,
+        var(--text-color-2) 50%,
+        var(--surface-default)
+      );
+      cursor: not-allowed;
+    }
+  }
+}  /* CHIP */
 
 @layer components.base {
   :where(.icon-button) {
@@ -3477,6 +3601,7 @@
   :where(.flex){--_gap:initial;align-items:center;gap:var(--_gap,var(--size-1));display:flex}
   :where(.flex-wrap){--_gap:initial;align-items:center;gap:var(--_gap,var(--size-3));flex-wrap:wrap;display:flex}
   :where(.flex-center){--_gap:initial;place-content:center;align-items:center;gap:var(--_gap,var(--size-3));flex-wrap:wrap;display:flex}
+  :where(.flex-end){ --_gap: initial; align-items: center; justify-content: flex-end; gap: var(--_gap, var(--size-3)); display: flex; }
   :where(.grid){--_gap:initial;align-content:start;gap:var(--_gap,var(--size-3));display:grid}
   :where(.pile){ display: grid; > * { grid-area: 1 / 1; } }
   :where(.grid-ram-fit){repeat(auto-fit, minmax(min(0, 100%), 1fr));}
