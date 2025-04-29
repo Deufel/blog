@@ -66,7 +66,7 @@
     :where(:root) { --size-relative-000: -0.5ch; --size-relative-00: -0.25ch; --size-relative-1: 0.25ch; --size-relative-2: 0.5ch; --size-relative-3: 1ch; --size-relative-4: 1.25ch; --size-relative-5: 1.5ch; --size-relative-6: 1.75ch; --size-relative-7: 2ch; --size-relative-8: 3ch; --size-relative-9: 4ch; --size-relative-10: 5ch; --size-relative-11: 7.5ch; --size-relative-12: 10ch; --size-relative-13: 15ch; --size-relative-14: 20ch; --size-relative-15: 30ch; }
     :where(:root) { --font-lineheight-00: 0.95; --font-lineheight-0: 1.1; --font-lineheight-1: 1.25; --font-lineheight-2: 1.375; --font-lineheight-3: 1.5; --font-lineheight-4: 1.75; --font-lineheight-5: 2; }
     :where(:root) { --oklch-red: 25; --oklch-pink: 350; --oklch-purple: 310; --oklch-violet: 290; --oklch-indigo: 270; --oklch-blue: 240; --oklch-cyan: 210; --oklch-teal: 185; --oklch-green: 145; --oklch-lime: 125; --oklch-yellow: 100; --oklch-orange: 75; }
-}
+}  /* OPEN PROPS */
 
 @layer normalize {
   *,
@@ -261,7 +261,7 @@
   :target {
     scroll-margin-block-start: 2rem;
   }
-}
+}  /* NORMZLIZE */
 
 @layer utils {
   .sr-only {
@@ -317,10 +317,7 @@
       }
     }
   }
-}  /*utils*/
-
-
-
+}  /* UTILS */
 
 @layer theme {
   :root[data-theme="system"],
@@ -915,7 +912,7 @@
       }
     }
   }
-}  /*  ICON BUTTON */
+}  /* ICON BUTTON */
 
 @layer components.base {
   :where(nav.tabs) {
@@ -3583,7 +3580,7 @@
         "  header  header  header" auto
         "  nav     main    aside " 1fr
         "  footer  footer  footer" auto
-        /  240px    1fr     auto;
+        /  auto    1fr     auto;
       min-height: 100svh;
     }
   }
