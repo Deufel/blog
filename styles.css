@@ -573,6 +573,7 @@
       svg {
         max-block-size: 0.7lh;
         color: currentColor;
+        vertical-align: middle; /* mike */
       }
     }
 
