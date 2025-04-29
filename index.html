@@ -9,36 +9,32 @@
 <script src=""></script>
 <body>
     <ul class="list card tonal content me__4" hx-on--click="htmx.takeClass(event.target, 'selected')">
-         <style ready="">.selected {color: var(--color-8)}</style>
-         <li>
-           <div class="text">
-    <strong>Theme Setting</strong>       </div>
-         </li>
-         <li>
-    <label for="theme-light" class="radio">         <div class="start">
-    <icon-sun><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun-icon lucide-sun"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg></icon-sun>         </div>
-             <div class="text">Light Mode</div>
-             <div class="end">
-               <input name="theme" type="radio" id="theme-light">
-             </div>
-    </label>     </li>
-         <li>
-    <label for="theme-dark" class="radio">         <div class="start">
-    <icon-moon><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon-icon lucide-moon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></icon-moon>         </div>
-             <div class="text">Dark Mode</div>
-             <div class="end">
-               <input name="theme" type="radio" id="theme-dark">
-             </div>
-    </label>     </li>
-         <li>
-    <label for="theme-system" class="radio">         <div class="start">
-    <icon-sun-moon><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun-moon-icon lucide-sun-moon"><path d="M12 8a2.83 2.83 0 0 0 4 4 4 4 0 1 1-4-4"></path><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.9 4.9 1.4 1.4"></path><path d="m17.7 17.7 1.4 1.4"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.3 17.7-1.4 1.4"></path><path d="m19.1 4.9-1.4 1.4"></path></svg></icon-sun-moon>         </div>
-             <div class="text">System Mode</div>
-             <div class="end">
-               <input name="theme" type="radio" id="theme-system">
-             </div>
-    </label>     </li>
-       </ul>
+        <li><div class="text"><strong>Theme Setting</strong></div></li>
+
+        <li><label for="theme-light-dark" class="radio">
+            <div class="start">
+                    <icon-sun><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun-icon lucide-sun"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg></icon-sun>
+            </div>
+            <div class="text">System Mode</div>
+            <div class="end"><input name="theme" type="radio" id="theme-light-dark"></div>
+        </label></li>
+
+        <li><label for="theme-light" class="radio">
+            <div class="start">
+                    <icon-sun><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun-icon lucide-sun"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg></icon-sun>
+            </div>
+            <div class="text">Light Mode</div>
+            <div class="end"><input name="theme" type="radio" id="theme-light"></div>
+        </label></li>
+
+        <li><label for="theme-dark" class="radio">
+            <div class="start">
+                    <icon-sun><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun-icon lucide-sun"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg></icon-sun>
+            </div>
+            <div class="text">Dark Mode</div>
+            <div class="end"><input name="theme" type="radio" id="theme-dark"></div>
+        </label></li>
+    </ul>
 
 <h2>Buttons</h2>
 <div class="flex">
