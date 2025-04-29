@@ -3569,7 +3569,7 @@
       /  1fr;
     min-height: 100svh;
   }
-}  /* DASHBOARD */
+}  /* DASHBOARD - MOBILE */
 
 @layer layout.desktop {
   @media (min-width: 768px) {
@@ -3580,11 +3580,12 @@
         "  header  header  header" auto
         "  nav     main    aside " 1fr
         "  footer  footer  footer" auto
-        /  auto    1fr     auto;
+        /  240px    1fr     auto;
       min-height: 100svh;
+      gap: var(--size-2);
     }
   }
-}  /* DASHBOARD */
+}  /* DASHBOARD - DESKTOP */
 
 @layer extra {
   :where(.hide-md-up){ @media (min-width: 768px) { display: none ; } }
@@ -3592,8 +3593,24 @@
   :where(.debug){border: dashed red;}
   :where(.rounded){--_rounded:initial;border-radius:var(--_rounded,var(--radius-2))}
   :where(.rounded-match){overflow-clip-margin:content-box;overflow:clip}
-  :where(.padding){--_padding:initial;--_padding-inline:initial;--_padding-block:initial;padding-inline:var(--_padding-inline,var(--_padding,var(--size-2)));padding-block:var(--_padding-block,var(--_padding,var(--size-2)))}
-  :where(.margin){--_margin:initial;--_margin-inline:initial;--_margin-block:initial;margin-inline:var(--_margin-inline,var(--_margin,var(--size-2)));margin-block:var(--_margin-block,var(--_margin,var(--size-2)))}
+  /* :where(.padding){--_padding:initial;--_padding-inline:initial;--_padding-block:initial;padding-inline:var(--_padding-inline,var(--_padding,var(--size-2)));padding-block:var(--_padding-block,var(--_padding,var(--size-2)))}
+  :where(.margin){--_margin:initial;--_margin-inline:initial;--_margin-block:initial;margin-inline:var(--_margin-inline,var(--_margin,var(--size-2)));margin-block:var(--_margin-block,var(--_margin,var(--size-2)))} */
+
+  :where(.padding) { --_padding: initial; --_padding-inline: initial; --_padding-block: initial; --_padding-top: initial; --_padding-right: initial; --_padding-bottom: initial; --_padding-left: initial; padding-inline: var(--_padding-inline, var(--_padding, var(--size-2))); padding-block: var(--_padding-block, var(--_padding, var(--size-2))); }
+  :where(.padding-top) { --_padding-top: initial; padding-top: var(--_padding-top, var(--_padding, var(--size-2))); }
+  :where(.padding-right) { --_padding-right: initial; padding-right: var(--_padding-right, var(--_padding-inline, var(--_padding, var(--size-2)))); }
+  :where(.padding-bottom) { --_padding-bottom: initial; padding-bottom: var(--_padding-bottom, var(--_padding-block, var(--_padding, var(--size-2)))); }
+  :where(.padding-left) { --_padding-left: initial; padding-left: var(--_padding-left, var(--_padding-inline, var(--_padding, var(--size-2)))); }
+  :where(.padding-inline) { --_padding-inline: initial; padding-inline: var(--_padding-inline, var(--_padding, var(--size-2))); }
+  :where(.padding-block) { --_padding-block: initial; padding-block: var(--_padding-block, var(--_padding, var(--size-2))); }
+  :where(.margin) { --_margin: initial; --_margin-inline: initial; --_margin-block: initial; --_margin-top: initial; --_margin-right: initial; --_margin-bottom: initial; --_margin-left: initial; margin-inline: var(--_margin-inline, var(--_margin, var(--size-2))); margin-block: var(--_margin-block, var(--_margin, var(--size-2))); }
+  :where(.margin-top) { --_margin-top: initial; margin-top: var(--_margin-top, var(--_margin-block, var(--_margin, var(--size-2)))); }
+  :where(.margin-right) { --_margin-right: initial; margin-right: var(--_margin-right, var(--_margin-inline, var(--_margin, var(--size-2)))); }
+  :where(.margin-bottom) { --_margin-bottom: initial; margin-bottom: var(--_margin-bottom, var(--_margin-block, var(--_margin, var(--size-2)))); }
+  :where(.margin-left) { --_margin-left: initial; margin-left: var(--_margin-left, var(--_margin-inline, var(--_margin, var(--size-2)))); }
+  :where(.margin-inline) { --_margin-inline: initial; margin-inline: var(--_margin-inline, var(--_margin, var(--size-2))); }
+  :where(.margin-block) { --_margin-block: initial; margin-block: var(--_margin-block, var(--_margin, var(--size-2))); }
+
   :where(.flex){--_gap:initial;align-items:center;gap:var(--_gap,var(--size-1));display:flex}
   :where(.flex-wrap){--_gap:initial;align-items:center;gap:var(--_gap,var(--size-3));flex-wrap:wrap;display:flex}
   :where(.flex-center){--_gap:initial;place-content:center;align-items:center;gap:var(--_gap,var(--size-3));flex-wrap:wrap;display:flex}

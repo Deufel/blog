@@ -23,21 +23,45 @@
         </button>
     </header>
 
-    <main id="main" class="card tonal margin">
+    <main id="main" class="card tonal">
         <h1>Main</h1>
     </main>
-    <nav popover="auto" data-layout="mobile-popover" id="nav" class="card outlined" style="overflow-y: auto; scrollbar-gutter: auto;">
-        <ul class="list">
-            <li>
-                <button hx-get="partials/button.html" hx-target="#main">
-                    <div class="start">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-mouse-pointer-icon lucide-square-mouse-pointer"><path d="M12.034 12.681a.498.498 0 0 1 .647-.647l9 3.5a.5.5 0 0 1-.033.943l-3.444 1.068a1 1 0 0 0-.66.66l-1.067 3.443a.5.5 0 0 1-.943.033z"/><path d="M21 11V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h6"/></svg>
-                    </div>
-                    <div class="text">
-                        <p>Buttons</p>
-                    </div>
-                </button>
-            </li>
+    <nav popover="auto" data-layout="mobile-popover" id="nav" class="card tonal" style="overflow-y: auto; scrollbar-gutter: auto;">
+        <ul class="list push-last">
+
+            <details class="card">
+              <summary id="actions" aria-controls="actions">Actions</summary>
+              <div id="actions" role="region" aria-labelledby="actions" >
+                  <li>
+                      <button hx-get="partials/button.html" hx-target="#main">
+                          <div class="start">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-mouse-pointer-icon lucide-square-mouse-pointer"><path d="M12.034 12.681a.498.498 0 0 1 .647-.647l9 3.5a.5.5 0 0 1-.033.943l-3.444 1.068a1 1 0 0 0-.66.66l-1.067 3.443a.5.5 0 0 1-.943.033z"/><path d="M21 11V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h6"/></svg>
+                          </div>
+                          <div class="text">
+                              <p>Buttons</p>
+                          </div>
+                      </button>
+                  </li>
+              </div>
+            </details>
+
+            <details class="card">
+              <summary id="inputs" aria-controls="inputs">Inputs</summary>
+              <div id="inputs" role="region" aria-labelledby="inputs" >
+                  <li>
+                      <button hx-get="partials/checkbox.html" hx-target="#main">
+                          <div class="start">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-check-icon lucide-square-check"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="m9 12 2 2 4-4"/></svg>
+                          </div>
+                          <div class="text">
+                              <p>Checkbox</p>
+                          </div>
+                      </button>
+                  </li>
+              </div>
+            </details>
+
+
         </ul>
     </nav>
 
