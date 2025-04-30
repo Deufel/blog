@@ -7,3 +7,9 @@
   </section>
   <input type="range" id="range" step="0.1">
 </div>
+
+
+<script>
+range.oninput = () =>
+  document.body.style.setProperty('--pos', range.value + '%')
+</script>
