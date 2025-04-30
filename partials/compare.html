@@ -13,28 +13,19 @@
         }
     .me img { max-block-size: 80dvh; max-inline-size: 100%; }
     </style>
-  <section class="before">
-    <img src="https://picsum.photos/800/400?random=1" alt="Random image">
-  </section>
-  <section class="after">
-      <pre><code class="language-javascript">
-      function greet(name) {
-        return `Hello, ${name}!`;
-      }
-      </code></pre>
-  </section>
-  <input type="range" id="range" step="0.1" min="0" max="100" value="50">
+
+    <section class="before">
+        <img src="https://picsum.photos/800/400?random=1" alt="Random image">
+    </section>
+    <section class="after">
+        <img src="https://picsum.photos/800/400?random=1" alt="Random image">
+    </section>
+    <input type="range" id="range" step="0.1" min="0" max="100" value="50">
+
+    <script>
+    range.oninput = () =>
+      document.body.style.setProperty('--pos', range.value + '%')
+
+    hljs.highlightAll(); hljs.initCopyButton();
+    </script>
 </div>
-
-<script>
-  const range = document.getElementById('range');
-  range.oninput = () => {
-    document.body.style.setProperty('--pos', range.value + '%');
-  };
-  // Initialize on page load
-  document.body.style.setProperty('--pos', range.value + '%');
-</script>
-
-<script>
-  hljs.highlightAll();
-</script>
