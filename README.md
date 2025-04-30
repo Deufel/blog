@@ -1,6 +1,9 @@
 # CSS Stylesheet
 
-A minimal custom CSS file based on slight modifications of [OpenProps UI](https://open-props-ui.netlify.app/) built with the best custom css variables from [OpenProps](https://open-props.style/).
+A minimal custom CSS file based on slight modifications of [OpenProps UI](https://open-props-ui.netlify.app/) built with the custom css variables from [OpenProps](https://open-props.style/).
+
+## Demo
+[Example Page](https://deufel.github.io/css/)
 
 ## Overview
 
