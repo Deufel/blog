@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="styles.css">
     <script src="vendor/htmx.min.js"></script>
     <script src="layout.js"></script>
+    <!-- Highlight.js core -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tokyo-night-dark.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+    <!-- Optional: load languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
+
 </head>
 
 <body class="dashboard centered-body">
@@ -33,6 +40,12 @@
     <aside popover="auto" id="aside">
         <h2>Aside</h2>
     </aside>
+
+
+
+    <script>
+      hljs.highlightAll();
+    </script>
 
 </body>
 </html>
