@@ -3559,6 +3559,12 @@
     #aside:popover-open  {opacity: 1;transform: translateX(0);@starting-style {opacity: 0;transform: translateX(100%);}}
     #signin:popover-open {opacity: 1;transform: translateX(0);@starting-style {opacity: 0;transform: translateX(100%);}}
     #footer:popover-open {opacity: 1;transform: translateY(0);@starting-style {opacity: 0;transform: translateY(100%);}}
+
+    [popover]:popover-open::backdrop {
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+      backdrop-filter: blur(5px); /* Apply a subtle blur */
+    }
+
   }
 
   :where(body.dashboard) {
