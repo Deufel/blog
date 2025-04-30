@@ -3540,9 +3540,9 @@
   :where(body.dashboard) {
 
     >header {grid-area: header;}
-    >nav    {grid-area: nav;}
-    >aside  {grid-area: aside;}
-    >main   {grid-area: main;}
+    >nav    {grid-area: nav; overflow-y: auto;}
+    >aside  {grid-area: aside;overflow-y: auto}
+    >main   {grid-area: main; overflow-y: auto;}
     >footer {grid-area: footer;}
 
 
@@ -3550,7 +3550,9 @@
         position: fixed;
         transition: all 0.5s var(--ease-elastic-in-out-3), opacity 0.5s var(--ease-elastic-in-out-3);
     }
-    >nav, >aside {width: min(80vw, 300px); top: 0; height: 100%; overflow-y: auto; scrollbar-gutter: auto;opacity: 0}
+
+    >nav, >aside {width: min(80vw, 300px); top: 0; height: 100svh; scrollbar-gutter: auto;opacity: 0}
+
     >nav {left: 0; right: auto;transform: translateX(-100%); }
     >aside {right: 0;left: auto; transform: translateX(100%); }
     >footer {top: auto; width: 100%; height: auto; transform: translateY(100%);}
@@ -3581,7 +3583,8 @@
       "  header  " auto
       "  main    " 1fr
       /  1fr;
-    min-height: 100svh;
+    height: 100svh; /* Changed from min-height to height for exact sizing */
+    overflow: hidden; /* Added to prevent body scrolling */
   }
 }  /* DASHBOARD - MOBILE */
 
