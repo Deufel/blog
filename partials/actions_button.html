@@ -117,7 +117,12 @@
 
 
 <div class="card outlined">
-    <script> hljs.highlightAll(); hljs.initCopyButton(); </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      hljs.highlightAll();
+      hljs.addPlugin(new CopyButtonPlugin());
+    });
+    </script>
     <hgroup>
         <p>Actions</p>
         <h2 class="h3">Large Buttons</h2>
