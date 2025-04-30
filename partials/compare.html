@@ -2,7 +2,7 @@
 
 <div class="compare">
     <style>
-    .me { display: grid;}
+    .me { display: grid; max-height: 80svh;}
     .me > * { grid-area: 1 / 1; }
     .me > section { display: grid; place-content: center; }
     .me.before { mask: linear-gradient(to right, #000 0, var(--pos, 50%), #0000 0); }
@@ -11,7 +11,7 @@
             &::-webkit-slider-thumb { appearance: none; inline-size: 4px; block-size: 80svh; background-color: CanvasText; }
             &::-moz-range-thumb { appearance: none; inline-size: 4px; block-size: 80svh; background-color: CanvasText; }
         }
-    .me img { max-block-size: 80dvh; max-inline-size: 100%; }
+    .me img { max-block-size: 80svh; max-inline-size: 100%; }
     </style>
 
     <section class="before">
