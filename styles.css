@@ -3561,6 +3561,11 @@
     #footer:popover-open {opacity: 1;transform: translateY(0);@starting-style {opacity: 0;transform: translateY(100%);}}
 
     [popover]:popover-open::backdrop {
+        transition:
+            display 1s allow-discrete,
+            overlay 1s allow-discrete,
+            opacity 1s ease,
+            transform 1s ease;
       background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
       backdrop-filter: blur(5px); /* Apply a subtle blur */
     }
