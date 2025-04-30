@@ -8,12 +8,18 @@
     <script src="vendor/htmx.min.js"></script>
     <script src="layout.js"></script>
     <script src="vendor/scopedCSS.js"></script>
-    <!-- Highlight.js core -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/tokyo-night-dark.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
-    <!-- Optional: load languages -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
+    <!-- Highlight.js Light & Dark Theme Support -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.9.0/styles/tokyo-night-dark.min.css" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.9.0/styles/tokyo-night-light.min.css" media="(prefers-color-scheme: light)">
+
+    <!-- Highlight.js Core -->
+    <script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+
+    <!-- Highlight.js Copy Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
+
+
 
 </head>
 
@@ -44,9 +50,9 @@
 
 
 
-    <script>
-      hljs.highlightAll();
-    </script>
+
+    <script> hljs.highlightAll(); hljs.initCopyButton(); </script>
+
 
 </body>
 </html>
