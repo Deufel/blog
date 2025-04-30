@@ -1,4 +1,4 @@
-# My CSS Stylesheet
+# CSS Stylesheet
 
 A minimal custom CSS file based on slight modifications of [OpenProps UI](https://open-props-ui.netlify.app/) built with the best custom css variables from [OpenProps](https://open-props.style/).
 
