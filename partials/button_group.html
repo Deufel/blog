@@ -1,17 +1,52 @@
 <h2>Button Groups</h2>
-<div clas="flex-wrap">
-    <div class="button-group" role="group">
-        <button class="button outlined">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-orbit-icon lucide-orbit"><path d="M20.341 6.484A10 10 0 0 1 10.266 21.85"/><path d="M3.659 17.516A10 10 0 0 1 13.74 2.152"/><circle cx="12" cy="12" r="3"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/></svg>
-            Auto
-        </button>
-        <button class="button outlined">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun-icon lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-            Light
-        </button>
-        <button class="button outlined">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon-icon lucide-moon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-            Dark
-        </button>
+<div clas="card outlined">
+    <hgroup>
+        <p>Actions</p>
+        <h2 class="h3">Button Group</h2>
+        <p><a href="https://open-props-ui.netlify.app/components/data-display/card.html">Docs</a></p>
+    </hgroup>
+    <div class="content">
+        <div class="button-group" role="group">
+            <button class="button outlined">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-orbit-icon lucide-orbit"><path d="M20.341 6.484A10 10 0 0 1 10.266 21.85"/><path d="M3.659 17.516A10 10 0 0 1 13.74 2.152"/><circle cx="12" cy="12" r="3"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/></svg>
+                Auto
+            </button>
+            <button class="button outlined">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun-icon lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                Light
+            </button>
+            <button class="button outlined">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon-icon lucide-moon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                Dark
+            </button>
+        </div>
+    </div>
+    <div class="actions">
+        <details class="card">
+          <summary id="summary-id" aria-controls="content-id">View Code</summary>
+          <div id="content-id" class="content" role="region" aria-labelledby="summary-id" >
+            <pre><code class="language-html">
+                &lt;div class=&quot;button-group&quot; role=&quot;group&quot;&gt;
+                    &lt;button class=&quot;button outlined&quot;&gt;
+                        &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; class=&quot;lucide lucide-orbit-icon lucide-orbit&quot;&gt;&lt;path d=&quot;M20.341 6.484A10 10 0 0 1 10.266 21.85&quot;/&gt;&lt;path d=&quot;M3.659 17.516A10 10 0 0 1 13.74 2.152&quot;/&gt;&lt;circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;3&quot;/&gt;&lt;circle cx=&quot;19&quot; cy=&quot;5&quot; r=&quot;2&quot;/&gt;&lt;circle cx=&quot;5&quot; cy=&quot;19&quot; r=&quot;2&quot;/&gt;&lt;/svg&gt;
+                        Auto
+                    &lt;/button&gt;
+                    &lt;button class=&quot;button outlined&quot;&gt;
+                        &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; class=&quot;lucide lucide-sun-icon lucide-sun&quot;&gt;&lt;circle cx=&quot;12&quot; cy=&quot;12&quot; r=&quot;4&quot;/&gt;&lt;path d=&quot;M12 2v2&quot;/&gt;&lt;path d=&quot;M12 20v2&quot;/&gt;&lt;path d=&quot;m4.93 4.93 1.41 1.41&quot;/&gt;&lt;path d=&quot;m17.66 17.66 1.41 1.41&quot;/&gt;&lt;path d=&quot;M2 12h2&quot;/&gt;&lt;path d=&quot;M20 12h2&quot;/&gt;&lt;path d=&quot;m6.34 17.66-1.41 1.41&quot;/&gt;&lt;path d=&quot;m19.07 4.93-1.41 1.41&quot;/&gt;&lt;/svg&gt;
+                        Light
+                    &lt;/button&gt;
+                    &lt;button class=&quot;button outlined&quot;&gt;
+                        &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;24&quot; height=&quot;24&quot; viewBox=&quot;0 0 24 24&quot; fill=&quot;none&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; class=&quot;lucide lucide-moon-icon lucide-moon&quot;&gt;&lt;path d=&quot;M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z&quot;/&gt;&lt;/svg&gt;
+                        Dark
+                    &lt;/button&gt;
+                &lt;/div&gt;
+            </code></pre>
+          </div>
+        </details>
     </div>
 </div>
+
+
+<script>
+  hljs.highlightAll();
+</script>
