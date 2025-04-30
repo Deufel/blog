@@ -9,7 +9,17 @@ This project is a flat-file CSS implementation that adapts and slightly changes 
 ## Usage
 
 Download or link the `styles.css` file into your project; but be aware this is not minified or optimized for production use.
-
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Deufel/css/styles.css">
+```
+
+## Tips
+
+Surreal JS works very nicely with a class based style system; as all the button in this design system require the class of ```button``` you can bulk add them to a div...
+
+```html
+<div>
+<script>me().any("button").classAdd('button')</script>
+...
+</div>
 ```
