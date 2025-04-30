@@ -1,5 +1,18 @@
+<p>Random other usefull css these example are outside the design system and have all the styles scoped to the html <kbd>F12</kbd></p>
 
 <div class="compare">
+    <style>
+    .me { display: grid;}
+    .me > * { grid-area: 1 / 1; }
+    .me > section { display: grid; place-content: center; }
+    .me.before { mask: linear-gradient(to right, #000 0, var(--pos, 50%), #0000 0); }
+    .me.after { mask: linear-gradient(to right, #0000 0, var(--pos, 50%), #000 0); }
+    .me > input[type="range"] { z-index: 1; appearance: none; background: transparent; cursor: pointer; -webkit-tap-highlight-color: transparent;
+            &::-webkit-slider-thumb { appearance: none; inline-size: 4px; block-size: 100dvh; background-color: CanvasText; }
+            &::-moz-range-thumb { appearance: none; inline-size: 4px; block-size: 100dvh; background-color: CanvasText; }
+        }
+    .me img { max-block-size: 80dvh; max-inline-size: 100%; }
+    </style>
   <section class="before">
     <img src="https://picsum.photos/800/400?random=1" alt="Random image">
   </section>
