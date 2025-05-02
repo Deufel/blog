@@ -3752,12 +3752,13 @@
           /  1fr;
         min-height: 100svh;
     }
-}
+}  /* MOBILE */
 
 @layer layout.desktop {
   @media (min-width: 768px) {
     body {
       >nav, >aside, >footer {position: static; transform: none; opacity: 1;}
+      >nav, >aside {height: auto; max-height: none; width: auto;}
       grid-template:
         "  header  header  header" auto
         "  nav     main    aside " 1fr
@@ -3766,10 +3767,7 @@
       min-height: 100svh;
     }
   }
-}
-
-
-
+}  /* DESKTOP */
 
 @layer extra {
   :where(.htmx-request) {cursor: progress}
