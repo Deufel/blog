@@ -3800,7 +3800,7 @@
         >header {grid-area: header;}
         >nav    {grid-area: nav; overflow-y: auto;}
         >aside  {grid-area: aside; overflow-y: auto;}
-        >main   {grid-area: main; overflow-y: auto;}
+        >main   {grid-area: main; scroll-behavior: auto; overflow-y: auto;}
         >footer {grid-area: footer;}
 
         >nav, >aside, >footer { position: fixed; transition: opacity 300ms, transform 300ms;}
