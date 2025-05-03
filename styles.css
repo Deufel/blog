@@ -2573,7 +2573,6 @@
 }  /* PROGRESS */
 
 @layer components.has-deps {
-
   :where(.list) {
     --_bg-color: light-dark(var(--gray-1), var(--gray-15));
 
@@ -3768,6 +3767,18 @@
     }
   }
 }  /* DESKTOP */
+
+@layer layout.desktop {
+  @media (min-width: 1024px) {
+    body {
+      grid-template:
+        "  header  header  header" auto
+        "  nav     main    aside " 1fr
+        "  footer  footer  footer" auto
+        /  240     1fr     auto;
+    }
+  }
+}  /* DESKTOP LARGE */
 
 @layer extra {
   :where(.htmx-request) {cursor: progress}
