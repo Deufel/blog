@@ -3818,7 +3818,7 @@
           "  header  " auto
           "  main    " 1fr
           /  1fr;
-        min-height: 100svh;
+        height: 100svh;
     }
 }  /* MOBILE */
 
@@ -3836,30 +3836,6 @@
     }
   }
 }  /* DESKTOP */
-
-@layer layout.desktop {
-  @media (min-width: 1024px) {
-    body {
-      grid-template:
-        "  header  header  header" auto
-        "  nav     main    aside " 1fr
-        "  footer  footer  footer" auto
-        /  240px   1fr     auto;
-    }
-  }
-}
-
-@layer layout.desktop {
-  @media (min-width: 1024px) {
-    body {
-      grid-template:
-        "  header  header  header" auto
-        "  nav     main    aside " 1fr
-        "  footer  footer  footer" auto
-        /  240     1fr     auto;
-    }
-  }
-}  /* DESKTOP LARGE */
 
 @layer extra {
   :where(.htmx-request) {cursor: progress}
