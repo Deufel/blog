@@ -3809,8 +3809,8 @@
 
         >nav[popover], >aside[popover], >footer[popover] { position: fixed; transition: opacity 300ms, transform 300ms;}
         >nav[popover], >aside[popover] {width: min(80vw, 300px); top: 0; height: 100svh;}
-        >nav[popover] {left: 0; right: auto; opacity: 0; transform: translateX(-100%);}
-        >aside[popover] {right: 0; left: auto; opacity: 0; transform: translateX(100%);}
+        >nav[popover]    {left: 0  ; right: auto; opacity: 0; transform: translateX(-100%);}
+        >aside[popover]  {right: 0 ; left: auto ; opacity: 0; transform: translateX(100%);}
         >footer[popover] {top: auto; width: 100%; height: auto; transform: translateY(100%);}
 
 

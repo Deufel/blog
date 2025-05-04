@@ -37,19 +37,10 @@
         </button>
     </header>
 
-    <main id="main" class="tonal surface rounded">
-        <h1>Main</h1>
-    </main>
-
-    <nav hx-get="partials/nav.html" hx-trigger="load" hx-swap="outerHTML" style="cursor: wait;">
-    </nav>
-
-    <aside popover="auto" id="aside">
-        <h2>Aside</h2>
-    </aside>
-
-
-
+    <main   id="main"   hx-get="partials/index_main.html"   hx-trigger="load"></main>
+    <aside  id="aside"  hx-get="partials/index_aside.html"  hx-trigger="load" popover="auto" data-layout="mobile-popover"></aside>
+    <nav    id="nav"    hx-get="partials/index_nav.html"    hx-trigger="load" popover="auto" data-layout="mobile-popover"></nav>
+    <footer id="footer" hx-get="partials/index_footer.html" hx-trigger="load" popover="auto" data-layout="mobile-popover"></footer>
 
 
 </body>
