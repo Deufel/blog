@@ -3854,7 +3854,7 @@
 }/* MIKES FORM namespced to .form */
 
 
-/* @layer layout.mobile {
+@layer layout.mobile {
     body {
         >header {grid-area: header;}
         >nav    {grid-area: nav; overflow-y: auto;}
@@ -3862,11 +3862,16 @@
         >main   {grid-area: main; scroll-behavior: auto; overflow-y: auto;}
         >footer {grid-area: footer;}
 
-        >nav, >aside, >footer { position: fixed; transition: opacity 300ms, transform 300ms;}
-        >nav, >aside {width: min(80vw, 300px); top: 0; height: 100svh;}
-        >nav {left: 0; right: auto; opacity: 0; transform: translateX(-100%);}
-        >aside {right: 0; left: auto; opacity: 0; transform: translateX(100%);}
-        >footer {top: auto; width: 100%; height: auto; transform: translateY(100%);}
+        >nav, >aside, >footer {position: static; transform: none; opacity: 1;}
+        >nav, >aside {height: auto; max-height: none; width: auto;}
+
+        >nav[popover], >aside[popover], >footer[popover] { position: fixed; transition: opacity 300ms, transform 300ms;}
+        >nav[popover], >aside[popover] {width: min(80vw, 300px); top: 0; height: 100svh;}
+        >nav[popover] {left: 0; right: auto; opacity: 0; transform: translateX(-100%);}
+        >aside[popover] {right: 0; left: auto; opacity: 0; transform: translateX(100%);}
+        >footer[popover] {top: auto; width: 100%; height: auto; transform: translateY(100%);}
+
+
 
         #nav:popover-open {opacity: 1; transform: translateX(0); @starting-style {opacity: 0; transform: translateX(-100%);}}
         #aside:popover-open {opacity: 1; transform: translateX(0); @starting-style {opacity: 0; transform: translateX(100%);}}
@@ -3881,94 +3886,18 @@
         min-height: 100svh;
         height: 100svh;
     }
-}  /* MOBILE */ */
+}  /* MOBILE */
 
 /* @layer layout.desktop {
   @media (min-width: 768px) {
     body {
       >nav, >aside, >footer {position: static; transform: none; opacity: 1;}
       >nav, >aside {height: auto; max-height: none; width: auto;}
-      grid-template:
-        "  header  header  header" auto
-        "  nav     main    aside " 1fr
-        "  footer  footer  footer" auto
-        /  auto    1fr     auto;
       min-height: 100svh;
     }
   }
-}  /* DESKTOP */ */
+}  /* DESKTOP */
 
-
-@layer layout.mobile {
-    body {
-        >header {grid-area: header;}
-        >nav    {grid-area: nav; overflow-y: auto;}
-        >aside  {grid-area: aside; overflow-y: auto;}
-        >main   {grid-area: main; scroll-behavior: auto; overflow-y: auto;}
-        >footer {grid-area: footer;}
-
-        /* Apply fixed positioning only when popover attribute exists */
-        >nav[popover], >aside[popover], >footer[popover] {
-            position: fixed;
-            transition: opacity 300ms, transform 300ms;
-        }
-
-        >nav[popover], >aside[popover] {
-            width: min(80vw, 300px);
-            top: 0;
-            height: 100svh;
-        }
-
-        >nav[popover] {
-            left: 0;
-            right: auto;
-            opacity: 0;
-            transform: translateX(-100%);
-        }
-
-        >aside[popover] {
-            right: 0;
-            left: auto;
-            opacity: 0;
-            transform: translateX(100%);
-        }
-
-        >footer[popover] {
-            top: auto;
-            width: 100%;
-            height: auto;
-            transform: translateY(100%);
-        }
-
-        /* Popover-open states */
-        #nav:popover-open {
-            opacity: 1;
-            transform: translateX(0);
-            @starting-style {opacity: 0; transform: translateX(-100%);}
-        }
-
-        #aside:popover-open {
-            opacity: 1;
-            transform: translateX(0);
-            @starting-style {opacity: 0; transform: translateX(100%);}
-        }
-
-        #footer:popover-open {
-            opacity: 1;
-            transform: translateY(0);
-            @starting-style {opacity: 0; transform: translateY(100%);}
-        }
-
-        display: grid;
-        grid-template:
-          "  header  header  header" auto
-          "  nav     main    aside " 1fr
-          "  footer  footer  footer" auto
-          /  auto    1fr     auto;
-        min-height: 100svh;
-        height: 100svh;
-    }
-}
 
 @layer extra {
   :where(.content-sm) { --_width: 25ch; width: var(--_width); }
