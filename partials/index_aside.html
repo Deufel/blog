@@ -1,4 +1,4 @@
-<ul class="list card tonal content me__4" hx-on--click="htmx.takeClass(event.target, 'selected')">
+<ul class="list card tonal content">
     <li><div class="text"><strong>Theme Setting</strong></div></li>
 
     <li><label for="theme-light-dark" class="radio">
@@ -25,3 +25,25 @@
         <div class="end"><input name="theme" type="radio" id="theme-dark"></div>
     </label></li>
 </ul>
+
+<label class="field">
+  <select id="hue-select">
+    <button>
+      <selectedcontent></selectedcontent>
+    </button>
+    <div class="list">
+      <option value="cyan">Cyan</option>
+      <option value="red">Red</option>
+      <option value="pink">Pink</option>
+      <option value="purple">Purple</option>
+      <option value="violet">Violet</option>
+      <option value="indigo">Indigo</option>
+      <option value="blue">Blue</option>
+      <option value="teal">Teal</option>
+      <option value="green">Green</option>
+      <option value="lime">Lime</option>
+      <option value="yellow">Yellow</option>
+      <option value="orange">Orange</option>
+    </div>
+  </select>
+</label>
