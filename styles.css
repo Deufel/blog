@@ -3859,19 +3859,16 @@
         >header {grid-area: header;}
         >nav    {grid-area: nav; overflow-y: auto;}
         >aside  {grid-area: aside; overflow-y: auto;}
-        >main   {grid-area: main; scroll-behavior: auto; overflow-y: auto;}
+        >main   {grid-area: main; overflow-y: auto;}
         >footer {grid-area: footer;}
-
         >nav, >aside, >footer { position: fixed; transition: opacity 300ms, transform 300ms;}
         >nav, >aside {width: min(80vw, 300px); top: 0; height: 100svh;}
         >nav {left: 0; right: auto; opacity: 0; transform: translateX(-100%);}
         >aside {right: 0; left: auto; opacity: 0; transform: translateX(100%);}
         >footer {top: auto; width: 100%; height: auto; transform: translateY(100%);}
-
         #nav:popover-open {opacity: 1; transform: translateX(0); @starting-style {opacity: 0; transform: translateX(-100%);}}
         #aside:popover-open {opacity: 1; transform: translateX(0); @starting-style {opacity: 0; transform: translateX(100%);}}
         #footer:popover-open {opacity: 1; transform: translateY(0); @starting-style {opacity: 0; transform: translateY(100%);}}
-
         display: grid;
         grid-template:
           "  header  " auto
@@ -3880,12 +3877,15 @@
         height: 100svh;
     }
 }  /* MOBILE */
-
 @layer layout.desktop {
   @media (min-width: 768px) {
     body {
       >nav, >aside, >footer {position: static; transform: none; opacity: 1;}
-      >nav, >aside {height: auto; max-height: none; width: auto;}
+      >nav, >aside {
+        height: auto;
+        max-height: calc(100svh - auto); /* This might need adjustment based on header/footer height */
+        width: auto;
+      }
       grid-template:
         "  header  header  header" auto
         "  nav     main    aside " 1fr
@@ -3895,6 +3895,8 @@
     }
   }
 }  /* DESKTOP */
+
+
 
 @layer extra {
   :where(.content-sm) { --_width: 25ch; width: var(--_width); }
