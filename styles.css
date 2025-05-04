@@ -3796,7 +3796,7 @@
 
 @layer components.has-deps {
 
-  :where(form) form {
+  :where(.form) form {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -3851,7 +3851,7 @@
       max-width: var(--size-content-2);
     }
   }
-}  /* MIKES FORM namespced to .form */
+}/* MIKES FORM namespced to .form */
 
 
 @layer layout.mobile {
