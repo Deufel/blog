@@ -3897,6 +3897,9 @@
 }  /* DESKTOP */
 
 @layer extra {
+  :where(.content-sm) { --_width: 25ch; width: var(--_width); }
+  :where(.content-md) { --_width: 40ch; width: var(--_width); }
+  :where(.content-lg) { --_width: 75ch; width: var(--_width); }
   :where(.htmx-request) {cursor: progress}
   :where(.hide-md-up){ @media (min-width: 768px) { display: none ; } }
   :where(.hide-md-down) {  @media (max-width: 767.98px) {  display: none !important;  }  }
