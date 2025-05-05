@@ -320,26 +320,26 @@
 }  /* UTILS */
 
 @layer theme {
-  :root[data-theme="system"],
-  :root:has(#theme-system:checked) { color-scheme: light dark; }
-  :root[data-theme="light"],
-  :root:has(#theme-light:checked) { color-scheme: light; }
-  :root[data-theme="dark"],
-  :root:has(#theme-dark:checked) { color-scheme: dark; }
+    :root[data-theme="system"],
+    :root:has(#theme-system:checked) { color-scheme: light dark; }
+    :root[data-theme="light"],
+    :root:has(#theme-light:checked) { color-scheme: light; }
+    :root[data-theme="dark"],
+    :root:has(#theme-dark:checked) { color-scheme: dark; }
 
-  /* New selectors for color presets */
-   :root:has(#hue-red:checked) { --palette-hue: var(--oklch-red); }
-   :root:has(#hue-pink:checked) { --palette-hue: var(--oklch-pink); }
-   :root:has(#hue-purple:checked) { --palette-hue: var(--oklch-purple); }
-   :root:has(#hue-violet:checked) { --palette-hue: var(--oklch-violet); }
-   :root:has(#hue-indigo:checked) { --palette-hue: var(--oklch-indigo); }
-   :root:has(#hue-blue:checked) { --palette-hue: var(--oklch-blue); }
-   :root:has(#hue-cyan:checked) { --palette-hue: var(--oklch-cyan); }
-   :root:has(#hue-teal:checked) { --palette-hue: var(--oklch-teal); }
-   :root:has(#hue-green:checked) { --palette-hue: var(--oklch-green); }
-   :root:has(#hue-lime:checked) { --palette-hue: var(--oklch-lime); }
-   :root:has(#hue-yellow:checked) { --palette-hue: var(--oklch-yellow); }
-   :root:has(#hue-orange:checked) { --palette-hue: var(--oklch-orange); }
+    /* Color theme selectors based on the select value */
+    :root:has(#hue-select option[value="cyan"]:checked) { --palette-hue: var(--oklch-cyan); }
+    :root:has(#hue-select option[value="red"]:checked) { --palette-hue: var(--oklch-red); }
+    :root:has(#hue-select option[value="pink"]:checked) { --palette-hue: var(--oklch-pink); }
+    :root:has(#hue-select option[value="purple"]:checked) { --palette-hue: var(--oklch-purple); }
+    :root:has(#hue-select option[value="violet"]:checked) { --palette-hue: var(--oklch-violet); }
+    :root:has(#hue-select option[value="indigo"]:checked) { --palette-hue: var(--oklch-indigo); }
+    :root:has(#hue-select option[value="blue"]:checked) { --palette-hue: var(--oklch-blue); }
+    :root:has(#hue-select option[value="teal"]:checked) { --palette-hue: var(--oklch-teal); }
+    :root:has(#hue-select option[value="green"]:checked) { --palette-hue: var(--oklch-green); }
+    :root:has(#hue-select option[value="lime"]:checked) { --palette-hue: var(--oklch-lime); }
+    :root:has(#hue-select option[value="yellow"]:checked) { --palette-hue: var(--oklch-yellow); }
+    :root:has(#hue-select option[value="orange"]:checked) { --palette-hue: var(--oklch-orange); } }
 
   :where(html) {
     color-scheme: light dark;
