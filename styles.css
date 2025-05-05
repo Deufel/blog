@@ -3848,9 +3848,12 @@
 
 
 @layer extra {
+  /* Content widths */
   :where(.content-sm) { --_width: 25ch; width: var(--_width); }
   :where(.content-md) { --_width: 40ch; width: var(--_width); }
   :where(.content-lg) { --_width: 75ch; width: var(--_width); }
+
+  /* Utility states */
   :where(.htmx-request) {cursor: progress}
   :where(.hide-md-up){ @media (min-width: 768px) { display: none ; } }
   :where(.hide-md-down) {  @media (max-width: 767.98px) {  display: none !important;  }  }
@@ -3858,9 +3861,8 @@
   :where(.debug){border: dashed red;}
   :where(.rounded){--_rounded:initial;border-radius:var(--_rounded,var(--radius-2))}
   :where(.rounded-match){overflow-clip-margin:content-box;overflow:clip}
-  /* :where(.padding){--_padding:initial;--_padding-inline:initial;--_padding-block:initial;padding-inline:var(--_padding-inline,var(--_padding,var(--size-2)));padding-block:var(--_padding-block,var(--_padding,var(--size-2)))}
-  :where(.margin){--_margin:initial;--_margin-inline:initial;--_margin-block:initial;margin-inline:var(--_margin-inline,var(--_margin,var(--size-2)));margin-block:var(--_margin-block,var(--_margin,var(--size-2)))} */
 
+  /* Padding utilities */
   :where(.padding) { --_padding: initial; --_padding-inline: initial; --_padding-block: initial; --_padding-top: initial; --_padding-right: initial; --_padding-bottom: initial; --_padding-left: initial; padding-inline: var(--_padding-inline, var(--_padding, var(--size-2))); padding-block: var(--_padding-block, var(--_padding, var(--size-2))); }
   :where(.padding-top) { --_padding-top: initial; padding-top: var(--_padding-top, var(--_padding, var(--size-2))); }
   :where(.padding-right) { --_padding-right: initial; padding-right: var(--_padding-right, var(--_padding-inline, var(--_padding, var(--size-2)))); }
@@ -3868,6 +3870,8 @@
   :where(.padding-left) { --_padding-left: initial; padding-left: var(--_padding-left, var(--_padding-inline, var(--_padding, var(--size-2)))); }
   :where(.padding-inline) { --_padding-inline: initial; padding-inline: var(--_padding-inline, var(--_padding, var(--size-2))); }
   :where(.padding-block) { --_padding-block: initial; padding-block: var(--_padding-block, var(--_padding, var(--size-2))); }
+
+  /* Margin utilities */
   :where(.margin) { --_margin: initial; --_margin-inline: initial; --_margin-block: initial; --_margin-top: initial; --_margin-right: initial; --_margin-bottom: initial; --_margin-left: initial; margin-inline: var(--_margin-inline, var(--_margin, var(--size-2))); margin-block: var(--_margin-block, var(--_margin, var(--size-2))); }
   :where(.margin-top) { --_margin-top: initial; margin-top: var(--_margin-top, var(--_margin-block, var(--_margin, var(--size-2)))); }
   :where(.margin-right) { --_margin-right: initial; margin-right: var(--_margin-right, var(--_margin-inline, var(--_margin, var(--size-2)))); }
@@ -3876,21 +3880,174 @@
   :where(.margin-inline) { --_margin-inline: initial; margin-inline: var(--_margin-inline, var(--_margin, var(--size-2))); }
   :where(.margin-block) { --_margin-block: initial; margin-block: var(--_margin-block, var(--_margin, var(--size-2))); }
 
+  /* Layout utilities */
   :where(.flex){--_gap:initial;align-items:center;gap:var(--_gap,var(--size-1));display:flex}
   :where(.flex-wrap){--_gap:initial;align-items:center;gap:var(--_gap,var(--size-3));flex-wrap:wrap;display:flex}
   :where(.flex-center){--_gap:initial;place-content:center;align-items:center;gap:var(--_gap,var(--size-3));flex-wrap:wrap;display:flex}
   :where(.flex-end){ --_gap: initial; align-items: center; justify-content: flex-end; gap: var(--_gap, var(--size-3)); display: flex; }
   :where(.grid){--_gap:initial;align-content:start;gap:var(--_gap,var(--size-3));display:grid}
   :where(.pile){ display: grid; > * { grid-area: 1 / 1; } }
-  :where(.grid-ram-fit){repeat(auto-fit, minmax(min(0, 100%), 1fr));}
-  :where(.grid-ram-fill){repeat(auto-fill, minmax(min(0, 100%), 1fr));}
-  :where(.grid-ram-fit) :where(.grid-ram-fill){repeat(auto-fit, minmax(min(0, 100%), 1fr));}
+  :where(.grid-ram-fit){grid-template-columns:repeat(auto-fit, minmax(min(var(--min-column-size, 0px), 100%), 1fr))}
+  :where(.grid-ram-fill){grid-template-columns:repeat(auto-fill, minmax(min(var(--min-column-size, 0px), 100%), 1fr))}
   :where(.flex-spread) { --_gap: initial; align-items: center; justify-content: space-between; gap: var(--_gap, var(--size-3)); display: flex; }
+
+  /* Alignment utilities */
+  :where(.--align-items-start) { align-items: flex-start; }
+  :where(.--align-items-end) { align-items: flex-end; }
+  :where(.--align-items-center) { align-items: center; }
+  :where(.--align-items-stretch) { align-items: stretch; }
+  :where(.--align-items-baseline) { align-items: baseline; }
+
+  /* Scroll lock utilities */
+  @supports (scrollbar-gutter: stable) {
+    :where(.--scroll-lock) {
+      scrollbar-gutter: var(--scroll-lock-gutter) !important;
+    }
+    :where(.--scroll-lock body) {
+      overflow: hidden !important;
+    }
+  }
+  @supports not (scrollbar-gutter: stable) {
+    :where(.--scroll-lock body) {
+      padding-right: var(--scroll-lock-size) !important;
+      overflow: hidden !important;
+    }
+  }
+
+  /* Layout children reset */
+  :is(
+    [class*='--cluster'],
+    [class*='--flank'],
+    [class*='--frame'],
+    [class*='--grid'],
+    [class*='--split']
+  ) > * {
+    margin-block: 0;
+    margin-inline: 0;
+  }
+
+  /* Layout gap default */
+  :where(
+    [class*='--cluster'],
+    [class*='--flank'],
+    [class*='--frame'],
+    [class*='--grid'],
+    [class*='--stack'],
+    [class*='--split']
+  ) {
+    gap: var(--space-2);
+  }
+
+  /* Cluster layout */
+  :where([class*='--cluster']) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  /* Flank layout */
+  :where([class*='--flank']) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    --content-percentage: initial;
+    --flank-size: initial;
+  }
+
+  :where([class*='--flank']:not([class*='\:end']) > :first-child),
+  :where([class*='--flank'][class*='\:start'] > :first-child) {
+    flex-basis: var(--flank-size, auto);
+    flex-grow: 1;
+  }
+  :where([class*='--flank']:not([class*='\:end']) > :last-child),
+  :where([class*='--flank'][class*='\:start'] > :last-child) {
+    flex-basis: 0;
+    flex-grow: 999;
+    min-inline-size: var(--content-percentage, 50%);
+  }
+
+  :where([class*='--flank'][class*='\:end'] > :last-child) {
+    flex-basis: var(--flank-size, auto);
+    flex-grow: 1;
+  }
+  :where([class*='--flank'][class*='\:end'] > :first-child) {
+    flex-basis: 0;
+    flex-grow: 999;
+    min-inline-size: var(--content-percentage, 50%);
+  }
+
+  /* Frame layout */
+  :where([class*='--frame']) {
+    display: flex;
+    aspect-ratio: 1 / 1;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  :where([class*='--frame'] > img),
+  :where([class*='--frame'] > video) {
+    block-size: 100%;
+    inline-size: 100%;
+    object-fit: cover;
+  }
+
+  :where([class*='--frame'][class*='\:square']) { aspect-ratio: 1 / 1; }
+  :where([class*='--frame'][class*='\:landscape']) { aspect-ratio: 16 / 9; }
+  :where([class*='--frame'][class*='\:portrait']) { aspect-ratio: 9 / 16; }
+
+  /* Grid layout */
+  :where([class*='--grid']) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(var(--min-column-size, 20ch), 100%), 1fr));
+    --min-column-size: initial;
+  }
+
+  :where(.--span-grid) {
+    grid-column: 1 / -1;
+  }
+
+  /* Split layout */
+  :where([class*='--split']) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  :where([class*='--split']),
+  :where([class*='--split'][class*='\:row']) {
+    flex-direction: row;
+    block-size: auto;
+    inline-size: 100%;
+  }
+
+  :where([class*='--split']:not([class*='\:column']) > :first-child) {
+    flex: 0 1 auto;
+  }
+
+  :where([class*='--split'][class*='\:column']) {
+    flex-direction: column;
+    block-size: auto;
+    inline-size: auto;
+    align-self: stretch;
+  }
+
+  /* Stack layout */
+  :where([class*='--stack']) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+
+  /* Additional utilities */
   :where(.surface){--_surface:initial;background:var(--_surface,var(--surface-3))}
-  :where(.surface)  :where(.surface){--_surface:var(--surface-2)}
-  :where(.surface)  :where(.surface)  :where(.surface){--_surface:var(--surface-1)}
+  :where(.surface) :where(.surface){--_surface:var(--surface-2)}
+  :where(.surface) :where(.surface) :where(.surface){--_surface:var(--surface-1)}
   :where(.well){--_well:initial;background:var(--_well,var(--well-1))}
-  :where(.well)  :where(.well){--_well:var(--well-2)}
+  :where(.well) :where(.well){--_well:var(--well-2)}
   :where(.shadow){--_shadow:initial;box-shadow:var(--_shadow,var(--shadow-3))}
   :where(.border){--_border-size:initial;--_border-style:initial;--_border-color:initial;border:var(--_border-size,var(--border-size-1))var(--_border-style,solid)var(--_border-color,var(--surface-2))}
   :where(.border) :where(.surface){--_border-color:var(--surface-3)}
