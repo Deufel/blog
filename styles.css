@@ -4043,6 +4043,7 @@
   }
 
   /* Additional utilities */
+  :where(.numbers) { font-variant: tabular-nums; }
   :where(.surface){--_surface:initial;background:var(--_surface,var(--surface-3))}
   :where(.surface) :where(.surface){--_surface:var(--surface-2)}
   :where(.surface) :where(.surface) :where(.surface){--_surface:var(--surface-1)}
