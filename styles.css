@@ -3821,7 +3821,7 @@
         >main   {grid-area: main; scroll-behavior: auto; overflow-y: auto;}
         >footer {grid-area: footer;}
 
-        >nav, >aside, >footer {position: static; transform: none; opacity: 1; padding: 0;}
+        >nav, >aside, >footer {position: static; transform: none; opacity: 1;}
         >nav, >aside {height: auto; max-height: none; width: auto;}
         >nav {background-color: var(--surface-elevated;border-color: var(--_border-color);border-radius: var(--border-radius, 0.25rem);border-style: solid;}
 
@@ -4064,8 +4064,13 @@
   :where(.well){--_well:initial;background:var(--_well,var(--well-1))}
   :where(.well) :where(.well){--_well:var(--well-2)}
   :where(.shadow){--_shadow:initial;box-shadow:var(--_shadow,var(--shadow-3))}
-  :where(.border){--_border-size:initial;--_border-style:initial;--_border-color:initial;border:var(--_border-size,var(--border-size-1))var(--_border-style,solid)var(--_border-color,var(--surface-2))}
-  :where(.border) :where(.surface){--_border-color:var(--surface-3)}
+
+
+  :where(.border) { border: var(--border-width) solid var(--border-color); border-radius: var(--border-radius);}
+  :where(.border-1) { border: var(--border-width) solid var(--border-color); border-radius: var(--size-1);}
+  :where(.border-2) { border: var(--border-width) solid var(--border-color); border-radius: var(--size-2);}
+  :where(.border-3) { border: var(--border-width) solid var(--border-color); border-radius: var(--size-3);}
+
   :where(.gradient-border) { border-width: var(--size-3); border-image-slice: 1; border-image-source: var(--conic-gradient-3); }
   :where(.border-between-block) > * + * { border-block-start-width: var(--border); }
   :where(.border-between-inline) > * + * { border-inline-start-width: var(--border); }
