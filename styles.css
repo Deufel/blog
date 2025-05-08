@@ -3819,9 +3819,9 @@
         >main   {grid-area: main; scroll-behavior: auto; overflow-y: auto;}
         >footer {grid-area: footer;}
 
-        >nav, >aside, >footer {position: static; transform: none; opacity: 1;}
+        >nav, >aside, >footer {position: static; transform: none; opacity: 1; padding: 0;}
         >nav, >aside {height: auto; max-height: none; width: auto;}
-        >nav {background-color: var(--_bg-color);border-color: var(--_border-color);border-radius: var(--border-radius, 0.25rem);border-style: solid;}
+        >nav {background-color: var(--surface-elevated;border-color: var(--_border-color);border-radius: var(--border-radius, 0.25rem);border-style: solid;}
 
 
         >nav[popover], >aside[popover], >footer[popover] { position: fixed; transition: opacity 300ms, transform 300ms;}
