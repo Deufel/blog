@@ -365,6 +365,15 @@
     --surface-tonal: light-dark(var(--gray-3), var(--gray-12));
     --surface-elevated: light-dark(var(--gray-1), var(--gray-12));
 
+    /* Additional Surface*/
+    --surface-1: light-dark(var(--gray-1), var(--gray-13));
+    --surface-2: light-dark(var(--gray-3), var(--gray-15));
+    --surface-3: light-dark(var(--gray-3), var(--gray-12));
+    --surface-4: light-dark(var(--gray-1), var(--gray-12));
+    --well-1: light-dark(var(--gray-12), var(--gray-5));
+    --well-2: light-dark(var(--gray-15), var(--gray-3));
+
+
     /* Shadows */
     --shadow-color: light-dark(220 3% 15%, 220 40% 2%);
     --shadow-strength: light-dark(1%, 10%);
