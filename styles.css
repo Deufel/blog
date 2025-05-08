@@ -79,6 +79,8 @@
     scrollbar-width: thin;
   }
 
+  [popover] {padding: 0;} /*  Peskey 4px of padding on nav bar may have unintended consequence later keep an eye on this default is 0.25 em from user style sheet */
+
   :where(html) {
     --_page-bg-color: var(--surface-default);
 
