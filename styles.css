@@ -79,8 +79,11 @@
     scrollbar-width: thin;
   }
 
+  :where(h1,h2,h3,h4,h5,h6){text-wrap:balance}
+
   :where(html) {
     --_page-bg-color: var(--surface-default);
+
 
     accent-color: var(--primary);
     background-color: var(--_page-bg-color);
@@ -364,6 +367,33 @@
     --surface-filled: light-dark(var(--gray-3), var(--gray-15));
     --surface-tonal: light-dark(var(--gray-3), var(--gray-12));
     --surface-elevated: light-dark(var(--gray-1), var(--gray-12));
+
+    /* Dynamic Surface experiment */
+    --surface-1-bg: light-dark(color-mix(in lch, var(--color-5), var(--gray-1) 90%),  color-mix(in lch, var(--color-7), var(--gray-13) 90%));
+    --surface-2-bg: light-dark(color-mix(in lch, var(--color-5), var(--gray-2) 85%),  color-mix(in lch, var(--color-7), var(--gray-12) 85%));
+    --surface-3-bg: light-dark(color-mix(in lch, var(--color-6), var(--gray-3) 80%),  color-mix(in lch, var(--color-8), var(--gray-11) 80%));
+
+    --surface-1: var(--surface-1-bg);
+    --surface-1-border: color-mix(in lch, var(--surface-1-bg), black 20%);
+    --surface-1-text: color-mix(in srgb, lch(from var(--surface-1-bg) calc((50 - l) * infinity) 0 0), var(--surface-1-bg) 10%);
+    --surface-2: var(--surface-2-bg);
+    --surface-2-border: color-mix(in lch, var(--surface-2-bg), black 20%);
+    --surface-2-text: color-mix(in srgb, lch(from var(--surface-2-bg) calc((50 - l) * infinity) 0 0), var(--surface-2-bg) 10%);
+    --surface-3: var(--surface-3-bg);
+    --surface-3-border: color-mix(in lch, var(--surface-3-bg), black 20%);
+    --surface-3-text: color-mix(in srgb, lch(from var(--surface-3-bg) calc((50 - l) * infinity) 0 0), var(--surface-3-bg) 10%);
+    --well-1-bg: light-dark(color-mix(in lch, var(--color-5), var(--gray-3) 80%),  color-mix(in lch, var(--color-7), var(--gray-12) 80%));
+    --well-2-bg: light-dark(color-mix(in lch, var(--color-6), var(--gray-4) 70%),  color-mix(in lch, var(--color-8), var(--gray-13) 70%));
+    --well-1: var(--well-1-bg);
+    --well-1-border: color-mix(in lch, var(--well-1-bg), black 20%);
+    --well-1-text: color-mix(in srgb, lch(from var(--well-1-bg) calc((50 - l) * infinity) 0 0), var(--well-1-bg) 10%);
+    --well-2: var(--well-2-bg);
+    --well-2-border: color-mix(in lch, var(--well-2-bg), black 20%);
+    --well-2-text: color-mix(in srgb, lch(from var(--well-2-bg) calc((50 - l) * infinity) 0 0), var(--well-2-bg) 10%);
+    --shadow-3: 0 1px 3px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 5%));
+    --border-size-1: var(--border-width);
+
+
 
     /* Shadows */
     --shadow-color: light-dark(220 3% 15%, 220 40% 2%);
@@ -2249,7 +2279,7 @@
       }
     }
   }
-}  /* Switch */
+}  /* SWITCH */
 
 @layer components.has-deaps {
   :where(details) {
@@ -3852,6 +3882,7 @@
   :where(.content-sm) { --_width: 25ch; width: var(--_width); }
   :where(.content-md) { --_width: 40ch; width: var(--_width); }
   :where(.content-lg) { --_width: 75ch; width: var(--_width); }
+  :where(.content-center) {width: min(100%, clamp(920px, 90vw, 1450px)); margin-inline: auto;}
 
   /* Utility states */
   :where(.htmx-request) {cursor: progress}
@@ -3892,7 +3923,7 @@
   :where(.flex-spread) { --_gap: initial; align-items: center; justify-content: space-between; gap: var(--_gap, var(--size-3)); display: flex; }
 
   /* Grid gap utility */
-  :where(.gap) { --_gap: initial; --_gap-inline: initial; --_gap-block: initial; gap: var(--_gap, var(--size-2)); row-gap: var(--_gap-block, var(--_gap, var(--size-2))); column-gap: var(--_gap-inline, var(--_gap, var(--size-2))); }
+  :where(.gap) { --_gap: initial; --_gap-inline: initial; --_gap-block: initial; gap: var(--_gap, var(--size-3)); row-gap: var(--_gap-block, var(--_gap, var(--size-3))); column-gap: var(--_gap-inline, var(--_gap, var(--size-3))); }
 
   /* Alignment utilities */
   :where(.--align-items-start) { align-items: flex-start; }
@@ -4073,5 +4104,5 @@
   :where(.text-lg){font-size:var(--font-size-5)}
   :where(.square){aspect-ratio:1}
   :where(.round){aspect-ratio:1;border-radius:var(--radius-round);overflow:clip}
-  :where(.container) { width: min(100%, clamp(320px, 90vw, 1450px)); }
+  :where(.container) { width: min(100%, clamp(320px, 90vw, 1450px)); margin-inline: auto}
 }  /* EXTRA */
