@@ -346,7 +346,7 @@
 
 
    /* Scroll Bar */
-    * { scrollbar-width: thin; scrollbar-color: var(--color-9) transparent;  transition: scrollbar-color .5s ease; &:not(:hover) { scrollbar-color: var(--grey-8) #0000; }}
+    * { scrollbar-width: thin; scrollbar-color: var(--color-9) transparent;}
     *::-webkit-scrollbar { width: 8px; height: 8px; }
     *::-webkit-scrollbar-thumb { background: var(--color-6); border-radius: var(--border-radius); }
 
