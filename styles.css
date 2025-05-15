@@ -344,8 +344,7 @@
     :root:has(#hue-select option[value="yellow"]:checked) { --palette-hue: var(--oklch-yellow); }
     :root:has(#hue-select option[value="orange"]:checked) { --palette-hue: var(--oklch-orange); }
 
-
-   /* Scroll Bar */
+    /* Scroll Bar */
     * { scrollbar-width: thin; scrollbar-color: var(--color-9) transparent;}
     *::-webkit-scrollbar { width: 8px; height: 8px; }
     *::-webkit-scrollbar-thumb { background: var(--color-6); border-radius: var(--border-radius); }
