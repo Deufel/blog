@@ -3780,28 +3780,27 @@
 
 
 @layer layout{
-    body, .--layout-hg{
+    body, .--layout-hg {
         >header {grid-area: header;}
         >nav    {grid-area: nav; overflow-y: auto;}
         >aside  {grid-area: aside; overflow-y: auto;}
         >main   {grid-area: main; scroll-behavior: auto; overflow-y: auto;}
         >footer {grid-area: footer;}
-
         >nav, >aside, >footer {position: static; transform: none; opacity: 1;}
         >nav, >aside {height: auto; max-height: none; width: auto;}
         >nav {background-color: var(--_bg-color);border-color: var(--_border-color);border-radius: var(--border-radius, 0.25rem);border-style: solid;}
-
-
-        >nav[popover], >aside[popover], >footer[popover] { position: fixed; transition: opacity 300ms, transform 300ms;}
+        >nav[popover], >aside[popover], >footer[popover] {
+            position: fixed;
+            transition: opacity 300ms, transform 300ms;
+            overlay: auto;
+        }
         >nav[popover], >aside[popover] {width: min(80vw, 300px); top: 0; height: 100svh;}
         >nav[popover]    {left: 0  ; right: auto; opacity: 0; transform: translateX(-100%);}
         >aside[popover]  {right: 0 ; left: auto ; opacity: 0; transform: translateX(100%);}
         >footer[popover] {top: auto; width: 100%; height: auto; transform: translateY(100%);}
-
         #nav:popover-open {opacity: 1; transform: translateX(0); @starting-style {opacity: 0; transform: translateX(-100%);}}
         #aside:popover-open {opacity: 1; transform: translateX(0); @starting-style {opacity: 0; transform: translateX(100%);}}
         #footer:popover-open {opacity: 1; transform: translateY(0); @starting-style {opacity: 0; transform: translateY(100%);}}
-
         display: grid;
         grid-template:
           "  header  header  header" auto
