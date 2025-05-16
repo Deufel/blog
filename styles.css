@@ -3779,8 +3779,8 @@
 
 
 
-@layer layout.mobile {
-    body {
+@layer layout{
+    body, .--layout-hg{
         >header {grid-area: header;}
         >nav    {grid-area: nav; overflow-y: auto;}
         >aside  {grid-area: aside; overflow-y: auto;}
@@ -3811,7 +3811,8 @@
         min-height: 100svh;
         height: 100svh;
     }
-}  /* MOBILE */
+}  /* LAYOUT */
+
 
 /* @layer layout.desktop {
   @media (min-width: 768px) {
