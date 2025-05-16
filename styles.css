@@ -3787,15 +3787,12 @@
         >main   {grid-area: main; scroll-behavior: auto; overflow-y: auto;}
         >footer {grid-area: footer;}
 
-        >nav, >aside, >footer {position: static; transform: none; opacity: 1;
-            [popover] {
-                position: fixed; transition: opacity 300ms, transform 300ms;
-                ::backdrop { backdrop-filter: blur(6px); background-color: rgba(0, 0, 0, 0.2); opacity: 1;};
-            };
-        }
-        >nav, >aside {block-size: auto; inline-size: auto;}
+        >nav, >aside, >footer {position: static; transform: none; opacity: 1;}
+        >nav, >aside {height: auto; max-height: none; width: auto;}
+        >nav {background-color: var(--_bg-color);border-color: var(--_border-color);border-radius: var(--border-radius, 0.25rem);border-style: solid;}
 
 
+        >nav[popover], >aside[popover], >footer[popover] { position: fixed; transition: opacity 300ms, transform 300ms;}
         >nav[popover], >aside[popover] {width: min(80vw, 300px); top: 0; height: 100svh;}
         >nav[popover]    {left: 0  ; right: auto; opacity: 0; transform: translateX(-100%);}
         >aside[popover]  {right: 0 ; left: auto ; opacity: 0; transform: translateX(100%);}
