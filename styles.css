@@ -3778,19 +3778,18 @@
 }  /* FIELD GROUPS */
 
 
-
+/*
 @layer layout{
     body, .--layout-hg {
         >header {grid-area: header;}
-        >nav    {grid-area: nav; overflow-y: auto;}
-        >aside  {grid-area: aside; overflow-y: auto;}
-        >main   {grid-area: main; scroll-behavior: auto; overflow-y: auto;}
+        >nav    {grid-area: nav; overflow-block: auto;}
+        >aside  {grid-area: aside; overflow-block: auto;}
+        >main   {grid-area: main; scroll-behavior: auto; overflow-block: auto;}
         >footer {grid-area: footer;}
         >nav, >aside, >footer {position: static; transform: none; opacity: 1;}
-        >nav, >aside {height: auto; max-height: none; width: auto;}
-        >nav {background-color: var(--_bg-color);border-color: var(--_border-color);border-radius: var(--border-radius, 0.25rem);border-style: solid;}
+        >nav, >aside {block-size: auto; max-block-size: none; inline-size: auto;}
+        >nav {background-color: var(--_bg-color); border-color: var(--_border-color); border-radius: var(--border-radius, 0.25rem); border-style: solid;}
 
-        /* Popover styles with the critical transition properties */
         >nav[popover], >aside[popover], >footer[popover] {
             position: fixed;
             transition:
@@ -3799,24 +3798,28 @@
                 opacity 300ms ease,
                 transform 300ms ease;
 
-            /* Exit stage to (default state) */
+
             opacity: 0;
         }
 
-        >nav[popover], >aside[popover] {width: min(80vw, 300px); top: 0; height: 100svh;}
-        >nav[popover]    {left: 0; right: auto; transform: translateX(-100%);}
-        >aside[popover]  {right: 0; left: auto; transform: translateX(100%);}
-        >footer[popover] {top: auto; width: 100%; height: auto; transform: translateY(100%);}
+        >nav[popover], >aside[popover] {inline-size: min(80vw, 300px); inset-block-start: 0; block-size: 100svh;}
+        >nav[popover]    {inset-inline-start: 0; inset-inline-end: auto; transform: translateX(-100%);}
+        >aside[popover]  {inset-inline-end: 0; inset-inline-start: auto; transform: translateX(100%);}
+        >footer[popover] {inset-block-start: auto; inline-size: 100%; block-size: auto; transform: translateY(100%);}
 
-        /* On stage (open state) */
+
         >nav[popover]:popover-open,
-        >aside[popover]:popover-open,
-        >footer[popover]:popover-open {
+        >aside[popover]:popover-open {
             opacity: 1;
             transform: translateX(0);
         }
 
-        /* Enter stage from (starting styles) */
+        >footer[popover]:popover-open {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
         @starting-style {
             >nav[popover]:popover-open {opacity: 0; transform: translateX(-100%);}
             >aside[popover]:popover-open {opacity: 0; transform: translateX(100%);}
@@ -3829,8 +3832,8 @@
           "  nav     main    aside " 1fr
           "  footer  footer  footer" auto
           /  auto    1fr     auto;
-        min-height: 100svh;
-        height: 100svh;
+        min-block-size: 100svh;
+        block-size: 100svh;
     }
 }  /* LAYOUT */
 
@@ -4094,6 +4097,172 @@
       color-mix(in srgb, var(--color-5) 5%, var(--gray-12))
     );
   }
-
-
 }  /* EXTRA */
+
+
+
+
+@layer layout {
+  /* Define custom properties with default values */
+  :root {
+    --layout-bg-color: white;
+    --layout-border-color: #ddd;
+    --layout-border-radius: 0.25rem;
+    --layout-transition-duration: 300ms;
+  }
+
+  body, .--layout-hg {
+    display: grid;
+    grid-template:
+      "header  header  header" auto
+      "nav     main    aside" 1fr
+      "footer  footer  footer" auto
+      / auto   1fr     auto;
+    min-block-size: 100svh;
+    block-size: 100svh;
+
+    /* Header styles */
+    > header {
+      grid-area: header;
+    }
+
+    /* Nav styles */
+    > nav {
+      grid-area: nav;
+      overflow-block: auto;
+      position: static;
+      transform: none;
+      opacity: 1;
+      block-size: auto;
+      max-block-size: none;
+      inline-size: auto;
+      background-color: var(--layout-bg-color, white);
+      border: solid var(--layout-border-color, #ddd);
+      border-width: 1px;
+      border-radius: var(--layout-border-radius, 0.25rem);
+
+      &[popover] {
+        position: fixed;
+        inline-size: min(80vw, 300px);
+        inset-block-start: 0;
+        block-size: 100svh;
+        inset-inline-start: 0;
+        inset-inline-end: auto;
+        transform: translateX(-100%);
+        opacity: 0;
+        background-color: var(--layout-bg-color, white);
+        transition:
+          display var(--layout-transition-duration, 300ms) allow-discrete,
+          overlay var(--layout-transition-duration, 300ms) allow-discrete,
+          opacity var(--layout-transition-duration, 300ms) ease,
+          transform var(--layout-transition-duration, 300ms) ease;
+
+        /* Drawer-style border (only on the inline-end side) */
+        border-width: 0;
+        border-inline-end-width: 1px;
+        border-radius: 0;
+
+        &:popover-open {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+    }
+
+    /* Main styles */
+    > main {
+      grid-area: main;
+      scroll-behavior: auto;
+      overflow-block: auto;
+    }
+
+    /* Aside styles */
+    > aside {
+      grid-area: aside;
+      overflow-block: auto;
+      position: static;
+      transform: none;
+      opacity: 1;
+      block-size: auto;
+      max-block-size: none;
+      inline-size: auto;
+      background-color: var(--layout-bg-color, white);
+      border: solid var(--layout-border-color, #ddd);
+      border-width: 1px;
+      border-radius: var(--layout-border-radius, 0.25rem);
+
+      &[popover] {
+        position: fixed;
+        inline-size: min(80vw, 300px);
+        inset-block-start: 0;
+        block-size: 100svh;
+        inset-inline-end: 0;
+        inset-inline-start: auto;
+        transform: translateX(100%);
+        opacity: 0;
+        background-color: var(--layout-bg-color, white);
+        transition:
+          display var(--layout-transition-duration, 300ms) allow-discrete,
+          overlay var(--layout-transition-duration, 300ms) allow-discrete,
+          opacity var(--layout-transition-duration, 300ms) ease,
+          transform var(--layout-transition-duration, 300ms) ease;
+
+        /* Drawer-style border (only on the inline-start side) */
+        border-width: 0;
+        border-inline-start-width: 1px;
+        border-radius: 0;
+
+        &:popover-open {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+    }
+
+    /* Footer styles */
+    > footer {
+      grid-area: footer;
+      position: static;
+      transform: none;
+      opacity: 1;
+
+      &[popover] {
+        position: fixed;
+        inset-block-start: auto;
+        inline-size: 100%;
+        block-size: auto;
+        transform: translateY(100%);
+        opacity: 0;
+        background-color: var(--layout-bg-color, white);
+        transition:
+          display var(--layout-transition-duration, 300ms) allow-discrete,
+          overlay var(--layout-transition-duration, 300ms) allow-discrete,
+          opacity var(--layout-transition-duration, 300ms) ease,
+          transform var(--layout-transition-duration, 300ms) ease;
+
+        &:popover-open {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    }
+
+    /* Starting styles for animations */
+    @starting-style {
+      > nav[popover]:popover-open {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+
+      > aside[popover]:popover-open {
+        opacity: 0;
+        transform: translateX(100%);
+      }
+
+      > footer[popover]:popover-open {
+        opacity: 0;
+        transform: translateY(100%);
+      }
+    }
+  }
+}
