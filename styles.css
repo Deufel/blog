@@ -4119,9 +4119,9 @@
       "nav     main    aside" 1fr
       "footer  footer  footer" auto
       / auto   1fr     auto;
-    margin-inline: var(--size-2);
+    inset: 0 var(--size-2) 0 var(--size-2);
     min-block-size: 100svh;
-    block-size: (100svh - var(--size-2) - var(--size-2));
+    block-size: (100svh - var(--size-2) - var(--size-2);
 
     /* Header styles */
     > header {
