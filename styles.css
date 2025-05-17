@@ -1,4 +1,4 @@
-@layer openprops, normalize, utils, theme, layout.mobile, layout.desktop, components.base, components.has-deps, demo, extra;
+@layer openprops, normalize, utils, theme, layout, components.base, components.has-deps, demo, extra;
 
 @layer openprops {
     @custom-media --motionOK      (prefers-reduced-motion: no-preference);
@@ -4113,11 +4113,13 @@
 
   body, .--layout-hg {
     display: grid;
+    gap: var(--size-2);
     grid-template:
       "header  header  header" auto
       "nav     main    aside" 1fr
       "footer  footer  footer" auto
       / auto   1fr     auto;
+    margin-inline: var(--size-2);
     min-block-size: 100svh;
     block-size: 100svh;
 
