@@ -4121,7 +4121,7 @@
       / auto   1fr     auto;
     margin-inline: var(--size-2);
     min-block-size: 100svh;
-    block-size: 100svh;
+    block-size: (100svh - var(--size-2) - var(--size-2));
 
     /* Header styles */
     > header {
