@@ -15,6 +15,18 @@
         <script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-copy/dist/highlightjs-copy.min.css">
+        <style>
+        @layer layout.desktop {
+                      body{
+                          padding-inline: var(--size-2);
+                          padding-block-end: var(--size-2);
+                          >* { border-radius: var(--radius-3); }
+                          > nav:not(:empty):not(:has(> dialog:only-child)) { margin-inline-end: var(--size-2); }
+                          > aside:not(:empty):not(:has(> dialog:only-child)) { margin-inline-start: var(--size-2) };
+                      }
+                  }
+
+        </style>
     </head>
     <body>
         <header id="header" hx-get="partials/index_header.html" hx-trigger="load" hx-swap="outterHTML"></header>
