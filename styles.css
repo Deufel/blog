@@ -1,4 +1,5 @@
-@layer openprops, normalize, utils, theme, components.base, components.has-deps, layout.mobile, layout.desktop, layout.extra;
+
+@layer openprops, normalize, OPUIutils, theme, components.base, components.has-deps, layout.mobile, layout.desktop, utils;
 
 @layer openprops {
     @custom-media --motionOK      (prefers-reduced-motion: no-preference);
@@ -280,7 +281,7 @@
   [popover] {padding: 0;}
 }  /* NORMZLIZE */
 
-@layer utils {
+@layer OPUIutils {
   .sr-only {
     block-size: 1px;
     clip-path: inset(50%);
@@ -358,11 +359,38 @@
     :root:has(#hue-select option[value="yellow"]:checked) { --palette-hue: var(--oklch-yellow); }
     :root:has(#hue-select option[value="orange"]:checked) { --palette-hue: var(--oklch-orange); }
 
+    :root {
+        /* form icons */
+        --icon-valid: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2300aa00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
+        --icon-invalid: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23ff0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>');
+    }
+
+    :root html {
+        /* Scroll Bar */
+        scrollbar-color: var(--color-7) var(--_bg-color);
+
+          transition: scrollbar-color .3s ease;
+
+          &:not(:hover) {
+            scrollbar-color: var(--grey-7) var(--_bg-color);
+          }
+    }
+
   :where(html) {
     color-scheme: light dark;
     --palette-hue: var(--oklch-cyan);
     --palette-hue-rotate-by: 5;
     --palette-chroma: 0.89;
+
+    /* Mike Layout*/
+    --min-column-size: 40ch;
+
+    /* Mike colors*/
+    /* --_bg-color: light-dark(var(--gray-3), var(--gray-14)); */
+    /* --bg-color-nav: light-dark(var(--gray-4), var(--gray-13)); */
+    --surface-hue: light-dark( color-mix(in srgb, var(--color-4), var(--gray-3) 93%), color-mix(in srgb, var(--color-2), var(--gray-13) 93%));
+    --surface-hue-alt: light-dark( color-mix(in srgb, var(--color-5), var(--gray-4) 90%), color-mix(in srgb, var(--color-13), var(--gray-5) 90%));
+
 
     /* Primary */
     --primary: var(--color-8);
@@ -381,8 +409,7 @@
     --surface-filled: light-dark(var(--gray-3), var(--gray-15));
     --surface-tonal: light-dark(var(--gray-3), var(--gray-12));
     --surface-elevated: light-dark(var(--gray-1), var(--gray-12));
-    --surface-hue: light-dark( color-mix(in srgb, var(--color-7), var(--gray-7) 90%), color-mix(in srgb, var(--color-2), var(--gray-12) 81%));
-    --surface-hue-alt: light-dark( color-mix(in srgb, var(--color-5), var(--gray-4) 90%), color-mix(in srgb, var(--color-13), var(--gray-5) 90%));
+
 
     /* Shadows */
     --shadow-color: light-dark(220 3% 15%, 220 40% 2%);
@@ -429,6 +456,7 @@
   }
 
   /* Highlight colors */
+
 
   :where(.red, .error, del) {
     --palette-hue: var(--oklch-red, 25);
@@ -921,9 +949,16 @@
       opacity: 0.64;
     }
 
-    svg {
-      max-inline-size: var(--size-5);
-      pointer-events: none;
+
+    /* mike states */
+    &.dormant {
+      color: var(--border-color);
+      opacity: 0.8;
+    }
+
+    &.active {
+      color: var(--color-7);
+      opacity: 1;
     }
 
     /* Ripple effect, utils > index.css */
@@ -941,6 +976,34 @@
   }
 }  /* ICON BUTTON */
 
+@layer components.base {
+  :where(hr) {
+    background-color: var(--border-color);
+    block-size: var(--border-size-1);
+    margin-block: var(--size-fluid-3);
+  }
+
+  .divider-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+
+  .divider-grid hr {
+    margin-block: 0;
+  }
+
+  .divider-text {
+    color:var(--text-2);
+    font-size:var(--font-size-0);
+    white-space: nowrap;
+    text-align: center;
+    text-box-trim: both;
+    text-box-edge: cap alphabetic;
+  }
+}  /* HORIZONTAL RULE */
 
 @layer components.base {
   :where(nav.tabs) {
@@ -1068,112 +1131,248 @@
 }  /* TAB - modified */
 
 @layer components.base {
-  :where(table) {
-    border-collapse: collapse;
-    display: block;
-    margin: var(--size-3) 0;
-    max-inline-size: 100%;
-    position: relative;
+    :where(table) {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 0;
+      max-inline-size: 100%;
+      position: relative;
 
-    /* Rows */
-    tr {
-      background-color: var(--surface-default);
-      border-top: 1px solid var(--border-color);
-
-      &:hover {
-        background-color: oklch(from var(--surface-filled) l c h / 75%);
-      }
-    }
-
-    /* Cells */
-    th,
-    td {
-      border: 1px solid var(--border-color);
-      padding: var(--size-1) var(--size-2);
-    }
-
-    th {
-      background-color: var(--surface-filled);
-      color: var(--text-color-1);
-      font-size: var(--font-size-sm, 0.75rem);
-      font-weight: 600;
-      text-align: start;
-    }
-
-    td {
-      font-size: var(--font-size-sm, 0.75rem);
-    }
-
-    /* Caption */
-    caption {
-      caption-side: bottom;
-      color: var(--text-color-2);
-      font-size: var(--font-size-sm, 0.75rem);
-      padding: var(--size-2) 0;
-      text-align: start;
-    }
-
-    /* Header */
-    thead {
-      position: sticky;
-      top: 0;
-      z-index: 1;
-    }
-
-    /* Footer */
-    tfoot {
-      border-top: 2px solid var(--border-color);
-
+      /* Rows */
       tr {
-        background-color: var(--surface-filled);
+        background-color: var(--surface-default);
+        border-top: var(--border-width) solid var(--border-color);
+
+        &:first-child {
+          border-top: none;
+        }
+
+        &:hover {
+          background-color: oklch(from var(--surface-filled) l c h / 75%);
+        }
       }
 
-      td {
-        color: var(--text-color-1);
-        font-weight: 600;
-      }
-    }
-
-    /* Column group */
-    colgroup col {
-      border: none;
-    }
-
-    @container (width < 60ch) {
+      /* Cells */
       th,
       td {
-        padding: var(--size-1) 0.875rem;
-      }
-    }
-
-    /* Sticky header */
-    &.sticky-header thead {
-      background-color: var(--surface-filled);
-      position: sticky;
-      inset-block-start: 0;
-      z-index: 1;
-    }
-
-    /* Dense */
-    &.dense {
-      th,
-      td {
+        border-right: var(--border-width) solid var(--border-color);
+        border-bottom: var(--border-width) solid var(--border-color);
         padding: var(--size-1) var(--size-2);
+
+        &:first-child {
+          border-left: none;
+        }
+
+        &:last-child {
+          border-right: none;
+        }
       }
 
+      /* Last row cells don't need bottom border */
+      tr:last-child th,
+      tr:last-child td {
+        border-bottom: none;
+      }
+
+      th {
+        background-color: var(--surface-filled);
+        color: var(--text-color-1);
+        font-size: var(--font-size-sm, 0.75rem);
+        font-weight: 600;
+        text-align: start;
+      }
+
+      td {
+        font-size: var(--font-size-sm, 0.75rem);
+      }
+
+      /* Truncate - standalone */
+      &.truncate-row {
+        table-layout: fixed;
+
+        td {
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+      }
+
+      /* Truncate with reveal on hover */
+      &.truncate-reveal {
+        table-layout: auto;
+
+        td {
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          max-width: 1px;
+          transition: all 0.2s ease;
+        }
+
+        td:hover {
+          white-space: normal;
+          overflow: visible;
+          position: relative;
+        }
+      }
+
+      /* Sortable Icon Padding */
+      th:has(svg)::after {
+          content: "";
+          display: inline-block;
+          width: 2rem;
+        }
+      th:has(svg) {
+        overflow: hidden;
+        white-space: nowrap;
+
+        button {
+            float: inline-end;
+        }
+      }
+
+
+    /* Numbers */
+      &:has(.numbers) td.numbers {
+        text-align: right;
+      }
+
+      /* Caption */
       caption {
-        padding: var(--size-1) 0;
+        caption-side: bottom;
+        color: var(--text-color-2);
+        font-size: var(--font-size-sm, 0.75rem);
+        padding: var(--size-2) 0;
+        text-align: start;
+      }
+
+      /* Header */
+      thead {
+        position: sticky;
+        top: var(--header-height, 0);
+        z-index: 1;
+      }
+
+      /* Footer */
+      tfoot {
+        border-top: 2px solid var(--border-color);
+
+        tr {
+          background-color: var(--surface-filled);
+        }
+
+        td {
+          color: var(--text-color-1);
+          font-weight: 600;
+        }
+      }
+
+      /* Column group */
+      colgroup col {
+        border: none;
       }
 
       @container (width < 60ch) {
         th,
         td {
+          padding: var(--size-1) 0.875rem;
+        }
+      }
+
+      /* Row and column highlighting */
+      &.highlight-rows {
+        tr:hover {
+          background-color: var(--highlighted, oklch(from var(--surface-filled) l c h / 50%));
+        }
+      }
+
+      &.highlight-columns {
+        td:hover {
+          background-color: var(--highlighted, oklch(from var(--surface-filled) l c h / 50%));
+        }
+
+        /* Highlight entire column on cell hover */
+        :has(td:hover) td:nth-child(1):hover ~ *,
+        :has(td:nth-child(1):hover) td:nth-child(1),
+        :has(td:nth-child(2):hover) td:nth-child(2),
+        :has(td:nth-child(3):hover) td:nth-child(3),
+        :has(td:nth-child(4):hover) td:nth-child(4),
+        :has(td:nth-child(5):hover) td:nth-child(5),
+        :has(td:nth-child(6):hover) td:nth-child(6),
+        :has(td:nth-child(7):hover) td:nth-child(7),
+        :has(td:nth-child(8):hover) td:nth-child(8) {
+          background-color: var(--highlighted, oklch(from var(--surface-filled) l c h / 30%));
+        }
+      }
+
+      &.highlight-cross {
+        /* Row highlighting */
+        tr:hover td {
+          background-color: var(--highlighted, oklch(from var(--surface-filled) l c h / 40%));
+        }
+
+        /* Column highlighting using :has() */
+        :has(td:nth-child(1):hover) td:nth-child(1),
+        :has(td:nth-child(2):hover) td:nth-child(2),
+        :has(td:nth-child(3):hover) td:nth-child(3),
+        :has(td:nth-child(4):hover) td:nth-child(4),
+        :has(td:nth-child(5):hover) td:nth-child(5),
+        :has(td:nth-child(6):hover) td:nth-child(6),
+        :has(td:nth-child(7):hover) td:nth-child(7),
+        :has(td:nth-child(8):hover) td:nth-child(8) {
+          background-color: var(--highlighted, oklch(from var(--surface-filled) l c h / 40%));
+        }
+
+        /* Intersecting cell gets stronger highlight */
+        td:hover {
+          background-color: var(--highlighted, oklch(from var(--surface-filled) l c h / 70%)) !important;
+        }
+      }
+
+      /* Dense */
+      &.dense {
+        th,
+        td {
           padding: var(--size-1) var(--size-2);
+        }
+
+        caption {
+          padding: var(--size-1) 0;
+        }
+
+        @container (width < 60ch) {
+          th,
+          td {
+            padding: var(--size-1) var(--size-2);
+          }
         }
       }
     }
+
+
+
+
+    /* Special handling for tables inside cards */
+    :where(.card) {
+
+      & > .content:has(> table.truncate-reveal-auto:only-child) {
+          padding: 0;
+          overflow-x: hidden;
+      }
+      /* Remove padding from content when it contains only a table */
+      & > .content:has(> table:only-child) {
+        padding: 0;
+      }
+      /* Optional: Add some breathing room if table isn't the only content */
+      & > .content table:not(:only-child) {
+        margin: var(--size-2) 0;
+      }
+      & > .content:has(> table:only-child) {
+          padding: 0;
+          overflow-x: auto;
+    }
   }
-}  /* TABLE */
+}   /* TABLE -- modified --*/
 
 @layer components.base {
   :where([role="group"].toggle-button-group) {
@@ -1317,6 +1516,149 @@
     }
   }
 }  /* TOGGLE BUTTON */
+
+@layer components.base {
+  :where([role="group"].toggle-button-group) {
+    --_border-radius: var(--radius-round);
+    --_button-padding-inline: clamp(var(--size-2), 3cqi, var(--size-4));
+    --_max-width: auto;
+    --_icon-size: var(--size-4);
+
+    background-color: var(--surface-default);
+    border: 1px solid var(--border-color);
+    border-radius: var(--_border-radius);
+    display: flex;
+    grid-auto-columns: 1fr;
+    grid-auto-flow: column;
+    max-inline-size: var(--_max-width);
+    min-inline-size: max-content;
+    overflow: clip;
+
+    /* Size */
+    &.small {
+      button {
+        min-block-size: 2.1875rem; /* 35px */
+      }
+    }
+
+    &.x-small {
+      button {
+        min-block-size: var(--size-4); /* 30px */
+      }
+    }
+
+    &.fullwidth {
+      inline-size: 100%;
+    }
+
+    /* Button */
+    button {
+      --_bg-color: transparent;
+
+      align-items: center;
+      background: var(--_bg-color) var(--ripple, none);
+      border-radius: 0;
+      border-inline: 1px solid var(--border-color);
+      border-inline-start-width: 0;
+      color: var(--text-color-1);
+      display: inline-flex;
+      flex: auto;
+      gap: 1ex;
+      justify-content: center;
+      min-block-size: 2.5rem; /* 40px */
+      min-inline-size: 5ex;
+      outline-offset: calc(-1 * var(--size-2));
+      padding: 0 var(--_button-padding-inline);
+      position: relative;
+      user-select: none;
+
+      @media (prefers-reduced-motion: no-preference) {
+        transition:
+          background-color 0.2s var(--ease-out-3),
+          box-shadow 0.2s var(--ease-out-3),
+          border-color 0.2s var(--ease-out-3),
+          color 0.2s var(--ease-out-3),
+          outline-offset 0.05s var(--ease-1);
+      }
+
+      /* Element states */
+      &:hover {
+        --_bg-color: light-dark(oklch(0% 0 0 / 0.04), oklch(100% 0 0 / 0.08));
+      }
+
+      &:focus-visible {
+        outline-offset: -6px;
+      }
+
+      /* Disabled */
+      &[disabled] {
+        border-color: color-mix(in oklch, var(--border-color) 50%, transparent);
+        cursor: not-allowed;
+        color: color-mix(in oklch, var(--text-color-1) 30%, transparent);
+      }
+
+      &[disabled] + &:not([disabled]):not(:last-of-type) {
+        border-inline-end-width: 1px;
+      }
+
+      /* Assign border radius for outline */
+      &:first-of-type {
+        border-bottom-left-radius: var(--_border-radius);
+        border-top-left-radius: var(--_border-radius);
+      }
+      &:last-of-type {
+        border-bottom-right-radius: var(--_border-radius);
+        border-top-right-radius: var(--_border-radius);
+      }
+
+      &:last-of-type {
+        border-inline-end-width: 0;
+      }
+
+      /* Ripple effect */
+      background-position: center;
+
+      &:where(:not([disabled])) {
+        &:where(:not(:active):hover) {
+          --ripple: radial-gradient(circle, transparent 1%, var(--_bg-color) 1%)
+            center/15000%;
+
+          transition: background var(--button-ripple-duration);
+        }
+
+        &:where(:hover:active) {
+          background-size: var(--button-ripple-size);
+          transition: background 0s;
+        }
+      }
+
+      /* Icons */
+      svg {
+        inline-size: var(--_icon-size);
+        inset-inline-start: calc(var(--_button-padding-inline));
+
+        & + svg {
+          max-block-size: var(--size-5);
+          max-inline-size: var(--size-7);
+        }
+      }
+
+      /* Selected */
+      &.selected {
+        --_bg-color: color-mix(
+          in oklch,
+          var(--primary) 12%,
+          var(--surface-default)
+        );
+
+        /* Checkmark */
+        svg:first-of-type {
+          margin-block-end: -3px;
+        }
+      }
+    }
+  }
+}  /* TOGGLE BUTTON GROUP */
 
 @layer components.base {
   /* Base typography */
@@ -2669,13 +3011,10 @@
 
 @layer components.has-deps {
     :where(.list) {
-      --_bg-color: light-dark(var(--gray-3), var(--gray-14));
+      /* --_bg-color: light-dark(var(--gray-3), var(--gray-14)); */
       background-color: var(--_bg-color);
       list-style: none;
       padding: var(--size-2) 0;
-
-
-
 
     /* Push last item to bottom */
     &.push-last {
@@ -3167,483 +3506,90 @@
 }  /* SELECT */
 
 @layer components.has-deps {
-  :where(.field) {
-    --_accent-color: var(--primary);
-    --_bg-color: var(--surface-default);
-    --_border-color: var(--field-border-color);
-    --_field-padding-block: 0.75rem;
-    --_field-padding-inline: var(--size-2);
-    --_filled-border-color: var(--text-color-1);
-    --_height: var(--field-size);
-    --_label-color: var(--text-color-2);
-    --_supporting-text-color: var(--text-color-2);
+  :where(.alert) {
+    --_bg-color: var(--surface-tonal);
+    --_border-color: var(--surface-tonal);
+    --_color: var(--text-color-1);
 
-    contain: layout;
-    display: inline-grid;
-    position: relative;
-
-    /* Input/Select base */
-    & input,
-    & textarea,
-    & select {
-      background-color: var(--_bg-color);
-      block-size: var(--_height);
-      border-radius: var(--field-border-radius);
-      border: var(--field-border-width) solid var(--_border-color);
-      color: var(--text-color-1);
-      font-family: var(--font-sans);
-      font-size: var(--font-size-1);
-      grid-column: 1/-1;
-      grid-row: 1;
-      inline-size: 100%;
-      line-height: var(--font-lineheight-1);
-      min-inline-size: 0;
-      padding: var(--_field-padding-block) var(--_field-padding-inline);
-
-      @media (prefers-reduced-motion: no-preference) {
-        transition:
-          border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-          padding-block 0.2s var(--ease-3);
-      }
+    &.outlined {
+      --_bg-color: var(--surface-default);
+      --_border-color: var(--border-color);
+      --_color: var(--text-color-1);
     }
 
-    /* Required/Invalid */
-    &:has(
-        :not(:placeholder-shown):invalid,
-        :where(
-            :placeholder-shown,
-            option[value=""]:not(:checked),
-            option:checked:not([value=""])
-          ):required
-      ) {
-      .label:after {
-        color: var(--red);
-        content: "*";
-        margin: -0.25em auto auto 0.25em;
-      }
-    }
+    background-color: var(--_bg-color);
+    border: 1px solid var(--_border-color);
+    border-radius: var(--border-radius);
+    color: var(--_color);
+    padding: var(--size-3);
 
-    /* File */
-    &:has(input[type="file"]) {
-      cursor: pointer;
+    & > .content {
+      display: grid;
+      gap: var(--size-2);
+      font-size: var(--font-size-sm);
 
-      input {
-        align-self: flex-start;
-        block-size: var(--_height);
-        box-shadow: none;
-        color: var(--text-color-1);
-        cursor: inherit;
-        max-inline-size: 100%;
-        padding: 0;
-        transition: font-size 0.2s var(--ease-3);
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        color: inherit;
+        font-size: var(--font-size-md);
+        font-weight: 600;
 
-        &::-webkit-file-upload-button,
-        &::file-selector-button {
-          background-color: var(--surface-tonal);
-          border: none;
-          block-size: calc(100% - var(--size-2) * 2);
-          border-radius: var(--field-border-radius);
-          cursor: pointer;
-          margin-inline-end: 1ex;
-          margin-block-start: var(--size-2);
-          margin-inline-start: var(--size-2);
-        }
-      }
-
-      /* Variants */
-      &.filled {
-        input {
-          &::-webkit-file-upload-button,
-          &::file-selector-button {
-            background-color: var(--surface-default);
-            block-size: calc(100% - var(--size-2) * 2);
-            border-radius: var(--field-border-radius);
-            cursor: pointer;
-            margin-block-start: var(--size-2);
-          }
-        }
-      }
-
-      /* Sizes */
-      &.small {
-        input {
-          font-size: var(--font-size-sm);
-          &::-webkit-file-upload-button,
-          &::file-selector-button {
-            block-size: calc(100% - var(--size-2));
-            margin-block-start: var(--size-1);
-          }
+        * {
+          font-size: inherit;
         }
       }
     }
 
-    /* Autosuggest */
-    &:has(input[list]) {
-      .label {
-        /* Make sure chevron is visible */
-        inline-size: calc(100% - var(--size-6));
-      }
-    }
-
-    /* Select */
-    &:has(select) {
-      .label {
-        /* Make sure chevron is visible */
-        inline-size: calc(100% - var(--size-6));
-      }
-    }
-
-    /* Experimental Select */
-    &:has(select button) {
-      select {
-        padding: 0;
-
-        button {
-          outline: 0;
-          padding: var(--_field-padding-block) var(--size-8)
-            var(--_field-padding-block) var(--_field-padding-inline);
-        }
-      }
-    }
-
-    /* Non-experimental Select */
-    &:has(select):not(:has(button)) {
-      select {
-        padding: var(--_field-padding-block) var(--size-8)
-          var(--_field-padding-block) var(--_field-padding-inline);
-      }
-    }
-
-    /* Input - color */
-    &:has(input[type="color"]) {
-      input {
-        appearance: none;
-        background: none;
-        block-size: var(--_height);
-        overflow: hidden;
-        padding: 0;
-
-        &::-webkit-color-swatch {
-          border: none;
-        }
-
-        &::-webkit-color-swatch-wrapper {
-          padding: 0;
-        }
-      }
-
-      .label {
-        border: 1px solid var(--field-border-color);
-        inline-size: fit-content;
-        margin-inline-start: var(--size-2);
-      }
-    }
-
-    /* Textarea */
-    &:has(textarea) {
-      .label {
-        align-self: start;
-        margin-block-start: var(--_field-padding-block);
-      }
-    }
-
-    /*
-  * Variant: Outlined
-  */
-    &:not(.filled) {
-      /* Element states */
-      &:hover {
-        &:not(.error) {
-          :where(input, textarea, select) {
-            --_border-color: var(--text-color-1);
-          }
-        }
-      }
-    }
-
-    &:not(.filled):focus-within {
-      & input,
-      & textarea,
-      & select {
-        border-color: var(--_accent-color);
-        outline-offset: -2px;
-        outline: 2px solid var(--_accent-color);
-      }
-    }
-
-    /* Label */
-    .label {
-      align-self: center;
-      background-color: var(--_bg-color);
-      border-radius: var(--field-border-radius);
-      color: var(--_label-color);
-      border-radius: var(--radius-1);
-      display: inline-flex;
-      font-size: var(--font-size-md);
-      grid-column: 1/-1;
-      grid-row: 1;
-      inline-size: calc(100% - (var(--field-border-width) * 2));
-      margin-inline-start: var(--field-border-width);
-      padding-inline: var(--_field-padding-inline);
-      pointer-events: none;
-      z-index: 1;
-
-      @media (prefers-reduced-motion: no-preference) {
-        transition:
-          border-color 0.2s var(--ease-3),
-          font-size 0.2s var(--ease-3),
-          inline-size 0.05s var(--ease-3),
-          margin 0.2s var(--ease-3),
-          padding-inline 0.2s var(--ease-3);
-      }
-    }
-
-
-    &:focus-within,
-    &:has(:where(input:not([type="color"]), textarea):not(:placeholder-shown)),
-    &:has(option[value=""]:not(:checked)),
-    &:has(option:checked:not([value=""])) {
-      .label {
-        border-color: transparent;
-        color: var(--_accent-color);
-        font-size: 0.75rem;
-        inline-size: max-content;
-        letter-spacing: 0.15px;
-        line-height: 1.15;
-        margin-block-start: -2.7rem;
-        margin-inline-start: var(--_field-padding-inline);
-        padding-inline: 0.125rem;
-      }
-
-      /* Neutral label color reset */
-      &:not(:focus-within):not(.error) {
-        .label {
-          color: var(--text-color-2);
-        }
-      }
-
-      &:has(textarea) {
-        .label {
-          margin-block-start: -0.35rem;
-        }
-
-        &.small {
-          .label {
-            align-self: start;
-            margin-block-start: var(--_field-padding-block);
-          }
-        }
-      }
-    }
-
-    /* Supporting text */
-    .supporting-text {
-      color: var(--_supporting-text-color);
-      font-size: var(--font-size-xs);
-      grid-row: 3;
-      line-height: 1.5;
-      margin-inline-start: var(--field-border-width);
-      padding-inline: var(--_field-padding-inline);
-      z-index: 1;
-    }
-
-    /* Auto-fit */
-    &.auto-fit {
-      inline-size: auto;
-      :where(& input, & textarea) {
-        field-sizing: content;
-      }
-    }
-
-    /* Validation */
-    &.error {
-      --_accent-color: var(--color-9);
+    /* Colors */
+    &.error,
+    &.ok,
+    &.warning {
+      --_bg-color: var(--color-4);
       --_border-color: var(--color-9);
-      --_filled-border-color: var(--color-9);
-      --_label-color: var(--color-9);
-      --_supporting-text-color: var(--color-9);
+      --_color: var(--color-15);
+
+      &.outlined {
+        --_bg-color: var(--surface-default);
+        --_border-color: var(--color-9);
+        --_color: light-dark(var(--color-15), var(--color-1));
+      }
+
+      svg {
+        margin-block-start: 0.15rem;
+        stroke: var(--color-9);
+      }
     }
 
-    /*
-  * Variant: Filled
-  */
-    &.filled {
-      --_bg-color: var(--surface-tonal);
-      *:focus-visible {
-        outline: 0;
-      }
+    /* Links
+    * Can't make sure contrast will be acceptable (yet) so we use the current text color instead.
+    */
+    &:not(.outlined) {
+      a[href] {
+        color: inherit;
 
-      /* Base style */
-      & input,
-      & textarea,
-      & select {
-        border-block-end-color: var(--_filled-border-color);
-        border-block-start-color: transparent;
-        border-inline-color: transparent;
-        border-radius: 0;
-      }
-
-      & input[type="color"] {
-        border-inline: none;
-      }
-
-      /* Bottom line */
-      &::before {
-        background-color: var(--_filled-border-color);
-        block-size: calc(var(--field-border-width) + 1px);
-        content: "";
-        inline-size: 100%;
-        margin-block-end: calc(-1 * (var(--field-border-width) * 2));
-        transform: scaleX(0);
-        translate: 0 calc(-1 * (var(--field-border-width) * 2));
-        z-index: 1;
-
-        @media (prefers-reduced-motion: no-preference) {
-          transition:
-            transform 0.3s var(--ease-3),
-            translate 0.2s var(--ease-3);
-        }
-      }
-
-      /* Label */
-      .label {
-        background-color: var(--_bg-color);
-      }
-
-      &:not(:has([disabled], :has(input[type="color"]))) {
-        /* Hover */
         &:hover {
-          --_bg-color: light-dark(
-            oklch(from var(--surface-tonal) calc(l * 0.93) c h),
-            oklch(from var(--surface-tonal) calc(l * 1.1) c h)
-          );
-        }
-      }
-
-
-      &:has(.label) {
-        &:focus-within,
-        &:has(
-            :where(input:not(:where([type="color"])), textarea):not(
-                :placeholder-shown
-              )
-          ),
-        &:has(option[value=""]:not(:checked)),
-        &:has(option:checked:not([value=""])) {
-          :where(input, textarea) {
-            padding-block: calc(var(--_field-padding-block) * 1.7)
-              calc(var(--_field-padding-block) * 0.3);
-          }
-
-          select > button,
-          select:not(:has(button)) {
-            padding-block: calc(var(--_field-padding-block) * 1.7)
-              calc(var(--_field-padding-block) * 0.3);
-          }
-
-          .label {
-            margin-block-start: calc(-1 * var(--size-5));
-            margin-inline-start: calc(var(--_field-padding-inline) / 2);
-            padding-inline: calc(var(--_field-padding-inline) / 2);
-          }
-
-          &:has(textarea) {
-            .label {
-              margin-block-start: var(--size-1);
-            }
-          }
-        }
-      }
-
-      /* Element states */
-      &:hover {
-        &::before {
-          transform: scaleX(1);
-        }
-      }
-      &:focus-within {
-        & input,
-        & textarea,
-        & select {
-          border-block-end-color: var(--_accent-color);
-        }
-
-        &::before {
-          background-color: var(--_accent-color);
-          transform: scaleX(1) translateX(0px);
+          color: var(--primary);
         }
       }
     }
 
-    /* Disabled */
-    &:where(:has([disabled])) {
-      &::before {
-        display: none;
-      }
-      :where(input, textarea, select) {
-        cursor: not-allowed;
-        opacity: 0.7;
+    /* Icon */
+    &:has(svg) {
+      display: grid;
+      gap: var(--size-3);
+      grid-template-columns: var(--size-4) 1fr;
 
-        * {
-          pointer-events: none;
-        }
-      }
-    }
-
-    /* Read-only */
-    &:where(:has([readonly])) {
-      &::before {
-        display: none;
-      }
-      :where(input, textarea, select) {
-        cursor: not-allowed;
-
-        * {
-          pointer-events: none;
-        }
-      }
-    }
-
-    /* Sizes */
-    &.small {
-      --_field-padding-block: var(--size-2);
-      --_height: var(--field-size-small);
-
-      &:has(input[type="color"]) {
-        .label {
-          line-height: 1.5;
-        }
-      }
-
-      &:has(textarea) {
-        .label {
-          align-self: center;
-          margin-block-start: unset;
-        }
-      }
-
-
-      &:focus-within,
-      &:has(
-          :where(input:not([type="color"]), textarea):not(:placeholder-shown)
-        ),
-      &:has(option[value=""]:not(:checked)),
-      &:has(option:checked:not([value=""])) {
-        .label {
-          margin-block-start: -2.2rem;
-          margin-inline-start: var(--size-1);
-          padding-inline: var(--size-1);
-        }
-
-        &:not(.filled):has(textarea) {
-          .label {
-            margin-block-start: -0.35rem;
-          }
-        }
+      svg {
+        margin-block-start: 0.15rem;
+        stroke: currentColor;
       }
     }
   }
-}  /* FIELD */
+}  /* ALERT */
 
 @layer components.has-deps {
   :where(.field:has(textarea)) {
@@ -3730,6 +3676,276 @@
 }  /* TEXT FIELD */
 
 @layer components.has-deps {
+  :where(.field) {
+    --_accent-color: var(--primary);
+    --_bg-color: var(--surface-tonal);
+    --_border-color: var(--field-border-color);
+    --_field-padding-block: 0.75rem;
+    --_field-padding-inline: var(--size-2);
+    --_height: var(--field-size);
+    --_label-color: var(--text-color-2);
+    --_supporting-text-color: var(--text-color-2);
+
+    contain: layout;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    position: relative;
+
+    /* Label in first row */
+    .label {
+      grid-row: 1;
+      color: var(--_label-color);
+      font-size: var(--font-size-sm);
+      font-weight: 500;
+      line-height: var(--font-lineheight-1);
+      margin-inline: var(--size-1);
+      margin-block-start: var(--size-1);
+    }
+
+    /* Input/Select/Textarea in second row */
+    & input,
+    & textarea,
+    & select {
+      grid-row: 2;
+      background-color: var(--_bg-color);
+      block-size: var(--_height);
+      border-radius: var(--field-border-radius);
+      /* border: var(--field-border-width) solid var(--_border-color); */
+      color: var(--text-color-1);
+      font-family: var(--font-sans);
+      font-size: var(--font-size-1);
+      inline-size: 100%;
+      line-height: var(--font-lineheight-1);
+      min-inline-size: 0;
+      padding: var(--_field-padding-block) var(--_field-padding-inline);
+    }
+
+    /* Submit button styling */
+    & input[type="submit"],
+    & button[type="submit"] {
+      inline-size: 100%;
+      cursor: pointer;
+
+      &:hover:not(:disabled) {
+        opacity: 0.9;
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+    }
+
+    /* Supporting text in third row */
+    .supporting-text {
+      grid-row: 3;
+      color: var(--_supporting-text-color);
+      font-size: var(--font-size-xs);
+      line-height: 1.5;
+      margin-inline: var(--size-2);
+    }
+
+    /* Required indicator */
+    &:has(:required) {
+      .label::after {
+        color: var(--red);
+        content: "*";
+        margin-inline-start: 0.25em;
+      }
+    }
+
+    /* Invalid state - based on data attribute on any child */
+    &:has([data-invalid]) {
+      --_accent-color: var(--red);
+      --_border-color: var(--red);
+      --_supporting-text-color: var(--red);
+
+      .label::after {
+        content: "";
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin-inline-start: 0.25em;
+        background-image: var(--icon-invalid);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        vertical-align: text-bottom; /* Alternative alignment */
+      }
+    }
+
+    /* Valid state - based on data attribute on any child */
+    &:has([data-valid]) {
+      .label::after {
+        content: "";
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin-inline-start: 0.25em;
+        background-image: var(--icon-valid);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: text-bottom;
+
+      }
+    }
+
+    /* Textarea adjustments */
+    &:has(textarea) {
+      textarea {
+        block-size: auto;
+        min-block-size: calc(var(--_height) * 2);
+        resize: vertical;
+      }
+    }
+
+    /* Select adjustments */
+    &:has(select) {
+      select {
+        padding-inline-end: var(--size-8);
+      }
+    }
+
+    /* File input adjustments */
+    &:has(input[type="file"]) {
+      cursor: pointer;
+
+      input {
+        cursor: inherit;
+        padding: 0;
+
+        &::-webkit-file-upload-button,
+        &::file-selector-button {
+          background-color: var(--surface-tonal);
+          border: none;
+          block-size: calc(100% - var(--size-2) * 2);
+          border-radius: var(--field-border-radius);
+          cursor: pointer;
+          margin-block-start: var(--size-2);
+          margin-inline: var(--size-2) 1ex;
+        }
+      }
+    }
+
+    /* Color input adjustments */
+    &:has(input[type="color"]) {
+      input {
+        appearance: none;
+        background: none;
+        overflow: hidden;
+        padding: 0;
+
+        &::-webkit-color-swatch {
+          border: none;
+        }
+
+        &::-webkit-color-swatch-wrapper {
+          padding: 0;
+        }
+      }
+    }
+
+    /* Autosuggest */
+    &:has(input[list]) {
+      input::-webkit-calendar-picker-indicator {
+        opacity: 0;
+        position: absolute;
+        cursor: pointer;
+        pointer-events: none;
+      }
+    }
+
+    &:has(input[list]:placeholder-shown),
+    &:where(:focus-within, :hover):has(input[list]) {
+      &::after {
+        block-size: 0;
+        border-block-start: 5px solid;
+        border-inline: 5px solid transparent;
+        content: "";
+        display: inline-block;
+        inline-size: 0;
+        inset: calc(var(--_height) / 2) var(--size-3) auto auto;
+        pointer-events: none;
+        position: absolute;
+        translate: 0 -50%;
+      }
+    }
+
+    /*
+    * States
+    */
+
+    /* Hover */
+    &:hover:not(:has([disabled])):not(:has([data-invalid])) {
+      :where(input, textarea, select) {
+        border-color: var(--text-color-1);
+      }
+    }
+
+    /* Focus */
+    &:focus-within {
+      :where(input, textarea, select) {
+        border-color: var(--_accent-color);
+        outline: 2px solid var(--_accent-color);
+        outline-offset: -2px;
+      }
+    }
+
+    /* Disabled */
+    &:has([disabled]) {
+      :where(input, textarea, select) {
+        cursor: not-allowed;
+        opacity: 0.7;
+      }
+
+      .label {
+        opacity: 0.7;
+      }
+    }
+
+    /* Read-only */
+    &:has([readonly]) {
+      :where(input, textarea, select) {
+        cursor: not-allowed;
+      }
+    }
+
+
+
+    /*
+    * Sizes
+    */
+
+    /* Small */
+    &.small {
+      --_field-padding-block: var(--size-2);
+      --_height: var(--field-size-small);
+
+      &:has(input[type="file"]) {
+        input {
+          font-size: var(--font-size-sm);
+
+          &::-webkit-file-upload-button,
+          &::file-selector-button {
+            block-size: calc(100% - var(--size-2));
+            margin-block-start: var(--size-1);
+          }
+        }
+      }
+    }
+
+    /* Auto-fit */
+    &.auto-fit {
+      inline-size: auto;
+
+      :where(input, textarea) {
+        field-sizing: content;
+      }
+    }
+  }
+}
+
+@layer components.has-deps {
   /* Common styling for checkbox, radio and switch groups */
   :where(fieldset.field-group) {
     border: 0;
@@ -3738,17 +3954,23 @@
     padding: 0;
     z-index: 1;
 
+
+
     legend {
       color: var(--text-color-2);
-      padding: 0 1ex 0 0;
+      font-size: var(--font-size-sm);
+      font-weight: 500;
+      line-height: var(--font-lineheight-1);
+      padding: 0 1ex var(--size-1) 0;
+      margin-inline: var(--size-1);
+      margin-block-start: var(--size-1); /* Add this line */
     }
 
     /* Disabled */
     &[disabled] {
       cursor: not-allowed;
-      opacity: 0.64;
+      opacity: 0.7;
       user-select: none;
-
       input {
         cursor: not-allowed;
       }
@@ -3758,26 +3980,23 @@
     &.error {
       legend,
       .supporting-text {
-        color: var(--color-9);
+        color: var(--red);
       }
     }
 
     /* Required */
     &:has([required]) {
       &:not(:has(input:where([type="radio"], [type="checkbox"]):checked)) {
-        legend {
-          position: relative;
-
-          &::after {
-            color: var(--red);
-            content: "*";
-            inset: 0 -0.25ex auto auto;
-            position: absolute;
-          }
+        legend::after {
+          color: var(--red);
+          content: "*";
+          margin-inline-start: 0.25em;
         }
       }
     }
-    :where(.radio, .checkbox, .switch) .label:after {
+
+    /* Hide individual field required indicators in groups */
+    :where(.radio, .checkbox, .switch) .label::after {
       display: none;
     }
 
@@ -3786,17 +4005,17 @@
       color: var(--text-color-2);
       font-size: var(--font-size-xs);
       line-height: 1.5;
+      margin-inline: var(--size-2);
       z-index: 1;
     }
 
-    /* Fields */
+    /* Fields container */
     .fields {
       display: flex;
       flex-direction: column;
       gap: var(--size-2);
-
       * ~ & {
-        padding: var(--size-2) 0;
+        padding-block-start: var(--size-2);
       }
     }
 
@@ -3804,138 +4023,526 @@
       padding-block-end: 0;
     }
 
-    /* Directions */
+    /* Direction variants */
     &.row {
       .fields {
         flex-direction: row;
+        flex-wrap: wrap;
+      }
+    }
+
+    /* Small variant */
+    &.small {
+      legend {
+        font-size: var(--font-size-xs);
+        padding-block-end: var(--size-1);
+      }
+      .fields {
+        gap: var(--size-1);
+      }
+      .supporting-text {
+        font-size: calc(var(--font-size-xs) * 0.9);
+      }
+    }
+
+    /* Error state enhancements */
+    &.error {
+      legend {
+        color: var(--red);
+        font-weight: 500;
+      }
+      .supporting-text {
+        color: var(--red);
       }
     }
   }
-}  /* FIELD GROUPS */
 
-@layer layout.desktop {
-    @media (width > 768px) {
-        body {
-            overscroll-behavior: none;
+  /* Individual checkbox/radio/switch items using grid layout */
+  :where(.checkbox, .radio, .switch) {
+    --_input-size: 1.125rem;
+    --_gap: var(--size-2);
 
-            display: grid;
-            grid-template:
-            "header header header" auto
-            "nav main aside" 1fr
-            "footer footer footer" auto
-            / auto 1fr auto;
-            height: 100svh;
+    contain: layout;
+    display: grid;
+    grid-template-columns: var(--_input-size) 1fr;
+    grid-template-rows: auto auto;
+    gap: 0 var(--_gap);
+    align-items: start;
+    position: relative;
 
-            > header { grid-area: header; }
+    /* Input spans full height of first column, centered vertically */
+    input[type="checkbox"],
+    input[type="radio"] {
+      grid-column: 1;
+      grid-row: 1 ;
+      margin: 0;
+      margin-inline-start: var(--size-1);
+      width: var(--_input-size);
+      height: var(--_input-size);
+      align-self: center; /* Center vertically within the full column */
+      justify-self: start; /* Align to start of column */
+      flex-shrink: 0;
+    }
 
-            > nav {
-                grid-area: nav;
-                margin: var(--size-2);
+    /* Label in second column, first row */
+    .label {
+      grid-column: 2;
+      grid-row: 1;
 
-                > ul{
-                    border-radius: var(--border-radius);
-                    border: 1px solid var(--border-color);
-                }
+      /* Typography */
+      font-size: var(--font-size-1);
+      line-height: var(--font-lineheight-3, 1.5);
+      color: var(--text-color-1);
+
+      /* Flex container for complex content */
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.25em;
+
+      /* Ensure proper text wrapping */
+      min-width: 0;
+
+      /* Handle nested elements */
+      > * {
+        flex-shrink: 0;
+      }
+
+      > span {
+        flex-shrink: 1;
+        min-width: 0;
+      }
+
+      /* Links within labels */
+      a {
+        color: var(--link-color, var(--primary));
+        text-decoration: underline;
+        text-underline-offset: 0.125em;
+
+        &:hover {
+          color: var(--link-hover-color, var(--primary-hover));
+        }
+
+        &:focus {
+          outline: 2px solid var(--focus-color, var(--primary));
+          outline-offset: 2px;
+          border-radius: 2px;
+        }
+      }
+    }
+
+    /* Supporting text in second column, second row */
+    .supporting-text {
+      grid-column: 2;
+      grid-row: 2;
+
+      color: var(--text-color-2);
+      font-size: var(--font-size-xs);
+      line-height: 1.5;
+
+      /* Flex container for complex content like label */
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.25em;
+
+      /* Ensure proper text wrapping */
+      min-width: 0;
+
+      /* Handle nested elements */
+      > * {
+        flex-shrink: 0;
+      }
+
+      > span {
+        flex-shrink: 1;
+        min-width: 0;
+      }
+
+      /* Links within supporting text */
+      a {
+        color: var(--link-color, var(--primary));
+        text-decoration: underline;
+        text-underline-offset: 0.125em;
+
+        &:hover {
+          color: var(--link-hover-color, var(--primary-hover));
+        }
+
+        &:focus {
+          outline: 2px solid var(--focus-color, var(--primary));
+          outline-offset: 2px;
+          border-radius: 2px;
+        }
+      }
+
+      /* Only show if it has content */
+      &:empty {
+        display: none;
+      }
+    }
+
+    /* States */
+    &:hover:not(:has([disabled])) {
+      .label {
+        color: var(--text-color-1);
+      }
+    }
+
+    &:has(:focus) {
+      .label {
+        color: var(--primary);
+      }
+    }
+
+    &:has([disabled]) {
+      opacity: 0.7;
+      cursor: not-allowed;
+
+      input {
+        cursor: not-allowed;
+      }
+
+      .label {
+        cursor: not-allowed;
+        color: var(--text-color-2);
+      }
+    }
+
+    /* Size variants */
+    &.small {
+      --_input-size: 1rem;
+      --_gap: var(--size-1);
+
+      .label {
+        font-size: var(--font-size-sm);
+      }
+
+      .supporting-text {
+        font-size: calc(var(--font-size-xs) * 0.9);
+      }
+    }
+
+    &.large {
+      --_input-size: 1.25rem;
+      --_gap: var(--size-3);
+
+      .label {
+        font-size: var(--font-size-2);
+      }
+    }
+
+    /* Error state */
+    &.error {
+      .label {
+        color: var(--red);
+      }
+
+      .supporting-text {
+        color: var(--red);
+      }
+
+      input {
+        border-color: var(--red);
+        outline-color: var(--red);
+      }
+    }
+
+    /* Responsive behavior */
+    @media (max-width: 480px) {
+      .label {
+        gap: 0.125em;
+      }
+    }
+  }
+}  /* FIELD GROUPS Modified CHECKBOX, SWITCH ect... */
+
+@layer components.has-deps {
+  /* Standalone submit button styling - outside of .field containers */
+  :where(button[type="submit"], input[type="submit"]) {
+    &:not(.field *) {
+      inline-size: 100%;
+      cursor: pointer;
+
+      &:hover:not(:disabled) {
+        opacity: 0.9;
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+    }
+  }   /* additional CSS for full width submit buttons */
+
+
+@layer layout.mobile{
+
+    /* drawer animations */
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+    @keyframes slideInLeft { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+    @keyframes slideOutLeft { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+    @keyframes slideInRight { from { transform: translateX(100%); } to { transform: translateX(0); } }
+    @keyframes slideOutRight { from { transform: translateX(0); } to { transform: translateX(100%); } }
+    @keyframes slideInUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+    @keyframes slideOutUp { from { transform: translateY(0); } to { transform: translateY(-100%); } }
+    @keyframes slideInDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+    @keyframes slideOutDown { from { transform: translateY(0); } to { transform: translateY(100%); } }
+
+    /* Hardware Acceleration */
+    dialog { will-change: transform; backface-visibility: hidden; }
+    .container { will-change: transform; backface-visibility: hidden; }
+    dialog:not([open]) { will-change: auto; }
+
+    /* Left drawer styles */
+    body > nav > dialog {
+    view-transition-name: nav-drawer;
+    inline-size: min(80vw, 300px);
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    inset-block-start: 0;
+    block-size: 100svh;
+    inset-inline-start: 0;
+    inset-inline-end: auto;
+    /* max-height: 100%; */
+    }
+
+    /* Right drawer styles */
+    body > aside > dialog {
+    view-transition-name: aside-drawer;
+    /* inline-size: min(80vw, 300px); */
+    position: fixed;
+    inset-inline-start: auto;
+    margin: 0;
+    padding: 0;
+    inset-inline-end: 0;
+    inset-block-start: 0;
+    block-size: 100svh;
+    inset-inline-start: auto;
+    inset-inline-end: 0;
+    /* max-height: 100%; */
+    }
+
+    /* Bottom drawer styles */
+    body > footer > dialog {
+      view-transition-name: footer-drawer;
+      position: fixed;
+      inset-inline-start: 0;
+      inset-inline-end: 0;
+      inset-block-end: 0;
+      inset-block-start: auto;
+      height: auto;
+      block-size: auto;
+      inline-size: 100%;
+      margin-block-start: auto;
+      background-color: var(--surface-hue);
+      padding-bottom: calc(var(--size-3) + env(safe-area-inset-bottom));
+      max-block-size: calc(80svh - env(safe-area-inset-bottom));
+
+    }
+
+
+
+    /* View transitions for left drawer */
+    ::view-transition-old(nav-drawer) {
+    animation:
+        fadeOut 0.3s ease forwards,
+        slideOutLeft 0.3s ease forwards;
+    }
+
+    ::view-transition-new(nav-drawer) {
+    animation:
+        fadeIn 0.3s ease forwards,
+        slideInLeft 0.3s ease forwards;
+    }
+
+    /* View transitions for right drawer */
+    ::view-transition-old(aside-drawer) {
+    animation:
+        fadeOut 0.3s ease forwards,
+        slideOutRight 0.3s ease forwards;
+    }
+
+    ::view-transition-new(aside-drawer) {
+    animation:
+        fadeIn 0.3s ease forwards,
+        slideInRight 0.3s ease forwards;
+    }
+
+    /* View transitions for bottom drawer */
+    ::view-transition-old(footer-drawer) {
+    animation:
+        fadeOut 0.3s ease forwards,
+        slideOutDown 0.3s ease forwards;
+    }
+
+    ::view-transition-new(footer-drawer) {
+    animation:
+        fadeIn 0.3s ease forwards,
+        slideInUp 0.3s ease forwards;
+    }
+}
+
+
+@layer layout.mobile {
+    body {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        overscroll-behavior: none;
+        display: grid;
+        grid-template:
+        "header header header" auto
+        "nav main aside" 1fr
+        "footer footer footer" auto
+        / auto 1fr auto;
+        height: 100svh;
+        padding: 0;
+        margin: 0;
+
+        dialog::backdrop {background-color: light-dark(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8));}
+
+        > header { grid-area: header; }
+        > main { grid-area: main; }
+        > nav { grid-area: nav; }
+        > aside { grid-area: aside; }
+        > footer { grid-area: footer; }
+
+        >* { border-radius: 0; }
+
+        > main {
+            flex: 1;
+            /* scrollbar-gutter: stable both-edges; */
+            overflow-y: auto;
+            overflow-x: auto;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            margin: 0;
+            gap: 0;
+
+            > header {
+                flex-shrink: 0;
+                padding-block-end: 0;
+                padding-block-start: var(--size-fluid-1);
+                padding-inline-start: var(--size-fluid-1);
+                padding-inline-end: var(--size-fluid-1);
+            }
+
+            > section {
+                flex: 1;
+                overflow-y: auto;
+                min-height: 0;
+            }
+
+            > footer {
+                flex-shrink: 0;
+            }
+
+            /* Not sure what I want to do for header/ footer differentiation... ?  */
+            /* > * + * { border-top: 2px solid var(--border-color); } */
+        }
+
+        > nav, > aside {
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            background-color: var(--surface-hue);
+
+            > header {
+                flex-shrink: 0;
             }
 
             > main {
-                grid-area: main;
+                flex: 1;
                 overflow-y: auto;
-                overflow-x: auto;
-                scroll-behavior: smooth;
-                padding: 1rem;
-                border-radius: var(--border-radius);
-                border: 1px solid var(--border-radius);
-                margin-block: var(--size-2);
-                margin-inline-end: var(--size-2);
+                min-height: 0;
+                scrollbar-gutter: stable both-edges;
+                scrollbar-color: var(--color-7) #0000;
             }
 
-            > aside {
-                grid-area: aside;
-                border-radius: var(--border-radius);
+            > footer {
+                flex-shrink: 0;
             }
 
-            > footer { grid-area: footer; }
-        }
-    }
-}  /* LAYOUT.DESKTOP */
+            /* Add borders between sections */
+            > * + * {
+                border-top: 2px solid var(--border-color);
+            }
 
-@layer layout.mobile {
-    @media (width < 768px) {
-        body {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            overscroll-behavior: none;
-
-            display: grid;
-            grid-template:
-            "header header header" auto
-            "nav main aside" 1fr
-            "footer footer footer" auto
-            / auto 1fr auto;
-            height: 100svh;
-            padding: 0;
-            margin: 0;
-
-        dialog::backdrop { background-color: rgba(0, 0, 0, 0.5); }
-
-        > header { grid-area: header; }
-
-        > main {
-            grid-area: main;
-            overflow-y: auto;
-            scroll-behavior: smooth;
-            padding: 0;
-            border-radius: 0;
-            margin: 0;
-        }
-
-        > nav {
-            grid-area: nav;
-            border-start-end-radius: var(--drawer-radius);
-            border-end-end-radius: var(--drawer-radius);
+            /* When content is in a dialog */
             > dialog[open] {
-                border: 1px solid var(--border-color);
-                border-start-end-radius: var(--drawer-radius);
-                border-end-end-radius: var(--drawer-radius);
-                clip-path: inset(0 0 0 0 round 0 var(--drawer-radius) var(--drawer-radius) 0);
+                background-color: var(--surface-hue);
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+
+
+                /* Same structure for dialog contents */
+                > header {
+                    flex-shrink: 0;
+                }
+
+                > main {
+                    flex: 1;
+                    overflow-y: auto;
+                    min-height: 0;
+                    scrollbar-gutter: stable both-edges;
+                    scrollbar-color: var(--color-7) #0000;
+                }
+
+                > footer {
+                    flex-shrink: 0;
+                    height: auto;
+                }
+
+                /* Add borders between sections in dialog */
+                > * + * {
+                    border-top: 2px solid var(--border-color);
+                }
             }
 
+            /* List item selection styles */
             li.selected {
-                color: var(--color-8);
+                color: var(--primary);
             }
         }
 
-        > aside {
-            grid-area: aside;
+        /* Specific dialog styling for each drawer */
+        > aside > dialog[open] {
             border-start-start-radius: var(--drawer-radius);
             border-end-start-radius: var(--drawer-radius);
-            > dialog[open] {
-                border: 1px solid var(--border-color);
-                border-start-start-radius: var(--drawer-radius);
-                border-end-start-radius: var(--drawer-radius);
-                clip-path: inset(0 0 0 0 round var(--drawer-radius) 0 0 var(--drawer-radius));
-            }
         }
 
-        > footer {
-            grid-area: footer;
+        > nav > dialog[open] {
+            border-start-end-radius: var(--drawer-radius);
+            border-end-end-radius: var(--drawer-radius);
+        }
+
+        > footer > dialog[open] {
             border-start-start-radius: var(--drawer-radius);
             border-start-end-radius: var(--drawer-radius);
-            > dialog[open] {
-                border-start-start-radius: var(--drawer-radius);
-                border-start-end-radius: var(--drawer-radius);
-                clip-path: inset(0 0 0 0 round var(--drawer-radius) var(--drawer-radius) 0 0);
-            }
+            max-inline-size: none;
         }
     }
-}  /* LAYOUT.MOBILE */
+}
 
-@layer extra {
+@layer utils {
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-7) #0000;
+
+      body {
+           transition: width 0.3s ease, left 0.3s ease, transform 0.3s ease;
+      }
+    }
+
   :where(.content-sm) { --_width: 25ch; width: var(--_width); }
   :where(.content-md) { --_width: 40ch; width: var(--_width); }
   :where(.content-lg) { --_width: 75ch; width: var(--_width); }
@@ -3944,7 +4551,10 @@
   :where(.hide-md-up){ @media (min-width: 768px) { display: none ; } }
   :where(.hide-md-down) {  @media (max-width: 767.98px) {  display: none !important;  }  }
   :where(.gradient-text) { --_color-1-from: yellow; --_color-1-to:   red; --_color-2-from: purple; --_color-2-to:   indigo; @media (prefers-color-scheme: dark) { --_color-1-from: lime; --_color-1-to:   cyan; --_color-2-from: cyan; --_color-2-to:   deeppink; } }
-  :where(.debug) {border: 1px dashed red;border-radius: 0.5rem;}
+  :where(.debug) { border: 1px dashed red; border-radius: 0.5rem; }
+  :where:(.debug):hover { outline: 2px solid blue; outline-offset: 2px; box-shadow:  inset 0 0 0 1px rgba(0, 255, 0, 0.3), 0 0 0 1px rgba(255, 165, 0, 0.5); }
+
+
   :where(.rounded){--_rounded:initial;border-radius:var(--_rounded,var(--radius-2))}
   :where(.rounded-match){overflow-clip-margin:content-box;overflow:clip}
 
@@ -3971,14 +4581,15 @@
   :where(.flex-wrap){--_gap:initial;align-items:center;gap:var(--_gap,var(--size-3));flex-wrap:wrap;display:flex}
   :where(.flex-center){--_gap:initial;place-content:center;align-items:center;gap:var(--_gap,var(--size-3));flex-wrap:wrap;display:flex}
   :where(.flex-end){ --_gap: initial; align-items: center; justify-content: flex-end; gap: var(--_gap, var(--size-3)); display: flex; }
-  :where(.grid){--_gap:initial;align-content:start;gap:var(--_gap,var(--size-3));display:grid}
-  :where(.pile){ display: grid; > * { grid-area: 1 / 1; } }
+  /* :where(.grid){--_gap:initial;align-content:start;gap:var(--_gap,var(--size-3));display:grid} */
+  :where(.pile){ display: grid; > * { grid-area: 1 / 1; place-items: center;} }
   :where(.grid-ram-fit){grid-template-columns:repeat(auto-fit, minmax(min(var(--min-column-size, 0px), 100%), 1fr))}
   :where(.grid-ram-fill){grid-template-columns:repeat(auto-fill, minmax(min(var(--min-column-size, 0px), 100%), 1fr))}
   :where(.flex-spread) { --_gap: initial; align-items: center; justify-content: space-between; gap: var(--_gap, var(--size-3)); display: flex; }
 
 
   :where(.gap) { --_gap: initial; --_gap-inline: initial; --_gap-block: initial; gap: var(--_gap, var(--size-2)); row-gap: var(--_gap-block, var(--_gap, var(--size-2))); column-gap: var(--_gap-inline, var(--_gap, var(--size-2))); }
+  :where(.gap-3) { --_gap: initial; --_gap-inline: initial; --_gap-block: initial; gap: var(--_gap, var(--size-3)); row-gap: var(--_gap-block, var(--_gap, var(--size-3))); column-gap: var(--_gap-inline, var(--_gap, var(--size-3))); }
 
 
   :where(.--align-items-start) { align-items: flex-start; }
@@ -3989,155 +4600,41 @@
 
 
   @supports (scrollbar-gutter: stable) {
-    :where(.--scroll-lock) {
-      scrollbar-gutter: var(--scroll-lock-gutter) !important;
-    }
-    :where(.--scroll-lock body) {
-      overflow: hidden !important;
-    }
+    :where(.--scroll-lock) { scrollbar-gutter: var(--scroll-lock-gutter) !important; }
+    :where(.--scroll-lock body) { overflow: hidden !important; }
   }
   @supports not (scrollbar-gutter: stable) {
-    :where(.--scroll-lock body) {
-      padding-right: var(--scroll-lock-size) !important;
-      overflow: hidden !important;
-    }
+    :where(.--scroll-lock body) { padding-right: var(--scroll-lock-size) !important; overflow: hidden !important; }
   }
 
 
-  :is(
-    [class*='--cluster'],
-    [class*='--flank'],
-    [class*='--frame'],
-    [class*='--grid'],
-    [class*='--split']
-  ) > * {
-    margin-block: 0;
-    margin-inline: 0;
-  }
+  :is( [class*='--cluster'], [class*='--flank'], [class*='--frame'], [class*='--grid'], [class*='--split'] ) > * { margin-block: 0; margin-inline: 0; }
+  :where( [class*='--cluster'], [class*='--flank'], [class*='--frame'], [class*='--grid'], [class*='--stack'], [class*='--split'] ) { gap: var(--size-2); }
 
-
-  :where(
-    [class*='--cluster'],
-    [class*='--flank'],
-    [class*='--frame'],
-    [class*='--grid'],
-    [class*='--stack'],
-    [class*='--split']
-  ) {
-    gap: var(--space-2);
-  }
-
-
-  :where([class*='--cluster']) {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
-  }
-
-
-  :where([class*='--flank']) {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    --content-percentage: initial;
-    --flank-size: initial;
-  }
-
+  :where([class*='--cluster']) { display: flex; flex-wrap: wrap; justify-content: flex-start; align-items: center; }
+  :where([class*='--flank']) { display: flex; flex-wrap: wrap; align-items: center; --content-percentage: initial; --flank-size: initial; }
   :where([class*='--flank']:not([class*='\:end']) > :first-child),
-  :where([class*='--flank'][class*='\:start'] > :first-child) {
-    flex-basis: var(--flank-size, auto);
-    flex-grow: 1;
-  }
+  :where([class*='--flank'][class*='\:start'] > :first-child) { flex-basis: var(--flank-size, auto); flex-grow: 1; }
   :where([class*='--flank']:not([class*='\:end']) > :last-child),
-  :where([class*='--flank'][class*='\:start'] > :last-child) {
-    flex-basis: 0;
-    flex-grow: 999;
-    min-inline-size: var(--content-percentage, 50%);
-  }
-
-  :where([class*='--flank'][class*='\:end'] > :last-child) {
-    flex-basis: var(--flank-size, auto);
-    flex-grow: 1;
-  }
-  :where([class*='--flank'][class*='\:end'] > :first-child) {
-    flex-basis: 0;
-    flex-grow: 999;
-    min-inline-size: var(--content-percentage, 50%);
-  }
-
-
-  :where([class*='--frame']) {
-    display: flex;
-    aspect-ratio: 1 / 1;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-  }
-
+  :where([class*='--flank'][class*='\:start'] > :last-child) { flex-basis: 0; flex-grow: 999; min-inline-size: var(--content-percentage, 50%); }
+  :where([class*='--flank'][class*='\:end'] > :last-child) { flex-basis: var(--flank-size, auto); flex-grow: 1; }
+  :where([class*='--flank'][class*='\:end'] > :first-child) { flex-basis: 0; flex-grow: 999; min-inline-size: var(--content-percentage, 50%); }
+  :where([class*='--frame']) { display: flex; aspect-ratio: 1 / 1; justify-content: center; align-items: center; overflow: hidden; }
   :where([class*='--frame'] > img),
-  :where([class*='--frame'] > video) {
-    block-size: 100%;
-    inline-size: 100%;
-    object-fit: cover;
-  }
-
+  :where([class*='--frame'] > video) { block-size: 100%; inline-size: 100%; object-fit: cover; }
   :where([class*='--frame'][class*='\:square']) { aspect-ratio: 1 / 1; }
   :where([class*='--frame'][class*='\:landscape']) { aspect-ratio: 16 / 9; }
   :where([class*='--frame'][class*='\:portrait']) { aspect-ratio: 9 / 16; }
-
-
-  :where([class*='--grid']) {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(var(--min-column-size, 20ch), 100%), 1fr));
-    --min-column-size: initial;
-  }
-
-  :where(.--span-grid) {
-    grid-column: 1 / -1;
-  }
-
-
-  :where([class*='--split']) {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-  }
-
+  :where([class*='--grid']) { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(var(--min-column-size, 20ch), 100%), 1fr)); --min-column-size: initial; }
+  :where([class*='--span-grid']) {  grid-column: 1 / -1;  }
+  :where([class*='--split']) { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; }
   :where([class*='--split']),
-  :where([class*='--split'][class*='\:row']) {
-    flex-direction: row;
-    block-size: auto;
-    inline-size: 100%;
-  }
-
-  :where([class*='--split']:not([class*='\:column']) > :first-child) {
-    flex: 0 1 auto;
-  }
-
-  :where([class*='--split'][class*='\:column']) {
-    flex-direction: column;
-    block-size: auto;
-    inline-size: auto;
-    align-self: stretch;
-  }
-
-
-  :where([class*='--stack']) {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
-  }
-
-
+  :where([class*='--split'][class*='\:row']) { flex-direction: row; block-size: auto; inline-size: 100%; }
+  :where([class*='--split']:not([class*='\:column']) > :first-child) { flex: 0 1 auto; }
+  :where([class*='--split'][class*='\:column']) { flex-direction: column; block-size: auto; inline-size: auto; align-self: stretch; }
+  :where([class*='--stack']) { display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; }
   :where(.numbers) { font-variant: tabular-nums; }
-  :where(.surface){--_surface:initial;background:var(--_surface,var(--surface-3))}
-  :where(.surface) :where(.surface){--_surface:var(--surface-2)}
-  :where(.surface) :where(.surface) :where(.surface){--_surface:var(--surface-1)}
-  :where(.well){--_well:initial;background:var(--_well,var(--well-1))}
-  :where(.well) :where(.well){--_well:var(--well-2)}
+
   :where(.shadow){--_shadow:initial;box-shadow:var(--_shadow,var(--shadow-3))}
   :where(.border){--_border-size:initial;--_border-style:initial;--_border-color:initial;border:var(--_border-size,var(--border-size-1))var(--_border-style,solid)var(--_border-color,var(--surface-2))}
   :where(.border) :where(.surface){--_border-color:var(--surface-3)}
@@ -4159,5 +4656,20 @@
   :where(.text-lg){font-size:var(--font-size-5)}
   :where(.square){aspect-ratio:1}
   :where(.round){aspect-ratio:1;border-radius:var(--radius-round);overflow:clip}
-  :where(.container) { width: min(100%, clamp(320px, 90vw, 1450px)); margin-inline: auto; }
+  :where(.headline) {
+      font-family: var(--font-sans);
+      font-size: var(--font-size-5); /* ~28px */
+      font-weight: var(--font-weight-4); /* 400 */
+      line-height: var(--font-lineheight-2); /* 1.25 */
+      letter-spacing: 0;
+      color: var(--text-color-1);
+    }
+  /* :where(.container) {width: clamp(320px, 90%, 1400px); left: 50%; transform: translateX(-50%);} */
+  :where(.container) {
+    width: clamp(320px, 90%, 1400px);
+    left: 50%;
+    transform: translateX(-50%) translateZ(0);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: width, transform; /* Tell browser both will change */
+  }
 }  /* EXTRA */
