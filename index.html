@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-copy/dist/highlightjs-copy.min.css">
     </head>
     <body>
-        <header id="header" hx-get="partials/index_header.html" hx-trigger="load"></header>
+        <header id="header" hx-get="partials/index_header.html" hx-trigger="load" hx-swap="outterHTML"></header>
         <main   id="main"   hx-get="partials/index_main.html"   hx-trigger="load"></main>
         <aside>
             <dialog id="aside-drawer" hx-on-open="document.activeElement?.blur()" hx-get="partials/index_aside.html"  hx-trigger="load" hx-swap="outterHTML"></dialog>
