@@ -1,9 +1,10 @@
 # CSS Stylesheet
 
-A minimal custom CSS file based on slight modifications of [OpenProps UI](https://open-props-ui.netlify.app/) built with the custom css variables from [OpenProps](https://open-props.style/).
+A minimal custom CSS file based on slight modifications of [OpenProps UI](https://open-props-ui.netlify.app/) built with the custom css variables from [OpenProps](https://open-props.style/); and icons from [Lucide Icons](https://lucide.dev/)
 
 ## Demo
 [Example Page](https://deufel.github.io/css/)
+
 
 ## Overview
 
@@ -14,4 +15,6 @@ This project is a flat-file CSS implementation that adapts and slightly changes 
 Download or link the `styles.css` file into your project; but be aware this is not minified or optimized for production use.
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Deufel/css/styles.css">
+<script src="https://cdn.jsdelivr.net/gh/Deufel/css/theme.js"></script>
+
 ```

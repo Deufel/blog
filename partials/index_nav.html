@@ -1,146 +1,146 @@
 <nav hx-on::after-request="document.getElementById('nav-drawer').close()" hx-on--after-request="document.querySelectorAll('#nav li.selected').forEach(li =&gt; li.classList.remove('selected')); event.target.closest('li').classList.add('selected');" id="nav">
-     <header>
-       <ul class="list">
-         <li class="selected">
-<button hx-get="/r/dashboard/home" hx-push-url="true" hx-target="#main" class="">             <div class="start">
-<icon-home><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house-icon lucide-house"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg></icon-home>             </div>
-             <div class="text">
-               <p>Home</p>
-             </div>
-</button>         </li>
-       </ul>
-     </header>
-<main>       <ul hx-swap="innerHTML transition:true" hx-push-url="true" hx-target="#main" class="list">
-         <li>
-           <div class="text inset">
-<strong>Discover</strong>           </div>
-         </li>
-         <li>
-<button hx-get="/r/dashboard/search">             <div class="start">
-<icon-search><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg></icon-search>             </div>
-             <div class="text">
-               <p>Search</p>
-             </div>
-</button>         </li>
-         <li>
-<button hx-get="/r/dashboard/saved">             <div class="start">
-<icon-heart><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart-icon lucide-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg></icon-heart>             </div>
-             <div class="text">
-               <p>Saved Events</p>
-             </div>
-</button>         </li>
-         <li class="border-top">
-           <div class="text inset">
-<strong>My Activations</strong>           </div>
-         </li>
-         <li>
-<button hx-get="/r/dashboard/sample">             <div class="start">
-<icon-helping-hand><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hand-helping-icon lucide-hand-helping"><path d="M11 12h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 14"></path><path d="m7 18 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"></path><path d="m2 13 6 6"></path></svg></icon-helping-hand>             </div>
-             <div class="text">
-               <p>Sampling Promotions</p>
-             </div>
-</button>         </li>
-         <li>
-<button hx-get="/r/dashboard/partnerships">             <div class="start">
-<icon-handshake><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-handshake-icon lucide-handshake"><path d="m11 17 2 2a1 1 0 1 0 3-3"></path><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"></path><path d="m21 3 1 11h-2"></path><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"></path><path d="M3 4h8"></path></svg></icon-handshake>             </div>
-             <div class="text">
-               <p>Event Partnerships</p>
-             </div>
-</button>         </li>
-         <li>
-<button hx-get="/r/dashboard/calendar">             <div class="start">
-<icon-calendar><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar1-icon lucide-calendar-1"><path d="M11 14h1v4"></path><path d="M16 2v4"></path><path d="M3 10h18"></path><path d="M8 2v4"></path><rect x="3" y="4" width="18" height="18" rx="2"></rect></svg></icon-calendar>             </div>
-             <div class="text">
-               <p>Calendar</p>
-             </div>
-</button>         </li>
-         <li>
-<button hx-get="/r/dashboard/mapnew">             <div class="start">
-<icon-map><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-icon lucide-map"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"></path><path d="M15 5.764v15"></path><path d="M9 3.236v15"></path></svg></icon-map>             </div>
-             <div class="text">
-               <p>Map</p>
-             </div>
-</button>         </li>
-         <li class="border-top">
-           <div class="text inset">
-<strong>Operations</strong>           </div>
-         </li>
-         <li>
-<button hx-get="/r/dashboard/reporting">             <div class="start">
-<icon-chart-line><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-line-icon lucide-chart-line"><path d="M3 3v16a2 2 0 0 0 2 2h16"></path><path d="m19 9-5 5-4-4-3 3"></path></svg></icon-chart-line>             </div>
-             <div class="text">
-               <p>Reports</p>
-             </div>
-</button>         </li>
-         <li>
-<button hx-get="/r/dashboard/assets">             <div class="start">
-<icon-package-search><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package-search-icon lucide-package-search"><path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14"></path><path d="m7.5 4.27 9 5.15"></path><polyline points="3.29 7 12 12 20.71 7"></polyline><line x1="12" x2="12" y1="22" y2="12"></line><circle cx="18.5" cy="15.5" r="2.5"></circle><path d="M20.27 17.27 22 19"></path></svg></icon-package-search>             </div>
-             <div class="text">
-               <p>Asset Manager</p>
-             </div>
-</button>         </li>
-         <li>
-<button hx-get="/r/dashboard/brands">             <div class="start">
-<icon-shopping-basket><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-basket-icon lucide-shopping-basket"><path d="m15 11-1 9"></path><path d="m19 11-4-7"></path><path d="M2 11h20"></path><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.7-7.4"></path><path d="M4.5 15.5h15"></path><path d="m5 11 4-7"></path><path d="m9 11 1 9"></path></svg></icon-shopping-basket>             </div>
-             <div class="text">
-               <p>Brand Manager</p>
-             </div>
-</button>         </li>
-         <li class="border-top">
-           <div class="text inset">
-<strong>Testing</strong>           </div>
-         </li>
-         <li>
-<button hx-get="/z/datalist">             <div class="start">
-<icon-arrow-down-wide-narrow><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down-wide-narrow-icon lucide-arrow-down-wide-narrow"><path d="m3 16 4 4 4-4"></path><path d="M7 20V4"></path><path d="M11 4h10"></path><path d="M11 8h7"></path><path d="M11 12h4"></path></svg></icon-arrow-down-wide-narrow>             </div>
-             <div class="text">
-               <p>Test - Datalist</p>
-             </div>
-</button>         </li>
-         <li>
-<button hx-get="/z/dashboard/chart">             <div class="start">
-<icon-chart-line><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-line-icon lucide-chart-line"><path d="M3 3v16a2 2 0 0 0 2 2h16"></path><path d="m19 9-5 5-4-4-3 3"></path></svg></icon-chart-line>             </div>
-             <div class="text">
-               <p>ChartJS</p>
-             </div>
-</button>         </li>
-         <li>
-<button hx-get="/z/dashboard/apex">             <div class="start">
-<icon-chart-bar><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-bar-stacked-icon lucide-chart-bar-stacked"><path d="M11 13v4"></path><path d="M15 5v4"></path><path d="M3 3v16a2 2 0 0 0 2 2h16"></path><rect x="7" y="13" width="9" height="4" rx="1"></rect><rect x="7" y="5" width="12" height="4" rx="1"></rect></svg></icon-chart-bar>             </div>
-             <div class="text">
-               <p>Apex Charts</p>
-             </div>
-</button>         </li>
-         <li class="border-top">
-           <div class="text inset">
-<strong>Super Admin</strong>           </div>
-         </li>
-         <li>
-<button hx-get="/z/dashboard/admin">             <div class="start">
-<icon-shield><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-icon lucide-shield"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path></svg></icon-shield>             </div>
-             <div class="text">
-               <p>Manage Whitelist</p>
-             </div>
-</button>         </li>
-         <li>
-<button hx-get="/z/dashboard/upload">             <div class="start">
-<icon-file-up><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-up-icon lucide-file-up"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M12 12v6"></path><path d="m15 15-3-3-3 3"></path></svg></icon-file-up>             </div>
-             <div class="text">
-               <p>Upload Events</p>
-             </div>
-</button>         </li>
-       </ul>
-</main>     <footer>
-       <ul hx-swap="innerHTML transition:true" hx-push-url="true" hx-target="#main" class="list">
-         <li>
-<button hx-get="/r/dashboard/settings">             <div class="start">
-<icon-settings><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings-icon lucide-settings"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg></icon-settings>             </div>
-             <div class="text">
-               <p>Settings</p>
-             </div>
-             <div class="end">
-<kbd>Ver 0.3.1</kbd>             </div>
-</button>         </li>
-       </ul>
-     </footer>
-   </nav>
+         <header>
+           <ul class="list">
+             <li>
+<button hx-get="/r/dashboard/home" hx-push-url="true" hx-target="#main">                 <div class="start">
+<icon-home><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house-icon lucide-house"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg></icon-home>                 </div>
+                 <div class="text">
+                   <p>Home</p>
+                 </div>
+</button>             </li>
+           </ul>
+         </header>
+<main>           <ul hx-swap="innerHTML transition:true" hx-push-url="true" hx-target="#main" class="list">
+             <li>
+               <div class="text inset">
+<strong>Discover</strong>               </div>
+             </li>
+             <li>
+<button hx-get="/r/dashboard/search">                 <div class="start">
+<icon-search><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg></icon-search>                 </div>
+                 <div class="text">
+                   <p>Search</p>
+                 </div>
+</button>             </li>
+             <li>
+<button hx-get="/r/dashboard/saved">                 <div class="start">
+<icon-heart><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart-icon lucide-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg></icon-heart>                 </div>
+                 <div class="text">
+                   <p>Saved Events</p>
+                 </div>
+</button>             </li>
+             <li class="border-top">
+               <div class="text inset">
+<strong>My Activations</strong>               </div>
+             </li>
+             <li>
+<button hx-get="/r/dashboard/sample">                 <div class="start">
+<icon-helping-hand><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hand-helping-icon lucide-hand-helping"><path d="M11 12h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 14"></path><path d="m7 18 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"></path><path d="m2 13 6 6"></path></svg></icon-helping-hand>                 </div>
+                 <div class="text">
+                   <p>Sampling Promotions</p>
+                 </div>
+</button>             </li>
+             <li>
+<button hx-get="/r/dashboard/partnerships">                 <div class="start">
+<icon-handshake><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-handshake-icon lucide-handshake"><path d="m11 17 2 2a1 1 0 1 0 3-3"></path><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"></path><path d="m21 3 1 11h-2"></path><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"></path><path d="M3 4h8"></path></svg></icon-handshake>                 </div>
+                 <div class="text">
+                   <p>Event Partnerships</p>
+                 </div>
+</button>             </li>
+             <li>
+<button hx-get="/r/dashboard/calendar">                 <div class="start">
+<icon-calendar><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar1-icon lucide-calendar-1"><path d="M11 14h1v4"></path><path d="M16 2v4"></path><path d="M3 10h18"></path><path d="M8 2v4"></path><rect x="3" y="4" width="18" height="18" rx="2"></rect></svg></icon-calendar>                 </div>
+                 <div class="text">
+                   <p>Calendar</p>
+                 </div>
+</button>             </li>
+             <li>
+<button hx-get="/r/dashboard/mapnew">                 <div class="start">
+<icon-map><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-icon lucide-map"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"></path><path d="M15 5.764v15"></path><path d="M9 3.236v15"></path></svg></icon-map>                 </div>
+                 <div class="text">
+                   <p>Map</p>
+                 </div>
+</button>             </li>
+             <li class="border-top">
+               <div class="text inset">
+<strong>Operations</strong>               </div>
+             </li>
+             <li>
+<button hx-get="/r/dashboard/reporting">                 <div class="start">
+<icon-chart-line><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-line-icon lucide-chart-line"><path d="M3 3v16a2 2 0 0 0 2 2h16"></path><path d="m19 9-5 5-4-4-3 3"></path></svg></icon-chart-line>                 </div>
+                 <div class="text">
+                   <p>Reports</p>
+                 </div>
+</button>             </li>
+             <li>
+<button hx-get="/r/dashboard/assets">                 <div class="start">
+<icon-package-search><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package-search-icon lucide-package-search"><path d="M21 10V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l2-1.14"></path><path d="m7.5 4.27 9 5.15"></path><polyline points="3.29 7 12 12 20.71 7"></polyline><line x1="12" x2="12" y1="22" y2="12"></line><circle cx="18.5" cy="15.5" r="2.5"></circle><path d="M20.27 17.27 22 19"></path></svg></icon-package-search>                 </div>
+                 <div class="text">
+                   <p>Asset Manager</p>
+                 </div>
+</button>             </li>
+             <li>
+<button hx-get="/r/dashboard/brands">                 <div class="start">
+<icon-shopping-basket><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-basket-icon lucide-shopping-basket"><path d="m15 11-1 9"></path><path d="m19 11-4-7"></path><path d="M2 11h20"></path><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.7-7.4"></path><path d="M4.5 15.5h15"></path><path d="m5 11 4-7"></path><path d="m9 11 1 9"></path></svg></icon-shopping-basket>                 </div>
+                 <div class="text">
+                   <p>Brand Manager</p>
+                 </div>
+</button>             </li>
+             <li class="border-top">
+               <div class="text inset">
+<strong>Testing</strong>               </div>
+             </li>
+             <li>
+<button hx-get="/z/datalist">                 <div class="start">
+<icon-arrow-down-wide-narrow><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down-wide-narrow-icon lucide-arrow-down-wide-narrow"><path d="m3 16 4 4 4-4"></path><path d="M7 20V4"></path><path d="M11 4h10"></path><path d="M11 8h7"></path><path d="M11 12h4"></path></svg></icon-arrow-down-wide-narrow>                 </div>
+                 <div class="text">
+                   <p>Test - Datalist</p>
+                 </div>
+</button>             </li>
+             <li>
+<button hx-get="/z/dashboard/chart">                 <div class="start">
+<icon-chart-line><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-line-icon lucide-chart-line"><path d="M3 3v16a2 2 0 0 0 2 2h16"></path><path d="m19 9-5 5-4-4-3 3"></path></svg></icon-chart-line>                 </div>
+                 <div class="text">
+                   <p>ChartJS</p>
+                 </div>
+</button>             </li>
+             <li>
+<button hx-get="/z/dashboard/apex">                 <div class="start">
+<icon-chart-bar><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-bar-stacked-icon lucide-chart-bar-stacked"><path d="M11 13v4"></path><path d="M15 5v4"></path><path d="M3 3v16a2 2 0 0 0 2 2h16"></path><rect x="7" y="13" width="9" height="4" rx="1"></rect><rect x="7" y="5" width="12" height="4" rx="1"></rect></svg></icon-chart-bar>                 </div>
+                 <div class="text">
+                   <p>Apex Charts</p>
+                 </div>
+</button>             </li>
+             <li class="border-top">
+               <div class="text inset">
+<strong>Super Admin</strong>               </div>
+             </li>
+             <li>
+<button hx-get="/z/dashboard/admin">                 <div class="start">
+<icon-shield><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-icon lucide-shield"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path></svg></icon-shield>                 </div>
+                 <div class="text">
+                   <p>Manage Whitelist</p>
+                 </div>
+</button>             </li>
+             <li>
+<button hx-get="/z/dashboard/upload">                 <div class="start">
+<icon-file-up><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-up-icon lucide-file-up"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M12 12v6"></path><path d="m15 15-3-3-3 3"></path></svg></icon-file-up>                 </div>
+                 <div class="text">
+                   <p>Upload Events</p>
+                 </div>
+</button>             </li>
+           </ul>
+</main>         <footer>
+           <ul hx-swap="innerHTML transition:true" hx-push-url="true" hx-target="#main" class="list">
+             <li>
+<button hx-get="/r/dashboard/settings">                 <div class="start">
+<icon-settings><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings-icon lucide-settings"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg></icon-settings>                 </div>
+                 <div class="text">
+                   <p>Settings</p>
+                 </div>
+                 <div class="end">
+<kbd>Ver 0.3.1</kbd>                 </div>
+</button>             </li>
+           </ul>
+         </footer>
+       </nav>
