@@ -19,9 +19,9 @@
     <body>
         <header id="header" hx-get="partials/index_header.html" hx-trigger="load"></header>
         <main   id="main"   hx-get="partials/index_main.html"   hx-trigger="load"></main>
-        <dialog>
-            <aside  id="aside"  hx-get="partials/index_aside.html"  hx-trigger="load" hx-swap="outterHTML"></aside>
-        </dialog>
+        <aside>
+            <dialog id="aside-drawer" hx-on-open="document.activeElement?.blur()" hx-get="partials/index_aside.html"  hx-trigger="load" hx-swap="outterHTML"></dialog>
+        </aside>
         <nav    id="nav"    hx-get="partials/index_nav.html"    hx-trigger="load" hx-swap="outterHTML"></nav>
         <footer id="footer" hx-get="partials/index_footer.html" hx-trigger="load"></footer>
     </body>
