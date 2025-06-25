@@ -22,7 +22,13 @@
         <aside>
             <dialog id="aside-drawer" hx-on-open="document.activeElement?.blur()" hx-get="partials/index_aside.html"  hx-trigger="load" hx-swap="outterHTML"></dialog>
         </aside>
-        <nav    id="nav"    hx-get="partials/index_nav.html"    hx-trigger="load" hx-swap="outterHTML"></nav>
+        <nav
+            id="nav"
+            hx-on::after-request="document.getElementById('nav-drawer').close()"
+            hx-on--after-request="document.querySelectorAll('#nav li.selected').forEach(li =&gt; li.classList.remove('selected')); event.target.closest('li').classList.add('selected');"
+            hx-get="partials/index_nav.html"
+            hx-trigger="load">
+        </nav>
         <footer id="footer" hx-get="partials/index_footer.html" hx-trigger="load"></footer>
     </body>
 </html>
