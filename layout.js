@@ -1,213 +1,141 @@
-function handlePopoverAttributes() {
-  const mobilePopoverElements = document.querySelectorAll('[data-layout="mobile-popover"]');
-  const isMobile = window.innerWidth <= 768;
 
-  mobilePopoverElements.forEach(element => {
-    if (isMobile) {
-      element.setAttribute('popover', 'auto');
-      element.removeAttribute('style');
-    } else {
-      element.removeAttribute('popover');
-      element.style.position = 'static';
-      element.style.transform = 'none';
-      element.style.opacity = '1';
-      element.style.width = 'auto';
-    }
-  });
+// Open dialog with view transitions and remove initial focus
+
+function openDrawer(position) {
+  const drawer = document.querySelector(`body > ${position} > dialog`);
+  if (!drawer) return;
+
+  const openAction = () => {
+    drawer.showModal();
+    document.activeElement?.blur();
+    if (window.themeUtils) window.themeUtils.init();
+  };
+
+  if (document.startViewTransition) {
+    document.startViewTransition(openAction);
+  } else {
+    openAction();
+  }
 }
 
-function closeNavOnLinkClick() {
-  // Get all links inside the nav
-  const navElement = document.getElementById('nav');
-  if (!navElement) return;
+// Close dialog with view transitions
+function closeDrawer(dialogEl, reason = 'close') {
+  if (!dialogEl) return;
 
-  const navLinks = navElement.querySelectorAll('a, button');
-
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      // Check if we're in mobile mode and nav is a popover
-      if (window.innerWidth <= 768 && navElement.hasAttribute('popover')) {
-        navElement.hidePopover();
-      }
-    });
-  });
+  if (document.startViewTransition) {
+    document.startViewTransition(() => dialogEl.close(reason));
+  } else {
+    dialogEl.close(reason);
+  }
 }
 
-// Initialize when DOM is ready
-document.addEventListener("DOMContentLoaded", () => {
-  handlePopoverAttributes();
-  closeNavOnLinkClick();
-  window.addEventListener('resize', handlePopoverAttributes);
-
-  // Listen for HTMX events
-  document.body.addEventListener('htmx:afterSwap', () => {
-    handlePopoverAttributes();
-    closeNavOnLinkClick(); // Re-attach event listeners after content changes
-  });
-
-  document.body.addEventListener('htmx:load', () => {
-    handlePopoverAttributes();
-    closeNavOnLinkClick();
-  });
+// Handle backdrop clicks for soft dismiss
+document.addEventListener('click', event => {
+  const dialog = event.target.closest('dialog');
+  if (dialog && event.target === dialog) closeDrawer(dialog, 'dismiss');
 });
 
-function handlePopoverAttributes() {
-  const mobilePopoverElements = document.querySelectorAll('[data-layout="mobile-popover"]');
-  const isMobile = window.innerWidth <= 768;
-
-  mobilePopoverElements.forEach(element => {
-    if (isMobile) {
-      element.setAttribute('popover', 'auto');
-      element.removeAttribute('style');
-
-      // Set up enhanced popover behavior if needed
-      if (element.getAttribute('data-focus-trap') === 'true' && !element.hasAttribute('data-enhanced')) {
-        enhancePopover(element);
-        element.setAttribute('data-enhanced', 'true');
-      }
-    } else {
-      element.removeAttribute('popover');
-      element.style.position = 'static';
-      element.style.transform = 'none';
-      element.style.opacity = '1';
-      element.style.width = 'auto';
-    }
-  });
-}
-
-function enhancePopover(popoverElement) {
-  // Create backdrop element if it doesn't exist
-  let backdrop = document.getElementById('popover-backdrop');
-  if (!backdrop) {
-    backdrop = document.createElement('div');
-    backdrop.id = 'popover-backdrop';
-    backdrop.style.position = 'fixed';
-    backdrop.style.top = '0';
-    backdrop.style.left = '0';
-    backdrop.style.width = '100vw';
-    backdrop.style.height = '100vh';
-    backdrop.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-    backdrop.style.zIndex = '998';  // Just below popover
-    backdrop.style.display = 'none';
-    document.body.appendChild(backdrop);
-
-    // Prevent clicks on backdrop from bubbling
-    backdrop.addEventListener('click', (e) => {
-      e.stopPropagation();
-      // Find any open popovers and close them
-      const openPopovers = document.querySelectorAll('[popover][data-focus-trap="true"][popover=open]');
-      openPopovers.forEach(pop => pop.hidePopover());
-    });
-  }
-
-  // Add event listeners for popover open/close
-  popoverElement.addEventListener('toggle', (e) => {
-    if (e.newState === 'open') {
-      // Show backdrop
-      backdrop.style.display = 'block';
-
-      // Lock scroll
-      document.body.style.overflow = 'hidden';
-
-      // Set up focus trap
-      setupFocusTrap(popoverElement);
-    } else {
-      // Hide backdrop
-      backdrop.style.display = 'none';
-
-      // Unlock scroll
-      document.body.style.overflow = '';
-
-      // Remove focus trap
-      removeFocusTrap();
-    }
-  });
-}
-
-// Focus trap implementation
-let lastFocusedElement = null;
-
-function setupFocusTrap(element) {
-  // Save currently focused element to restore later
-  lastFocusedElement = document.activeElement;
-
-  // Find all focusable elements within the popover
-  const focusableElements = element.querySelectorAll(
-    'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
-  );
-
-  if (focusableElements.length === 0) return;
-
-  const firstElement = focusableElements[0];
-  const lastElement = focusableElements[focusableElements.length - 1];
-
-  // Focus the first element
-  firstElement.focus();
-
-  // Set up keydown event for tab key
-  document.addEventListener('keydown', trapTabKey);
-
-  function trapTabKey(e) {
-    if (e.key === 'Tab') {
-      if (e.shiftKey && document.activeElement === firstElement) {
-        e.preventDefault();
-        lastElement.focus();
-      } else if (!e.shiftKey && document.activeElement === lastElement) {
-        e.preventDefault();
-        firstElement.focus();
-      }
-    } else if (e.key === 'Escape') {
-      // Close the popover on Escape key
-      element.hidePopover();
+// Handle Escape key to close with animation
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') {
+    const openDialog = document.querySelector('dialog[open]');
+    if (openDialog) {
+      event.preventDefault();
+      closeDrawer(openDialog, 'escape');
     }
   }
-}
-
-function removeFocusTrap() {
-  document.removeEventListener('keydown', trapTabKey);
-
-  // Restore focus to the element that was focused before
-  if (lastFocusedElement) {
-    lastFocusedElement.focus();
-  }
-}
-
-function closeNavOnLinkClick() {
-  const navElement = document.getElementById('nav');
-  if (!navElement) return;
-
-  const navLinks = navElement.querySelectorAll('a, button');
-
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if (window.innerWidth <= 768 && navElement.hasAttribute('popover')) {
-        navElement.hidePopover();
-      }
-    });
-  });
-}
-
-// Initialize when DOM is ready
-document.addEventListener("DOMContentLoaded", () => {
-  handlePopoverAttributes();
-  closeNavOnLinkClick();
-  window.addEventListener('resize', handlePopoverAttributes);
-
-  // Listen for HTMX events
-  document.body.addEventListener('htmx:afterSwap', () => {
-    handlePopoverAttributes();
-    closeNavOnLinkClick();
-  });
-
-  document.body.addEventListener('htmx:load', () => {
-    handlePopoverAttributes();
-    closeNavOnLinkClick();
-  });
 });
 
-// Note: The trapTabKey function needs to be defined at a higher scope
-// or attached to the window object to be accessible from removeFocusTrap
-function trapTabKey(e) {
-  // This is a placeholder - the actual implementation will be created
-  // dynamically for each popover in setupFocusTrap
-}
+// Prevent default dialog close behavior to use our animations
+document.addEventListener('cancel', event => {
+  if (event.target.tagName === 'DIALOG') {
+    event.preventDefault();
+    closeDrawer(event.target, 'escape');
+  }
+}, true);
+
+// ---- THEME -----
+(function() {
+    const themeChannel = new BroadcastChannel('theme-updates');
+
+    function applyTheme(themeMode, colorHue) {
+        document.documentElement.setAttribute('data-theme', themeMode || 'system');
+        document.documentElement.style.setProperty('--palette-hue', `var(--oklch-${colorHue || 'cyan'})`);
+    }
+
+    function applyLayout(layout) {
+        if (!document.body) return;
+        if (layout === 'container') document.body.classList.add('container');
+        else document.body.classList.remove('container');
+    }
+
+    function loadAndApplyTheme() {
+        const themeMode = localStorage.getItem('themePreference') || 'system';
+        const colorHue = localStorage.getItem('huePreference') || 'cyan';
+        const layout = localStorage.getItem('layoutPreference') || 'fullwidth';
+        applyTheme(themeMode, colorHue);
+        applyLayout(layout);
+    }
+
+    function saveThemePreference(key, value) {
+        localStorage.setItem(key + 'Preference', value);
+        loadAndApplyTheme();
+        themeChannel.postMessage({type: 'theme-change', key: key + 'Preference', value});
+    }
+
+    themeChannel.onmessage = e => {
+        if (e.data.type === 'theme-change') loadAndApplyTheme();
+    };
+
+    window.selectTheme = function(theme, btn) {
+        saveThemePreference('theme', theme);
+        document.querySelectorAll('#theme-toggle button').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+    };
+
+    window.selectLayout = function(layout, btn) {
+        saveThemePreference('layout', layout);
+        document.querySelectorAll('#layout-toggle button').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+    };
+
+    window.selectColor = function(color, btn) {
+        saveThemePreference('hue', color);
+        document.querySelectorAll('#color-toggle button').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+    };
+
+    window.saveThemePreference = saveThemePreference;
+
+    function initThemeUI() {
+        const themeMode = localStorage.getItem('themePreference') || 'system';
+        const colorHue = localStorage.getItem('huePreference') || 'cyan';
+
+        document.querySelectorAll('#theme-toggle button').forEach(b => b.classList.remove('selected'));
+        const themeBtn = document.querySelector(`#theme-toggle button[onclick*="${themeMode}"]`);
+        if (themeBtn) themeBtn.classList.add('selected');
+
+        document.querySelectorAll('#color-toggle button').forEach(b => b.classList.remove('selected'));
+        const colorBtn = document.querySelector(`#color-toggle button[onclick*="${colorHue}"]`);
+        if (colorBtn) colorBtn.classList.add('selected');
+    }
+
+    function initLayoutUI() {
+        const layout = localStorage.getItem('layoutPreference') || 'fullwidth';
+        document.querySelectorAll('#layout-toggle button').forEach(b => b.classList.remove('selected'));
+        const layoutBtn = document.querySelector(`#layout-toggle button[onclick*="${layout}"]`);
+        if (layoutBtn) layoutBtn.classList.add('selected');
+    }
+
+    function init() {
+        loadAndApplyTheme();
+        initThemeUI();
+        initLayoutUI();
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
+
+    window.themeUtils = {init};
+    document.addEventListener('htmx:afterSwap', () => {initThemeUI(); initLayoutUI();});
+})();
