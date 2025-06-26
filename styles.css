@@ -3738,7 +3738,7 @@
 
     /* Supporting text in third row */
     .supporting-text {
-      grid-row: 3;
+      grid-row: 1;
       color: var(--_supporting-text-color);
       font-size: var(--font-size-xs);
       line-height: 1.5;
@@ -4275,7 +4275,6 @@
     }
   }   /* additional CSS for full width submit buttons */
 
-
 @layer layout.mobile{
 
     /* drawer animations */
@@ -4384,7 +4383,6 @@
         slideInUp 0.3s ease forwards;
     }
 }
-
 
 @layer layout.mobile {
     body {
