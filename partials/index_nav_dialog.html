@@ -8,9 +8,10 @@
 
 <!-- This is an out-of-band swap that replaces the button -->
 <button id="nav-toggle"
+        class="icon-button"
         hx-get="partials/index_nav_inline"
         hx-target="#nav"
         hx-swap="outerHTML"
         hx-swap-oob="true">
-    Move Nav to Inline
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu"><path d="M4 12h16"/><path d="M4 18h16"/><path d="M4 6h16"/></svg>
 </button>
