@@ -2,13 +2,13 @@
 <nav id="nav"
      hx-on::after-request="document.getElementById('nav-drawer').close()"
      hx-on--after-request="document.querySelectorAll('#nav li.selected').forEach(li => li.classList.remove('selected')); event.target.closest('li').classList.add('selected');">
-    <dialog id="nav-drawer" hx-get="partials/index_nav.html" hx-trigger="load" open>
+    <dialog id="nav-drawer" hx-get="partials/index_nav" hx-trigger="load" open>
     </dialog>
 </nav>
 
 <!-- This is an out-of-band swap that replaces the button -->
 <button id="nav-toggle"
-        hx-get="partials/index_nav_inline.html"
+        hx-get="partials/index_nav_inline"
         hx-target="#nav"
         hx-swap="outerHTML"
         hx-swap-oob="true">
