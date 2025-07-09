@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTMX Nav Toggle Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js" integrity="sha384-Akqfrbj/HpNVo8k11SXBb6TlBWmXXlYQrCSqEWmyKJe+hDm3Z/B2WVG4smwBkRVm" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        #header {
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        #toggle-nav-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        #toggle-nav-btn:hover {
+            background-color: #0056b3;
+        }
+
+        #main, #aside, #footer {
+            background-color: white;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+
+        #nav {
+            background-color: #e9ecef;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+
+        /* Dialog styling */
+        dialog {
+            border: none;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            width: 90%;
+        }
+
+        dialog::backdrop {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-content {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-content li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .nav-content li:last-child {
+            border-bottom: none;
+        }
+
+        .nav-content li.selected {
+            background-color: #007bff;
+            color: white;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .close-dialog {
+            float: right;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <button id="toggle-nav-btn"
+                hx-get="/to-dialog"
+                hx-target="#nav"
+                hx-swap="outerHTML">
+            Move to Dialog
+        </button>
+        <h1>HTMX Navigation Toggle Demo</h1>
+    </header>
+
+    <main id="main">
+        <h2>Main Content</h2>
+        <p>This is the main content area. The navigation can be toggled between inline and dialog modes.</p>
+    </main>
+
+    <aside id="aside">
+        <h3>Aside Content</h3>
+        <p>This is the aside content.</p>
+    </aside>
+
+    <nav id="nav">
+        <h3>Navigation (Inline Mode)</h3>
+        <ul class="nav-content">
+            <li class="selected">Home</li>
+            <li>About</li>
+            <li>Services</li>
+            <li>Contact</li>
+        </ul>
+    </nav>
+
+    <footer id="footer">
+        <p>&copy; 2024 Demo Site</p>
+    </footer>
+
+    <script>
+        // Mock server responses for the toggle endpoints
+        let isDialogMode = false;
+
+        htmx.on('htmx:configRequest', function(evt) {
+            if (evt.detail.path === '/to-dialog') {
+                evt.preventDefault();
+
+                // Response that swaps nav to dialog mode AND updates the button
+                const response = `
+                    <nav id="nav">
+                        <dialog id="nav-drawer" open>
+                            <button class="close-dialog" onclick="this.parentElement.close()">×</button>
+                            <h3>Navigation (Dialog Mode)</h3>
+                            <ul class="nav-content">
+                                <li class="selected">Home</li>
+                                <li>About</li>
+                                <li>Services</li>
+                                <li>Contact</li>
+                            </ul>
+                        </dialog>
+                    </nav>
+
+                    <button id="toggle-nav-btn"
+                            hx-get="/to-inline"
+                            hx-target="#nav"
+                            hx-swap="outerHTML"
+                            hx-swap-oob="true">
+                        Move to Inline
+                    </button>
+                `;
+
+                // Set the response
+                evt.detail.xhr = {
+                    response: response,
+                    status: 200,
+                    responseText: response
+                };
+
+            } else if (evt.detail.path === '/to-inline') {
+                evt.preventDefault();
+
+                // Response that swaps nav to inline mode AND updates the button
+                const response = `
+                    <nav id="nav">
+                        <h3>Navigation (Inline Mode)</h3>
+                        <ul class="nav-content">
+                            <li class="selected">Home</li>
+                            <li>About</li>
+                            <li>Services</li>
+                            <li>Contact</li>
+                        </ul>
+                    </nav>
+
+                    <button id="toggle-nav-btn"
+                            hx-get="/to-dialog"
+                            hx-target="#nav"
+                            hx-swap="outerHTML"
+                            hx-swap-oob="true">
+                        Move to Dialog
+                    </button>
+                `;
+
+                // Set the response
+                evt.detail.xhr = {
+                    response: response,
+                    status: 200,
+                    responseText: response
+                };
+            }
+        });
+    </script>
+</body>
+</html>
