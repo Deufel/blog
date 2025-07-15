@@ -75,12 +75,27 @@ document.addEventListener(
     else document.body.classList.remove("container");
   }
 
+  function applyDevice(device) {
+    if (!document.body) return;
+    // Remove existing layout classes
+    document.body.classList.remove(
+      "layout-desktop",
+      "layout-tablet",
+      "layout-mobile",
+      "layout-auto",
+    );
+    // Add the selected device layout class
+    document.body.classList.add(`layout-${device || "auto"}`);
+  }
+
   function loadAndApplyTheme() {
     const themeMode = localStorage.getItem("themePreference") || "system";
     const colorHue = localStorage.getItem("huePreference") || "cyan";
     const layout = localStorage.getItem("layoutPreference") || "fullwidth";
+    const device = localStorage.getItem("devicePreference") || "auto";
     applyTheme(themeMode, colorHue);
     applyLayout(layout);
+    applyDevice(device);
   }
 
   function saveThemePreference(key, value) {
@@ -121,6 +136,14 @@ document.addEventListener(
     btn.classList.add("selected");
   };
 
+  window.selectDevice = function (device, btn) {
+    saveThemePreference("device", device);
+    document
+      .querySelectorAll("#device-toggle button")
+      .forEach((b) => b.classList.remove("selected"));
+    btn.classList.add("selected");
+  };
+
   window.saveThemePreference = saveThemePreference;
 
   function initThemeUI() {
@@ -155,10 +178,22 @@ document.addEventListener(
     if (layoutBtn) layoutBtn.classList.add("selected");
   }
 
+  function initDeviceUI() {
+    const device = localStorage.getItem("devicePreference") || "auto";
+    document
+      .querySelectorAll("#device-toggle button")
+      .forEach((b) => b.classList.remove("selected"));
+    const deviceBtn = document.querySelector(
+      `#device-toggle button[onclick*="${device}"]`,
+    );
+    if (deviceBtn) deviceBtn.classList.add("selected");
+  }
+
   function init() {
     loadAndApplyTheme();
     initThemeUI();
     initLayoutUI();
+    initDeviceUI();
   }
 
   if (document.readyState === "loading")
@@ -169,5 +204,6 @@ document.addEventListener(
   document.addEventListener("htmx:afterSwap", () => {
     initThemeUI();
     initLayoutUI();
+    initDeviceUI();
   });
 })();
