@@ -1,0 +1,233 @@
+/* ===== MODAL DRAWER SYSTEM CSS - SIMPLIFIED ===== */
+/* Let the grid system handle sizing, we just handle positioning and animations */
+
+/* CSS Variables */
+:root {
+    --drawer-backdrop-color: rgba(0, 0, 0, 0.5);
+    --drawer-background: var(--surface-hue, #ffffff);
+    --drawer-border-color: var(--border-color, #e0e0e0);
+    --drawer-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    --drawer-border-radius: 12px;
+    --drawer-animation-duration: 0.3s;
+    --drawer-animation-easing: var(--ease-3, cubic-bezier(0.25, 0, 0.3, 1));
+}
+
+/* ===== BASE DRAWER STYLES ===== */
+header[popover][data-drawer-breakpoint],
+nav[popover][data-drawer-breakpoint],
+aside[popover][data-drawer-breakpoint],
+footer[popover][data-drawer-breakpoint] {
+    /* Reset popover defaults */
+    border: none;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    max-width: none;
+    max-height: none;
+    scrollbar-width: thin;
+    scrollbar-gutter: stable both-edges;
+
+    /* Appearance */
+    background: var(--drawer-background);
+    border: 1px solid var(--drawer-border-color);
+    box-shadow: var(--drawer-shadow);
+
+    /* Maintain your semantic grid structure */
+    display: grid;
+    grid-template:
+        "header header header" auto
+        "nav main aside" 1fr
+        "footer footer footer" auto
+        / auto 1fr auto;
+    overflow: hidden;
+
+    /* Nested sections maintain structure */
+    > header {
+        grid-area: header;
+        margin-bottom: var(--gap-size, 6px);
+    }
+    > nav {
+        grid-area: nav;
+        margin-right: var(--gap-size, 6px);
+        overflow-y: auto;
+    }
+    > main {
+        grid-area: main;
+        overflow-y: auto;
+        min-height: 0;
+    }
+    > aside {
+        grid-area: aside;
+        margin-left: var(--gap-size, 6px);
+        overflow-y: auto;
+    }
+    > footer {
+        grid-area: footer;
+        margin-top: var(--gap-size, 6px);
+    }
+
+    /* Animation properties */
+    transition:
+        opacity var(--drawer-animation-duration) var(--drawer-animation-easing),
+        transform var(--drawer-animation-duration)
+            var(--drawer-animation-easing),
+        overlay var(--drawer-animation-duration) allow-discrete,
+        display var(--drawer-animation-duration) allow-discrete;
+
+    /* Backdrop */
+    &::backdrop {
+        background-color: rgb(0 0 0 / 0%);
+        backdrop-filter: blur(0px);
+        transition:
+            background-color var(--drawer-animation-duration)
+                var(--drawer-animation-easing),
+            backdrop-filter var(--drawer-animation-duration)
+                var(--drawer-animation-easing),
+            overlay var(--drawer-animation-duration) allow-discrete,
+            display var(--drawer-animation-duration) allow-discrete;
+    }
+
+    &:popover-open::backdrop {
+        background-color: var(--drawer-backdrop-color);
+        backdrop-filter: blur(2px);
+    }
+}
+
+/* ===== HEADER DRAWER (Top) - Full width, grid-controlled height ===== */
+header[popover][data-drawer-breakpoint] {
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    /* Height handled by grid system */
+    border-radius: 0 0 var(--drawer-border-radius) var(--drawer-border-radius);
+    border-top: none;
+
+    &:popover-open {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    opacity: 0;
+    transform: translateY(-100%);
+}
+
+@starting-style {
+    header[popover][data-drawer-breakpoint]:popover-open {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+}
+
+/* ===== NAV DRAWER (Left) - Full height, grid-controlled width ===== */
+nav[popover][data-drawer-breakpoint] {
+    height: 100svh;
+    max-width: 80vw;
+    border-radius: 0 var(--drawer-border-radius) var(--drawer-border-radius) 0;
+    border-left: none;
+
+    &:popover-open {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    opacity: 0;
+    transform: translateX(-100%);
+}
+
+@starting-style {
+    nav[popover][data-drawer-breakpoint]:popover-open {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+}
+
+/* ===== ASIDE DRAWER (Right) - Full height, grid-controlled width ===== */
+aside[popover][data-drawer-breakpoint] {
+    left: auto;
+    height: 100svh;
+    max-width: 80vw;
+    border-radius: var(--drawer-border-radius) 0 0 var(--drawer-border-radius);
+    border-right: none;
+
+    &:popover-open {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+@starting-style {
+    aside[popover][data-drawer-breakpoint]:popover-open {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+/* ===== FOOTER DRAWER (Bottom) - Full width, grid-controlled height ===== */
+footer[popover][data-drawer-breakpoint] {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    /* Height handled by grid system */
+    border-radius: var(--drawer-border-radius) var(--drawer-border-radius) 0 0;
+    border-bottom: none;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+
+    &:popover-open {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    opacity: 0;
+    transform: translateY(100%);
+}
+
+@starting-style {
+    footer[popover][data-drawer-breakpoint]:popover-open {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+}
+
+/* ===== BACKDROP STARTING STYLES ===== */
+@starting-style {
+    header[popover][data-drawer-breakpoint]:popover-open::backdrop,
+    nav[popover][data-drawer-breakpoint]:popover-open::backdrop,
+    aside[popover][data-drawer-breakpoint]:popover-open::backdrop,
+    footer[popover][data-drawer-breakpoint]:popover-open::backdrop {
+        background-color: rgb(0 0 0 / 0%);
+        backdrop-filter: blur(0px);
+    }
+}
+
+/* ===== REDUCED MOTION SUPPORT ===== */
+@media (prefers-reduced-motion: reduce) {
+    header[popover][data-drawer-breakpoint],
+    nav[popover][data-drawer-breakpoint],
+    aside[popover][data-drawer-breakpoint],
+    footer[popover][data-drawer-breakpoint] {
+        transition: none !important;
+    }
+
+    @starting-style {
+        header[popover][data-drawer-breakpoint]:popover-open,
+        nav[popover][data-drawer-breakpoint]:popover-open,
+        aside[popover][data-drawer-breakpoint]:popover-open,
+        footer[popover][data-drawer-breakpoint]:popover-open {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+    }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    [popover][data-drawer-breakpoint] {
+        display: none !important;
+    }
+}

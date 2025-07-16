@@ -5318,83 +5318,310 @@
     }
 } /* LAYOUT - TRANSITIONS */
 
-@layer layout.media {
-    /* Base device styles - desktop and tablet get spacing */
-    body.device-desktop,
-    body.device-tablet {
-        padding-inline: var(--size-2);
-        padding-block-end: var(--size-2);
-
-        > * {
-            border-radius: var(--radius-3);
-        }
-
-        > nav:not(:empty):not(:has(> dialog:only-child)) {
-            margin-inline-end: var(--size-2);
-        }
-
-        > aside:not(:empty):not(:has(> dialog:only-child)) {
-            margin-inline-start: var(--size-2);
-        }
+@layer layout {
+    :root {
+        --surface-hue: #f5f5f5;
+        --border-color: #e0e0e0;
+        --section-padding: 1rem;
+        --scrollbar-thumb: #c0c0c0;
+        --scrollbar-track: transparent;
+        --scrollbar-thumb-hover: #a0a0a0;
+        --gap-size: 6px;
+        --drawer-backdrop-color: rgba(0, 0, 0, 0.5);
+        --drawer-background: var(--surface-hue);
+        --drawer-border-color: var(--border-color);
+        --drawer-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        --drawer-border-radius: 12px;
+        --drawer-animation-duration: 0.3s;
+        --drawer-animation-easing: var(--ease-3, cubic-bezier(0.25, 0, 0.3, 1));
     }
 
-    /* Landscape orientation adjustments */
-    @media (orientation: landscape) and (max-height: 600px) {
-        body.device-desktop,
-        body.device-tablet {
+    /* Main Dashboard Layout */
+    body {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100svh;
+        overflow: hidden;
+        overscroll-behavior: none;
+        display: grid;
+        grid-template:
+            "header header header" auto
+            "nav main aside" 1fr
+            "footer footer footer" auto
+            / auto 1fr auto;
+        padding: var(--gap-size);
+        margin: 0;
+
+        /* Grid Area Assignments */
+        > header {
+            grid-area: header;
+            margin-bottom: var(--gap-size);
+        }
+        > nav {
+            grid-area: nav;
+            margin-right: var(--gap-size);
+        }
+        > main {
+            grid-area: main;
+        }
+        > aside {
+            grid-area: aside;
+            margin-left: var(--gap-size);
+        }
+        > footer {
+            grid-area: footer;
+            margin-top: var(--gap-size);
+        }
+
+        /* Each main section uses the same semantic layout pattern */
+        > header,
+        > nav,
+        > main,
+        > aside,
+        > footer {
+            display: grid;
             grid-template:
-                "header main aside" auto
+                "header header header" auto
                 "nav main aside" 1fr
                 "footer footer footer" auto
                 / auto 1fr auto;
+            overflow-y: auto;
+            min-height: 0;
+
+            /* Grid area assignments for nested sections */
+            > header {
+                grid-area: header;
+                margin-bottom: var(--gap-size);
+            }
+            > nav {
+                grid-area: nav;
+                margin-right: var(--gap-size);
+                overflow-y: auto;
+            }
+            > main {
+                grid-area: main;
+                overflow: auto;
+                min-height: 0;
+            }
+            > aside {
+                grid-area: aside;
+                margin-left: var(--gap-size);
+                overflow-y: auto;
+            }
+            > footer {
+                grid-area: footer;
+                margin-top: var(--gap-size);
+            }
         }
 
-        body.device-desktop > main,
-        body.device-tablet > main {
-            margin-block-start: var(--size-2);
+        /* Hide empty nested sections */
+        > header:empty,
+        > nav:empty,
+        > aside:empty,
+        > footer:empty {
+            display: none;
+        }
+    }
+    /* ===== BASE DRAWER STYLES ===== */
+    [popover][data-drawer-breakpoint] {
+        /* Reset popover defaults */
+        border: none;
+        padding: 0;
+        margin: 0;
+        outline: none;
+        max-width: none;
+        max-height: none;
+        scrollbar-width: thin;
+        scrollbar-gutter: stable both-edges;
+
+        /* Appearance */
+        background: var(--drawer-background);
+        border: 1px solid var(--drawer-border-color);
+        box-shadow: var(--drawer-shadow);
+
+        /* Maintain semantic grid structure */
+        display: grid;
+        grid-template:
+            "header header header" auto
+            "nav main aside" 1fr
+            "footer footer footer" auto
+            / auto 1fr auto;
+        overflow: hidden;
+
+        /* Nested sections maintain structure */
+        > header {
+            grid-area: header;
+            margin-bottom: var(--gap-size);
+        }
+        > nav {
+            grid-area: nav;
+            margin-right: var(--gap-size);
+            overflow-y: auto;
+        }
+        > main {
+            grid-area: main;
+            overflow: auto;
+            min-height: 0;
+        }
+        > aside {
+            grid-area: aside;
+            margin-left: var(--gap-size);
+            overflow-y: auto;
+        }
+        > footer {
+            grid-area: footer;
+            margin-top: var(--gap-size);
+        }
+
+        /* Animation properties */
+        transition:
+            opacity var(--drawer-animation-duration)
+                var(--drawer-animation-easing),
+            transform var(--drawer-animation-duration)
+                var(--drawer-animation-easing),
+            overlay var(--drawer-animation-duration) allow-discrete,
+            display var(--drawer-animation-duration) allow-discrete;
+
+        /* Backdrop */
+        &::backdrop {
+            background-color: rgb(0 0 0 / 0%);
+            transition:
+                background-color var(--drawer-animation-duration)
+                    var(--drawer-animation-easing),
+                backdrop-filter var(--drawer-animation-duration)
+                    var(--drawer-animation-easing),
+                overlay var(--drawer-animation-duration) allow-discrete,
+                display var(--drawer-animation-duration) allow-discrete;
+        }
+
+        &:popover-open::backdrop {
+            background-color: var(--drawer-backdrop-color);
+            backdrop-filter: blur(2px);
         }
     }
 
-    /* Layout class overrides - higher specificity in media layer */
+    /* ===== HEADER DRAWER ===== */
+    header[popover][data-drawer-breakpoint] {
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        border-radius: 0 0 var(--drawer-border-radius)
+            var(--drawer-border-radius);
+        border-top: none;
+        opacity: 0;
+        transform: translateY(-100%);
 
-    /* Desktop layout: show nav content + desktop styling */
-    body.layout-desktop {
-        padding-inline: var(--size-2);
-        padding-block-end: var(--size-2);
-
-        > * {
-            border-radius: var(--radius-3);
-        }
-
-        > nav:not(:empty):not(:has(> dialog:only-child)) {
-            margin-inline-end: var(--size-2);
-        }
-
-        > aside:not(:empty):not(:has(> dialog:only-child)) {
-            margin-inline-start: var(--size-2);
-        }
-
-        > nav > *:not(dialog) {
-            display: initial;
+        &:popover-open {
+            opacity: 1;
+            transform: translateY(0);
         }
     }
 
-    /* Mobile layout: hide nav content (already default from general layer) */
-    body.layout-mobile > nav > *:not(dialog) {
-        display: none;
+    /* ===== NAV DRAWER ===== */
+    nav[popover][data-drawer-breakpoint] {
+        height: 100svh;
+        max-width: 80vw;
+        border-radius: 0 var(--drawer-border-radius) var(--drawer-border-radius)
+            0;
+        border-left: none;
+        opacity: 0;
+        transform: translateX(-100%);
+
+        &:popover-open {
+            opacity: 1;
+            transform: translateX(0);
+        }
     }
 
-    /* Tablet layout: hide nav content like mobile for now */
-    body.layout-tablet > nav > *:not(dialog) {
-        display: none;
+    /* ===== ASIDE DRAWER ===== */
+    aside[popover][data-drawer-breakpoint] {
+        left: auto;
+        height: 100svh;
+        max-width: 80vw;
+        border-radius: var(--drawer-border-radius) 0 0
+            var(--drawer-border-radius);
+        border-right: none;
+        opacity: 0;
+        transform: translateX(100%);
+
+        &:popover-open {
+            opacity: 1;
+            transform: translateX(0);
+        }
     }
 
-    /* Auto layout: responsive behavior based on device detection */
-    body.layout-auto.device-desktop > nav > *:not(dialog),
-    body.layout-auto.device-tablet > nav > *:not(dialog) {
-        display: initial;
+    /* ===== FOOTER DRAWER ===== */
+    footer[popover][data-drawer-breakpoint] {
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        border-radius: var(--drawer-border-radius) var(--drawer-border-radius) 0
+            0;
+        border-bottom: none;
+        padding-bottom: env(safe-area-inset-bottom, 0);
+        opacity: 0;
+        transform: translateY(100%);
+
+        &:popover-open {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
-} /* LAYOUT - MEDIA QUERIES */
+
+    /* ===== STARTING STYLES ===== */
+    @starting-style {
+        [popover][data-drawer-breakpoint]:popover-open {
+            opacity: 0;
+        }
+
+        header[popover][data-drawer-breakpoint]:popover-open {
+            transform: translateY(-100%);
+        }
+
+        nav[popover][data-drawer-breakpoint]:popover-open {
+            transform: translateX(-100%);
+        }
+
+        aside[popover][data-drawer-breakpoint]:popover-open {
+            transform: translateX(100%);
+        }
+
+        footer[popover][data-drawer-breakpoint]:popover-open {
+            transform: translateY(100%);
+        }
+
+        [popover][data-drawer-breakpoint]:popover-open::backdrop {
+            background-color: rgb(0 0 0 / 0%);
+            backdrop-filter: blur(0px);
+        }
+    }
+
+    /* ===== REDUCED MOTION SUPPORT ===== */
+    @media (prefers-reduced-motion: reduce) {
+        [popover][data-drawer-breakpoint] {
+            transition: none !important;
+        }
+
+        @starting-style {
+            [popover][data-drawer-breakpoint]:popover-open {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+    }
+
+    /* ===== PRINT STYLES ===== */
+    @media print {
+        [popover][data-drawer-breakpoint] {
+            display: none !important;
+        }
+    }
+} /* LAYOUT */
 
 @layer layout.show-hide {
     /* Show/Hide utilities based on layout classes */

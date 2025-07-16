@@ -3,201 +3,309 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTMX Nav Toggle Demo</title>
-    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js" integrity="sha384-Akqfrbj/HpNVo8k11SXBb6TlBWmXXlYQrCSqEWmyKJe+hDm3Z/B2WVG4smwBkRVm" crossorigin="anonymous"></script>
+    <title>Semantic Dashboard Layout</title>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
+    /* Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* CSS Variables for theming */
+    :root {
+        --surface-hue: #f5f5f5;
+        --border-color: #e0e0e0;
+        --section-padding: 1rem;
+        --scrollbar-thumb: #c0c0c0;
+        --scrollbar-track: transparent;
+        --scrollbar-thumb-hover: #a0a0a0;
+        --gap-size: 6px;
+        --drawer-backdrop-color: rgba(0, 0, 0, 0.5);
+        --drawer-background: var(--surface-hue);
+        --drawer-border-color: var(--border-color);
+        --drawer-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        --drawer-border-radius: 12px;
+        --drawer-animation-duration: 0.3s;
+        --drawer-animation-easing: var(--ease-3, cubic-bezier(0.25, 0, 0.3, 1));
+    }
+
+    /* Main Dashboard Layout */
+    body {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100svh;
+        overflow: hidden;
+        overscroll-behavior: none;
+        display: grid;
+        grid-template:
+            "header header header" auto
+            "nav main aside" 1fr
+            "footer footer footer" auto
+            / auto 1fr auto;
+        padding: var(--gap-size);
+        margin: 0;
+
+        /* Grid Area Assignments */
+        > header { grid-area: header; margin-bottom: var(--gap-size); }
+        > nav { grid-area: nav; margin-right: var(--gap-size); }
+        > main { grid-area: main; }
+        > aside { grid-area: aside; margin-left: var(--gap-size); }
+        > footer { grid-area: footer; margin-top: var(--gap-size); }
+
+        /* Each main section uses the same semantic layout pattern */
+        > header, > nav, > main, > aside, > footer {
+            display: grid;
+            grid-template:
+                "header header header" auto
+                "nav main aside" 1fr
+                "footer footer footer" auto
+                / auto 1fr auto;
+            overflow-y: auto;
+            min-height: 0;
+
+            /* Grid area assignments for nested sections */
+            > header { grid-area: header; margin-bottom: var(--gap-size); }
+            > nav { grid-area: nav; margin-right: var(--gap-size); overflow-y: auto; }
+            > main { grid-area: main; overflow: auto; min-height: 0; }
+            > aside { grid-area: aside; margin-left: var(--gap-size); overflow-y: auto; }
+            > footer { grid-area: footer; margin-top: var(--gap-size); }
         }
 
-        #header {
-            background-color: #333;
-            color: white;
-            padding: 1rem;
-            margin-bottom: 1rem;
+        /* Hide empty nested sections */
+        > header:empty, > nav:empty, > aside:empty, > footer:empty { display: none; }
+    }
+    /* ===== BASE DRAWER STYLES ===== */
+    [popover][data-drawer-breakpoint] {
+        /* Reset popover defaults */
+        border: none;
+        padding: 0;
+        margin: 0;
+        outline: none;
+        max-width: none;
+        max-height: none;
+        scrollbar-width: thin;
+        scrollbar-gutter: stable both-edges;
+
+        /* Appearance */
+        background: var(--drawer-background);
+        border: 1px solid var(--drawer-border-color);
+        box-shadow: var(--drawer-shadow);
+
+        /* Maintain semantic grid structure */
+        display: grid;
+        grid-template:
+            "header header header" auto
+            "nav main aside" 1fr
+            "footer footer footer" auto
+            / auto 1fr auto;
+        overflow: hidden;
+
+        /* Nested sections maintain structure */
+        > header { grid-area: header; margin-bottom: var(--gap-size); }
+        > nav { grid-area: nav; margin-right: var(--gap-size); overflow-y: auto; }
+        > main { grid-area: main; overflow: auto; min-height: 0; }
+        > aside { grid-area: aside; margin-left: var(--gap-size); overflow-y: auto; }
+        > footer { grid-area: footer; margin-top: var(--gap-size); }
+
+        /* Animation properties */
+        transition:
+            opacity var(--drawer-animation-duration) var(--drawer-animation-easing),
+            transform var(--drawer-animation-duration) var(--drawer-animation-easing),
+            overlay var(--drawer-animation-duration) allow-discrete,
+            display var(--drawer-animation-duration) allow-discrete;
+
+        /* Backdrop */
+        &::backdrop {
+            background-color: rgb(0 0 0 / 0%);
+            transition:
+                background-color var(--drawer-animation-duration) var(--drawer-animation-easing),
+                backdrop-filter var(--drawer-animation-duration) var(--drawer-animation-easing),
+                overlay var(--drawer-animation-duration) allow-discrete,
+                display var(--drawer-animation-duration) allow-discrete;
         }
 
-        #toggle-nav-btn {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            border-radius: 4px;
+        &:popover-open::backdrop {
+            background-color: var(--drawer-backdrop-color);
+            backdrop-filter: blur(2px);
+        }
+    }
+
+    /* ===== HEADER DRAWER ===== */
+    header[popover][data-drawer-breakpoint] {
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        border-radius: 0 0 var(--drawer-border-radius) var(--drawer-border-radius);
+        border-top: none;
+        opacity: 0;
+        transform: translateY(-100%);
+
+        &:popover-open {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* ===== NAV DRAWER ===== */
+    nav[popover][data-drawer-breakpoint] {
+        height: 100svh;
+        max-width: 80vw;
+        border-radius: 0 var(--drawer-border-radius) var(--drawer-border-radius) 0;
+        border-left: none;
+        opacity: 0;
+        transform: translateX(-100%);
+
+        &:popover-open {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    /* ===== ASIDE DRAWER ===== */
+    aside[popover][data-drawer-breakpoint] {
+        left: auto;
+        height: 100svh;
+        max-width: 80vw;
+        border-radius: var(--drawer-border-radius) 0 0 var(--drawer-border-radius);
+        border-right: none;
+        opacity: 0;
+        transform: translateX(100%);
+
+        &:popover-open {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    /* ===== FOOTER DRAWER ===== */
+    footer[popover][data-drawer-breakpoint] {
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        border-radius: var(--drawer-border-radius) var(--drawer-border-radius) 0 0;
+        border-bottom: none;
+        padding-bottom: env(safe-area-inset-bottom, 0);
+        opacity: 0;
+        transform: translateY(100%);
+
+        &:popover-open {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* ===== STARTING STYLES ===== */
+    @starting-style {
+        [popover][data-drawer-breakpoint]:popover-open {
+            opacity: 0;
         }
 
-        #toggle-nav-btn:hover {
-            background-color: #0056b3;
+        header[popover][data-drawer-breakpoint]:popover-open {
+            transform: translateY(-100%);
         }
 
-        #main, #aside, #footer {
-            background-color: white;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 4px;
+        nav[popover][data-drawer-breakpoint]:popover-open {
+            transform: translateX(-100%);
         }
 
-        #nav {
-            background-color: #e9ecef;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 4px;
+        aside[popover][data-drawer-breakpoint]:popover-open {
+            transform: translateX(100%);
         }
 
-        /* Dialog styling */
-        dialog {
-            border: none;
-            border-radius: 8px;
-            padding: 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 300px;
-            width: 90%;
+        footer[popover][data-drawer-breakpoint]:popover-open {
+            transform: translateY(100%);
         }
 
-        dialog::backdrop {
-            background-color: rgba(0, 0, 0, 0.5);
+        [popover][data-drawer-breakpoint]:popover-open::backdrop {
+            background-color: rgb(0 0 0 / 0%);
+            backdrop-filter: blur(0px);
+        }
+    }
+
+    /* ===== REDUCED MOTION SUPPORT ===== */
+    @media (prefers-reduced-motion: reduce) {
+        [popover][data-drawer-breakpoint] {
+            transition: none !important;
         }
 
-        .nav-content {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        @starting-style {
+            [popover][data-drawer-breakpoint]:popover-open {
+                opacity: 1 !important;
+                transform: none !important;
+            }
         }
+    }
 
-        .nav-content li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #ddd;
+    /* ===== PRINT STYLES ===== */
+    @media print {
+        [popover][data-drawer-breakpoint] {
+            display: none !important;
         }
-
-        .nav-content li:last-child {
-            border-bottom: none;
-        }
-
-        .nav-content li.selected {
-            background-color: #007bff;
-            color: white;
-            padding: 0.5rem;
-            border-radius: 4px;
-        }
-
-        .close-dialog {
-            float: right;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
+    }
     </style>
+
 </head>
 <body>
-    <header id="header">
-        <button id="toggle-nav-btn"
-                hx-get="/to-dialog"
-                hx-target="#nav"
-                hx-swap="outerHTML">
-            Move to Dialog
-        </button>
-        <h1>HTMX Navigation Toggle Demo</h1>
+    <header id="header" data-drawer-breakpoint="400">
+        <header style="background-color: #FFE5E5;"> header &GT; header </header>
+        <nav    style="background-color: #E5F3FF;"> <button popovertarget="nav"> nav </button> </nav>
+        <main   style="background-color: #F0F8E5;"> header &GT; main   </main>
+        <aside  style="background-color: #FFF5E5;">
+            <button popovertarget="aside"> aside </button>
+            <button popovertarget="footer"> footer </button>
+        </aside>
+        <footer style="background-color: #F5E5FF;"> header &GT; footer </footer>
     </header>
 
-    <main id="main">
-        <h2>Main Content</h2>
-        <p>This is the main content area. The navigation can be toggled between inline and dialog modes.</p>
-    </main>
-
-    <aside id="aside">
-        <h3>Aside Content</h3>
-        <p>This is the aside content.</p>
-    </aside>
-
-    <nav id="nav">
-        <h3>Navigation (Inline Mode)</h3>
-        <ul class="nav-content">
-            <li class="selected">Home</li>
-            <li>About</li>
-            <li>Services</li>
-            <li>Contact</li>
-        </ul>
+    <nav id="nav" data-drawer-breakpoint="768">
+        <header style="background-color: #FFE5E5;"> nav &GT; header </header>
+        <nav    style="background-color: #E5F3FF;"> nav &GT; nav    </nav>
+        <main   style="background-color: #F0F8E5;"> nav &GT; main   </main>
+        <aside  style="background-color: #FFF5E5;"> nav &GT; aside  </aside>
+        <footer style="background-color: #F5E5FF;"> nav &GT; footer </footer>
     </nav>
 
-    <footer id="footer">
-        <p>&copy; 2024 Demo Site</p>
+    <main id="main">
+        <header style="background-color: #FFE5E5;"> main &GT; header </header>
+        <nav    style="background-color: #E5F3FF;"> main &GT; nav    </nav>
+        <main   style="background-color: #F0F8E5;"> main &GT; main
+            <button popovertarget="aside"> aside </button>
+            <button popovertarget="nav"> nav </button>
+            <button popovertarget="header"> header </button>
+            <button popovertarget="footer"> footer </button>
+            <button popovertarget="aside"> aside </button>
+        </main>
+
+        <aside  style="background-color: #FFF5E5;"> main &GT; aside  </aside>
+        <footer style="background-color: #F5E5FF;"> main &GT; footer </footer>
+    </main>
+
+    <aside id="aside" data-drawer-breakpoint="1024">
+        <header style="background-color: #FFE5E5;"> aside &GT; header </header>
+        <nav    style="background-color: #E5F3FF;"> aside &GT; nav    </nav>
+        <main   style="background-color: #F0F8E5;"> aside &GT; main   </main>
+        <aside  style="background-color: #FFF5E5;"> aside &GT; aside  </aside>
+        <footer style="background-color: #F5E5FF;"> aside &GT; footer </footer>
+    </aside>
+
+    <footer id="footer" data-drawer-breakpoint="768">
+        <header style="background-color: #FFE5E5;"> footer &GT; header </header>
+        <nav    style="background-color: #E5F3FF;"> footer &GT; nav    </nav>
+        <main   style="background-color: #F0F8E5;"> footer &GT; main   </main>
+        <aside  style="background-color: #FFF5E5;"> footer &GT; aside  </aside>
+        <footer style="background-color: #F5E5FF;"> footer &GT; footer </footer>
     </footer>
 
-    <script>
-        // Mock server responses for the toggle endpoints
-        let isDialogMode = false;
+    <!-- Load JavaScript after DOM content -->
+    <script src="drawer.js"></script>
 
-        htmx.on('htmx:configRequest', function(evt) {
-            if (evt.detail.path === '/to-dialog') {
-                evt.preventDefault();
 
-                // Response that swaps nav to dialog mode AND updates the button
-                const response = `
-                    <nav id="nav">
-                        <dialog id="nav-drawer" open>
-                            <button class="close-dialog" onclick="this.parentElement.close()">×</button>
-                            <h3>Navigation (Dialog Mode)</h3>
-                            <ul class="nav-content">
-                                <li class="selected">Home</li>
-                                <li>About</li>
-                                <li>Services</li>
-                                <li>Contact</li>
-                            </ul>
-                        </dialog>
-                    </nav>
-
-                    <button id="toggle-nav-btn"
-                            hx-get="/to-inline"
-                            hx-target="#nav"
-                            hx-swap="outerHTML"
-                            hx-swap-oob="true">
-                        Move to Inline
-                    </button>
-                `;
-
-                // Set the response
-                evt.detail.xhr = {
-                    response: response,
-                    status: 200,
-                    responseText: response
-                };
-
-            } else if (evt.detail.path === '/to-inline') {
-                evt.preventDefault();
-
-                // Response that swaps nav to inline mode AND updates the button
-                const response = `
-                    <nav id="nav">
-                        <h3>Navigation (Inline Mode)</h3>
-                        <ul class="nav-content">
-                            <li class="selected">Home</li>
-                            <li>About</li>
-                            <li>Services</li>
-                            <li>Contact</li>
-                        </ul>
-                    </nav>
-
-                    <button id="toggle-nav-btn"
-                            hx-get="/to-dialog"
-                            hx-target="#nav"
-                            hx-swap="outerHTML"
-                            hx-swap-oob="true">
-                        Move to Dialog
-                    </button>
-                `;
-
-                // Set the response
-                evt.detail.xhr = {
-                    response: response,
-                    status: 200,
-                    responseText: response
-                };
-            }
-        });
-    </script>
 </body>
 </html>
