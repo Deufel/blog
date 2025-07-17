@@ -17,16 +17,23 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-copy/dist/highlightjs-copy.min.css">
     </head>
     <body>
-        <header id="header" hx-get="partials/index_header.html" hx-trigger="load"></header>
+        <header id="header" hx-get="partials/index_header.html" hx-trigger="load" data-drawer-breakpoint="400">  </header>
         <main   id="main"   hx-get="partials/index_main.html"   hx-trigger="load"></main>
-        <aside  id="aside"  hx-get="partials/index_aside.html"  hx-trigger="load"></aside>
+        <aside  id="aside"  hx-get="partials/index_aside.html"  hx-trigger="load" data-drawer-breakpoint="always" ></aside>
         <nav
             id="nav"
             hx-on::after-request="document.getElementById('nav-drawer').close()"
             hx-on--after-request="document.querySelectorAll('#nav li.selected').forEach(li =&gt; li.classList.remove('selected')); event.target.closest('li').classList.add('selected');"
             hx-get="partials/index_nav.html"
-            hx-trigger="load">
+            hx-trigger="load"
+            data-drawer-breakpoint="768"
+        >
         </nav>
         <footer id="footer" hx-get="partials/index_footer.html" hx-trigger="load"></footer>
+
+
+        <!-- Load JavaScript after DOM content -->
+        <script src="drawer.js"></script>
+
     </body>
 </html>
