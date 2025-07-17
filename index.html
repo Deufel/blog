@@ -7,6 +7,7 @@
         <!-- 'Mike' -->
         <link rel="stylesheet" href="styles.css">
         <!-- <script src="layout.js"></script> -->
+        <script src="layout.js"></script>
         <!-- Vendor -->
         <script src="vendor/scopedCSS.js"></script>
         <script src="vendor/htmx.min.js"></script>
@@ -14,7 +15,7 @@
     <body>
         <header id="header" hx-get="partials/index_header.html" hx-trigger="load" data-drawer-breakpoint="400">  </header>
         <main   id="main"   hx-get="partials/index_main.html"   hx-trigger="load"></main>
-        <aside  id="aside"  hx-get="partials/index_aside.html"  hx-trigger="load" data-drawer-breakpoint="always" ></aside>
+        <aside  id="aside"  hx-get="partials/index_aside.html"  hx-trigger="load" data-drawer-breakpoint="1200" ></aside>
         <nav
             id="nav"
             hx-on::after-request="document.getElementById('nav-drawer').close()"
@@ -29,7 +30,6 @@
 
         <!-- Load JavaScript after DOM content -->
         <script src="drawer.js"></script>
-        <script src="layout.js"></script>
 
     </body>
 </html>
