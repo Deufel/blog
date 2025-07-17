@@ -1352,14 +1352,6 @@
         &.large {
             --_min-height: 2.875rem;
             padding-inline: 4ex;
-
-            &:where(:not([disabled]):active) {
-                box-shadow: var(--inner-shadow-4);
-
-                & > * {
-                    transform: translateY(2px);
-                }
-            }
         }
 
         /* Variants */
