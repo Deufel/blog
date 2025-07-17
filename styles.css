@@ -3898,15 +3898,11 @@
         }
 
         &.button {
-            transition:
-                box-shadow 0.2s ease,
-                transform 0.2s ease;
+            transition: box-shadow 0.2s ease,
             cursor: pointer;
 
-            &:hover {
-                box-shadow: var(--shadow-2);
-                transform: translateY(-1px);
-            }
+            &:hover { box-shadow: var(--shadow-2); }
+            &:active{ box-shadow: var(--inner-shadow-2); }
         }
 
         &.squared {
