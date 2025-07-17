@@ -3865,6 +3865,7 @@
 @layer components.base {
     :where(.avatar) {
         --_bg-color: var(--color-8);
+        --_hover-color: var(--color-6);
         --_color: var(--text-color-1);
         --_width: 40px;
 
@@ -3897,11 +3898,15 @@
             position: absolute;
         }
 
-        &.squared {
+        :hover {
+            background-color: var(--_hover-color);
+        }
+
+        .squared {
             border-radius: 0;
         }
 
-        &.rounded {
+        .rounded {
             border-radius: var(--border-size-3);
         }
     }
