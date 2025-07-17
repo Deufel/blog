@@ -1,105 +1,112 @@
-<div class="--split">
-<hgroup>           <p>Data Table</p>
-           <h2>Testing</h2>
-</hgroup>         <nav class="tabs filled">
-           <div role="tablist" hx-on--after-request="htmx.takeClass(event.target, 'selected')">
-<button role="tab" hx-on-click="htmx.removeClass(htmx.find('#data-table'), 'truncate-row'); htmx.removeClass(htmx.find('#data-table'), 'truncate-reveal')" hx-post="#" hx-swap="none" class="selected">auto</button><button role="tab" hx-on-click="htmx.removeClass(htmx.find('#data-table'), 'truncate-reveal'); htmx.addClass(htmx.find('#data-table'), 'truncate-row')" hx-post="#" hx-swap="none">truncate</button><button role="tab" hx-on-click="htmx.removeClass(htmx.find('#data-table'), 'truncate-row'); htmx.addClass(htmx.find('#data-table'), 'truncate-reveal')" hx-post="#" hx-swap="none">truncate-reveal</button>           </div>
-         </nav>
-       </div>
-       <div class="card outlined">
-         <div class="content">
-           <table id="data-table" class="highlight-cross">
-             <thead>
-               <tr hx-swap="outerHTML">
-                 <th>
+<header>
+    <hgroup>
+        <p>Data Table</p>
+        <h2>Testing</h2>
+    </hgroup>
+</header>
+<main>
+    <nav class="tabs filled">
+        <div role="tablist" hx-on--after-request="htmx.takeClass(event.target, 'selected')">
+            <button role="tab" hx-on-click="htmx.removeClass(htmx.find('#data-table'), 'truncate-row'); htmx.removeClass(htmx.find('#data-table'), 'truncate-reveal')" hx-post="#" hx-swap="none" class="selected">auto</button><button role="tab" hx-on-click="htmx.removeClass(htmx.find('#data-table'), 'truncate-reveal'); htmx.addClass(htmx.find('#data-table'), 'truncate-row')" hx-post="#" hx-swap="none">truncate</button><button role="tab" hx-on-click="htmx.removeClass(htmx.find('#data-table'), 'truncate-row'); htmx.addClass(htmx.find('#data-table'), 'truncate-reveal')" hx-post="#" hx-swap="none">truncate-reveal</button>
+        </div>
+    </nav>
+
+    <!-- DATA TABLE -->
+    <div class="card outlined">
+      <div class="content">
+        <table id="data-table" class="highlight-cross">
+          <thead>
+            <tr hx-swap="outerHTML">
+              <th>
 Product<button hx-get="partials/toggles/a_z" class="icon-button dormant"><icon-arrow-down-wide-narrow><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down-wide-narrow-icon lucide-arrow-down-wide-narrow"><path d="m3 16 4 4 4-4"></path><path d="M7 20V4"></path><path d="M11 4h10"></path><path d="M11 8h7"></path><path d="M11 12h4"></path></svg></icon-arrow-down-wide-narrow></button>                 </th>
-                 <th>
+              <th>
 Description<button hx-get="partials/toggles/a_z" class="icon-button dormant"><icon-arrow-down-wide-narrow><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down-wide-narrow-icon lucide-arrow-down-wide-narrow"><path d="m3 16 4 4 4-4"></path><path d="M7 20V4"></path><path d="M11 4h10"></path><path d="M11 8h7"></path><path d="M11 12h4"></path></svg></icon-arrow-down-wide-narrow></button>                 </th>
-                 <th class=" numbers">
+              <th class=" numbers">
 Q1 2024<button hx-get="partials/toggles/1_0" class="icon-button dormant"><icon-arrow-down-wide-narrow><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down-wide-narrow-icon lucide-arrow-down-wide-narrow"><path d="m3 16 4 4 4-4"></path><path d="M7 20V4"></path><path d="M11 4h10"></path><path d="M11 8h7"></path><path d="M11 12h4"></path></svg></icon-arrow-down-wide-narrow></button>                 </th>
-                 <th class=" numbers">
+              <th class=" numbers">
 Q2 2024<button hx-get="partials/toggles/1_0" class="icon-button dormant"><icon-arrow-down-wide-narrow><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down-wide-narrow-icon lucide-arrow-down-wide-narrow"><path d="m3 16 4 4 4-4"></path><path d="M7 20V4"></path><path d="M11 4h10"></path><path d="M11 8h7"></path><path d="M11 12h4"></path></svg></icon-arrow-down-wide-narrow></button>                 </th>
-                 <th class=" numbers">
+              <th class=" numbers">
 Q3 2024<button hx-get="partials/toggles/1_0" class="icon-button dormant"><icon-arrow-down-wide-narrow><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down-wide-narrow-icon lucide-arrow-down-wide-narrow"><path d="m3 16 4 4 4-4"></path><path d="M7 20V4"></path><path d="M11 4h10"></path><path d="M11 8h7"></path><path d="M11 12h4"></path></svg></icon-arrow-down-wide-narrow></button>                 </th>
-                 <th class=" numbers">
+              <th class=" numbers">
 Q4 2024<button hx-get="partials/toggles/1_0" class="icon-button dormant"><icon-arrow-down-wide-narrow><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down-wide-narrow-icon lucide-arrow-down-wide-narrow"><path d="m3 16 4 4 4-4"></path><path d="M7 20V4"></path><path d="M11 4h10"></path><path d="M11 8h7"></path><path d="M11 12h4"></path></svg></icon-arrow-down-wide-narrow></button>                 </th>
-                 <th class=" numbers">
+              <th class=" numbers">
 Growth<button hx-get="partials/toggles/1_0" class="icon-button dormant"><icon-arrow-down-wide-narrow><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down-wide-narrow-icon lucide-arrow-down-wide-narrow"><path d="m3 16 4 4 4-4"></path><path d="M7 20V4"></path><path d="M11 4h10"></path><path d="M11 8h7"></path><path d="M11 12h4"></path></svg></icon-arrow-down-wide-narrow></button>                 </th>
-               </tr>
-             </thead>
-             <tbody>
-               <tr>
-                 <td>MacBook Pro</td>
-                 <td>Professional laptop with M3 Pro chip, 18GB unified memory, 512GB SSD storage, Liquid Retina XDR display with ProMotion technology, advanced thermal architecture</td>
-                 <td class="numbers">$125,400</td>
-                 <td class="numbers">$134,200</td>
-                 <td class="numbers">$142,800</td>
-                 <td class="numbers">$158,100</td>
-                 <td class="numbers">+26.1%</td>
-               </tr>
-               <tr>
-                 <td>iPhone 15</td>
-                 <td>Latest smartphone featuring A17 Pro chip, titanium design, Action Button, advanced camera system with 5x telephoto zoom, USB-C connectivity, and enhanced battery life</td>
-                 <td class="numbers">$245,600</td>
-                 <td class="numbers">$198,300</td>
-                 <td class="numbers">$289,400</td>
-                 <td class="numbers">$312,700</td>
-                 <td class="numbers">+27.3%</td>
-               </tr>
-               <tr>
-                 <td>iPad Air</td>
-                 <td>Versatile tablet with M2 chip, 10.9-inch Liquid Retina display, Touch ID, Apple Pencil compatibility, Magic Keyboard support, perfect for creativity and productivity</td>
-                 <td class="numbers">$89,200</td>
-                 <td class="numbers">$92,100</td>
-                 <td class="numbers">$95,800</td>
-                 <td class="numbers">$103,400</td>
-                 <td class="numbers">+15.9%</td>
-               </tr>
-               <tr>
-                 <td>AirPods Pro</td>
-                 <td>Premium wireless earbuds with active noise cancellation, spatial audio, adaptive transparency mode, personalized volume control, and up to 6 hours listening time</td>
-                 <td class="numbers">$67,800</td>
-                 <td class="numbers">$71,200</td>
-                 <td class="numbers">$74,600</td>
-                 <td class="numbers">$79,900</td>
-                 <td class="numbers">+17.8%</td>
-               </tr>
-               <tr>
-                 <td>Apple Watch</td>
-                 <td>Advanced smartwatch with health monitoring, fitness tracking, ECG app, blood oxygen sensor, always-on Retina display, and comprehensive wellness features</td>
-                 <td class="numbers">$112,300</td>
-                 <td class="numbers">$118,700</td>
-                 <td class="numbers">$124,100</td>
-                 <td class="numbers">$132,500</td>
-                 <td class="numbers">+18.0%</td>
-               </tr>
-               <tr>
-                 <td>Mac Studio</td>
-                 <td>Compact desktop computer with M2 Ultra chip, up to 192GB unified memory, extensive connectivity options, perfect for professional creative workflows and demanding tasks</td>
-                 <td class="numbers">$34,500</td>
-                 <td class="numbers">$36,800</td>
-                 <td class="numbers">$38,200</td>
-                 <td class="numbers">$41,100</td>
-                 <td class="numbers">+19.1%</td>
-               </tr>
-             </tbody>
-             <tfoot>
-               <tr>
-                 <td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>MacBook Pro</td>
+              <td>Professional laptop with M3 Pro chip, 18GB unified memory, 512GB SSD storage, Liquid Retina XDR display with ProMotion technology, advanced thermal architecture</td>
+              <td class="numbers">$125,400</td>
+              <td class="numbers">$134,200</td>
+              <td class="numbers">$142,800</td>
+              <td class="numbers">$158,100</td>
+              <td class="numbers">+26.1%</td>
+            </tr>
+            <tr>
+              <td>iPhone 15</td>
+              <td>Latest smartphone featuring A17 Pro chip, titanium design, Action Button, advanced camera system with 5x telephoto zoom, USB-C connectivity, and enhanced battery life</td>
+              <td class="numbers">$245,600</td>
+              <td class="numbers">$198,300</td>
+              <td class="numbers">$289,400</td>
+              <td class="numbers">$312,700</td>
+              <td class="numbers">+27.3%</td>
+            </tr>
+            <tr>
+              <td>iPad Air</td>
+              <td>Versatile tablet with M2 chip, 10.9-inch Liquid Retina display, Touch ID, Apple Pencil compatibility, Magic Keyboard support, perfect for creativity and productivity</td>
+              <td class="numbers">$89,200</td>
+              <td class="numbers">$92,100</td>
+              <td class="numbers">$95,800</td>
+              <td class="numbers">$103,400</td>
+              <td class="numbers">+15.9%</td>
+            </tr>
+            <tr>
+              <td>AirPods Pro</td>
+              <td>Premium wireless earbuds with active noise cancellation, spatial audio, adaptive transparency mode, personalized volume control, and up to 6 hours listening time</td>
+              <td class="numbers">$67,800</td>
+              <td class="numbers">$71,200</td>
+              <td class="numbers">$74,600</td>
+              <td class="numbers">$79,900</td>
+              <td class="numbers">+17.8%</td>
+            </tr>
+            <tr>
+              <td>Apple Watch</td>
+              <td>Advanced smartwatch with health monitoring, fitness tracking, ECG app, blood oxygen sensor, always-on Retina display, and comprehensive wellness features</td>
+              <td class="numbers">$112,300</td>
+              <td class="numbers">$118,700</td>
+              <td class="numbers">$124,100</td>
+              <td class="numbers">$132,500</td>
+              <td class="numbers">+18.0%</td>
+            </tr>
+            <tr>
+              <td>Mac Studio</td>
+              <td>Compact desktop computer with M2 Ultra chip, up to 192GB unified memory, extensive connectivity options, perfect for professional creative workflows and demanding tasks</td>
+              <td class="numbers">$34,500</td>
+              <td class="numbers">$36,800</td>
+              <td class="numbers">$38,200</td>
+              <td class="numbers">$41,100</td>
+              <td class="numbers">+19.1%</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>
 <strong>Total</strong>                 </td>
-                 <td>—</td>
-                 <td class="numbers">
+              <td>—</td>
+              <td class="numbers">
 <strong>$674,800</strong>                 </td>
-                 <td class="numbers">
+              <td class="numbers">
 <strong>$651,300</strong>                 </td>
-                 <td class="numbers">
+              <td class="numbers">
 <strong>$764,900</strong>                 </td>
-                 <td class="numbers">
+              <td class="numbers">
 <strong>$827,700</strong>                 </td>
-                 <td class="numbers">
+              <td class="numbers">
 <strong>+22.7%</strong>                 </td>
-               </tr>
-             </tfoot>
-           </table>
-         </div>
-       </div>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+</main>
