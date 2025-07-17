@@ -3898,15 +3898,15 @@
             position: absolute;
         }
 
-        :hover {
+        &:hover {
             background-color: var(--_hover-color);
         }
 
-        .squared {
+        &.squared {
             border-radius: 0;
         }
 
-        .rounded {
+        &.rounded {
             border-radius: var(--border-size-3);
         }
     }
