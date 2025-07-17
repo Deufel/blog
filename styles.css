@@ -4960,6 +4960,7 @@
     }
 } /* Common styling for checkbox, radio and switch groups */
 
+/* LAYOUT */
 @layer layout {
     /* Main Dashboard Layout */
     body {
@@ -5049,6 +5050,7 @@
             display: none;
         }
     }
+
     /* ===== BASE DRAWER STYLES ===== */
     [popover][data-drawer-breakpoint] {
         /* Reset popover defaults */
@@ -5198,45 +5200,10 @@
         }
     }
 
-    /* ===== STARTING STYLES ===== */
-    @starting-style {
-        [popover][data-drawer-breakpoint]:popover-open {
-            opacity: 0;
-        }
-
-        header[popover][data-drawer-breakpoint]:popover-open {
-            transform: translateY(-100%);
-        }
-
-        nav[popover][data-drawer-breakpoint]:popover-open {
-            transform: translateX(-100%);
-        }
-
-        aside[popover][data-drawer-breakpoint]:popover-open {
-            transform: translateX(100%);
-        }
-
-        footer[popover][data-drawer-breakpoint]:popover-open {
-            transform: translateY(100%);
-        }
-
-        [popover][data-drawer-breakpoint]:popover-open::backdrop {
-            background-color: rgb(0 0 0 / 0%);
-            backdrop-filter: blur(0px);
-        }
-    }
-
     /* ===== REDUCED MOTION SUPPORT ===== */
     @media (prefers-reduced-motion: reduce) {
         [popover][data-drawer-breakpoint] {
             transition: none !important;
-        }
-
-        @starting-style {
-            [popover][data-drawer-breakpoint]:popover-open {
-                opacity: 1 !important;
-                transform: none !important;
-            }
         }
     }
 
@@ -5246,8 +5213,37 @@
             display: none !important;
         }
     }
-} /* LAYOUT */
+}
 
+/* ===== STARTING STYLES (Outside of @layer for better mobile support) ===== */
+@starting-style {
+    [popover][data-drawer-breakpoint]:popover-open {
+        opacity: 0;
+    }
+
+    [popover][data-drawer-breakpoint]:popover-open::backdrop {
+        background-color: rgb(0 0 0 / 0%);
+        backdrop-filter: blur(0px);
+    }
+
+    header[popover][data-drawer-breakpoint]:popover-open {
+        transform: translateY(-100%);
+    }
+
+    nav[popover][data-drawer-breakpoint]:popover-open {
+        transform: translateX(-100%);
+    }
+
+    aside[popover][data-drawer-breakpoint]:popover-open {
+        transform: translateX(100%);
+    }
+
+    footer[popover][data-drawer-breakpoint]:popover-open {
+        transform: translateY(100%);
+    }
+}
+
+/* EXTRA */
 @layer utils {
     html {
         scrollbar-width: thin;
@@ -5735,8 +5731,9 @@
         transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         will-change: width, transform; /* Tell browser both will change */
     }
-} /* EXTRA */
+}
 
+/* Form - in progress */
 @layer components.has-deps {
     :where(form) {
         > * {
