@@ -9,7 +9,21 @@
         <button popovertarget="header"> header </button>
         <button popovertarget="footer"> footer </button>
         <button popovertarget="aside"> aside </button>
+
+        <h3>Test view transition api WIP</h3>
+        <hr>
+        </hr>
+
+        <button hx-get="partial/box.html" hx-target="#main-aside" class="button">
+            <span>
+                Slide in Right
+            </span>
+        </button>
+
     </main>
+
+    <aside id="mian-aside"> </aside>
+
     <footer>
         <code>main $gt; main</code>
     </footer>
