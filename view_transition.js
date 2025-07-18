@@ -1,4 +1,4 @@
-// 🌘 Enhanced View Transition Auto-Generator
+// 🌘 Enhanced View Transition Auto-Generator HTMX Focused
 window.vtTransitionCount ??= 1; // Global counter for unique IDs
 window.vtRegistry ??= new Map(); // Track elements and their transition names
 
@@ -181,28 +181,25 @@ const KEYFRAMES = `
     }
 }
 `;
+// Replace your existing observer with HTMX event integration
+document.addEventListener("htmx:load", function (evt) {
+  processNewContent(evt.detail.elt);
+});
 
-// View Transition Auto-Generator Observer
-window.viewTransitionObserver ??= new MutationObserver((mutations) => {
-  // Find all elements with vt-* attributes that don't have transition names yet
+function processNewContent(container) {
   Object.keys(ANIMATION_CONFIG).forEach((animationType) => {
-    document
+    container
       .querySelectorAll(`[vt-${animationType}]:not([data-vt-processed])`)
       .forEach((element) => {
         processViewTransitionElement(element, animationType);
       });
   });
-}).observe(document.documentElement, {
-  childList: true,
-  subtree: true,
-  attributes: true,
-});
+}
 
 function processViewTransitionElement(element, animationType) {
-  // Generate unique transition name
   const transitionId = "vt__" + window.vtTransitionCount++;
 
-  // Set view-transition-name
+  // Set view-transition-name BEFORE the swap
   element.style.viewTransitionName = transitionId;
 
   // Mark as processed
@@ -215,7 +212,7 @@ function processViewTransitionElement(element, animationType) {
     type: animationType,
   });
 
-  // Generate and inject CSS
+  // Generate CSS immediately
   injectTransitionCSS(transitionId, animationType);
 }
 
