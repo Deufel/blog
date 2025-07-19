@@ -5755,17 +5755,15 @@
 }
 
 /* view transitions */
-@layer view-transitions {
-    ::view-transition-new(slide-*) {
-        animation: slideInRight 0.5s ease-out forwards;
-    }
+::view-transition-new(slide-right) {
+    animation: slideInRight 0.5s ease-out forwards;
+}
 
-    @keyframes slideInRight {
-        from {
-            transform: translateX(100%);
-        }
-        to {
-            transform: translateX(0);
-        }
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
     }
 }
