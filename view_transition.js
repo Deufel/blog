@@ -1,12 +1,11 @@
-document.addEventListener("htmx:load", function (evt) {
-  console.log("HTMX load event fired!", evt.detail.elt);
-
-  const slideElements = evt.detail.elt.querySelectorAll("[vt-slide-in-right]");
-  console.log("Found slide elements:", slideElements.length, slideElements);
+document.addEventListener("htmx:beforeSwap", function (evt) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(evt.detail.xhr.responseText, "text/html");
+  const slideElements = doc.querySelectorAll("[vt-slide-in-right]");
 
   slideElements.forEach((element) => {
-    console.log("Setting view-transition-name on:", element);
     element.style.viewTransitionName = "slide-right";
-    console.log("Style after setting:", element.style.viewTransitionName);
   });
+
+  evt.detail.serverResponse = doc.documentElement.outerHTML;
 });
