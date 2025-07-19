@@ -9,9 +9,3 @@ document.addEventListener("htmx:beforeSwap", function (evt) {
 
   evt.detail.serverResponse = doc.documentElement.outerHTML;
 });
-
-document.addEventListener("htmx:afterSettle", function (evt) {
-  evt.target.querySelectorAll("[vt-slide-in-right]").forEach((element) => {
-    element.style.viewTransitionName = "";
-  });
-});
