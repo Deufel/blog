@@ -21,6 +21,7 @@
 //   }, 500); // Wait for transition to complete
 // });
 
+// ----------test 2 ------------
 // htmx.defineExtension("vt", {
 //   onEvent: function (name, evt) {
 //     if (name === "htmx:beforeSwap") this.handleBeforeSwap(evt);
@@ -88,33 +89,43 @@
 //   },
 // });
 
+//  hy78888888888888
+//
 htmx.defineExtension("vt", {
   onEvent: function (name, evt) {
-    if (name === "htmx:afterSwap") this.handleAfterSwap(evt);
+    if (name === "htmx:beforeSwap") return this.handleBeforeSwap(evt);
     return true;
   },
 
-  handleAfterSwap: function (evt) {
+  handleBeforeSwap: function (evt) {
     const extAttr = evt.detail.elt.getAttribute("hx-ext");
-    if (!extAttr || !extAttr.includes("vt:")) return;
+    if (!extAttr || !extAttr.includes("vt:")) return true;
 
     const transitionType = extAttr.split("vt:")[1].split(" ")[0];
-    const newElements = evt.target.children;
+    const transitionName = `vt-${transitionType}`;
 
-    Array.from(newElements).forEach((el) => {
-      const transitionName = `vt-${transitionType}-${Date.now()}`;
-      el.style.viewTransitionName = transitionName;
-      this.injectCSS(transitionName, transitionType);
-    });
+    this.injectCSS(transitionName, transitionType);
+
+    if (document.startViewTransition) {
+      evt.preventDefault();
+      document.startViewTransition(() => {
+        const target = htmx.find(evt.detail.target);
+        target.style.viewTransitionName = transitionName;
+        target.innerHTML = evt.detail.xhr.responseText;
+        setTimeout(() => (target.style.viewTransitionName = ""), 500);
+      });
+    }
+    return false;
   },
 
   injectCSS: function (transitionName, animationType) {
+    if (document.querySelector(`style[data-vt="${transitionName}"]`)) return;
     const keyframes = `@keyframes slide-in-right{from{transform:translateX(100%)}to{transform:translateX(0)}}`;
     const style = document.createElement("style");
+    style.setAttribute("data-vt", transitionName);
     style.textContent =
       keyframes +
       `::view-transition-new(${transitionName}){animation:slide-in-right .5s ease-out}`;
     document.head.appendChild(style);
-    setTimeout(() => style.remove(), 1000);
   },
 });
