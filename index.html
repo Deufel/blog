@@ -10,24 +10,14 @@
         <script src="layout.js"></script>
         <!-- Vendor -->
         <script src="vendor/scopedCSS.js"></script>
-        <script src="vendor/htmx.min.js"></script>
+        <script src="vendor/datastar.js"></script>
     </head>
     <body>
-        <header id="header" hx-get="partials/index_header.html" hx-trigger="load" data-drawer-breakpoint="400">  </header>
-        <main   id="main"   hx-get="partials/index_main.html"   hx-trigger="load"></main>
-        <aside  id="aside"  hx-get="partials/index_aside.html"  hx-trigger="load" data-drawer-breakpoint="always" ></aside>
-        <nav
-            id="nav"
-            hx-on::after-request="document.getElementById('nav-drawer').close()"
-            hx-on--after-request="document.querySelectorAll('#nav li.selected').forEach(li =&gt; li.classList.remove('selected')); event.target.closest('li').classList.add('selected');"
-            hx-get="partials/index_nav.html"
-            hx-trigger="load"
-            data-drawer-breakpoint="768"
-        >
-        </nav>
-        <footer id="footer" hx-get="partials/index_footer.html" hx-trigger="load"></footer>
-
-
+        <header id="header" data-on-load="@get('/partials/index_header.html')" data-drawer-breakpoint="400">  </header>
+        <main   id="main"   data-on-load="@get('/partials/index_main.html')">  </main>
+        <aside  id="aside"  data-on-load="@get('/partials/index_aside.html')" data-drawer-breakpoint="always" ></aside>
+        <nav    id="nav"    data-on-load="@get('/partials/index_nav.html')"   data-drawer-breakpoint="768" > </nav>
+        <footer id="footer" data-on-load="@get('/partials/index_footer.html')"></footer>
         <!-- Load JavaScript after DOM content -->
         <script src="drawer.js"></script>
         <script src="view_transition.js"></script>
