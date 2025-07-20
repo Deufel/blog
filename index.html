@@ -15,7 +15,7 @@
     <body>
         <header id="header" hx-get="partials/index_header.html" hx-trigger="load" data-drawer-breakpoint="400">  </header>
         <main   id="main"   hx-get="partials/index_main.html"   hx-trigger="load"></main>
-        <aside  id="aside"  hx-get="partials/index_aside.html"  hx-trigger="load" data-drawer-breakpoint="1200" ></aside>
+        <aside  id="aside"  hx-get="partials/index_aside.html"  hx-trigger="load" data-drawer-breakpoint="always" ></aside>
         <nav
             id="nav"
             hx-on::after-request="document.getElementById('nav-drawer').close()"
