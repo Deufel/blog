@@ -7,10 +7,12 @@
             </hgroup>
             <nav class="tabs underlined">
                 <div role="tablist" aria-label="Underlined tabs">
-                    <button id="underlined-tab-1" role="tab" aria-controls="tabpanel-1" aria-selected="true" tabindex="0">
+                    <button id="underlined-tab-1" role="tab" aria-controls="tabpanel-1" aria-selected="true" tabindex="0"
+                        data-on-click="@get('partials/actions_tabs/underlined')">
                     Underlined
                     </button>
-                    <button id="underlined-tab-2" role="tab" aria-controls="tabpanel-2" aria-selected="false" tabindex="-1">
+                    <button id="underlined-tab-2" role="tab" aria-controls="tabpanel-2" aria-selected="false" tabindex="-1"
+                        data-on-click="@get('partials/actions_tabs/filled')">
                     Filled
                     </button>
                     <button id="underlined-tab-3" role="tab" aria-controls="tabpanel-3" aria-selected="false" tabindex="-1">
