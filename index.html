@@ -26,14 +26,17 @@
         <footer id="footer" data-on-load="@get('partials/index_footer.html')"></footer>
 
         <script>
-              // Simple window resize handler that dispatches a custom event
-              window.addEventListener('resize', () => {
-                  document.body.dispatchEvent(
-                      new CustomEvent('windowresize', {
-                          detail: { width: window.innerWidth }
-                      })
-                  );
-              });
+          // Forces Mobile browsers to use :active pseudo class
+          document.addEventListener('touchstart', () => {}, { passive: true });
+          // Simple window resize handler that dispatches a custom event
+          window.addEventListener('resize', () => {
+              document.body.dispatchEvent(
+                  new CustomEvent('windowresize', {
+                      detail: { width: window.innerWidth }
+                  })
+              );
+          });
         </script>
+
     </body>
 </html>
