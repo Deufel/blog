@@ -5059,12 +5059,8 @@
         flex-direction: column;
         min-height: 100%;
 
-        /* Apply border radius only if popover="auto" is not present */
         &:where(:not([popover="auto"])) {
-            border-radius: var(
-                --border-radius,
-                8px
-            ); /* Fallback to 8px if not defined */
+            border-radius: var(--border-radius, 8px);
         }
     }
 
