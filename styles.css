@@ -4990,7 +4990,7 @@
         }
         > main {
             grid-area: main;
-            background-color: var(--surface-default);
+            background-color: var(--surface-tonal);
         }
         > aside {
             grid-area: aside;
