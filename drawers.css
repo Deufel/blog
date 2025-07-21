@@ -13,10 +13,10 @@
 }
 
 /* ===== BASE DRAWER STYLES ===== */
-header[popover][data-drawer-breakpoint],
-nav[popover][data-drawer-breakpoint],
-aside[popover][data-drawer-breakpoint],
-footer[popover][data-drawer-breakpoint] {
+header[popover],
+nav[popover],
+aside[popover],
+footer[popover] {
     /* Reset popover defaults */
     border: none;
     padding: 0;
@@ -94,7 +94,7 @@ footer[popover][data-drawer-breakpoint] {
 }
 
 /* ===== HEADER DRAWER (Top) - Full width, grid-controlled height ===== */
-header[popover][data-drawer-breakpoint] {
+header[popover] {
     top: 0;
     left: 0;
     right: 0;
@@ -113,14 +113,14 @@ header[popover][data-drawer-breakpoint] {
 }
 
 @starting-style {
-    header[popover][data-drawer-breakpoint]:popover-open {
+    header[popover]:popover-open {
         opacity: 0;
         transform: translateY(-100%);
     }
 }
 
 /* ===== NAV DRAWER (Left) - Full height, grid-controlled width ===== */
-nav[popover][data-drawer-breakpoint] {
+nav[popover] {
     height: 100svh;
     max-width: 80vw;
     border-radius: 0 var(--drawer-border-radius) var(--drawer-border-radius) 0;
@@ -136,14 +136,14 @@ nav[popover][data-drawer-breakpoint] {
 }
 
 @starting-style {
-    nav[popover][data-drawer-breakpoint]:popover-open {
+    nav[popover]:popover-open {
         opacity: 0;
         transform: translateX(-100%);
     }
 }
 
 /* ===== ASIDE DRAWER (Right) - Full height, grid-controlled width ===== */
-aside[popover][data-drawer-breakpoint] {
+aside[popover] {
     left: auto;
     height: 100svh;
     max-width: 80vw;
@@ -160,14 +160,14 @@ aside[popover][data-drawer-breakpoint] {
 }
 
 @starting-style {
-    aside[popover][data-drawer-breakpoint]:popover-open {
+    aside[popover]:popover-open {
         opacity: 0;
         transform: translateX(100%);
     }
 }
 
 /* ===== FOOTER DRAWER (Bottom) - Full width, grid-controlled height ===== */
-footer[popover][data-drawer-breakpoint] {
+footer[popover] {
     top: auto;
     bottom: 0;
     left: 0;
@@ -188,7 +188,7 @@ footer[popover][data-drawer-breakpoint] {
 }
 
 @starting-style {
-    footer[popover][data-drawer-breakpoint]:popover-open {
+    footer[popover]:popover-open {
         opacity: 0;
         transform: translateY(100%);
     }
@@ -196,10 +196,10 @@ footer[popover][data-drawer-breakpoint] {
 
 /* ===== BACKDROP STARTING STYLES ===== */
 @starting-style {
-    header[popover][data-drawer-breakpoint]:popover-open::backdrop,
-    nav[popover][data-drawer-breakpoint]:popover-open::backdrop,
-    aside[popover][data-drawer-breakpoint]:popover-open::backdrop,
-    footer[popover][data-drawer-breakpoint]:popover-open::backdrop {
+    header[popover]:popover-open::backdrop,
+    nav[popover]:popover-open::backdrop,
+    aside[popover]:popover-open::backdrop,
+    footer[popover]:popover-open::backdrop {
         background-color: rgb(0 0 0 / 0%);
         backdrop-filter: blur(0px);
     }
@@ -207,19 +207,18 @@ footer[popover][data-drawer-breakpoint] {
 
 /* ===== REDUCED MOTION SUPPORT ===== */
 @media (prefers-reduced-motion: reduce) {
-    header[popover][data-drawer-breakpoint],
-    nav[popover][data-drawer-breakpoint],
-    aside[popover][data-drawer-breakpoint],
-    footer[popover][data-drawer-breakpoint] {
+    header[popover],
+    nav[popover],
+    aside[popover],
+    footer[popover] {
         transition: none !important;
     }
 
     @starting-style {
-        header[popover][data-drawer-breakpoint]:popover-open,
-        nav[popover][data-drawer-breakpoint]:popover-open,
-        aside[popover][data-drawer-breakpoint]:popover-open,
-        footer[popover][data-drawer-breakpoint]:popover-open {
-            opacity: 1 !important;
+        header[popover]:popover-open,
+        nav[popover]:popover-open,
+        aside[popover]:popover-open,
+        footer[popover] 1 !important;
             transform: none !important;
         }
     }
@@ -227,7 +226,7 @@ footer[popover][data-drawer-breakpoint] {
 
 /* ===== PRINT STYLES ===== */
 @media print {
-    [popover][data-drawer-breakpoint] {
+    [popover] {
         display: none !important;
     }
 }
