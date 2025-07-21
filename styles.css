@@ -5809,6 +5809,7 @@
         min-block-size: 40px;
         padding: var(--size-2) var(--size-3);
         position: relative;
+        cursor: pointer;
 
         &:hover {
             background-color: light-dark(var(--gray-2), var(--gray-14));
