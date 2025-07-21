@@ -5059,7 +5059,7 @@
         min-height: 100%;
 
         &:where(:not([popover="auto"])) {
-            border-radius: var(--border-size-4);
+            border-radius: var(--size-3);
         }
 
         /* Apply to main, header, and footer containers */
@@ -5136,7 +5136,7 @@
         min-height: 100%;
 
         &:where(:not([popover="auto"])) {
-            border-radius: var(--radius-conditional-4);
+            border-radius: var(--radius-conditional-3);
         }
     }
 }
