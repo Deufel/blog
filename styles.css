@@ -5012,7 +5012,11 @@
                 / auto 1fr auto;
             overflow-y: auto;
             min-height: 0;
-            border-radius: var(--radius-conditional-3);
+
+            &:where(:not([popover="auto"])) {
+                border-radius: var(--radius-3);
+                border: var(--border-size-1) solid var(--border-color);
+            }
 
             > header {
                 grid-area: header;
@@ -5042,7 +5046,8 @@
             > main,
             > aside,
             > footer {
-                border-radius: var(--radius-conditional-2);
+                border-radius: var(--radius-2);
+                border: var(--border-size-1) solid var(--border-color);
             }
         }
 
@@ -5063,10 +5068,6 @@
         display: flex;
         flex-direction: column;
         min-height: 100%;
-
-        &:where(:not([popover="auto"])) {
-            /* border-radius: var(--size-3); */
-        }
 
         /* Apply to main, header, and footer containers */
         & > :where(main, header, footer) > ul {
@@ -5138,11 +5139,7 @@
 /* SEMANTIC Main */
 @layer layout {
     :where(body > main) {
-        background-color: var(--_bg-color);
+        background-color: var(--surface-default);
         min-height: 100%;
-
-        &:where(:not([popover="auto"])) {
-            /* border-radius: var(--radius-conditional-3); */
-        }
     }
 }
