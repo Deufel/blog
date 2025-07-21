@@ -1,145 +1,19 @@
 <nav id="nav">
     <header>
-        <ul>
-            <li>
-                <button data-on-click="@get('/partials/index_main.html')" >
-                        <span>Home</span>
-                </button>
-            </li>
-        </ul>
+        <p>Header</p>
     </header>
     <main>
         <ul>
-            <li>
-                <button data-on-click="@get('/partials/actions_button.html')" >
-                        <span>Buttons</span>
-                </button>
-            </li>
-            <li>
-                <button data-on-click="@get('/partials/actions_button_group.html')" >
-                        <span>Button Group</span>
-                </button>
-            </li>
-            <li data-on-click="@get('/partials/actions/tabs.html')"> Tabs </li>
-            <li>
-                <div class="text inset">
-                    <strong>Layout</strong>
-                </div>
-            </li>
-            <li>
-                <div class="text inset">
-                    <strong>Layout</strong>
-                </div>
-            </li>
-            <li>
-                <div class="text inset">
-                    <strong>Layout</strong>
-                </div>
-            </li>
-            <li>
-                <button data-on-click="@get('/partials/layout')">
-                    <div class="text">
-                        <p>layout</p>
-                    </div>
-                </button>
-            </li>
-            <li>
-                <div class="text inset">
-                    <strong>Data Display</strong>
-                </div>
-            </li>
-            <li>
-                <button hx-get="partials/data_display_table">
-                    <div class="text">
-                        <p>Data Table</p>
-                    </div>
-                </button>
-            </li>
-            <li>
-                <button hx-get="partials/box">
-                    <div class="text">
-                        <p>test</p>
-                    </div>
-                </button>
-            </li>
-            <li>
-                <div class="text inset">
-                    <strong>Actions</strong>
-                </div>
-            </li>
-            <li>
-                <button hx-get="partials/actions_button">
-                    <div class="text">
-                        <p>Button</p>
-                    </div>
-                </button>
-            </li>
-            <li>
-                <button hx-get="partials/actions_button_group">
-                    <div class="text">
-                        <p>Button Group</p>
-                    </div>
-                </button>
-            </li>
-            <li>
-                <button hx-get="partials/icon_button">
-                    <div class="text">
-                        <p>Icon Button</p>
-                    </div>
-                </button>
-            </li>
-            <li>
-                <button hx-get="partials/toggle_button_group">
-                    <div class="text">
-                        <p>Toggel Button Group</p>
-                    </div>
-                </button>
-            </li>
-            <li>
-                <button hx-get="partials/actions_tabs">
-                    <div class="text">
-                        <p>Tabs</p>
-                    </div>
-                </button>
-            </li>
+            <li data-on-click="@get('/partials/actions_button.html')"> Button </li>
+            <li data-on-click="@get('/partials/actions_button_group.html')"> Button Group </li>
+            <li data-on-click="@get('/partials/actions_icon_button.html')"> Icon Button </li>
+            <li data-on-click="@get('/partials/actions_tabs.html')"> Tabs </li>
+            <hr>
+            <li data-on-click="@get('/partials/data_display_chip.html')"> Chip </li>
         </ul>
     </main>
     <footer>
-        <ul
-            hx-swap="innerHTML transition:true"
-            hx-target="#main"
-            class="list"
-        >
-            <li>
-                <button hx-get="/r/dashboard/settings">
-                    <div class="start">
-                        <icon-settings
-                            ><svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="lucide lucide-settings-icon lucide-settings"
-                            >
-                                <path
-                                    d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
-                                ></path>
-                                <circle cx="12" cy="12" r="3"></circle></svg
-                        ></icon-settings>
-                    </div>
-                    <div class="text">
-                        <p>Settings</p>
-                    </div>
-                    <div class="end text-sm">
-                        <kbd>Ver. 0.0.2</kbd>
-                    </div>
-                </button>
-            </li>
-        </ul>
+        <p>Footer</p>
     </footer>
+
 </nav>
