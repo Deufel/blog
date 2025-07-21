@@ -5062,62 +5062,70 @@
         &:where(:not([popover="auto"])) {
             border-radius: var(--border-radius, 8px);
         }
-    }
 
-    :where(body > nav > main > ul) {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-
-        @media (hover) and (prefers-reduced-motion: no-preference) {
-            & > li {
-                transition: opacity 0.3s ease;
-            }
-
-            &:has(:hover) > li:not(:hover) {
-                opacity: 0.5;
-            }
-        }
-    }
-
-    :where(body > nav > main > ul > li) {
-        align-items: center;
-        display: flex;
-        font-size: var(--font-size-sm);
-        gap: var(--size-3);
-        min-block-size: 40px;
-        padding: var(--size-2) var(--size-3);
-        position: relative;
-        cursor: pointer;
-
-        &:hover {
-            background-color: light-dark(var(--gray-2), var(--gray-14));
-        }
-
-        /* SVG (equivalent to .start) */
-        & > svg {
-            align-self: center;
-            max-inline-size: var(--size-5);
-            padding-block-start: 0.125rem;
-        }
-
-        /* Text (equivalent to .text) */
-        & > p {
-            flex: 1;
-            line-height: 1.6;
-            color: inherit;
-            font-weight: 400;
-        }
-
-        /* Div (equivalent to .end) */
-        & > div {
-            align-items: center;
+        /* Apply to main, header, and footer containers */
+        & > :where(main, header, footer) > ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
             display: flex;
-            font-size: var(--font-size-xs);
-            text-align: end;
+            flex-direction: column;
+            flex: 1;
+
+            @media (hover) and (prefers-reduced-motion: no-preference) {
+                & > li {
+                    transition: opacity 0.3s ease;
+
+                    &:not(:hover) {
+                        :where(&):has(~ li:hover, li:hover) {
+                            opacity: 0.5;
+                        }
+                    }
+                }
+
+                &:has(:hover) > li:not(:hover) {
+                    opacity: 0.5;
+                }
+            }
+
+            /* List items styling */
+            & > li {
+                align-items: center;
+                display: flex;
+                font-size: var(--font-size-sm);
+                gap: var(--size-3);
+                min-block-size: 40px;
+                padding: var(--size-2) var(--size-3);
+                position: relative;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: light-dark(var(--gray-2), var(--gray-14));
+                }
+
+                /* SVG icons */
+                & > svg {
+                    align-self: center;
+                    max-inline-size: var(--size-5);
+                    padding-block-start: 0.125rem;
+                }
+
+                /* Text content */
+                & > p {
+                    flex: 1;
+                    line-height: 1.6;
+                    color: inherit;
+                    font-weight: 400;
+                }
+
+                /* End content */
+                & > div {
+                    align-items: center;
+                    display: flex;
+                    font-size: var(--font-size-xs);
+                    text-align: end;
+                }
+            }
         }
     }
 }
