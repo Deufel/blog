@@ -5146,7 +5146,8 @@
             [class*="--flank"],
             [class*="--frame"],
             [class*="--grid"],
-            [class*="--split"]
+            [class*="--split"],
+            [class*="--flex"]
         )
         > * {
         margin-block: 0;
@@ -5158,7 +5159,8 @@
         [class*="--frame"],
         [class*="--grid"],
         [class*="--stack"],
-        [class*="--split"]
+        [class*="--split"],
+        [class*="--flex"]
     ) {
         gap: var(--size-2);
     }
@@ -5254,6 +5256,24 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
+        align-items: stretch;
+    }
+    :where([class*="--flex"]) {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    :where([class*="--flex"]),
+    :where([class*="--flex"][class*="\:row"]) {
+        flex-direction: row;
+        block-size: auto;
+        inline-size: 100%;
+    }
+    :where([class*="--flex"][class*="\:column"]) {
+        flex-direction: column;
+        block-size: auto;
+        inline-size: auto;
+        align-self: stretch;
         align-items: stretch;
     }
 }
