@@ -5767,3 +5767,60 @@
         transform: translateX(0);
     }
 }
+
+/* nav styles */
+
+@layer components.base {
+    :where(body > nav) {
+        background-color: var(
+            --_bg-color,
+            light-dark(var(--gray-3), var(--gray-14))
+        );
+        padding: var(--size-2) 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+    }
+
+    :where(body > nav > main > ul) {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    :where(body > nav > main > ul > li) {
+        align-items: center;
+        display: flex;
+        font-size: var(--font-size-sm);
+        gap: var(--size-3);
+        min-block-size: 40px;
+        padding: var(--size-2) var(--size-3);
+        position: relative;
+
+        /* SVG (equivalent to .start) */
+        & > svg {
+            align-self: center;
+            max-inline-size: var(--size-5);
+            padding-block-start: 0.125rem;
+        }
+
+        /* Text (equivalent to .text) */
+        & > p {
+            flex: 1;
+            line-height: 1.6;
+            color: inherit;
+            font-weight: 400;
+        }
+
+        /* Div (equivalent to .end) */
+        & > div {
+            align-items: center;
+            display: flex;
+            font-size: var(--font-size-xs);
+            text-align: end;
+        }
+    }
+}
