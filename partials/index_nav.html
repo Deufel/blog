@@ -1,17 +1,36 @@
 <nav id="nav">
     <header>
-        <ul class="list">
+        <ul>
             <li>
                 <button data-on-click="@get('/partials/index_main.html')" >
-                    <div class="text">
-                        <p>Home</p>
-                    </div>
+                        <span>Home</span>
                 </button>
             </li>
         </ul>
     </header>
     <main>
         <ul>
+            <li>
+                <button data-on-click="@get('/partials/actions_button.html')" >
+                        <span>Buttons</span>
+                </button>
+            </li>
+            <li>
+                <button data-on-click="@get('/partials/actions_button_group.html')" >
+                        <span>Button Group</span>
+                </button>
+            </li>
+            <li data-on-click="@get('/partials/actions/tabs.html')"> Tabs </li>
+            <li>
+                <div class="text inset">
+                    <strong>Layout</strong>
+                </div>
+            </li>
+            <li>
+                <div class="text inset">
+                    <strong>Layout</strong>
+                </div>
+            </li>
             <li>
                 <div class="text inset">
                     <strong>Layout</strong>
