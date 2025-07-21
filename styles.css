@@ -1675,12 +1675,15 @@
             opacity: 0.64;
         }
 
+        &:where([selected]) {
+            color: var(--color-7);
+        }
+
         svg {
             max-inline-size: var(--size-5);
             pointer-events: none;
         }
 
-        /* Ripple effect, utils > index.css */
         &::before {
             --highlight-size: 130%;
         }
