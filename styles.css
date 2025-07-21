@@ -5799,6 +5799,7 @@
         min-block-size: 40px;
         padding: var(--size-2) var(--size-3);
         position: relative;
+        cursor: pointer;
 
         /* SVG (equivalent to .start) */
         & > svg {
