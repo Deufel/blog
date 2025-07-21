@@ -18,14 +18,22 @@
 
     </head>
 
-    <body data-signals="{windowWidth: window.innerWidth}"  data-on-resize.window="windowWidth = window.innerWidth">
+    <body data-signals="{windowWidth: window.innerWidth}" data-on-windowresize="$windowWidth = evt.detail.width">
         <header id="header" data-on-load="@get('partials/index_header.html')">  </header>
         <main   id="main"   data-on-load="@get('partials/index_main.html')">  </main>
         <aside  id="aside"  data-on-load="@get('partials/index_aside.html')"></aside>
         <nav    id="nav"    data-on-load="@get('partials/index_nav.html')"  > </nav>
         <footer id="footer" data-on-load="@get('partials/index_footer.html')"></footer>
-        <!-- Load JavaScript after DOM content -->
-        <!-- <script src="drawer.js"></script> -->
-        <script src="view_transition.js"></script>
+
+        <script>
+              // Simple window resize handler that dispatches a custom event
+              window.addEventListener('resize', () => {
+                  document.body.dispatchEvent(
+                      new CustomEvent('windowresize', {
+                          detail: { width: window.innerWidth }
+                      })
+                  );
+              });
+        </script>
     </body>
 </html>
