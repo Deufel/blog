@@ -5044,7 +5044,7 @@
             > footer {
                 grid-area: footer;
                 margin-top: var(--gap-size);
-                margin-inline: var(--size-2);
+                padding-inline: var(--size-2);
             }
             > header,
             > nav,
