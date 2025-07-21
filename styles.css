@@ -1655,7 +1655,6 @@
 @layer components.base {
     :where(button:has(> svg:only-child)) {
         --_text-color: inherit;
-
         align-items: center;
         aspect-ratio: 1;
         background-color: transparent;
@@ -1666,14 +1665,6 @@
         justify-content: center;
         padding: 0;
         transform-style: preserve-3d;
-        cursor: pointer;
-
-        /* Style the SVG */
-        svg {
-            width: 100%;
-            height: 100%;
-            fill: currentColor;
-        }
 
         &:where([disabled]) {
             color: light-dark(rgb(0, 0, 0/0.3), rgb(255, 255, 255/0.26));
@@ -1681,15 +1672,9 @@
             opacity: 0.64;
         }
 
-        /* mike states */
-        &.dormant {
-            color: var(--border-color);
-            opacity: 0.8;
-        }
-
-        &.active {
-            color: var(--color-7);
-            opacity: 1;
+        svg {
+            max-inline-size: var(--size-5);
+            pointer-events: none;
         }
 
         /* Ripple effect, utils > index.css */
@@ -1702,7 +1687,6 @@
             inline-size: var(--size-4);
             svg {
                 max-inline-size: var(--size-4);
-                max-block-size: var(--size-4);
             }
         }
     }
@@ -4990,7 +4974,7 @@
         > header {
             grid-area: header;
             margin-bottom: var(--gap-size);
-            margin-inline: var(--size-2);
+            padding-inline: var(--size-2);
         }
         > nav {
             grid-area: nav;
@@ -5033,7 +5017,7 @@
             > header {
                 grid-area: header;
                 margin-bottom: var(--gap-size);
-                margin-inline: var(--size-2);
+                padding-inline: var(--size-2);
             }
             > nav {
                 grid-area: nav;
