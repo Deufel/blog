@@ -1653,7 +1653,10 @@
 } /* CHIP */
 
 @layer components.base {
-    :where(button:has(> svg:only-child)) {
+    :where(
+        button:has(> svg:only-child),
+        button:has(> *:only-child > svg:only-child)
+    ) {
         --_text-color: inherit;
         align-items: center;
         aspect-ratio: 1;
