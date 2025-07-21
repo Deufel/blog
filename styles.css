@@ -4982,6 +4982,7 @@
         > header {
             grid-area: header;
             margin-bottom: var(--gap-size);
+            margin-inline: var(--size-2);
         }
         > nav {
             grid-area: nav;
@@ -5000,6 +5001,7 @@
         > footer {
             grid-area: footer;
             margin-top: var(--gap-size);
+            margin-inline: var(--size-2);
         }
 
         > header,
@@ -5023,6 +5025,7 @@
             > header {
                 grid-area: header;
                 margin-bottom: var(--gap-size);
+                margin-inline: var(--size-2);
             }
             > nav {
                 grid-area: nav;
@@ -5042,6 +5045,7 @@
             > footer {
                 grid-area: footer;
                 margin-top: var(--gap-size);
+                margin-inline: var(--size-2);
             }
             > header,
             > nav,
