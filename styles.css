@@ -5012,6 +5012,7 @@
                 / auto 1fr auto;
             overflow-y: auto;
             min-height: 0;
+            border-radius: var(--radius-conditional-3);
 
             > header {
                 grid-area: header;
@@ -5038,6 +5039,13 @@
                 margin-top: var(--gap-size);
                 margin-inline: var(--size-3);
             }
+            > header,
+            > nav,
+            > main,
+            > aside,
+            > footer {
+                border-radius: var(--radius-conditional-2);
+            }
         }
 
         > header:empty,
@@ -5059,7 +5067,7 @@
         min-height: 100%;
 
         &:where(:not([popover="auto"])) {
-            border-radius: var(--size-3);
+            /* border-radius: var(--size-3); */
         }
 
         /* Apply to main, header, and footer containers */
@@ -5136,7 +5144,7 @@
         min-height: 100%;
 
         &:where(:not([popover="auto"])) {
-            border-radius: var(--radius-conditional-3);
+            /* border-radius: var(--radius-conditional-3); */
         }
     }
 }
