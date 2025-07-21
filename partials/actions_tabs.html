@@ -1,11 +1,27 @@
 <main id="main">
-    <header>
-        <hgroup>
-            <p>Actions</p>
-            <h2 class="h3">Tabs: underlined</h2>
-            <p><a href="https://open-props-ui.netlify.app/components/actions/tab-buttons.html">Docs</a></p>
-        </hgroup>
+    <header id="main-header">
+        <div class="--split">
+            <hgroup>
+                <p>Actions</p>
+                <h2 class="h3">Tabs: underlined</h2>
+            </hgroup>
+            <nav class="tabs underlined">
+                <div role="tablist" aria-label="Underlined tabs">
+                    <button id="underlined-tab-1" role="tab" aria-controls="tabpanel-1" aria-selected="true" tabindex="0">
+                    Underlined
+                    </button>
+                    <button id="underlined-tab-2" role="tab" aria-controls="tabpanel-2" aria-selected="false" tabindex="-1">
+                    Filled
+                    </button>
+                    <button id="underlined-tab-3" role="tab" aria-controls="tabpanel-3" aria-selected="false" tabindex="-1">
+                    CSS
+                    </button>
+                </div>
+            </nav>
+        </div>
     </header>
+
+
     <main class="--stack">
 
         <div class="card elevated">

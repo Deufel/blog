@@ -5140,3 +5140,121 @@
         }
     }
 }
+
+@layer extra {
+    :is(
+            [class*="--cluster"],
+            [class*="--flank"],
+            [class*="--frame"],
+            [class*="--grid"],
+            [class*="--split"]
+        )
+        > * {
+        margin-block: 0;
+        margin-inline: 0;
+    }
+    :where(
+        [class*="--cluster"],
+        [class*="--flank"],
+        [class*="--frame"],
+        [class*="--grid"],
+        [class*="--stack"],
+        [class*="--split"]
+    ) {
+        gap: var(--size-2);
+    }
+
+    :where([class*="--cluster"]) {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    :where([class*="--flank"]) {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        --content-percentage: initial;
+        --flank-size: initial;
+    }
+    :where([class*="--flank"]:not([class*="\:end"]) > :first-child),
+    :where([class*="--flank"][class*="\:start"] > :first-child) {
+        flex-basis: var(--flank-size, auto);
+        flex-grow: 1;
+    }
+    :where([class*="--flank"]:not([class*="\:end"]) > :last-child),
+    :where([class*="--flank"][class*="\:start"] > :last-child) {
+        flex-basis: 0;
+        flex-grow: 999;
+        min-inline-size: var(--content-percentage, 50%);
+    }
+    :where([class*="--flank"][class*="\:end"] > :last-child) {
+        flex-basis: var(--flank-size, auto);
+        flex-grow: 1;
+    }
+    :where([class*="--flank"][class*="\:end"] > :first-child) {
+        flex-basis: 0;
+        flex-grow: 999;
+        min-inline-size: var(--content-percentage, 50%);
+    }
+    :where([class*="--frame"]) {
+        display: flex;
+        aspect-ratio: 1 / 1;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+    :where([class*="--frame"] > img),
+    :where([class*="--frame"] > video) {
+        block-size: 100%;
+        inline-size: 100%;
+        object-fit: cover;
+    }
+    :where([class*="--frame"][class*="\:square"]) {
+        aspect-ratio: 1 / 1;
+    }
+    :where([class*="--frame"][class*="\:landscape"]) {
+        aspect-ratio: 16 / 9;
+    }
+    :where([class*="--frame"][class*="\:portrait"]) {
+        aspect-ratio: 9 / 16;
+    }
+    :where([class*="--grid"]) {
+        display: grid;
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(min(var(--min-column-size, 20ch), 100%), 1fr)
+        );
+        --min-column-size: initial;
+    }
+    :where([class*="--span-grid"]) {
+        grid-column: 1 / -1;
+    }
+    :where([class*="--split"]) {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+    :where([class*="--split"]),
+    :where([class*="--split"][class*="\:row"]) {
+        flex-direction: row;
+        block-size: auto;
+        inline-size: 100%;
+    }
+    :where([class*="--split"]:not([class*="\:column"]) > :first-child) {
+        flex: 0 1 auto;
+    }
+    :where([class*="--split"][class*="\:column"]) {
+        flex-direction: column;
+        block-size: auto;
+        inline-size: auto;
+        align-self: stretch;
+    }
+    :where([class*="--stack"]) {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+    }
+}
