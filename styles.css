@@ -4986,13 +4986,16 @@
         > nav {
             grid-area: nav;
             margin-right: var(--gap-size);
+            background-color: var(--surface-hue);
         }
         > main {
             grid-area: main;
+            background-color: var(--surface-default);
         }
         > aside {
             grid-area: aside;
             margin-left: var(--gap-size);
+            background-color: var(--surface-hue);
         }
         > footer {
             grid-area: footer;
@@ -5015,7 +5018,6 @@
 
             &:where(:not([popover="auto"])) {
                 border-radius: var(--radius-3);
-                border: var(--border-size-1) solid var(--border-color);
             }
 
             > header {
@@ -5047,7 +5049,6 @@
             > aside,
             > footer {
                 border-radius: var(--radius-2);
-                border: var(--border-size-1) solid var(--border-color);
             }
         }
 
@@ -5133,13 +5134,5 @@
                 }
             }
         }
-    }
-}
-
-/* SEMANTIC Main */
-@layer layout {
-    :where(body > main) {
-        background-color: var(--surface-default);
-        min-height: 100%;
     }
 }
