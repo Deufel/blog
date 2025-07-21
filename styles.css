@@ -5276,4 +5276,8 @@
         align-self: stretch;
         align-items: stretch;
     }
+    /* New :end modifier for --flex */
+    :where([class*="--flex"][class*="\:end"]) {
+        justify-content: flex-end;
+    }
 }
