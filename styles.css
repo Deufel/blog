@@ -5048,19 +5048,16 @@
 }
 
 /* SEMANTIC NAV BAR */
-@layer components.base {
+@layer layout {
     :where(body > nav) {
-        background-color: var(
-            --_bg-color,
-            light-dark(var(--gray-3), var(--gray-14))
-        );
+        background-color: var(--surface-hue);
         padding: var(--size-2) 0;
         display: flex;
         flex-direction: column;
         min-height: 100%;
 
         &:where(:not([popover="auto"])) {
-            border-radius: var(--border-radius, 8px);
+            border-radius: var(--border-size-4);
         }
 
         /* Apply to main, header, and footer containers */
@@ -5126,6 +5123,18 @@
                     text-align: end;
                 }
             }
+        }
+    }
+}
+
+/* SEMANTIC Main */
+@layer layout {
+    :where(body > main) {
+        background-color: var(--_bg-color);
+        min-height: 100%;
+
+        &:where(:not([popover="auto"])) {
+            border-radius: var(--radius-conditional-4);
         }
     }
 }
