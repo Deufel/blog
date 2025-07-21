@@ -1675,7 +1675,8 @@
             opacity: 0.64;
         }
 
-        &:where([selected]) {
+        &:where(.selected),
+        &.selected {
             color: var(--color-7);
         }
 
