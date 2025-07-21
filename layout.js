@@ -201,7 +201,7 @@ document.addEventListener(
   else init();
 
   window.themeUtils = { init };
-  document.addEventListener("htmx:afterSwap", () => {
+  document.addEventListener("datastar-patch-elements", () => {
     initThemeUI();
     initLayoutUI();
     initDeviceUI();
