@@ -4962,7 +4962,6 @@
 
 /* LAYOUT */
 @layer layout {
-    /* Main Dashboard Layout */
     body {
         position: fixed;
         top: 0;
@@ -4980,15 +4979,6 @@
         padding: var(--gap-size);
         margin: 0;
 
-        /* Apply border radius only if popover="auto" is not present */
-        &:where(:not([popover="auto"])) {
-            border-radius: var(
-                --border-radius,
-                8px
-            ); /* Fallback to 8px if not defined */
-        }
-
-        /* Grid Area Assignments */
         > header {
             grid-area: header;
             margin-bottom: var(--gap-size);
@@ -5024,7 +5014,10 @@
             overflow-y: auto;
             min-height: 0;
 
-            /* Grid area assignments for nested sections */
+            &:where(:not([popover="auto"])) {
+                border-radius: var(--border-radius, 8px);
+            }
+
             > header {
                 grid-area: header;
                 margin-bottom: var(--gap-size);
@@ -5050,204 +5043,12 @@
             }
         }
 
-        /* Hide empty nested sections */
         > header:empty,
         > nav:empty,
         > aside:empty,
         > footer:empty {
             display: none;
         }
-    }
-
-    /* ===== BASE DRAWER STYLES ===== */
-    [popover][data-drawer-breakpoint] {
-        /* Reset popover defaults */
-        border: none;
-        padding: 0;
-        margin: 0;
-        outline: none;
-        max-width: none;
-        max-height: none;
-        scrollbar-width: thin;
-        scrollbar-gutter: stable both-edges;
-
-        /* Appearance */
-        background: var(--drawer-background);
-        border: 1px solid var(--drawer-border-color);
-        box-shadow: var(--drawer-shadow);
-
-        /* Maintain semantic grid structure */
-        display: grid;
-        grid-template:
-            "header header header" auto
-            "nav main aside" 1fr
-            "footer footer footer" auto
-            / auto 1fr auto;
-        overflow: hidden;
-
-        /* Nested sections maintain structure */
-        > header {
-            grid-area: header;
-            margin-bottom: var(--gap-size);
-        }
-        > nav {
-            grid-area: nav;
-            margin-right: var(--gap-size);
-            overflow-y: auto;
-        }
-        > main {
-            grid-area: main;
-            overflow: auto;
-            min-height: 0;
-        }
-        > aside {
-            grid-area: aside;
-            margin-left: var(--gap-size);
-            overflow-y: auto;
-        }
-        > footer {
-            grid-area: footer;
-            margin-top: var(--gap-size);
-        }
-
-        /* Animation properties */
-        transition:
-            opacity var(--drawer-animation-duration)
-                var(--drawer-animation-easing),
-            transform var(--drawer-animation-duration)
-                var(--drawer-animation-easing),
-            overlay var(--drawer-animation-duration) allow-discrete,
-            display var(--drawer-animation-duration) allow-discrete;
-
-        /* Backdrop */
-        &::backdrop {
-            background-color: rgb(0 0 0 / 0%);
-            transition:
-                background-color var(--drawer-animation-duration)
-                    var(--drawer-animation-easing),
-                backdrop-filter var(--drawer-animation-duration)
-                    var(--drawer-animation-easing),
-                overlay var(--drawer-animation-duration) allow-discrete,
-                display var(--drawer-animation-duration) allow-discrete;
-        }
-
-        &:popover-open::backdrop {
-            background-color: var(--drawer-backdrop-color);
-            backdrop-filter: blur(2px);
-        }
-    }
-
-    /* ===== HEADER DRAWER ===== */
-    header[popover][data-drawer-breakpoint] {
-        top: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        border-radius: 0 0 var(--drawer-border-radius)
-            var(--drawer-border-radius);
-        border-top: none;
-        opacity: 0;
-        transform: translateY(-100%);
-
-        &:popover-open {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    /* ===== NAV DRAWER ===== */
-    nav[popover][data-drawer-breakpoint] {
-        height: 100svh;
-        max-width: 80vw;
-        border-radius: 0 var(--drawer-border-radius) var(--drawer-border-radius)
-            0;
-        border-left: none;
-        opacity: 0;
-        transform: translateX(-100%);
-
-        &:popover-open {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-
-    /* ===== ASIDE DRAWER ===== */
-    aside[popover][data-drawer-breakpoint] {
-        left: auto;
-        height: 100svh;
-        max-width: 80vw;
-        border-radius: var(--drawer-border-radius) 0 0
-            var(--drawer-border-radius);
-        border-right: none;
-        opacity: 0;
-        transform: translateX(100%);
-
-        &:popover-open {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-
-    /* ===== FOOTER DRAWER ===== */
-    footer[popover][data-drawer-breakpoint] {
-        top: auto;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        border-radius: var(--drawer-border-radius) var(--drawer-border-radius) 0
-            0;
-        border-bottom: none;
-        padding-bottom: env(safe-area-inset-bottom, 0);
-        opacity: 0;
-        transform: translateY(100%);
-
-        &:popover-open {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    /* ===== REDUCED MOTION SUPPORT ===== */
-    @media (prefers-reduced-motion: reduce) {
-        [popover][data-drawer-breakpoint] {
-            transition: none !important;
-        }
-    }
-
-    /* ===== PRINT STYLES ===== */
-    @media print {
-        [popover][data-drawer-breakpoint] {
-            display: none !important;
-        }
-    }
-}
-
-/* ===== STARTING STYLES (Outside of @layer for better mobile support) ===== */
-@starting-style {
-    [popover][data-drawer-breakpoint]:popover-open {
-        opacity: 0;
-    }
-
-    [popover][data-drawer-breakpoint]:popover-open::backdrop {
-        background-color: rgb(0 0 0 / 0%);
-        backdrop-filter: blur(0px);
-    }
-
-    header[popover][data-drawer-breakpoint]:popover-open {
-        transform: translateY(-100%);
-    }
-
-    nav[popover][data-drawer-breakpoint]:popover-open {
-        transform: translateX(-100%);
-    }
-
-    aside[popover][data-drawer-breakpoint]:popover-open {
-        transform: translateX(100%);
-    }
-
-    footer[popover][data-drawer-breakpoint]:popover-open {
-        transform: translateY(100%);
     }
 }
 
@@ -5759,91 +5560,5 @@
 
     :where(form fieldset) {
         grid-column: 1 / -1;
-    }
-}
-
-/* view transitions */
-::view-transition-new(slide-right) {
-    animation: slideInRight 0.5s ease-out forwards;
-}
-
-@keyframes slideInRight {
-    from {
-        transform: translateX(100%);
-    }
-    to {
-        transform: translateX(0);
-    }
-}
-
-/* nav styles */
-
-@layer components.base {
-    :where(body > nav) {
-        background-color: var(
-            --_bg-color,
-            light-dark(var(--gray-3), var(--gray-14))
-        );
-        padding: var(--size-2) 0;
-        display: flex;
-        flex-direction: column;
-        min-height: 100%;
-    }
-
-    :where(body > nav > main > ul) {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-
-        @media (hover) and (prefers-reduced-motion: no-preference) {
-            & > li {
-                transition: opacity 0.3s ease;
-            }
-
-            &:has(:hover) > li:not(:hover) {
-                opacity: 0.5;
-            }
-        }
-    }
-
-    :where(body > nav > main > ul > li) {
-        align-items: center;
-        display: flex;
-        font-size: var(--font-size-sm);
-        gap: var(--size-3);
-        min-block-size: 40px;
-        padding: var(--size-2) var(--size-3);
-        position: relative;
-        cursor: pointer;
-
-        &:hover {
-            background-color: light-dark(var(--gray-2), var(--gray-14));
-        }
-
-        /* SVG (equivalent to .start) */
-        & > svg {
-            align-self: center;
-            max-inline-size: var(--size-5);
-            padding-block-start: 0.125rem;
-        }
-
-        /* Text (equivalent to .text) */
-        & > p {
-            flex: 1;
-            line-height: 1.6;
-            color: inherit;
-            font-weight: 400;
-        }
-
-        /* Div (equivalent to .end) */
-        & > div {
-            align-items: center;
-            display: flex;
-            font-size: var(--font-size-xs);
-            text-align: end;
-        }
     }
 }
