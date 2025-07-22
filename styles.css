@@ -682,6 +682,7 @@
         --size-content-1: 20ch;
         --size-content-2: 45ch;
         --size-content-3: 60ch;
+        --size-content-4: 75ch;
     }
     :where(:root) {
         --size-header-1: 20ch;
@@ -5233,5 +5234,39 @@
     .rotate-180 {
         transform: rotate(180deg);
         transition: transform 0.3s ease;
+    }
+
+    /* Plain class for monospace legal document styling */
+    .plain {
+        /* Typography */
+        font-family:
+            "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
+            "Courier New", monospace;
+        font-size: var(--font-size-sm);
+        line-height: var(--font-lineheight-4);
+        color: var(--text-color-1);
+
+        /* Layout */
+        max-width: var(--size-content-4);
+
+        /* Reset any inherited styles */
+        font-weight: normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: normal;
+
+        /* Legal document styling */
+        white-space: pre-wrap;
+        word-wrap: break-word;
+
+        /* Ensure good readability */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+
+        /* All text elements use monospace */
+        & * {
+            font-family: inherit;
+            font-weight: inherit;
+        }
     }
 }
