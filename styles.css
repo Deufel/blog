@@ -4918,8 +4918,7 @@
 
 /* LAYOUT */
 @layer layout {
-    body,
-    .layout {
+    body {
         position: fixed;
         top: 0;
         left: 0;
@@ -5021,11 +5020,60 @@
         }
     }
 
-    /* Optional: Override positioning for .layout when not used on body */
-    .layout:not(body) {
-        position: relative;
-        height: auto;
-        min-height: 100svh;
+    /* HERO LAYOUT UTILITY */
+    .hero {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        grid-template-rows: auto 1fr auto;
+        width: 100%;
+        height: 100%;
+
+        /* Placement utilities using CSS anchor position naming */
+        .start-start {
+            grid-area: 1 / 1;
+            justify-self: start;
+            align-self: start;
+        }
+        .start {
+            grid-area: 1 / 2;
+            justify-self: center;
+            align-self: start;
+        }
+        .start-end {
+            grid-area: 1 / 3;
+            justify-self: end;
+            align-self: start;
+        }
+        .center-start {
+            grid-area: 2 / 1;
+            justify-self: start;
+            align-self: center;
+        }
+        .center {
+            grid-area: 2 / 2;
+            justify-self: center;
+            align-self: center;
+        }
+        .center-end {
+            grid-area: 2 / 3;
+            justify-self: end;
+            align-self: center;
+        }
+        .end-start {
+            grid-area: 3 / 1;
+            justify-self: start;
+            align-self: end;
+        }
+        .end {
+            grid-area: 3 / 2;
+            justify-self: center;
+            align-self: end;
+        }
+        .end-end {
+            grid-area: 3 / 3;
+            justify-self: end;
+            align-self: end;
+        }
     }
 }
 
