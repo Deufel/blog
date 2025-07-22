@@ -1309,6 +1309,7 @@
     }
 } /* THEME */
 
+/* BUTTON */
 @layer components.base {
     :where(.button) {
         --_bg-color: transparent;
@@ -2390,12 +2391,13 @@
             }
 
             /* Selected */
-            &.selected {
+            &.selected:not([disabled]) {
                 --_bg-color: color-mix(
                     in oklch,
                     var(--primary) 12%,
                     var(--surface-default)
                 );
+                color: var(--primary);
 
                 /* Checkmark */
                 svg:first-of-type {
