@@ -5166,11 +5166,13 @@
                 min-block-size: 60px;
                 padding: var(--size-2);
                 gap: var(--size-1);
+                transition: all 0.3s ease;
 
                 /* SVG icons - keep centered */
                 & > svg {
                     align-self: center;
                     padding-block-start: 0;
+                    transition: all 0.3s ease;
                 }
 
                 /* Text content - smaller and centered */
@@ -5178,11 +5180,13 @@
                     font-size: var(--font-size-xs);
                     line-height: 1.2;
                     margin: 0;
+                    transition: all 0.3s ease;
                 }
 
                 /* Hide end content in dense mode */
                 & > div {
                     display: none;
+                    transition: opacity 0.3s ease;
                 }
             }
         }
@@ -5331,7 +5335,7 @@
     }
 
     .rotate-180 {
-        transform: rotate(180deg);
+        transform: rotate(90deg);
         transition: transform 0.3s ease;
     }
 }
