@@ -5153,6 +5153,40 @@
             }
         }
     }
+
+    /* Dense navigation variant */
+    :where(body > nav.dense) {
+        /* Apply to main, header, and footer containers */
+        & > :where(main, header, footer) > ul {
+            /* List items styling for dense mode */
+            & > li {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                min-block-size: 60px;
+                padding: var(--size-2);
+                gap: var(--size-1);
+
+                /* SVG icons - keep centered */
+                & > svg {
+                    align-self: center;
+                    padding-block-start: 0;
+                }
+
+                /* Text content - smaller and centered */
+                & > p {
+                    font-size: var(--font-size-xs);
+                    line-height: 1.2;
+                    margin: 0;
+                }
+
+                /* Hide end content in dense mode */
+                & > div {
+                    display: none;
+                }
+            }
+        }
+    }
 }
 
 @layer extra {
