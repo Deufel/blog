@@ -4939,6 +4939,9 @@
             grid-area: header;
             margin-bottom: var(--gap-size);
             padding-inline: var(--size-2);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
         }
         > nav {
             grid-area: nav;
@@ -5020,7 +5023,7 @@
         }
     }
 
-    /* HERO LAYOUT UTILITY */
+    /* LAYOUT UTILITY */
     .layout {
         display: grid;
         grid-template-columns: auto 1fr auto;
