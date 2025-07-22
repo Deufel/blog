@@ -5042,7 +5042,6 @@
             @media (hover) and (prefers-reduced-motion: no-preference) {
                 & > li {
                     transition: opacity 0.3s ease;
-
                     &:not(:hover) {
                         :where(&):has(~ li:hover, li:hover) {
                             opacity: 0.5;
