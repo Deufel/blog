@@ -4918,7 +4918,8 @@
 
 /* LAYOUT */
 @layer layout {
-    body {
+    body,
+    .layout {
         position: fixed;
         top: 0;
         left: 0;
@@ -5018,6 +5019,13 @@
         > footer:empty {
             display: none;
         }
+    }
+
+    /* Optional: Override positioning for .layout when not used on body */
+    .layout:not(body) {
+        position: relative;
+        height: auto;
+        min-height: 100svh;
     }
 }
 
