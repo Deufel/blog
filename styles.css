@@ -5113,7 +5113,7 @@
                 }
             }
 
-            /* List items styling */
+            /* List Items */
             & > li {
                 align-items: center;
                 display: flex;
@@ -5123,6 +5123,7 @@
                 padding: var(--size-2) var(--size-3);
                 position: relative;
                 cursor: pointer;
+                transition: all 0.3s ease; /* ADD THIS LINE */
 
                 &:hover {
                     background-color: light-dark(var(--gray-2), var(--gray-14));
@@ -5133,6 +5134,7 @@
                     align-self: center;
                     max-inline-size: var(--size-5);
                     padding-block-start: 0.125rem;
+                    transition: all 0.3s ease; /* ADD THIS LINE */
                 }
 
                 /* Text content */
@@ -5141,6 +5143,7 @@
                     line-height: 1.6;
                     color: inherit;
                     font-weight: 400;
+                    transition: all 0.3s ease; /* ADD THIS LINE */
                 }
 
                 /* End content */
@@ -5149,6 +5152,7 @@
                     display: flex;
                     font-size: var(--font-size-xs);
                     text-align: end;
+                    transition: opacity 0.3s ease; /* ADD THIS LINE */
                 }
             }
         }
@@ -5166,13 +5170,11 @@
                 min-block-size: 60px;
                 padding: var(--size-2);
                 gap: var(--size-1);
-                transition: all 0.3s ease;
 
                 /* SVG icons - keep centered */
                 & > svg {
                     align-self: center;
                     padding-block-start: 0;
-                    transition: all 0.3s ease;
                 }
 
                 /* Text content - smaller and centered */
@@ -5180,13 +5182,11 @@
                     font-size: var(--font-size-xs);
                     line-height: 1.2;
                     margin: 0;
-                    transition: all 0.3s ease;
                 }
 
                 /* Hide end content in dense mode */
                 & > div {
                     display: none;
-                    transition: opacity 0.3s ease;
                 }
             }
         }
