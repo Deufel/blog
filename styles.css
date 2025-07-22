@@ -5329,4 +5329,9 @@
     :where([class*="--flex"][class*="\:end"]) {
         justify-content: flex-end;
     }
+
+    .rotate-180 {
+        transform: rotate(180deg);
+        transition: transform 0.3s ease;
+    }
 }
