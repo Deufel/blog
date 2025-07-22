@@ -1573,17 +1573,6 @@
                 lch(from var(--_bg-color) calc((50 - l) * infinity) 0 0),
                 var(--_bg-color) 10%
             );
-
-            /* Colors */
-            &:hover {
-                --_bg-color: var(--color-9);
-                --_border-color: color-mix(in lch, var(--_bg-color), black 40%);
-                --_color: color-mix(
-                    in srgb,
-                    lch(from var(--_bg-color) calc((50 - l) * infinity) 0 0),
-                    var(--_bg-color) 10%
-                );
-            }
         }
 
         &:where(button, a):where(:not([disabled])) {
@@ -1616,38 +1605,6 @@
         }
         &.multiline {
             block-size: auto;
-        }
-
-        /* Ripple effect */
-        background-position: center;
-
-        &:where(:not([disabled])) {
-            &:where(:not(:active):hover) {
-                --ripple: radial-gradient(
-                        circle,
-                        transparent 1%,
-                        var(--_bg-color) 1%
-                    )
-                    center/15000%;
-
-                transition: background var(--button-ripple-duration);
-            }
-
-            &:where(:hover:active) {
-                background-size: var(--button-ripple-size);
-                transition: background 0s;
-            }
-        }
-
-        /* Disabled */
-        &:where([disabled]) {
-            opacity: 0.64;
-            --_text-color: color-mix(
-                in oklch,
-                var(--text-color-2) 50%,
-                var(--surface-default)
-            );
-            cursor: not-allowed;
         }
     }
 } /* CHIP */
@@ -2767,7 +2724,7 @@
 } /* Typography */
 
 @layer components.base {
-    :where(.card) {
+    :where(article) {
         --_bg-color: transparent;
         --_border-color: transparent;
         --_border-width: 0;
@@ -2852,7 +2809,7 @@
             }
         }
     }
-} /* CARD */
+} /* ARTICLE CARD */
 
 @layer components.base {
     label:where(.checkbox, .radio) {
