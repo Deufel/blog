@@ -1060,6 +1060,69 @@
         --palette-hue: var(--oklch-orange);
     }
 
+    /* Typography */
+    /* Default typography scale (Medium) */
+    :root {
+        --font-size-h1: var(--font-size-fluid-3);
+        --font-size-h2: var(--font-size-fluid-2);
+        --font-size-h3: var(--font-size-fluid-1);
+        --font-size-h4: var(--font-size-3);
+        --font-size-h5: var(--font-size-2);
+        --font-size-h6: var(--font-size-fluid-0);
+        --font-size-lg: var(--font-size-3);
+        --font-size-md: var(--font-size-fluid-0);
+        --font-size-sm: var(--font-size-0);
+        --font-size-xs: var(--font-size-00);
+    }
+
+    /* Small Scale */
+    [data-font-scale="sm"] {
+        --font-size-h1: var(--font-size-8);
+        --font-size-h2: var(--font-size-6);
+        --font-size-h3: var(--font-size-5);
+        --font-size-h4: var(--font-size-3);
+        --font-size-h5: var(--font-size-2);
+        --font-size-h6: var(--font-size-1);
+        --font-size-lg: var(--font-size-2);
+        --font-size-md: var(--font-size-1);
+        --font-size-sm: var(--font-size-0);
+        --font-size-xs: var(--font-size-00);
+
+        line-height: var(--font-lineheight-3);
+    }
+
+    /* Medium Scale (Default) */
+    [data-font-scale="md"] {
+        --font-size-h1: var(--font-size-fluid-3);
+        --font-size-h2: var(--font-size-fluid-2);
+        --font-size-h3: var(--font-size-fluid-1);
+        --font-size-h4: var(--font-size-3);
+        --font-size-h5: var(--font-size-2);
+        --font-size-h6: var(--font-size-fluid-0);
+        --font-size-lg: var(--font-size-3);
+        --font-size-md: var(--font-size-fluid-0);
+        --font-size-sm: var(--font-size-0);
+        --font-size-xs: var(--font-size-00);
+
+        line-height: var(--font-lineheight-4);
+    }
+
+    /* Large Scale */
+    [data-font-scale="lg"] {
+        --font-size-h1: var(--font-size-fluid-3);
+        --font-size-h2: var(--font-size-fluid-2);
+        --font-size-h3: var(--font-size-5);
+        --font-size-h4: var(--font-size-4);
+        --font-size-h5: var(--font-size-3);
+        --font-size-h6: var(--font-size-2);
+        --font-size-lg: var(--font-size-4);
+        --font-size-md: var(--font-size-3);
+        --font-size-sm: var(--font-size-2);
+        --font-size-xs: var(--font-size-1);
+
+        line-height: var(--font-lineheight-5);
+    }
+
     :root {
         /* form icons */
         --icon-valid: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2300aa00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
@@ -1134,18 +1197,6 @@
             inset 0 -0.5px 0 0 #fff1,
             inset 0 0.5px 0 0 #0007
         );
-
-        /* Typography */
-        --font-size-h1: var(--font-size-fluid-3, 3.5rem);
-        --font-size-h2: var(--font-size-fluid-2, 2rem);
-        --font-size-h3: var(--font-size-fluid-1, 1.5rem);
-        --font-size-h4: var(--font-size-3, 1.25rem);
-        --font-size-h5: var(--font-size-2, 1.1rem);
-        --font-size-h6: var(--font-size-fluid-0, 1rem);
-        --font-size-lg: var(--font-size-3, 1.25rem);
-        --font-size-md: var(--font-size-fluid-0, 1rem);
-        --font-size-sm: 0.875rem;
-        --font-size-xs: var(--font-size-0, 0.75rem);
 
         /* Borders */
         --border-color: light-dark(
