@@ -29,13 +29,21 @@
                     <div role="group" id="theme-toggle" class="toggle-button-group small fullwidth"
                          data-signals-theme-mode="'light'"
                          data-persist="{include: /^themeMode$/}"
-                         data-effect="
-                             document.documentElement.setAttribute('data-theme', $themeMode || 'system');
-                             window.themeBroadcast?.postMessage({
-                                 type: 'theme-change',
-                                 themeMode: $themeMode
-                             });
-                         "
+                         data-on-load="
+                                window.themeBroadcast = new BroadcastChannel('theme-updates');
+                                window.themeBroadcast.onmessage = (e) => {
+                                    if (e.data.type === 'theme-change') {
+                                        $themeMode = e.data.themeMode;
+                                    }
+                                };
+                            "
+                        data-effect="
+                            document.documentElement.setAttribute('data-theme', $themeMode || 'system');
+                            window.themeBroadcast?.postMessage({
+                                type: 'theme-change',
+                                themeMode: $themeMode
+                            });
+                        "
                     >
                         <button
                             data-class-selected="$themeMode === 'system'"
