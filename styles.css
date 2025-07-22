@@ -4916,7 +4916,7 @@
     }
 } /* Common styling for checkbox, radio and switch groups */
 
-/* LAYOUT */
+/* MAIN LAYOUT */
 @layer layout {
     body {
         position: fixed;
@@ -5021,7 +5021,7 @@
     }
 
     /* HERO LAYOUT UTILITY */
-    .hero {
+    .layout {
         display: grid;
         grid-template-columns: auto 1fr auto;
         grid-template-rows: auto 1fr auto;
