@@ -5245,9 +5245,10 @@
         font-size: var(--font-size-sm);
         line-height: var(--font-lineheight-4);
         color: var(--text-color-1);
+        margin-inline: auto;
 
         /* Layout */
-        max-width: var(--size-content-4);
+        max-width: 120ch;
 
         /* Reset any inherited styles */
         font-weight: normal;
