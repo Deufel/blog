@@ -1023,41 +1023,41 @@
         color-scheme: dark;
     }
 
-    /* Color theme selectors based on the select value */
-    :root:has(#hue-select option[value="cyan"]:checked) {
+    /* Color theme selectors based on data attribute instead of select */
+    :root[data-theme="cyan"] {
         --palette-hue: var(--oklch-cyan);
     }
-    :root:has(#hue-select option[value="red"]:checked) {
+    :root[data-theme="red"] {
         --palette-hue: var(--oklch-red);
     }
-    :root:has(#hue-select option[value="pink"]:checked) {
+    :root[data-theme="pink"] {
         --palette-hue: var(--oklch-pink);
     }
-    :root:has(#hue-select option[value="purple"]:checked) {
+    :root[data-theme="purple"] {
         --palette-hue: var(--oklch-purple);
     }
-    :root:has(#hue-select option[value="violet"]:checked) {
+    :root[data-theme="violet"] {
         --palette-hue: var(--oklch-violet);
     }
-    :root:has(#hue-select option[value="indigo"]:checked) {
+    :root[data-theme="indigo"] {
         --palette-hue: var(--oklch-indigo);
     }
-    :root:has(#hue-select option[value="blue"]:checked) {
+    :root[data-theme="blue"] {
         --palette-hue: var(--oklch-blue);
     }
-    :root:has(#hue-select option[value="teal"]:checked) {
+    :root[data-theme="teal"] {
         --palette-hue: var(--oklch-teal);
     }
-    :root:has(#hue-select option[value="green"]:checked) {
+    :root[data-theme="green"] {
         --palette-hue: var(--oklch-green);
     }
-    :root:has(#hue-select option[value="lime"]:checked) {
+    :root[data-theme="lime"] {
         --palette-hue: var(--oklch-lime);
     }
-    :root:has(#hue-select option[value="yellow"]:checked) {
+    :root[data-theme="yellow"] {
         --palette-hue: var(--oklch-yellow);
     }
-    :root:has(#hue-select option[value="orange"]:checked) {
+    :root[data-theme="orange"] {
         --palette-hue: var(--oklch-orange);
     }
 
