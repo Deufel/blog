@@ -749,10 +749,6 @@
         box-sizing: border-box;
     }
 
-    * {
-        scrollbar-width: thin;
-    }
-
     :where(html) {
         --_page-bg-color: var(--surface-default);
 
@@ -1136,14 +1132,15 @@
         --drawer-animation-easing: var(--ease-3, cubic-bezier(0.25, 0, 0.3, 1));
     }
 
-    :root html {
-        /* Scroll Bar */
-        scrollbar-color: var(--color-7) var(--_bg-color);
+    /* Global scrollbar styles */
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-9) transparent;
 
         transition: scrollbar-color 0.3s ease;
 
         &:not(:hover) {
-            scrollbar-color: var(--grey-7) var(--_bg-color);
+            scrollbar-color: var(--color-6) transparent;
         }
     }
 
@@ -4981,6 +4978,7 @@
         display: flex;
         flex-direction: column;
         min-height: 100%;
+        scrollbar-gutter: stable both-edges;
 
         /* Apply to main, header, and footer containers */
         & > :where(main, header, footer) > ul {
