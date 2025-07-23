@@ -1135,13 +1135,13 @@
     /* Global scrollbar styles */
     * {
         scrollbar-width: thin;
-        scrollbar-color: var(--color-8) transparent;
+        scrollbar-color: var(--color-7) transparent;
 
-        transition: scrollbar-color 0.3s ease;
+        /* transition: scrollbar-color 0.3s ease;
 
         &:not(:hover) {
             scrollbar-color: var(--color-5) transparent;
-        }
+        } */
     }
 
     :where(html) {
