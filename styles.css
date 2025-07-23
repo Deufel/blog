@@ -4975,7 +4975,7 @@
     }
 }
 
-/* SEMANTIC NAV BAR w dense class and animation - Modified for ul > li > button structure */
+/* SEMANTIC NAV BAR w dense class and animation - Modified for ul > li > a structure */
 @layer layout {
     :where(body > nav) {
         background-color: var(--surface-hue);
@@ -4994,27 +4994,13 @@
             flex-direction: column;
             flex: 1;
 
-            @media (hover) and (prefers-reduced-motion: no-preference) {
-                & > li {
-                    transition: opacity 0.3s ease;
-                    &:not(:hover) {
-                        :where(&):has(~ li:hover, li:hover) {
-                            opacity: 0.5;
-                        }
-                    }
-                }
-                &:has(:hover) > li:not(:hover) {
-                    opacity: 0.5;
-                }
-            }
-
             /* List Items */
             & > li {
                 position: relative;
                 transition: all 0.3s ease;
 
-                /* Button styling - inherits the li's original styling */
-                & > button {
+                /* Link styling - inherits the li's original styling */
+                & > a {
                     align-items: center;
                     display: flex;
                     font-size: var(--font-size-sm);
@@ -5022,13 +5008,10 @@
                     min-block-size: 40px;
                     padding: var(--size-2) var(--size-3);
                     width: 100%;
-                    border: none;
-                    background: transparent;
                     color: inherit;
-                    font-family: inherit;
+                    text-decoration: none;
                     cursor: pointer;
                     transition: all 0.3s ease;
-                    text-align: left;
 
                     &:hover {
                         background-color: light-dark(var(--gray-2), var(--gray-14));
@@ -5037,6 +5020,13 @@
                     &:focus-visible {
                         outline: 2px solid var(--accent);
                         outline-offset: -2px;
+                    }
+
+                    /* Active/current page state */
+                    &[aria-current="page"] {
+                        background-color: light-dark(var(--accent-2), var(--accent-11));
+                        color: var(--accent-text);
+                        font-weight: 500;
                     }
 
                     /* SVG icons */
@@ -5052,9 +5042,9 @@
                         flex: 1;
                         line-height: 1.6;
                         color: inherit;
-                        font-weight: 400;
+                        font-weight: inherit;
                         transition: all 0.3s ease;
-                        margin: 0; /* Reset button default margins */
+                        margin: 0;
                     }
 
                     /* End content */
@@ -5068,6 +5058,19 @@
                 }
             }
         }
+
+        /* Global hover opacity animation - applies to all nav items together */
+        @media (hover) and (prefers-reduced-motion: no-preference) {
+            /* Add transition to all list items */
+            & > :where(main, header, footer) > ul > li {
+                transition: opacity 0.3s ease;
+            }
+
+            /* When any item in the nav is hovered, fade all other items */
+            &:has(li:hover) > :where(main, header, footer) > ul > li:not(:hover) {
+                opacity: 0.5;
+            }
+        }
     }
 
     /* Dense navigation variant */
@@ -5075,7 +5078,7 @@
         /* Apply to main, header, and footer containers */
         & > :where(main, header, footer) > ul {
             /* List items styling for dense mode */
-            & > li > button {
+            & > li > a {
                 flex-direction: column;
                 justify-content: center;
                 text-align: center;
