@@ -2378,11 +2378,16 @@
             svg {
                 inline-size: var(--_icon-size);
                 inset-inline-start: calc(var(--_button-padding-inline));
+                /* Add these for better alignment */
+                display: block;
+                margin: auto;
+                flex-shrink: 0;
+            }
 
-                & + svg {
+                /* & + svg {
                     max-block-size: var(--size-5);
                     max-inline-size: var(--size-7);
-                }
+                } */
             }
 
             /* Selected */
