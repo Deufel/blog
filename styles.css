@@ -1010,54 +1010,51 @@
 } /* UTILS */
 
 @layer theme {
-    :root[data-theme="system"],
-    :root:has(#theme-system:checked) {
+    :root[data-theme-mode="system"] {
         color-scheme: light dark;
     }
-    :root[data-theme="light"],
-    :root:has(#theme-light:checked) {
+    :root[data-theme-mode="light"] {
         color-scheme: light;
     }
-    :root[data-theme="dark"],
-    :root:has(#theme-dark:checked) {
+    :root[data-theme-mode="dark"] {
         color-scheme: dark;
     }
 
     /* Color theme selectors based on data attribute instead of select */
-    :root[data-theme="cyan"] {
+    :root[data-theme-color="cyan"] {
         --palette-hue: var(--oklch-cyan);
     }
-    :root[data-theme="red"] {
+    :root[data-theme-color="red"] {
         --palette-hue: var(--oklch-red);
     }
-    :root[data-theme="pink"] {
+    :root[data-theme-color="pink"] {
         --palette-hue: var(--oklch-pink);
     }
-    :root[data-theme="purple"] {
+    :root[data-theme-color="purple"] {
         --palette-hue: var(--oklch-purple);
     }
-    :root[data-theme="violet"] {
+    :root[data-theme-color="violet"] {
         --palette-hue: var(--oklch-violet);
     }
-    :root[data-theme="indigo"] {
+    :root[data-theme-color="indigo"] {
         --palette-hue: var(--oklch-indigo);
     }
-    :root[data-theme="blue"] {
+    :root[data-theme-color="blue"] {
         --palette-hue: var(--oklch-blue);
     }
-    :root[data-theme="teal"] {
+    :root[data-theme-color="teal"] {
         --palette-hue: var(--oklch-teal);
     }
-    :root[data-theme="green"] {
+    :root[data-theme-color="green"] {
         --palette-hue: var(--oklch-green);
     }
-    :root[data-theme="lime"] {
+    :root[data-theme-color="lime"] {
         --palette-hue: var(--oklch-lime);
     }
-    :root[data-theme="yellow"] {
+    :root[data-theme-color="yellow"] {
         --palette-hue: var(--oklch-yellow);
     }
-    :root[data-theme="orange"] {
+    :root[data-theme-color="orange"] {
         --palette-hue: var(--oklch-orange);
     }
 
