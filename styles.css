@@ -1820,9 +1820,10 @@
                     padding-inline: var(--size-3);
                     cursor: pointer;
                     position: relative;
-                    opacity: 0;
+                    opacity: 0.3;
 
                     &:hover {
+                        opacity: 0.5;
                         background-color: oklch(
                             from var(--_bg-color) calc(l * 1.25) c h / 50%
                         );
