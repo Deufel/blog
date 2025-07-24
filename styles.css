@@ -4719,6 +4719,7 @@
         > main {
             grid-area: main;
             background-color: var(--surface-tonal);
+            scrollbar-gutter: stable both-edges;
         }
         > aside {
             grid-area: aside;
