@@ -1733,7 +1733,8 @@
 } /* HORIZONTAL RULE - modified for text - */
 
 
-/* Tabs Updated */
+
+/* TABS */
 @layer components.base {
     :where(nav.tabs) {
         --_bg-color: transparent;
@@ -1793,25 +1794,6 @@
                 }
             }
         }
-    }
-}
-
-@layer components.base {
-    :where(nav.tabs) {
-        --_bg-color: transparent;
-
-        & > [role="tablist"] {
-            button {
-                outline-color: transparent;
-                outline-offset: -4px;
-
-                &.selected {
-                    &:focus-visible {
-                        outline: 2px solid var(--text-color-1);
-                    }
-                }
-            }
-        }
 
         &.filled {
             --_bg-color: var(--surface-default);
@@ -1827,77 +1809,18 @@
                 width: fit-content;
                 position: relative;
                 display: grid;
-
-                /* Dynamic grid columns using :has() selector */
-                &:has(button:nth-child(1):nth-last-child(1)) {
-                    grid-template-columns: 1fr;
-                    --total-tabs: 1;
-                }
-                &:has(button:nth-child(1):nth-last-child(2)) {
-                    grid-template-columns: 1fr 1fr;
-                    --total-tabs: 2;
-                }
-                &:has(button:nth-child(1):nth-last-child(3)) {
-                    grid-template-columns: 1fr 1fr 1fr;
-                    --total-tabs: 3;
-                }
-                &:has(button:nth-child(1):nth-last-child(4)) {
-                    grid-template-columns: 1fr 1fr 1fr 1fr;
-                    --total-tabs: 4;
-                }
-                &:has(button:nth-child(1):nth-last-child(5)) {
-                    grid-template-columns: repeat(5, 1fr);
-                    --total-tabs: 5;
-                }
-                &:has(button:nth-child(1):nth-last-child(6)) {
-                    grid-template-columns: repeat(6, 1fr);
-                    --total-tabs: 6;
-                }
-
-                /* Sliding background */
-                &::before {
-                    content: "";
-                    position: absolute;
-                    top: 0.792ex;
-                    bottom: 0.792ex;
-                    background-color: var(--_selected-bg);
-                    border-radius: var(--_radius);
-                    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                    width: calc((100% - (0.792ex * 2)) / var(--total-tabs, 4));
-                    left: 0.792ex;
-                    transform: translateX(
-                        calc(var(--selected-index, 0) * 100%)
-                    );
-                    z-index: 1;
-                }
-
-                /* Set selected index based on which button is selected */
-                &:has(button:nth-child(1).selected) {
-                    --selected-index: 0;
-                }
-                &:has(button:nth-child(2).selected) {
-                    --selected-index: 1;
-                }
-                &:has(button:nth-child(3).selected) {
-                    --selected-index: 2;
-                }
-                &:has(button:nth-child(4).selected) {
-                    --selected-index: 3;
-                }
-                &:has(button:nth-child(5).selected) {
-                    --selected-index: 4;
-                }
-                &:has(button:nth-child(6).selected) {
-                    --selected-index: 5;
-                }
+                grid-auto-columns: 1fr;
+                grid-auto-flow: column;
 
                 button {
-                    background-color: transparent; /* Changed from var(--_bg-color) */
+                    background-color: var(--_selected-bg);
+                    border: none;
                     border-radius: var(--_radius);
                     line-height: var(--font-lineheight-4);
                     padding-inline: var(--size-3);
+                    cursor: pointer;
                     position: relative;
-                    z-index: 2; /* Ensure buttons are above the sliding background */
+                    opacity: 0;
 
                     &:hover {
                         background-color: oklch(
@@ -1905,14 +1828,14 @@
                         );
                     }
 
-                    &.selected {
-                        /* Remove background-color since it's now handled by ::before */
-                        color: inherit; /* Optional: you can style the selected text color */
+                    &[aria-selected="true"] {
+                        anchor-name: --active-tab;
+                        color: inherit;
+                        opacity: 1;
 
                         &:hover {
                             background-color: oklch(
-                                from var(--_selected-bg) calc(l * 1.25) c h /
-                                    30%
+                                from var(--_selected-bg) calc(l * 1.25) c h / 30%
                             );
                         }
                     }
@@ -1922,14 +1845,16 @@
                             background-color 0.2s var(--ease-out-3),
                             border-color 0.2s var(--ease-out-3),
                             color 0.2s var(--ease-out-3),
+                            opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
                             outline-offset 0.05s var(--ease-1);
                     }
                 }
             }
         }
     }
-} /* tab modified filled slider */
+}
 
+/* Table */
 @layer components.base {
     :where(table) {
         border-collapse: collapse;
