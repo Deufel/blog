@@ -1,4 +1,4 @@
-@layer openprops, normalize, OPUIutils, theme, components.base, components.has-deps, layout, view-transition, utils;
+@layer openprops, normalize, OPUIutils, theme, components.base, components.has-deps, layout.mobile, layout.default, layout.nav view-transition, utils;
 
 @layer openprops {
     :where(:root) {
@@ -4683,7 +4683,7 @@
 } /* Common styling for checkbox, radio and switch groups */
 
 /* MAIN LAYOUT */
-@layer layout {
+@layer layout.default {
     body {
         --gap-size: var(--size-fluid-0);
 
@@ -4796,7 +4796,7 @@
 }
 
 /* SEMANTIC NAV BAR w dense class and animation - Modified for ul > li > a structure */
-@layer layout {
+@layer layout.nav {
     :where(body > nav) {
         background-color: var(--surface-hue);
         padding: var(--size-2) 0;
@@ -4936,6 +4936,13 @@
         }
     }
 }
+
+@layer layout.mobile{
+    @media (max-width: 480px) {
+      --gap-size: 0;
+    }
+}
+
 
 /* Utility Class Crutches try not to use to much.. */
 @layer extra {
