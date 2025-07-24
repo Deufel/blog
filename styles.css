@@ -4940,6 +4940,9 @@
 @layer layout.mobile{
     @media (max-width: 480px) {
       --gap-size: 0;
+      &:where(:not([popover="auto"])) {
+          border-radius: 0;
+      }
     }
 }
 
