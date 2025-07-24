@@ -4918,30 +4918,7 @@
         }
     }
 
-    /* LAYOUT UTILITY */
-    .layout {
-        display: grid;
-        grid-template:
-            "↖️  ⬆️  ↗️" auto
-            "⬅️  ↔️  ➡️" 1fr
-            "↙️  ⬇️  ↘️" auto
-        /   auto 1fr auto;
-        /* overflow-y: auto; */
-        min-height: 0;
-        width: 100%;
-        height: 100%;
-    }
 
-    /* GRID AREA UTILITY CLASSES */
-    .↖️ { grid-area: ↖️; }
-    .⬆️ { grid-area: ⬆️; }
-    .↗️ { grid-area: ↗️; }
-    .⬅️ { grid-area: ⬅️; }
-    .↔️ { grid-area: ↔️; }
-    .➡️ { grid-area: ➡️; }
-    .↙️ { grid-area: ↙️; }
-    .⬇️ { grid-area: ⬇️; }
-    .↘️ { grid-area: ↘️; }
 }
 
 /* SEMANTIC NAV BAR w dense class and animation - Modified for ul > li > a structure */

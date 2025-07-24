@@ -1,6 +1,6 @@
 
 
-<main id="main">
+< id="main">
     <header class="--flank">
         <div class="avatar rounded">
             <img src="vendor/rocket.avif">
@@ -22,12 +22,27 @@
         </ul>
     </nav>
 
+    <main>
+        <article>
+            <button data-on-click="@get('/endpoint')">
+                Open the pod bay doors, HAL.
+            </button>
+            <div id="hal"></div>
+        </article>
+        <article>
+            <button data-on-click="alert('I’m sorry, Dave. I’m afraid I can’t do that.')">
+                Open the pod bay doors, HAL.
+            </button>
+        </article>
 
 
-    <footer">
-        <div class="layout">
-            <small class="↘️">https://github.com/Deufel/css/datastar</small>
-        </div>
+    </main>
+
+    <footer class="--flank:end">
+          <div></div>
+          <div>
+              <small>https://github.com/Deufel/css/datastar</small>
+          </div>
     </footer>
 
 </main>
