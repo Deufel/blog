@@ -1,12 +1,29 @@
 
 
 <main id="main">
-    <header class="--flank">
+    <header class="--split">
         <div class="avatar rounded">
             <img src="vendor/rocket.avif">
+            <h2>DataStar</h2>
         </div>
-        <h2>DataStar</h2>
+
+        <div>
+            <nav class="tabs underlined">
+                <div role="tablist" aria-label="Underlined tabs">
+                    <button id="tab-1" role="tab" aria-controls="tabpanel-1" aria-selected="false" tabindex="0" data-on-click="@get('partials/ds/data')">
+                        data-*
+                    </button>
+                    <button id="tab-2" role="tab" aria-controls="tabpanel-2" aria-selected="false" tabindex="0" data-on-click="@get('partials/ds/patching')">
+                        Patching
+                    </button>
+                    <button id="tab-3" role="tab" aria-controls="tabpanel-3" aria-selected="false" tabindex="0" data-on-click="@get('partials/ds/patching')">
+                        Signals
+                    </button>
+                </div>
+            </nav>
+        </div>
     </header>
+
 
     <nav>
         <ul>
@@ -22,7 +39,7 @@
         </ul>
     </nav>
 
-    <main>
+    <main id="main-main">
         <article>
             <button data-on-click="@get('/endpoint')">
                 Open the pod bay doors, HAL.
@@ -34,8 +51,6 @@
                 Open the pod bay doors, HAL.
             </button>
         </article>
-
-
     </main>
 
     <footer class="--flank:end">
