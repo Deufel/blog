@@ -29,6 +29,7 @@
         --font-size-7: 3rem;
         --font-size-8: 3.5rem;
         --font-size-fluid-0: clamp(0.75rem, 2vw, 1rem);
+        --font-size-fluid-0: clamp(0.75rem, 2vw, 1rem);
         --font-size-fluid-1: clamp(1rem, 4vw, 1.5rem);
         --font-size-fluid-2: clamp(1.5rem, 6vw, 2.5rem);
         --font-size-fluid-3: clamp(2rem, 9vw, 3.5rem);
@@ -49,6 +50,8 @@
         --size-13: 15rem;
         --size-14: 20rem;
         --size-15: 30rem;
+        --size-fluid-00: clamp(0rem, 0.25vw, 0.25rem);
+        --size-fluid-0: clamp(0.25rem, 0.5vw, 0.5rem);
         --size-fluid-1: clamp(0.5rem, 1vw, 1rem);
         --size-fluid-2: clamp(1rem, 2vw, 1.5rem);
         --size-fluid-3: clamp(1.5rem, 3vw, 2rem);
@@ -1122,7 +1125,6 @@
         --icon-valid: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%2300aa00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>');
         --icon-invalid: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%23ff0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>');
 
-        --gap-size: 6px;
         --drawer-backdrop-color: rgba(0, 0, 0, 0.5);
         --drawer-background: var(--surface-hue);
         --drawer-border-color: var(--border-color);
@@ -4683,6 +4685,8 @@
 /* MAIN LAYOUT */
 @layer layout {
     body {
+        --gap-size: var(--size-fluid-0);
+
         position: fixed;
         top: 0;
         left: 0;
