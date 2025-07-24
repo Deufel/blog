@@ -1732,6 +1732,8 @@
     }
 } /* HORIZONTAL RULE - modified for text - */
 
+
+/* Tabs Updated */
 @layer components.base {
     :where(nav.tabs) {
         --_bg-color: transparent;
@@ -1741,7 +1743,7 @@
                 outline-color: transparent;
                 outline-offset: -4px;
 
-                &.selected {
+                &[aria-selected="true"] {
                     &:focus-visible {
                         outline: 2px solid var(--text-color-1);
                     }
@@ -1754,9 +1756,9 @@
                 border-bottom: 1px solid var(--border-color);
                 position: relative;
                 display: grid;
-
-                /* CSS Counter to count tabs automatically */
-                counter-reset: tab-count;
+                grid-auto-columns: 1fr;
+                grid-auto-flow: column;
+                gap: var(--size-1);
 
                 button {
                     background: transparent;
@@ -1768,90 +1770,31 @@
                     cursor: pointer;
                     transition: color 0.2s ease;
 
-                    /* Increment counter for each button */
-                    counter-increment: tab-count;
-
                     &:hover {
                         color: var(--primary);
                     }
 
-                    &.selected {
+                    &[aria-selected="true"] {
+                        anchor-name: --active-tab;
                         color: var(--primary);
                     }
                 }
 
-                /* After all buttons, set the grid columns based on count */
-                &::before {
-                    content: "";
-                    grid-column: 1 / -1;
-                    display: none;
-                    /* This trick uses the counter to set a CSS property */
-                }
-
-                /* Dynamic grid columns using counter */
-                &:has(button:nth-child(1):nth-last-child(1)) {
-                    grid-template-columns: 1fr;
-                    --total-tabs: 1;
-                }
-                &:has(button:nth-child(1):nth-last-child(2)) {
-                    grid-template-columns: 1fr 1fr;
-                    --total-tabs: 2;
-                }
-                &:has(button:nth-child(1):nth-last-child(3)) {
-                    grid-template-columns: 1fr 1fr 1fr;
-                    --total-tabs: 3;
-                }
-                &:has(button:nth-child(1):nth-last-child(4)) {
-                    grid-template-columns: 1fr 1fr 1fr 1fr;
-                    --total-tabs: 4;
-                }
-                &:has(button:nth-child(1):nth-last-child(5)) {
-                    grid-template-columns: repeat(5, 1fr);
-                    --total-tabs: 5;
-                }
-                &:has(button:nth-child(1):nth-last-child(6)) {
-                    grid-template-columns: repeat(6, 1fr);
-                    --total-tabs: 6;
-                }
-
-                /* Sliding underline */
+                /* Underline anchored to active tab */
                 &::after {
                     content: "";
                     position: absolute;
-                    bottom: -1px;
+                    position-anchor: --active-tab;
+                    inset: auto auto 0 anchor(--active-tab left);
+                    width: anchor-size(--active-tab width);
                     height: 2px;
                     background: var(--primary);
-                    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                    width: calc(100% / var(--total-tabs, 4));
-                    left: 0;
-                    transform: translateX(
-                        calc(var(--selected-index, 0) * 100%)
-                    );
-                }
-
-                /* Set selected index based on which button is selected */
-                &:has(button:nth-child(1).selected) {
-                    --selected-index: 0;
-                }
-                &:has(button:nth-child(2).selected) {
-                    --selected-index: 1;
-                }
-                &:has(button:nth-child(3).selected) {
-                    --selected-index: 2;
-                }
-                &:has(button:nth-child(4).selected) {
-                    --selected-index: 3;
-                }
-                &:has(button:nth-child(5).selected) {
-                    --selected-index: 4;
-                }
-                &:has(button:nth-child(6).selected) {
-                    --selected-index: 5;
+                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                 }
             }
         }
     }
-} /* Tab - modified - slider - underlined */
+}
 
 @layer components.base {
     :where(nav.tabs) {
