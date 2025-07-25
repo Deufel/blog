@@ -4986,7 +4986,7 @@
         [class*="--split"],
         [class*="--flex"]
     ) {
-        gap: var(--size-2);
+        gap: var(--size-1);
     }
 
     :where([class*="--cluster"]) {
@@ -5105,9 +5105,12 @@
         justify-content: flex-end;
     }
 
+    .icon-button {
+        transition: transform 0.3s ease; /* This handles BOTH directions */
+    }
+
     .rotate-180 {
         transform: rotate(180deg);
-        transition: transform 0.3s ease;
     }
 
     /* Plain class for monospace legal document styling */
