@@ -156,7 +156,7 @@ class CodeViewer extends HTMLElement {
                             padding-left: 0;
                         }
 
-                        /* Simple syntax highlighting */
+                        /* Enhanced syntax highlighting */
                         .keyword { color: #cf222e; font-weight: bold; }
                         .string { color: #032f62; }
                         .comment { color: #6e7781; font-style: italic; }
@@ -164,7 +164,17 @@ class CodeViewer extends HTMLElement {
                         .attribute { color: #0550ae; }
                         .value { color: #032f62; }
                         .doctype { color: #6f42c1; font-weight: bold; }
-                        .datastar-attr { color: #8250df; font-weight: bold; }
+                        .datastar-attr {
+                            color: #8250df;
+                            font-weight: bold;
+                            background: rgba(130, 80, 223, 0.1);
+                            padding: 1px 2px;
+                            border-radius: 2px;
+                        }
+                        .datastar-value {
+                            color: #0969da;
+                            font-weight: 500;
+                        }
                     </style>
 
                     <div class="container">
@@ -248,19 +258,51 @@ class CodeViewer extends HTMLElement {
   }
 
   highlightHTML(code) {
-    return this.escapeHtml(code)
-      .replace(
-        /(&lt;!DOCTYPE[^&gt;]*&gt;)/gi,
-        '<span class="doctype">$1</span>',
-      )
-      .replace(/(&lt;\/?)([\w-]+)/g, '$1<span class="tag">$2</span>')
-      .replace(/([\w-]+)(=)/g, '<span class="attribute">$1</span>$2')
-      .replace(
-        /=(&quot;[^&quot;]*&quot;|'[^']*')/g,
-        '=<span class="value">$1</span>',
-      )
-      .replace(/(&lt;!--[\s\S]*?--&gt;)/g, '<span class="comment">$1</span>')
-      .replace(/(data-[\w-]+)/g, '<span class="datastar-attr">$1</span>');
+    let highlighted = this.escapeHtml(code);
+
+    // Handle DOCTYPE
+    highlighted = highlighted.replace(
+      /(&lt;!DOCTYPE[^&gt;]*&gt;)/gi,
+      '<span class="doctype">$1</span>',
+    );
+
+    // Handle comments
+    highlighted = highlighted.replace(
+      /(&lt;!--[\s\S]*?--&gt;)/g,
+      '<span class="comment">$1</span>',
+    );
+
+    // Handle opening and closing tags
+    highlighted = highlighted.replace(
+      /(&lt;\/?)([\w-]+)/g,
+      '$1<span class="tag">$2</span>',
+    );
+
+    // Handle data-* attributes with special highlighting
+    highlighted = highlighted.replace(
+      /(data-[\w-]+)(\s*=\s*)(&quot;[^&quot;]*&quot;|'[^']*')/g,
+      '<span class="datastar-attr">$1</span>$2<span class="datastar-value">$3</span>',
+    );
+
+    // Handle regular attributes (but not data-* ones that were already handled)
+    highlighted = highlighted.replace(
+      /(?<!data-[\w-])\b([\w-]+)(\s*=\s*)(&quot;[^&quot;]*&quot;|'[^']*')/g,
+      '<span class="attribute">$1</span>$2<span class="value">$3</span>',
+    );
+
+    // Handle attributes without values (like aria-selected, tabindex, etc.)
+    highlighted = highlighted.replace(
+      /\s([\w-]+)(?=\s|&gt;)/g,
+      ' <span class="attribute">$1</span>',
+    );
+
+    // Fix any double-highlighted data attributes
+    highlighted = highlighted.replace(
+      /<span class="attribute">(data-[\w-]+)<\/span>/g,
+      '<span class="datastar-attr">$1</span>',
+    );
+
+    return highlighted;
   }
 
   highlightCSS(code) {
