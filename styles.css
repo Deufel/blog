@@ -4795,9 +4795,7 @@
         > header {
             grid-area: header;
             margin-bottom: var(--gap-size);
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
+            align-self: center;
         }
 
         /* Nav specific styles */
