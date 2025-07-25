@@ -4797,11 +4797,11 @@
             grid-area: header;
             margin-bottom: var(--gap-size);
             align-self: center;
-            > aside  { place-items: center start }
+            /* > aside  { place-items: center start }
             > main   { place-items: center stretch}
             > nav    { place-itmes: center end}
             > header { place-items: end    start }
-            > footer { plase-items: start  start }
+            > footer { plase-items: start  start } */
             /* > aside {
                 place-items: center;
                 grid-auto-flow: column;
