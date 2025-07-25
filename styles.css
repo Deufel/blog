@@ -1,4 +1,4 @@
-@layer openprops, normalize, OPUIutils, theme, components.base, components.has-deps, layout, transition, utils;
+@layer openprops, normalize, OPUIutils, theme, layout.desktop, components.semantic,  components.base, components.has-deps, transition, utils;
 
 /* OPEN PROPS */
 @layer openprops {
@@ -4708,10 +4708,10 @@
 }
 
 /* MAIN LAYOUT */
-@layer layout {
+@layer layout.desktop {
     body {
 
-        --padding-size: var(--size-fluid-1);
+        --padding-size: var(--size-fluid-0);
         --gap-size: var(--size-fluid-0);
         --border-radius: var(--size-fluid-1);
 
@@ -4831,7 +4831,7 @@
 
 
 /* SEMANTIC NAV BAR w dense class and animation - Modified for ul > li > a structure */
-@layer layout {
+@layer components.semantic {
     :where(body > nav) {
         background-color: var(--surface-hue);
         padding: var(--size-2) 0;
