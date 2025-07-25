@@ -4711,7 +4711,7 @@
 @layer layout {
     body {
         --gap-size: var(--size-fluid-0);
-        --border-radius: var(--size-fluid-0);
+        --border-radius: var(--size-fluid-2);
 
         position: fixed;
         top: 0;
