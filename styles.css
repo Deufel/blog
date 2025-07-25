@@ -4796,7 +4796,8 @@
         > header {
             grid-area: header;
             margin-bottom: var(--gap-size);
-            align-self: center;
+            display: grid;
+            align-items: center;
             /* > aside  { place-items: center start }
             > main   { place-items: center stretch}
             > nav    { place-itmes: center end}
