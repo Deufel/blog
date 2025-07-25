@@ -4732,29 +4732,38 @@
         > header {
             grid-area: header;
             margin-bottom: var(--gap-size);
-            padding-inline: var(--size-2);
             display: flex;
             flex-wrap: wrap;
             align-items: center;
+            scrollbar-gutter: stable both-edges;
+            :empty { scrollbar-gutter: unset; }
         }
         > nav {
             grid-area: nav;
             margin-right: var(--gap-size);
             background-color: var(--surface-hue);
+            scrollbar-gutter: stable both-edges;
+            :empty { scrollbar-gutter: unset; }
+
         }
         > main {
             grid-area: main;
             background-color: var(--surface-tonal);
+            scrollbar-gutter: stable both-edges;
+            :empty { scrollbar-gutter: unset; }
         }
         > aside {
             grid-area: aside;
             margin-left: var(--gap-size);
             background-color: var(--surface-hue);
+            scrollbar-gutter: stable both-edges;
+            :empty { scrollbar-gutter: unset; }
         }
         > footer {
             grid-area: footer;
             margin-top: var(--gap-size);
-            margin-inline: var(--size-2);
+            scrollbar-gutter: stable both-edges;
+            :empty { scrollbar-gutter: unset; }
         }
 
         > header,
@@ -4789,27 +4798,17 @@
                 :empty {
                     scrollbar-gutter: unset;
                 }
+            }
 
             > main {
                 grid-area: main;
                 overflow: auto;
                 min-height: 0;
-                scrollbar-gutter: stable both-edges;
-
-                :empty {
-                    scrollbar-gutter: unset;
-                }
-
 
             > aside {
                 grid-area: aside;
                 margin-left: var(--gap-size);
                 overflow-y: auto;
-                scrollbar-gutter: stable both-edges;
-
-                :empty {
-                    scrollbar-gutter: unset;
-                }
             }
             > footer {
                 grid-area: footer;
@@ -4830,7 +4829,6 @@
         > aside:empty,
         > footer:empty {
             display: none;
-            scrollbar-gutter: unset;
         }
     }
 }
