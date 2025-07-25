@@ -1751,7 +1751,7 @@
                 outline-color: transparent;
                 outline-offset: -4px;
 
-                &.selected {
+                &[aria-selected="true"] {
                     &:focus-visible {
                         outline: 2px solid var(--text-color-1);
                     }
@@ -1785,7 +1785,7 @@
                         color: var(--primary);
                     }
 
-                    &.selected {
+                    &[aria-selected="true"] {
                         color: var(--primary);
                     }
                 }
@@ -1800,7 +1800,7 @@
 
                 /* Dynamic grid columns using counter */
                 &:has(button:nth-child(1):nth-last-child(1)) {
-                    grid-template-columns: repeat(1, 1fr)
+                    grid-template-columns: repeat(1, 1fr);
                     --total-tabs: 1;
                 }
                 &:has(button:nth-child(1):nth-last-child(2)) {
@@ -1839,23 +1839,23 @@
                     );
                 }
 
-                /* Set selected index based on which button is selected */
-                &:has(button:nth-child(1).selected) {
+                /* Set selected index based on which button has aria-selected="true" */
+                &:has(button:nth-child(1)[aria-selected="true"]) {
                     --selected-index: 0;
                 }
-                &:has(button:nth-child(2).selected) {
+                &:has(button:nth-child(2)[aria-selected="true"]) {
                     --selected-index: 1;
                 }
-                &:has(button:nth-child(3).selected) {
+                &:has(button:nth-child(3)[aria-selected="true"]) {
                     --selected-index: 2;
                 }
-                &:has(button:nth-child(4).selected) {
+                &:has(button:nth-child(4)[aria-selected="true"]) {
                     --selected-index: 3;
                 }
-                &:has(button:nth-child(5).selected) {
+                &:has(button:nth-child(5)[aria-selected="true"]) {
                     --selected-index: 4;
                 }
-                &:has(button:nth-child(6).selected) {
+                &:has(button:nth-child(6)[aria-selected="true"]) {
                     --selected-index: 5;
                 }
             }
