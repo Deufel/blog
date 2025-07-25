@@ -1,4 +1,4 @@
-@layer openprops, normalize, OPUIutils, theme, components.base, components.has-deps, layout.mobile, layout.default, layout.nav view-transition, utils;
+@layer openprops, normalize, OPUIutils, theme, components.base, components.has-deps, layout.default, layout.mobile, layout.nav view-transition, utils;
 
 @layer openprops {
     :where(:root) {
