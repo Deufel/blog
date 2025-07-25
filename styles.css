@@ -4799,7 +4799,8 @@
                 :empty {
                     scrollbar-gutter: unset;
                 }
-            }
+
+
             > aside {
                 grid-area: aside;
                 margin-left: var(--gap-size);
