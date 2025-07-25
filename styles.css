@@ -4710,6 +4710,8 @@
 /* MAIN LAYOUT */
 @layer layout {
     body {
+
+        --padding-size: var(--size-fluid-1);
         --gap-size: var(--size-fluid-0);
         --border-radius: var(--size-fluid-1);
 
@@ -4726,11 +4728,11 @@
             "nav main aside" 1fr
             "footer footer footer" auto
             / auto 1fr auto;
-        padding: var(--gap-size);
+        padding: var(--padding-size);
         margin: 0;
 
         /* Generic styles for all direct children */
-        > * {
+        > main, > header, > nav, > aside, > footer {
             display: grid;
             grid-template:
                 "header header header" auto
@@ -4750,7 +4752,7 @@
             }
 
             /* Generic styles for all grandchildren */
-            > * {
+            > main, > header, > nav, > aside, > footer {
                 border-radius: var(--radius-2);
 
                 &:empty {
