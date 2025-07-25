@@ -2,17 +2,10 @@
     data-attr-popover="$windowWidth < 640 ? 'auto' : null"
     data-class-dense="$navDense">
     <header id="nav-header" >
-        <ul>
-            <li>
-                <a>
-                    <div>
-                        <button class="center-end small" data-on-click="$navDense = !$navDense">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" data-class-rotate-180="$navDense"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M 19.03498,37.87702 5.4999802,24.00002 19.03498,10.12302" stroke-width="2" id="path1" /> <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="m 31.10798,37.87702 -13.535,-13.877 13.535,-13.877" stroke-width="2" id="path2" /> <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="m 42.49998,37.87702 -13.535,-13.877 13.535,-13.877" stroke-width="2" id="path3" /></svg>
-                        </button>
-                    </div>
-                </a>
-            </li>
-        </ul>
+        <button class="icon-button small" hint="collapse/expand"
+            data-on-click="$navDense = !$navDense">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" data-class-rotate-180="$navDense"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M 19.03498,37.87702 5.4999802,24.00002 19.03498,10.12302" stroke-width="2" id="path1" /> <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="m 31.10798,37.87702 -13.535,-13.877 13.535,-13.877" stroke-width="2" id="path2" /> <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="m 42.49998,37.87702 -13.535,-13.877 13.535,-13.877" stroke-width="2" id="path3" /></svg>
+        </button>
     </header>
 
     <main id="nav-main">
