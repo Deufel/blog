@@ -1,5 +1,6 @@
-@layer openprops, normalize, OPUIutils, theme, components.base, components.has-deps, layout, view-transition, utils;
+@layer openprops, normalize, OPUIutils, theme, components.base, components.has-deps, layout, transition, utils;
 
+/* OPEN PROPS */
 @layer openprops {
     :where(:root) {
         --font-sans:
@@ -743,8 +744,9 @@
         --oklch-yellow: 100;
         --oklch-orange: 75;
     }
-} /* OPEN PROPS */
+}
 
+/* NORMZLIZE */
 @layer normalize {
     *,
     ::before,
@@ -950,8 +952,9 @@
     [popover] {
         padding: 0;
     }
-} /* NORMZLIZE */
+}
 
+/* UTILS */
 @layer OPUIutils {
     .sr-only {
         block-size: 1px;
@@ -1006,8 +1009,9 @@
             }
         }
     }
-} /* UTILS */
+}
 
+/* THEME */
 @layer theme {
     :root[data-theme-mode="system"] {
         color-scheme: light dark;
@@ -1304,7 +1308,7 @@
             from var(--color-16) l var(--gray-chroma) var(--gray-lightness)
         );
     }
-} /* THEME */
+}
 
 /* BUTTON */
 @layer components.base {
@@ -1578,8 +1582,9 @@
         cursor: pointer;
         margin-inline-end: var(--size-relative-6);
     }
-} /* BUTTON */
+}
 
+/* CHIP */
 @layer components.base {
     :where(.chip) {
         --_bg-color: var(--surface-tonal);
@@ -1656,8 +1661,9 @@
             block-size: auto;
         }
     }
-} /* CHIP */
+}
 
+/* ICON BUTTON */
 @layer components.base {
     :where(
         button:has(> svg:only-child),
@@ -1703,8 +1709,9 @@
             }
         }
     }
-} /* ICON BUTTON */
+}
 
+/* HORIZONTAL RULE - modified for text - */
 @layer components.base {
     :where(hr) {
         background-color: var(--border-color);
@@ -1732,9 +1739,7 @@
         text-box-trim: both;
         text-box-edge: cap alphabetic;
     }
-} /* HORIZONTAL RULE - modified for text - */
-
-
+}
 
 /* TABS */
 @layer components.base {
@@ -2113,8 +2118,9 @@
             overflow-x: auto;
         }
     }
-} /* TABLE -- modified --*/
+}
 
+/* TOGGLE BUTTON GROUP*/
 @layer components.base {
     :where([role="group"].toggle-button-group) {
         --_border-radius: var(--radius-round);
@@ -2277,8 +2283,9 @@
             }
         }
     }
-} /* TOGGLE BUTTON GROUP*/
+}
 
+/* Typography */
 @layer components.base {
     /* Base typography */
     :where(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6) {
@@ -2487,8 +2494,9 @@
             text-wrap: balance;
         }
     }
-} /* Typography */
+}
 
+/* ARTICLE CARD */
 @layer components.base {
     :where(article) {
         --_bg-color: transparent;
@@ -2575,8 +2583,9 @@
             }
         }
     }
-} /* ARTICLE CARD */
+}
 
+/* CHECKBOX */
 @layer components.base {
     label:where(.checkbox, .radio) {
         align-items: center;
@@ -2700,8 +2709,9 @@
             }
         }
     }
-} /* CHECKBOX */
+}
 
+/* RADIO */
 @layer components.base {
     label:where(.checkbox, .radio) {
         align-items: center;
@@ -2824,8 +2834,9 @@
             }
         }
     }
-} /* RADIO */
+}
 
+/* RANGE */
 @layer components.base {
     :where(.range > input[type="range"]) {
         --thumb-bg: var(--primary);
@@ -2950,8 +2961,9 @@
             }
         }
     }
-} /* RANGE */
+}
 
+/* BAGDE */
 @layer components.base {
     :where(.badge) {
         --_bg-color: var(--primary);
@@ -3052,8 +3064,9 @@
             }
         }
     }
-} /* BAGDE */
+}
 
+/* SWITCH */
 @layer components.base {
     :where(.switch) {
         --_accent-color: var(--primary);
@@ -3248,8 +3261,9 @@
             }
         }
     }
-} /* SWITCH */
+}
 
+ /* ACCORDION */
 @layer components.has-deps {
     :where(details) {
         --_accordion-transition-time: 0.2s;
@@ -3422,8 +3436,9 @@
             }
         }
     }
-} /* ACCORDION */
+}
 
+/* BUTTON GROUP */
 @layer components.has-deps {
     :where([role="group"].button-group) {
         --_border-radius: var(--button-border-radius);
@@ -3491,8 +3506,9 @@
             }
         }
     }
-} /* BUTTON GROUP */
+}
 
+/* PROGRESS */
 @layer components.base {
     :where(progress) {
         --_accent-color: var(--primary);
@@ -3575,8 +3591,9 @@
             right: -8%;
         }
     }
-} /* PROGRESS */
+}
 
+/* AVATAR */
 @layer components.base {
     :where(.avatar) {
         --_bg-color: var(--color-8);
@@ -3656,8 +3673,9 @@
             outline: 2px solid var(--surface-default);
         }
     }
-} /* AVATAR */
+}
 
+/* LIST */
 @layer components.has-deps {
     :where(.list) {
         /* --_bg-color: light-dark(var(--gray-3), var(--gray-14)); */
@@ -3989,8 +4007,9 @@
             }
         }
     }
-} /* LIST */
+}
 
+/* SELECT */
 @layer components.has-deps {
     :where(.field > select) {
         position: relative;
@@ -4156,8 +4175,9 @@
     ::picker(select) {
         appearance: base-select;
     }
-} /* SELECT */
+}
 
+/* ALERT */
 @layer components.has-deps {
     :where(.alert) {
         --_bg-color: var(--surface-tonal);
@@ -4242,7 +4262,9 @@
             }
         }
     }
-} /* ALERT */
+}
+
+/* TEXT AREA */
 
 @layer components.has-deps {
     :where(.field:has(textarea)) {
@@ -4268,8 +4290,9 @@
             }
         }
     }
-} /* TEXT AREA */
+}
 
+/* TEXT FIELD */
 @layer components.has-deps {
     :where(
         .field:has(
@@ -4326,8 +4349,9 @@
             translate: 0 -50%;
         }
     }
-} /* TEXT FIELD */
+}
 
+/* FIELD MODIFIED grid with feedback*/
 @layer components.has-deps {
     :where(.field) {
         --_accent-color: var(--primary);
@@ -4593,8 +4617,9 @@
             }
         }
     }
-} /* FIELD MODIFIED grid with feedback*/
+}
 
+/* Common styling for checkbox, radio and switch groups */
 @layer components.has-deps {
     :where(fieldset.field-group) {
         border: 0;
@@ -4680,7 +4705,7 @@
             }
         }
     }
-} /* Common styling for checkbox, radio and switch groups */
+}
 
 /* MAIN LAYOUT */
 @layer layout {
@@ -4794,8 +4819,6 @@
             display: none;
         }
     }
-
-
 }
 
 /* SEMANTIC NAV BAR w dense class and animation - Modified for ul > li > a structure */
@@ -4939,16 +4962,6 @@
         }
     }
 }
-
-@layer layout {
-    @media (max-width: 480px) {
-      --gap-size: 0;
-      &:where(:not([popover="auto"])) {
-          border-radius: 0;
-      }
-    }
-}
-
 
 /* Utility Class Crutches try not to use to much.. */
 @layer extra {

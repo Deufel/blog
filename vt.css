@@ -1,0 +1,233 @@
+/* ===== MODAL DRAWER TRANSITIONS CSS - VIEW TRANSITIONS API ===== */
+@layer transitions {
+    /* CSS Variables */
+    :root {
+        --drawer-backdrop-color: rgba(0, 0, 0, 0.5);
+        --drawer-animation-duration: 0.3s;
+        --drawer-animation-easing: var(--ease-3, cubic-bezier(0.25, 0, 0.3, 1));
+    }
+
+    /* ===== BASE DRAWER TRANSITION STYLES ===== */
+    [popover] {
+        /* Animation properties using View Transitions */
+        transition:
+            opacity var(--drawer-animation-duration)
+                var(--drawer-animation-easing),
+            transform var(--drawer-animation-duration)
+                var(--drawer-animation-easing),
+            overlay var(--drawer-animation-duration) allow-discrete,
+            display var(--drawer-animation-duration) allow-discrete;
+
+        /* Backdrop */
+        &::backdrop {
+            background-color: rgb(0 0 0 / 0%);
+            backdrop-filter: blur(0px);
+            transition:
+                background-color var(--drawer-animation-duration)
+                    var(--drawer-animation-easing),
+                backdrop-filter var(--drawer-animation-duration)
+                    var(--drawer-animation-easing),
+                overlay var(--drawer-animation-duration) allow-discrete,
+                display var(--drawer-animation-duration) allow-discrete;
+        }
+
+        &:popover-open::backdrop {
+            background-color: var(--drawer-backdrop-color);
+            backdrop-filter: blur(2px);
+        }
+    }
+
+    /* ===== HEADER DRAWER (Top) ===== */
+    header[popover] {
+        view-transition-name: header-drawer;
+
+        &:popover-open {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+
+    /* View Transition for header */
+    ::view-transition-old(header-drawer) {
+        animation: slide-from-top var(--drawer-animation-duration)
+            var(--drawer-animation-easing) reverse;
+    }
+    ::view-transition-new(header-drawer) {
+        animation: slide-from-top var(--drawer-animation-duration)
+            var(--drawer-animation-easing);
+    }
+
+    /* ===== NAV DRAWER (Left) ===== */
+    nav[popover] {
+        view-transition-name: nav-drawer;
+
+        &:popover-open {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+
+    /* View Transition for nav */
+    ::view-transition-old(nav-drawer) {
+        animation: slide-from-left var(--drawer-animation-duration)
+            var(--drawer-animation-easing) reverse;
+    }
+    ::view-transition-new(nav-drawer) {
+        animation: slide-from-left var(--drawer-animation-duration)
+            var(--drawer-animation-easing);
+    }
+
+    /* ===== ASIDE DRAWER (Right) ===== */
+    aside[popover] {
+        view-transition-name: aside-drawer;
+
+        &:popover-open {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    /* View Transition for aside */
+    ::view-transition-old(aside-drawer) {
+        animation: slide-from-right var(--drawer-animation-duration)
+            var(--drawer-animation-easing) reverse;
+    }
+    ::view-transition-new(aside-drawer) {
+        animation: slide-from-right var(--drawer-animation-duration)
+            var(--drawer-animation-easing);
+    }
+
+    /* ===== FOOTER DRAWER (Bottom) ===== */
+    footer[popover] {
+        view-transition-name: footer-drawer;
+
+        &:popover-open {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        opacity: 0;
+        transform: translateY(100%);
+    }
+
+    /* View Transition for footer */
+    ::view-transition-old(footer-drawer) {
+        animation: slide-from-bottom var(--drawer-animation-duration)
+            var(--drawer-animation-easing) reverse;
+    }
+    ::view-transition-new(footer-drawer) {
+        animation: slide-from-bottom var(--drawer-animation-duration)
+            var(--drawer-animation-easing);
+    }
+
+    /* ===== KEYFRAMES FOR VIEW TRANSITIONS ===== */
+    @keyframes slide-from-top {
+        from {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slide-from-left {
+        from {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slide-from-right {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slide-from-bottom {
+        from {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    /* ===== BACKDROP TRANSITION ===== */
+    ::view-transition-group(root) {
+        animation-duration: var(--drawer-animation-duration);
+        animation-timing-function: var(--drawer-animation-easing);
+    }
+
+    ::view-transition-old(root) {
+        animation: fade-out var(--drawer-animation-duration)
+            var(--drawer-animation-easing);
+    }
+
+    ::view-transition-new(root) {
+        animation: fade-in var(--drawer-animation-duration)
+            var(--drawer-animation-easing);
+    }
+
+    @keyframes fade-in {
+        from {
+            background-color: rgb(0 0 0 / 0%);
+            backdrop-filter: blur(0px);
+        }
+        to {
+            background-color: var(--drawer-backdrop-color);
+            backdrop-filter: blur(2px);
+        }
+    }
+
+    @keyframes fade-out {
+        from {
+            background-color: var(--drawer-backdrop-color);
+            backdrop-filter: blur(2px);
+        }
+        to {
+            background-color: rgb(0 0 0 / 0%);
+            backdrop-filter: blur(0px);
+        }
+    }
+
+    /* ===== REDUCED MOTION SUPPORT ===== */
+    @media (prefers-reduced-motion: reduce) {
+        [popover] {
+            transition: none !important;
+        }
+
+        ::view-transition-old(*),
+        ::view-transition-new(*) {
+            animation: none !important;
+        }
+    }
+
+    /* ===== PRINT STYLES ===== */
+    @media print {
+        [popover] {
+            display: none !important;
+        }
+    }
+}
