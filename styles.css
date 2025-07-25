@@ -4807,7 +4807,7 @@
                 place-items: center;
                 grid-auto-flow: column;
                 display: inline-grid;
-                gap: var(--sive-1);
+                gap: var(--size-1);
             }
         }
 
@@ -4841,8 +4841,7 @@
 
 
 
-/* SEMANTIC NAV BAR w dense class and animation - Modified for ul > li > a structure */
-/* SEMANTIC NAV BAR w dense class and animation - Modified for grid layout */
+/* SEMANTIC NAV BAR */
 @layer components.semantic {
     :where(body > nav) {
         /* Remove flex properties that fight grid - let layout layer control container */
