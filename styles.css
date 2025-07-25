@@ -4796,33 +4796,24 @@
         > header {
             grid-area: header;
             margin-bottom: var(--gap-size);
-            display: grid;
-            grid-auto-flow: column; /* Add this line */
-            place-items: center;
-
-            /* > aside  { place-items: center start }
-            > main   { place-items: center stretch}
-            > nav    { place-itmes: center end}
-            > header { place-items: end    start }
-            > footer { plase-items: start  start } */
-            /* > aside {
+            > aside {
                 place-items: center;
                 grid-auto-flow: column;
                 display: inline-grid;
-                gap: var(--size-1);
+                column-gap: var(--size-3);
             }
             > main {
                 place-items: center;
                 grid-auto-flow: column;
                 display: inline-grid;
-                gap: var(--size-1);
+                column-gap: var(--size-3);
             }
             > nav {
                 place-items: center;
                 grid-auto-flow: column;
                 display: inline-grid;
-                gap: var(--size-1);
-            } */
+                column-gap: var(--size-3);
+            }
         }
 
         /* Nav specific styles */
