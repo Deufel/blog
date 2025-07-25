@@ -4785,18 +4785,30 @@
                 margin-right: var(--gap-size);
                 overflow-y: auto;
                 scrollbar-gutter: stable both-edges;
-            }
+
+                :empty {
+                    scrollbar-gutter: unset;
+                }
+
             > main {
                 grid-area: main;
                 overflow: auto;
                 min-height: 0;
                 scrollbar-gutter: stable both-edges;
+
+                :empty {
+                    scrollbar-gutter: unset;
+                }
             }
             > aside {
                 grid-area: aside;
                 margin-left: var(--gap-size);
                 overflow-y: auto;
                 scrollbar-gutter: stable both-edges;
+
+                :empty {
+                    scrollbar-gutter: unset;
+                }
             }
             > footer {
                 grid-area: footer;
@@ -4821,6 +4833,8 @@
         }
     }
 }
+
+
 
 /* SEMANTIC NAV BAR w dense class and animation - Modified for ul > li > a structure */
 @layer layout {
