@@ -3,6 +3,8 @@ class CodeViewer extends HTMLElement {
     super();
     this.attachShadow({ mode: "open" });
     this.codeContent = "";
+    this.showLineNumbers = true;
+    this.wordWrap = true;
   }
 
   static get observedAttributes() {
@@ -11,7 +13,7 @@ class CodeViewer extends HTMLElement {
 
   connectedCallback() {
     this.render();
-    this.setupDatastar();
+    this.loadCode();
   }
 
   render() {
@@ -67,6 +69,11 @@ class CodeViewer extends HTMLElement {
                             background: #e7edf3;
                         }
 
+                        .btn:disabled {
+                            opacity: 0.6;
+                            cursor: not-allowed;
+                        }
+
                         .content {
                             height: ${height};
                             overflow: auto;
@@ -103,6 +110,10 @@ class CodeViewer extends HTMLElement {
                             word-wrap: break-word;
                         }
 
+                        pre.no-wrap {
+                            white-space: pre;
+                        }
+
                         code {
                             background: transparent;
                         }
@@ -128,12 +139,21 @@ class CodeViewer extends HTMLElement {
                             vertical-align: top;
                         }
 
+                        .line-number.hidden {
+                            display: none;
+                        }
+
                         .line-content {
                             display: table-cell;
                             padding-left: 16px;
                             width: calc(100% - 66px);
                             word-wrap: break-word;
                             vertical-align: top;
+                        }
+
+                        .line-content.full-width {
+                            width: 100%;
+                            padding-left: 0;
                         }
 
                         /* Simple syntax highlighting */
@@ -144,6 +164,7 @@ class CodeViewer extends HTMLElement {
                         .attribute { color: #0550ae; }
                         .value { color: #032f62; }
                         .doctype { color: #6f42c1; font-weight: bold; }
+                        .datastar-attr { color: #8250df; font-weight: bold; }
                     </style>
 
                     <div class="container">
@@ -159,44 +180,38 @@ class CodeViewer extends HTMLElement {
                             <div class="loading">Loading code...</div>
                         </div>
                     </div>
-
-                    <!-- Hidden element for Datastar to load content into -->
-                    <div id="dataTarget" style="display: none;"></div>
                 `;
 
     this.setupEventListeners();
   }
 
-  setupDatastar() {
+  async loadCode() {
     const src = this.getAttribute("src");
-    if (!src) return;
+    if (!src) {
+      this.showError("No source URL provided");
+      return;
+    }
 
-    const dataTarget = this.shadowRoot.getElementById("dataTarget");
-
-    // Set up Datastar data-on-load attribute
-    dataTarget.setAttribute("data-on-load", `@get('${src}')`);
-
-    // Listen for when Datastar loads the content
-    const observer = new MutationObserver(() => {
-      if (dataTarget.textContent.trim()) {
-        this.codeContent = dataTarget.textContent;
-        this.displayCode(this.codeContent);
-        observer.disconnect();
+    try {
+      const response = await fetch(src);
+      if (!response.ok) {
+        throw new Error(
+          `Failed to load: ${response.status} ${response.statusText}`,
+        );
       }
-    });
 
-    observer.observe(dataTarget, {
-      childList: true,
-      characterData: true,
-      subtree: true,
-    });
+      const code = await response.text();
+      this.codeContent = code;
+      this.displayCode(code);
+    } catch (error) {
+      console.error("Error loading code:", error);
+      this.showError(`Failed to load code: ${error.message}`);
+    }
+  }
 
-    // Trigger Datastar evaluation
-    setTimeout(() => {
-      if (window.ds) {
-        window.ds.load(dataTarget);
-      }
-    }, 100);
+  showError(message) {
+    const content = this.shadowRoot.getElementById("content");
+    content.innerHTML = `<div class="error">${message}</div>`;
   }
 
   setupEventListeners() {
@@ -223,8 +238,10 @@ class CodeViewer extends HTMLElement {
       return this.highlightHTML(code);
     } else if (filename.endsWith(".css")) {
       return this.highlightCSS(code);
-    } else if (filename.endsWith(".js")) {
+    } else if (filename.endsWith(".js") || filename.endsWith(".ts")) {
       return this.highlightJS(code);
+    } else if (filename.endsWith(".py")) {
+      return this.highlightPython(code);
     }
 
     return this.escapeHtml(code);
@@ -243,10 +260,7 @@ class CodeViewer extends HTMLElement {
         '=<span class="value">$1</span>',
       )
       .replace(/(&lt;!--[\s\S]*?--&gt;)/g, '<span class="comment">$1</span>')
-      .replace(
-        /(data-[\w-]+)/g,
-        '<span class="attribute" style="color: #8250df;">$1</span>',
-      );
+      .replace(/(data-[\w-]+)/g, '<span class="datastar-attr">$1</span>');
   }
 
   highlightCSS(code) {
@@ -271,7 +285,19 @@ class CodeViewer extends HTMLElement {
       "extends",
       "import",
       "export",
+      "default",
+      "async",
+      "await",
+      "try",
+      "catch",
+      "finally",
+      "throw",
+      "new",
+      "this",
+      "super",
+      "static",
     ];
+
     let highlighted = this.escapeHtml(code);
 
     keywords.forEach((keyword) => {
@@ -287,15 +313,70 @@ class CodeViewer extends HTMLElement {
       .replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="comment">$1</span>');
   }
 
+  highlightPython(code) {
+    const keywords = [
+      "def",
+      "class",
+      "if",
+      "elif",
+      "else",
+      "for",
+      "while",
+      "return",
+      "import",
+      "from",
+      "as",
+      "try",
+      "except",
+      "finally",
+      "raise",
+      "with",
+      "lambda",
+      "and",
+      "or",
+      "not",
+      "in",
+      "is",
+      "None",
+      "True",
+      "False",
+      "async",
+      "await",
+    ];
+
+    let highlighted = this.escapeHtml(code);
+
+    keywords.forEach((keyword) => {
+      highlighted = highlighted.replace(
+        new RegExp(`\\b${keyword}\\b`, "g"),
+        `<span class="keyword">${keyword}</span>`,
+      );
+    });
+
+    return highlighted
+      .replace(
+        /('[^']*'|"[^"]*"|"""[\s\S]*?""")/g,
+        '<span class="string">$1</span>',
+      )
+      .replace(/(#.*$)/gm, '<span class="comment">$1</span>');
+  }
+
   addLineNumbers(code) {
     const lines = code.split("\n");
+    const lineNumberClass = this.showLineNumbers
+      ? "line-number"
+      : "line-number hidden";
+    const contentClass = this.showLineNumbers
+      ? "line-content"
+      : "line-content full-width";
+
     return lines
       .map(
         (line, index) =>
           `<div class="line">
-                        <span class="line-number">${index + 1}</span>
-                        <span class="line-content">${line || " "}</span>
-                    </div>`,
+                            <span class="${lineNumberClass}">${index + 1}</span>
+                            <span class="${contentClass}">${line || " "}</span>
+                        </div>`,
       )
       .join("");
   }
@@ -306,9 +387,10 @@ class CodeViewer extends HTMLElement {
     return div.innerHTML;
   }
 
-  copyCode() {
+  async copyCode() {
     if (this.codeContent) {
-      navigator.clipboard.writeText(this.codeContent).then(() => {
+      try {
+        await navigator.clipboard.writeText(this.codeContent);
         const btn = this.shadowRoot.getElementById("copyBtn");
         const originalText = btn.textContent;
         btn.textContent = "Copied!";
@@ -317,25 +399,28 @@ class CodeViewer extends HTMLElement {
           btn.textContent = originalText;
           btn.style.background = "#f6f8fa";
         }, 2000);
-      });
+      } catch (err) {
+        console.error("Failed to copy code:", err);
+      }
     }
   }
 
   toggleLineNumbers() {
-    const pre = this.shadowRoot.querySelector("pre");
-    const lineNumbers = this.shadowRoot.querySelectorAll(".line-number");
-    const isHidden = lineNumbers[0]?.style.display === "none";
-
-    lineNumbers.forEach((ln) => {
-      ln.style.display = isHidden ? "table-cell" : "none";
-    });
+    this.showLineNumbers = !this.showLineNumbers;
+    if (this.codeContent) {
+      this.displayCode(this.codeContent);
+    }
   }
 
   toggleWordWrap() {
+    this.wordWrap = !this.wordWrap;
     const pre = this.shadowRoot.querySelector("pre");
     if (pre) {
-      pre.style.whiteSpace =
-        pre.style.whiteSpace === "pre" ? "pre-wrap" : "pre";
+      if (this.wordWrap) {
+        pre.classList.remove("no-wrap");
+      } else {
+        pre.classList.add("no-wrap");
+      }
     }
   }
 }
