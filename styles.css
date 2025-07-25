@@ -1751,7 +1751,7 @@
                 outline-color: transparent;
                 outline-offset: -4px;
 
-                &[aria-selected="true"] {
+                &.selected {
                     &:focus-visible {
                         outline: 2px solid var(--text-color-1);
                     }
@@ -1764,9 +1764,9 @@
                 border-bottom: 1px solid var(--border-color);
                 position: relative;
                 display: grid;
-                grid-auto-columns: 1fr;
-                grid-auto-flow: column;
-                gap: var(--size-1);
+
+                /* CSS Counter to count tabs automatically */
+                counter-reset: tab-count;
 
                 button {
                     background: transparent;
@@ -1778,89 +1778,90 @@
                     cursor: pointer;
                     transition: color 0.2s ease;
 
+                    /* Increment counter for each button */
+                    counter-increment: tab-count;
+
                     &:hover {
                         color: var(--primary);
                     }
 
-                    &[aria-selected="true"] {
-                        anchor-name: --active-tab;
+                    &.selected {
                         color: var(--primary);
                     }
                 }
 
-                /* Underline anchored to active tab */
+                /* After all buttons, set the grid columns based on count */
+                &::before {
+                    content: "";
+                    grid-column: 1 / -1;
+                    display: none;
+                    /* This trick uses the counter to set a CSS property */
+                }
+
+                /* Dynamic grid columns using counter */
+                &:has(button:nth-child(1):nth-last-child(1)) {
+                    grid-template-columns: repeat(1, 1fr)
+                    --total-tabs: 1;
+                }
+                &:has(button:nth-child(1):nth-last-child(2)) {
+                    grid-template-columns: repeat(2, 1fr);
+                    --total-tabs: 2;
+                }
+                &:has(button:nth-child(1):nth-last-child(3)) {
+                    grid-template-columns: repeat(3, 1fr);
+                    --total-tabs: 3;
+                }
+                &:has(button:nth-child(1):nth-last-child(4)) {
+                    grid-template-columns: repeat(4, 1fr);
+                    --total-tabs: 4;
+                }
+                &:has(button:nth-child(1):nth-last-child(5)) {
+                    grid-template-columns: repeat(5, 1fr);
+                    --total-tabs: 5;
+                }
+                &:has(button:nth-child(1):nth-last-child(6)) {
+                    grid-template-columns: repeat(6, 1fr);
+                    --total-tabs: 6;
+                }
+
+                /* Sliding underline */
                 &::after {
                     content: "";
                     position: absolute;
-                    position-anchor: --active-tab;
-                    inset: auto auto 0 anchor(--active-tab left);
-                    width: anchor-size(--active-tab width);
+                    bottom: -1px;
                     height: 2px;
                     background: var(--primary);
-                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                    width: calc(100% / var(--total-tabs, 4));
+                    left: 0;
+                    transform: translateX(
+                        calc(var(--selected-index, 0) * 100%)
+                    );
                 }
-            }
-        }
 
-        &.filled {
-            --_bg-color: var(--surface-default);
-            --_radius: var(--border-radius);
-            --_selected-bg: var(--surface-filled);
-
-            & > [role="tablist"] {
-                background-color: var(--_bg-color);
-                border: var(--border-width) solid var(--border-color);
-                border-radius: var(--_radius);
-                overflow: hidden;
-                padding: 0.792ex;
-                width: fit-content;
-                position: relative;
-                display: grid;
-                grid-auto-columns: 1fr;
-                grid-auto-flow: column;
-
-                button {
-                    background-color: var(--_selected-bg);
-                    border: none;
-                    border-radius: var(--_radius);
-                    line-height: var(--font-lineheight-4);
-                    padding-inline: var(--size-3);
-                    cursor: pointer;
-                    position: relative;
-                    opacity: 0.3;
-
-                    &:hover {
-                        opacity: 0.5;
-                        background-color: oklch(
-                            from var(--_bg-color) calc(l * 1.25) c h / 50%
-                        );
-                    }
-
-                    &[aria-selected="true"] {
-                        anchor-name: --active-tab;
-                        color: inherit;
-                        opacity: 1;
-
-                        &:hover {
-                            background-color: oklch(
-                                from var(--_selected-bg) calc(l * 1.25) c h / 30%
-                            );
-                        }
-                    }
-
-                    @media (prefers-reduced-motion: no-preference) {
-                        transition:
-                            background-color 0.2s var(--ease-out-3),
-                            border-color 0.2s var(--ease-out-3),
-                            color 0.2s var(--ease-out-3),
-                            opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                            outline-offset 0.05s var(--ease-1);
-                    }
+                /* Set selected index based on which button is selected */
+                &:has(button:nth-child(1).selected) {
+                    --selected-index: 0;
+                }
+                &:has(button:nth-child(2).selected) {
+                    --selected-index: 1;
+                }
+                &:has(button:nth-child(3).selected) {
+                    --selected-index: 2;
+                }
+                &:has(button:nth-child(4).selected) {
+                    --selected-index: 3;
+                }
+                &:has(button:nth-child(5).selected) {
+                    --selected-index: 4;
+                }
+                &:has(button:nth-child(6).selected) {
+                    --selected-index: 5;
                 }
             }
         }
     }
-}
+} /* Tab - modified - slider - underlined */
 
 /* Table */
 @layer components.base {
