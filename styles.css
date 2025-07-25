@@ -4817,6 +4817,7 @@
         > aside:empty,
         > footer:empty {
             display: none;
+            scrollbar-gutter: unset;
         }
     }
 }
