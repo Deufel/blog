@@ -4685,7 +4685,8 @@
 /* MAIN LAYOUT */
 @layer layout {
     body {
-        --gap-size: var(--size-fluid-0);
+        --gap-size: var(--size-fluid-00);
+        --border-radius: var(--radius-3)
 
         position: fixed;
         top: 0;
@@ -4719,7 +4720,6 @@
         > main {
             grid-area: main;
             background-color: var(--surface-tonal);
-            scrollbar-gutter: stable both-edges;
         }
         > aside {
             grid-area: aside;
@@ -4747,7 +4747,7 @@
             min-height: 0;
 
             &:where(:not([popover="auto"])) {
-                border-radius: var(--radius-3);
+                border-radius: var(--border-radius);
             }
 
             > header {
@@ -4759,16 +4759,19 @@
                 grid-area: nav;
                 margin-right: var(--gap-size);
                 overflow-y: auto;
+                scrollbar-gutter: stable both-edges;
             }
             > main {
                 grid-area: main;
                 overflow: auto;
                 min-height: 0;
+                scrollbar-gutter: stable both-edges;
             }
             > aside {
                 grid-area: aside;
                 margin-left: var(--gap-size);
                 overflow-y: auto;
+                scrollbar-gutter: stable both-edges;
             }
             > footer {
                 grid-area: footer;
