@@ -4729,59 +4729,33 @@
         padding: var(--gap-size);
         margin: 0;
 
-        > header {
-            grid-area: header;
-            margin-bottom: var(--gap-size);
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            scrollbar-gutter: stable both-edges;
-            :empty { scrollbar-gutter: unset; }
-        }
-        > nav {
-            grid-area: nav;
-            margin-right: var(--gap-size);
-            background-color: var(--surface-hue);
-            scrollbar-gutter: stable both-edges;
-            :empty { scrollbar-gutter: unset; }
-
-        }
-        > main {
-            grid-area: main;
-            background-color: var(--surface-tonal);
-            scrollbar-gutter: stable both-edges;
-            :empty { scrollbar-gutter: unset; }
-        }
-        > aside {
-            grid-area: aside;
-            margin-left: var(--gap-size);
-            background-color: var(--surface-hue);
-            scrollbar-gutter: stable both-edges;
-            :empty { scrollbar-gutter: unset; }
-        }
-        > footer {
-            grid-area: footer;
-            margin-top: var(--gap-size);
-            scrollbar-gutter: stable both-edges;
-            :empty { scrollbar-gutter: unset; }
-        }
-
-        > header,
-        > nav,
-        > main,
-        > aside,
-        > footer {
+        /* Generic styles for all direct children */
+        > * {
             display: grid;
             grid-template:
                 "header header header" auto
                 "nav main aside" 1fr
                 "footer footer footer" auto
                 / auto 1fr auto;
-            /* overflow-y: auto; */
             min-height: 0;
+            scrollbar-gutter: stable both-edges;
 
             &:where(:not([popover="auto"])) {
                 border-radius: var(--border-radius);
+            }
+
+            &:empty {
+                display: none;
+                scrollbar-gutter: unset;
+            }
+
+            /* Generic styles for all grandchildren */
+            > * {
+                border-radius: var(--radius-2);
+
+                &:empty {
+                    scrollbar-gutter: unset;
+                }
             }
 
             > header {
@@ -4789,46 +4763,65 @@
                 margin-bottom: var(--gap-size);
                 padding-inline: var(--size-2);
             }
+
             > nav {
                 grid-area: nav;
                 margin-right: var(--gap-size);
                 overflow-y: auto;
-                scrollbar-gutter: stable both-edges;
-
-                :empty {
-                    scrollbar-gutter: unset;
-                }
             }
 
             > main {
                 grid-area: main;
                 overflow: auto;
                 min-height: 0;
+            }
 
             > aside {
                 grid-area: aside;
                 margin-left: var(--gap-size);
                 overflow-y: auto;
             }
+
             > footer {
                 grid-area: footer;
                 margin-top: var(--gap-size);
                 padding-inline: var(--size-2);
             }
-            > header,
-            > nav,
-            > main,
-            > aside,
-            > footer {
-                border-radius: var(--radius-2);
-            }
         }
 
-        > header:empty,
-        > nav:empty,
-        > aside:empty,
-        > footer:empty {
-            display: none;
+        /* Header specific styles */
+        > header {
+            grid-area: header;
+            margin-bottom: var(--gap-size);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        /* Nav specific styles */
+        > nav {
+            grid-area: nav;
+            margin-right: var(--gap-size);
+            background-color: var(--surface-hue);
+        }
+
+        /* Main specific styles */
+        > main {
+            grid-area: main;
+            background-color: var(--surface-tonal);
+        }
+
+        /* Aside specific styles */
+        > aside {
+            grid-area: aside;
+            margin-left: var(--gap-size);
+            background-color: var(--surface-hue);
+        }
+
+        /* Footer specific styles */
+        > footer {
+            grid-area: footer;
+            margin-top: var(--gap-size);
         }
     }
 }
