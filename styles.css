@@ -4796,6 +4796,16 @@
             grid-area: header;
             margin-bottom: var(--gap-size);
             align-self: center;
+            > aside {
+                place-items: center;
+                grid-auto-flow: column;
+                display: inline-grid;
+            }
+            > nav {
+                place-items: center;
+                grid-auto-flow: column;
+                display: inline-grid;
+            }
         }
 
         /* Nav specific styles */
