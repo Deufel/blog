@@ -4849,7 +4849,11 @@
 
 /* SEMANTIC NAV BAR */
 @layer components.semantic {
+    --margin-inline: var(--size-fluid-1);
+
     :where(body > nav) {
+
+        margin-inline: var(--margin-inline);
 
         > :where(main) {scrollbar-gutter: stable both-edges;}
 
