@@ -5144,8 +5144,8 @@
         font-family:
             "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
             "Courier New", monospace;
-        font-size: var(--font-size-sm);
-        line-height: var(--font-lineheight-4);
+        font-size: var(--font-size-xs);
+        line-height: var(--font-lineheight-2);
         color: var(--text-color-1);
         margin-inline: auto;
 
