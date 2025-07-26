@@ -4850,7 +4850,9 @@
 @layer components.semantic {
     :where(body > nav) {
 
-        & > :where(main, header, footer) > ul {
+        > :where(main) { scrollbar-gutter: stable both-edges;}
+
+        > :where(main, header, footer) > ul {
             list-style: none;
             padding: 0;
             margin: 0;
@@ -4858,11 +4860,11 @@
             flex-direction: column;
             height: 100%;
 
-            & > li {
+            > li {
                 position: relative;
                 transition: all 0.3s ease;
 
-                & > a {
+                > a {
                     align-items: center;
                     display: flex;
                     font-size: var(--font-size-sm);
