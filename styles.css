@@ -4867,7 +4867,7 @@
                 transition: all 0.3s ease;
 
                 /* Link styling - inherits the li's original styling */
-                & > a , > {
+                & > a {
                     align-items: center;
                     display: flex;
                     font-size: var(--font-size-sm);
