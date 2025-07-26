@@ -1,4 +1,4 @@
-@layer openprops, normalize, OPUIutils, theme, layout.desktop, components.semantic,  components.base, components.has-deps, transition, utils;
+@layer openprops, normalize, OPUIutils, theme, layout.desktop, components.base, components.has-deps, components.semantic, transition, utils;
 
 /* OPEN PROPS */
 @layer openprops {
@@ -4849,24 +4849,19 @@
 /* SEMANTIC NAV BAR */
 @layer components.semantic {
     :where(body > nav) {
-        /* Remove flex properties that fight grid - let layout layer control container */
-        /* Only style content, not container behavior */
 
-        /* Apply to main, header, and footer containers */
         & > :where(main, header, footer) > ul {
             list-style: none;
             padding: 0;
             margin: 0;
             display: flex;
             flex-direction: column;
-            height: 100%; /* Use height instead of flex: 1 to work with grid */
+            height: 100%;
 
-            /* List Items */
             & > li {
                 position: relative;
                 transition: all 0.3s ease;
 
-                /* Link styling - inherits the li's original styling */
                 & > a {
                     align-items: center;
                     display: flex;
@@ -4889,7 +4884,6 @@
                         outline-offset: -2px;
                     }
 
-                    /* Enhanced focus animation */
                     @media (prefers-reduced-motion: no-preference) {
                         &:focus {
                             transition: outline-offset .25s ease;
@@ -4899,22 +4893,18 @@
                         }
                     }
 
-                    /* Active/current page state - FIXED */
                     &[aria-current="page"] {
                         background-color: light-dark(var(--gray-11), var(--gray-4));
                         color: light-dark(var(--color-5), var(--color-9));
                         font-weight: 500;
 
-                        /* Optional: Add a subtle border or accent */
                         border-left: 3px solid light-dark(var(--accent), var(--accent-light));
 
-                        /* Ensure the current state is visible over hover */
                         &:hover {
                             background-color: light-dark(var(--gray-11), var(--gray-4));
                         }
                     }
 
-                    /* SVG icons */
                     & > svg {
                         align-self: center;
                         max-inline-size: var(--size-5);
@@ -4922,7 +4912,6 @@
                         transition: all 0.3s ease;
                     }
 
-                    /* Text content */
                     & > p {
                         flex: 1;
                         line-height: 1.6;
@@ -4932,7 +4921,6 @@
                         margin: 0;
                     }
 
-                    /* End content */
                     & > div {
                         align-items: center;
                         display: flex;
