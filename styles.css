@@ -2282,8 +2282,8 @@
                 color: var(--primary);
 
                 /* Checkmark */
-                svg:first-of-type {
-                    margin-block-end: -3px;
+                svg {
+                    margin-block-end: -1px;
                 }
             }
         }
@@ -3645,7 +3645,7 @@
                 box-shadow: var(--inner-shadow-2);
             }
             &:focus-visible {
-                outline-offset: -6px;
+                outline-offset: -3px;
             }
         }
 
