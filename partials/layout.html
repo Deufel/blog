@@ -17,8 +17,17 @@
         </code>
         <article>
             <h4>demo to see what hapens when elements are removed / added to DOM</h4>
+            <button class="button" data-on-click="@get('partials/layout_nav')"><span>Add Nav</span></button>
+            <button class="button" data-on-click="@delete('partials/layout_nav')"><span>Del Nav</span></button>
+
             <button class="button" data-on-click="@get('partials/layout_nav.html')"><span>Add Nav</span></button>
             <button class="button" data-on-click="@delete('partials/layout_nav.html')"><span>Del Nav</span></button>
+
+            <button class="button" data-on-click="@get('/partials/layout_nav')"><span>Add Nav</span></button>
+            <button class="button" data-on-click="@delete('/partials/layout_nav')"><span>Del Nav</span></button>
+
+            <button class="button" data-on-click="@get('/partials/layout_nav.html')"><span>Add Nav</span></button>
+            <button class="button" data-on-click="@delete('/partials/layout_nav.html')"><span>Del Nav</span></button>
         </article>
     </main>
     <aside  style="background-color: light-dark(#FFF5E5, color-mix(in srgb, #FFF5E5 30%, black));">main &GT; aside</aside>
