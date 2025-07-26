@@ -4896,9 +4896,13 @@
                     &[aria-current="page"] {
                         background-color: light-dark(var(--gray-11), var(--gray-4));
                         color: light-dark(var(--color-5), var(--color-9));
-                        font-weight: 500;
 
+                        /* Option 1: Rounded corners with left border accent */
+                        border-radius: 8px;
                         border-left: 3px solid light-dark(var(--accent), var(--accent-light));
+
+                        /* Optional: Add subtle shadow for more polish */
+                        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
                         &:hover {
                             background-color: light-dark(var(--gray-11), var(--gray-4));
