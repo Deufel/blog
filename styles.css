@@ -4853,9 +4853,6 @@
         /* Only style content, not container behavior */
 
         /* Apply to main, header, and footer containers */
-
-
-
         & > :where(main, header, footer) > ul {
             list-style: none;
             padding: 0;
@@ -4891,6 +4888,7 @@
                         outline: 2px solid var(--accent);
                         outline-offset: -2px;
                     }
+
                     /* Enhanced focus animation */
                     @media (prefers-reduced-motion: no-preference) {
                         &:focus {
@@ -4901,11 +4899,19 @@
                         }
                     }
 
-                    /* Active/current page state */
+                    /* Active/current page state - FIXED */
                     &[aria-current="page"] {
-                        background-color: light-dark(var(--gray-11), var(--grey-4));
-                        color: light-dark(var(--color-5), var(--color-9);
+                        background-color: light-dark(var(--gray-11), var(--gray-4));
+                        color: light-dark(var(--color-5), var(--color-9));
                         font-weight: 500;
+
+                        /* Optional: Add a subtle border or accent */
+                        border-left: 3px solid light-dark(var(--accent), var(--accent-light));
+
+                        /* Ensure the current state is visible over hover */
+                        &:hover {
+                            background-color: light-dark(var(--gray-11), var(--gray-4));
+                        }
                     }
 
                     /* SVG icons */
@@ -4932,7 +4938,6 @@
                         display: flex;
                         font-size: var(--font-size-xs);
                         text-align: end;
-
                         transition: opacity 0.3s ease;
                     }
                 }
@@ -4947,8 +4952,14 @@
             }
 
             /* When any item in the nav is hovered, fade all other items */
+            /* But preserve current page visibility */
             &:has(li:hover) > :where(main, header, footer) > ul > li:not(:hover) {
                 opacity: 0.5;
+
+                /* Keep current page more visible even when not hovered */
+                &:has(a[aria-current="page"]) {
+                    opacity: 0.75;
+                }
             }
         }
     }
@@ -4965,6 +4976,18 @@
                 min-block-size: 60px;
                 padding: var(--size-2);
                 gap: var(--size-1);
+
+                /* Current page state in dense mode */
+                &[aria-current="page"] {
+                    /* Keep the same background and color */
+                    background-color: light-dark(var(--gray-11), var(--gray-4));
+                    color: light-dark(var(--color-5), var(--color-9));
+                    font-weight: 500;
+
+                    /* Adjust border for dense layout */
+                    border-left: none;
+                    border-bottom: 3px solid light-dark(var(--accent), var(--accent-light));
+                }
 
                 /* SVG icons - keep centered */
                 & > svg {
