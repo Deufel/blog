@@ -2267,11 +2267,6 @@
                 flex-shrink: 0;
             }
 
-            /* & + svg {
-                    max-block-size: var(--size-5);
-                    max-inline-size: var(--size-7);
-                } */
-
             /* Selected */
             &[aria-selected="true"]:not([disabled]) {
                 --_bg-color: color-mix(
@@ -2280,12 +2275,6 @@
                     var(--surface-default)
                 );
                 color: var(--primary);
-
-                /* icon moves down to help show selected */
-                svg,
-                * > svg {
-                    margin-block-end: -1px;
-                }
             }
         }
     }
