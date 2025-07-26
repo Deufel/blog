@@ -1,5 +1,4 @@
 <main id="main">
-    <header style="background-color: light-dark(#FFE5E5, color-mix(in srgb, #FFE5E5 30%, black));"><h4> main &GT; header <h4></header>
     <nav    style="background-color: light-dark(#E5F3FF, color-mix(in srgb, #E5F3FF 30%, black));"><h4> main &GT; nav </h4></nav>
     <main   style="background-color: light-dark(#F0F8E5, color-mix(in srgb, #F0F8E5 30%, black));">
         <div>
@@ -8,10 +7,8 @@
         <p>The general idea with this leyout is that each page containes a auto adjusting "hero" grid from the &LT body &GT tag</p>
         <code class="plain">
             &LT body &GT
-                &LT header &GT
                 &LT nav    &GT
                 &LT main   &GT
-                &LT aside  &GT
                 &LT footer &GT
             &LT/body &GT
         </code>
@@ -24,6 +21,5 @@
             <button class="button" data-on-click="@get('partials/layout_5')"><span>example 5</span></button>
         </article>
     </main>
-    <aside  style="background-color: light-dark(#FFF5E5, color-mix(in srgb, #FFF5E5 30%, black));"> <h4>main &GT; aside</h4> </aside>
     <footer style="background-color: light-dark(#F5E5FF, color-mix(in srgb, #F5E5FF 30%, black));"><h4>main &GT; footer</h4></footer>
 </main>
