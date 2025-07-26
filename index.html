@@ -18,7 +18,7 @@
 
     </head>
 
-    <body data-signals="{windowWidth: window.innerWidth}" data-on-windowresize="$windowWidth = evt.detail.width">
+    <body data-signals="{windowWidth: window.innerWidth, currentPage: 'home'}" data-on-windowresize="$windowWidth = evt.detail.width">
         <header id="header" data-on-load="@get('partials/index_header.html')">  </header>
         <main   id="main"   data-on-load="@get('partials/index_main.html')">  </main>
         <aside  id="aside"  data-on-load="@get('partials/index_aside.html')"></aside>
