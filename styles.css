@@ -4821,6 +4821,7 @@
             grid-area: nav;
             margin-right: var(--gap-size);
             background-color: var(--surface-hue);
+            scrollbar-gutter: stable both-edges;
         }
 
         /* Main specific styles */
@@ -4840,6 +4841,7 @@
         > footer {
             grid-area: footer;
             margin-top: var(--gap-size);
+            scrollbar-gutter: auto;
         }
     }
 }
@@ -4849,7 +4851,6 @@
 /* SEMANTIC NAV BAR */
 @layer components.semantic {
     :where(body > nav) {
-        scrollbar-gutter: stable both-edges;
 
         > :where(main, header, footer) > ul {
             list-style: none;
