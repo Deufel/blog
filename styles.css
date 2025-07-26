@@ -4853,6 +4853,9 @@
         /* Only style content, not container behavior */
 
         /* Apply to main, header, and footer containers */
+
+
+
         & > :where(main, header, footer) > ul {
             list-style: none;
             padding: 0;
@@ -4929,7 +4932,7 @@
                         display: flex;
                         font-size: var(--font-size-xs);
                         text-align: end;
-                        justify-content: flex-end;
+
                         transition: opacity 0.3s ease;
                     }
                 }
