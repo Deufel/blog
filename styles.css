@@ -4879,6 +4879,7 @@
 
                     &:hover {
                         background-color: light-dark(var(--gray-2), var(--gray-14));
+                        border-radius: var(--radius-2);
                     }
 
                     &:focus-visible {
