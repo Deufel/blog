@@ -777,7 +777,9 @@
     }
 
     /* Mike - I never end up wanting this in my uls .. ? maybe a bad idea tbd..  */
-    :where(ul) {padding-inline-start: 0;}
+    :where(ul) {
+        padding-inline-start: 0;
+    }
 
     :where(body) {
         -moz-osx-font-smoothing: grayscale;
@@ -2265,11 +2267,10 @@
                 flex-shrink: 0;
             }
 
-                /* & + svg {
+            /* & + svg {
                     max-block-size: var(--size-5);
                     max-inline-size: var(--size-7);
                 } */
-            }
 
             /* Selected */
             &[aria-selected="true"]:not([disabled]) {
@@ -3267,7 +3268,7 @@
     }
 }
 
- /* ACCORDION */
+/* ACCORDION */
 @layer components.has-deps {
     :where(details) {
         --_accordion-transition-time: 0.2s;
@@ -4714,7 +4715,6 @@
 /* MAIN LAYOUT */
 @layer layout.desktop {
     body {
-
         --padding-size: var(--size-fluid-0);
         --gap-size: var(--size-fluid-0);
         --border-radius: var(--size-fluid-1);
@@ -4736,7 +4736,11 @@
         margin: 0;
 
         /* Generic styles for all direct children */
-        > main, > header, > nav, > aside, > footer {
+        > main,
+        > header,
+        > nav,
+        > aside,
+        > footer {
             display: grid;
             grid-template:
                 "header header header" auto
@@ -4756,7 +4760,11 @@
             }
 
             /* Generic styles for all grandchildren */
-            > main, > header, > nav, > aside, > footer {
+            > main,
+            > header,
+            > nav,
+            > aside,
+            > footer {
                 border-radius: var(--radius-2);
 
                 &:empty {
@@ -4848,7 +4856,6 @@
     }
 }
 
-
 /* PRINT STYLES - Adapt main viewport to paper */
 @layer layout.print {
     /* PRINT STYLES - Simple adaptation to paper */
@@ -4896,15 +4903,14 @@
     }
 }
 
-
-
 /* SEMANTIC NAV BAR */
 @layer components.semantic {
     :where(body > nav) {
-
         padding: var(--size-2);
 
-        > :where(main) {scrollbar-gutter: auto;}
+        > :where(main) {
+            scrollbar-gutter: auto;
+        }
 
         > :where(main, header, footer) > ul {
             list-style: none;
@@ -4918,7 +4924,9 @@
                 position: relative;
                 transition: all 0.3s ease;
 
-                + li {margin-top: var(--size-0);}
+                + li {
+                    margin-top: var(--size-0);
+                }
 
                 > a {
                     align-items: center;
@@ -4934,7 +4942,10 @@
                     transition: all 0.3s ease;
 
                     &:hover {
-                        background-color: light-dark(var(--gray-2), var(--gray-14));
+                        background-color: light-dark(
+                            var(--gray-2),
+                            var(--gray-14)
+                        );
                         border-radius: var(--radius-2);
                     }
 
@@ -4945,7 +4956,7 @@
 
                     @media (prefers-reduced-motion: no-preference) {
                         &:focus {
-                            transition: outline-offset .25s ease;
+                            transition: outline-offset 0.25s ease;
                         }
                         &:focus:not(:active) {
                             outline-offset: 5px;
@@ -4953,18 +4964,25 @@
                     }
 
                     &[aria-current="page"] {
-                        background-color: light-dark(var(--gray-11), var(--gray-4));
+                        background-color: light-dark(
+                            var(--gray-11),
+                            var(--gray-4)
+                        );
                         color: light-dark(var(--color-5), var(--color-9));
 
                         /* Option 1: Rounded corners with left border accent */
                         border-radius: var(--radius-2);
-                        border-left: 3px solid light-dark(var(--accent), var(--accent-light));
+                        border-left: 3px solid
+                            light-dark(var(--accent), var(--accent-light));
 
                         /* Optional: Add subtle shadow for more polish */
                         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
                         &:hover {
-                            background-color: light-dark(var(--gray-11), var(--gray-4));
+                            background-color: light-dark(
+                                var(--gray-11),
+                                var(--gray-4)
+                            );
                             border-radius: var(--radius-2);
                         }
                     }
@@ -5018,7 +5036,8 @@
 
                     /* Adjust border for dense layout */
                     border-left: none;
-                    border-bottom: 3px solid light-dark(var(--accent), var(--accent-light));
+                    border-bottom: 3px solid
+                        light-dark(var(--accent), var(--accent-light));
                 }
 
                 /* SVG icons - keep centered */
