@@ -45,15 +45,15 @@
                                     });
                                 "
                             >
-                    <button data-attr-aria-selected="$themeMode === 'system'" data-on-click="$themeMode = 'system'" >
+                    <button data-attr-aria-selected="$themeMode === 'system' ? 'true' : 'false'" data-on-click="$themeMode = 'system'" >
                         <icon-orbi><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-orbit-icon lucide-orbit"><path d="M20.341 6.484A10 10 0 0 1 10.266 21.85"></path><path d="M3.659 17.516A10 10 0 0 1 13.74 2.152"></path><circle cx="12" cy="12" r="3"></circle><circle cx="19" cy="5" r="2"></circle><circle cx="5" cy="19" r="2"></circle></svg></icon-orbi>
                         System
                     </button>
-                    <button data-attr-aria-selected="$themeMode === 'light'" data-on-click="$themeMode = 'light'" >
+                    <button data-attr-aria-selected="$themeMode === 'light' ? 'true' : 'false'" data-on-click="$themeMode = 'light'" >
                         <icon-sun><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun-icon lucide-sun"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg></icon-sun>
                         Light
                     </button>
-                    <button data-attr-aria-selected="$themeMode === 'dark'" data-on-click="$themeMode = 'dark'" >
+                    <button data-attr-aria-selected="$themeMode === 'dark' ? 'true' : 'false'" data-on-click="$themeMode = 'dark'" >
                         <icon-moon><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon-icon lucide-moon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></icon-moon>
                         Dark
                     </button>
