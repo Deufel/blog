@@ -4821,7 +4821,6 @@
             grid-area: nav;
             margin-right: var(--gap-size);
             background-color: var(--surface-hue);
-            scrollbar-gutter: stable both-edges;
         }
 
         /* Main specific styles */
@@ -4851,6 +4850,9 @@
 /* SEMANTIC NAV BAR */
 @layer components.semantic {
     :where(body > nav) {
+        scrollbar-gutter: auto; /* Override the layout layer */
+
+        > :where(main) {scrollbar-gutter: stable both-edges;}
 
         > :where(main, header, footer) > ul {
             list-style: none;
