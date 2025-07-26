@@ -4929,6 +4929,7 @@
                         display: flex;
                         font-size: var(--font-size-xs);
                         text-align: end;
+                        justify-content: flex-end;
                         transition: opacity 0.3s ease;
                     }
                 }
