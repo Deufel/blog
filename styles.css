@@ -4846,15 +4846,12 @@
 }
 
 
+
 /* SEMANTIC NAV BAR */
 @layer components.semantic {
-    --margin-inline: var(--size-fluid-1);
-
     :where(body > nav) {
 
-        padding-inline: var(--margin-inline);
-
-        > :where(main) {scrollbar-gutter: auto;}
+        > :where(main) {scrollbar-gutter: stable both-edges;}
 
         > :where(main, header, footer) > ul {
             list-style: none;
