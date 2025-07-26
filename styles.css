@@ -4741,7 +4741,7 @@
                 "footer footer footer" auto
                 / auto 1fr auto;
             min-height: 0;
-            scrollbar-gutter: stable both-edges;
+            /* scrollbar-gutter: stable both-edges; */
 
             &:where(:not([popover="auto"])) {
                 border-radius: var(--border-radius);
