@@ -4851,12 +4851,14 @@
 @layer components.semantic {
     :where(body > nav) {
 
-        > :where(main) {scrollbar-gutter: stable both-edges;}
+        padding: var(--size-fluid-1);
+
+        > :where(main) {scrollbar-gutter: auto;}
 
         > :where(main, header, footer) > ul {
             list-style: none;
-            padding: 0;
-            margin: 0;
+            /* padding: 0;
+            margin: 0; */
             display: flex;
             flex-direction: column;
             height: 100%;
