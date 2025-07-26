@@ -4900,7 +4900,7 @@
                         color: light-dark(var(--color-5), var(--color-9));
 
                         /* Option 1: Rounded corners with left border accent */
-                        border-radius: 8px;
+                        border-radius: var(--radius-2);
                         border-left: 3px solid light-dark(var(--accent), var(--accent-light));
 
                         /* Optional: Add subtle shadow for more polish */
@@ -4908,6 +4908,7 @@
 
                         &:hover {
                             background-color: light-dark(var(--gray-11), var(--gray-4));
+                            border-radius: var(--radius-2);
                         }
                     }
 
@@ -4937,23 +4938,6 @@
                 }
             }
         }
-
-        /* Global hover opacity animation - applies to all nav items together */
-        @media (hover) and (prefers-reduced-motion: no-preference) {
-            /* Add transition to all list items */
-            & > :where(main, header, footer) > ul > li {
-                transition: opacity 0.3s ease;
-            }
-
-            /* When any item in the nav is hovered, fade all other items */
-            /* &:has(li:hover) > :where(main, header, footer) > ul > li:not(:hover) {
-                opacity: 0.5;
-
-                &:has(a[aria-current="page"]) {
-                    opacity: 0.75;
-                }
-            } */
-        }
     }
 
     /* Dense navigation variant */
@@ -4974,7 +4958,6 @@
                     /* Keep the same background and color */
                     background-color: light-dark(var(--gray-11), var(--gray-4));
                     color: light-dark(var(--color-5), var(--color-9));
-                    font-weight: 500;
 
                     /* Adjust border for dense layout */
                     border-left: none;
