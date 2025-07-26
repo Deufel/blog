@@ -2281,8 +2281,9 @@
                 );
                 color: var(--primary);
 
-                /* Checkmark */
-                svg {
+                /* icon moves down to help show selected */
+                svg,
+                * > svg {
                     margin-block-end: -1px;
                 }
             }
