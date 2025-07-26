@@ -1,4 +1,4 @@
-@layer openprops, normalize, OPUIutils, theme, layout.desktop, components.base, components.has-deps, components.semantic, transition, utils;
+@layer openprops, normalize, OPUIutils, theme, layout.desktop, layout.print, components.base, components.has-deps, components.semantic, transition, utils;
 
 /* OPEN PROPS */
 @layer openprops {
@@ -4848,13 +4848,144 @@
     }
 }
 
+@layer layout.print {
+    /* PRINT STYLES - Only show main content */
+    @media print {
+        /* Hide everything except main content */
+        body > header,
+        body > nav,
+        body > aside,
+        body > footer {
+            display: none !important;
+        }
+
+        /* Reset body styles for print */
+        body {
+            position: static !important;
+            width: auto !important;
+            height: auto !important;
+            overflow: visible !important;
+            display: block !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            background: white !important;
+            color: black !important;
+            font-size: 12pt;
+            line-height: 1.4;
+        }
+
+        /* Style the main content for print */
+        body > main {
+            display: block !important;
+            grid-template: none !important;
+            width: 100% !important;
+            height: auto !important;
+            overflow: visible !important;
+            margin: 0 !important;
+            padding: 0.5in !important; /* Standard print margins */
+            background: transparent !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            page-break-inside: avoid;
+        }
+
+        /* Handle nested content within main */
+        body > main > * {
+            display: block !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            border-radius: 0 !important;
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+
+        /* Reset any nested grid layouts within main */
+        body > main > header,
+        body > main > nav,
+        body > main > aside,
+        body > main > footer {
+            display: block !important;
+            grid-template: none !important;
+            width: auto !important;
+            height: auto !important;
+            overflow: visible !important;
+            margin: 0 0 1em 0 !important;
+            padding: 0 !important;
+        }
+
+        /* Ensure main content flows naturally */
+        body > main > main {
+            display: block !important;
+            grid-template: none !important;
+            overflow: visible !important;
+            min-height: auto !important;
+        }
+
+        /* Page setup for letter size */
+        @page {
+            size: letter; /* 8.5" x 11" */
+            margin: 0.5in; /* Standard margins */
+        }
+
+        /* Improve readability for print */
+        h1, h2, h3, h4, h5, h6 {
+            page-break-after: avoid;
+            color: black !important;
+        }
+
+        p, div, section, article {
+            orphans: 3;
+            widows: 3;
+        }
+
+        /* Handle links for print */
+        a {
+            color: black !important;
+            text-decoration: underline !important;
+        }
+
+        /* Show URL for external links (optional) */
+        a[href^="http"]:after {
+            content: " (" attr(href) ")";
+            font-size: 10pt;
+            color: #666;
+        }
+
+        /* Remove any shadows, transitions, animations */
+        * {
+            box-shadow: none !important;
+            text-shadow: none !important;
+            transition: none !important;
+            animation: none !important;
+        }
+
+        /* Ensure images fit on page */
+        img {
+            max-width: 100% !important;
+            height: auto !important;
+            page-break-inside: avoid;
+        }
+
+        /* Handle tables */
+        table {
+            border-collapse: collapse !important;
+            width: 100% !important;
+        }
+
+        th, td {
+            border: 1px solid #000 !important;
+            padding: 4pt !important;
+        }
+    }
+}
+
 
 
 /* SEMANTIC NAV BAR */
 @layer components.semantic {
     :where(body > nav) {
 
-        padding: var(--size-3) var(--size-3) 0 var(--size-3);
+        padding: var(--size-2) 0 var(--size-2) var(--size-2);
 
         > :where(main) {scrollbar-gutter: stable;}
 
