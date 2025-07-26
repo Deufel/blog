@@ -4846,16 +4846,19 @@
 }
 
 
-
-/* SEMANTIC NAV BAR */
+/* SEMANTIC NAV BAR - Proper scrollbar architecture */
 @layer components.semantic {
     --margin-inline: var(--size-fluid-1);
 
     :where(body > nav) {
-
         margin-inline: var(--margin-inline);
 
-        > :where(main) {scrollbar-gutter: stable both-edges;}
+        /* Remove scrollbar-gutter from here - this was the root issue */
+        > :where(main) {
+            /* Container just needs to define its space */
+            height: 100%;
+            overflow: hidden; /* Prevent any unexpected overflow */
+        }
 
         > :where(main, header, footer) > ul {
             list-style: none;
@@ -4865,9 +4868,16 @@
             flex-direction: column;
             height: 100%;
 
+            /* THIS is where scrolling should happen */
+            overflow-y: auto;
+            scrollbar-gutter: stable;
+
             > li {
                 position: relative;
                 transition: all 0.3s ease;
+
+                /* Ensure li doesn't interfere with scrollbar */
+                flex-shrink: 0;
 
                 > a {
                     align-items: center;
@@ -4904,12 +4914,8 @@
                     &[aria-current="page"] {
                         background-color: light-dark(var(--gray-11), var(--gray-4));
                         color: light-dark(var(--color-5), var(--color-9));
-
-                        /* Option 1: Rounded corners with left border accent */
                         border-radius: var(--radius-2);
                         border-left: 3px solid light-dark(var(--accent), var(--accent-light));
-
-                        /* Optional: Add subtle shadow for more polish */
                         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
                         &:hover {
@@ -4948,9 +4954,11 @@
 
     /* Dense navigation variant */
     :where(body > nav.dense) {
-        /* Apply to main, header, and footer containers */
         & > :where(main, header, footer) > ul {
-            /* List items styling for dense mode */
+            /* Scrolling behavior remains the same */
+            overflow-y: auto;
+            scrollbar-gutter: stable;
+
             & > li > a {
                 flex-direction: column;
                 justify-content: center;
@@ -4959,31 +4967,24 @@
                 padding: var(--size-2);
                 gap: var(--size-1);
 
-                /* Current page state in dense mode */
                 &[aria-current="page"] {
-                    /* Keep the same background and color */
                     background-color: light-dark(var(--gray-11), var(--gray-4));
                     color: light-dark(var(--color-5), var(--color-9));
-
-                    /* Adjust border for dense layout */
                     border-left: none;
                     border-bottom: 3px solid light-dark(var(--accent), var(--accent-light));
                 }
 
-                /* SVG icons - keep centered */
                 & > svg {
                     align-self: center;
                     padding-block-start: 0;
                 }
 
-                /* Text content - smaller and centered */
                 & > p {
                     font-size: var(--font-size-xs);
                     line-height: 1.2;
                     margin: 0;
                 }
 
-                /* Hide end content in dense mode */
                 & > div {
                     display: none;
                 }
