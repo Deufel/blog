@@ -4848,10 +4848,11 @@
     }
 }
 
+
+/* PRINT STYLES - Adapt main viewport to paper */
 @layer layout.print {
-    /* PRINT STYLES - Only show main content */
     @media print {
-        /* Hide everything except main content */
+        /* Hide top-level navigation elements (keep only main) */
         body > header,
         body > nav,
         body > aside,
@@ -4859,7 +4860,7 @@
             display: none !important;
         }
 
-        /* Reset body styles for print */
+        /* Reset body to use paper as viewport */
         body {
             position: static !important;
             width: auto !important;
@@ -4874,60 +4875,99 @@
             line-height: 1.4;
         }
 
-        /* Style the main content for print */
+        /* Make main content fill the page like the original viewport */
         body > main {
-            display: block !important;
-            grid-template: none !important;
+            display: grid !important;
+            grid-template:
+                "header header header" auto
+                "nav main aside" 1fr
+                "footer footer footer" auto
+                / auto 1fr auto;
             width: 100% !important;
-            height: auto !important;
+            height: 100vh !important; /* Use full page height */
             overflow: visible !important;
             margin: 0 !important;
-            padding: 0.5in !important; /* Standard print margins */
+            padding: 0.5in !important; /* Paper margins */
             background: transparent !important;
             border-radius: 0 !important;
             box-shadow: none !important;
-            page-break-inside: avoid;
+            gap: var(--gap-size, 1rem);
         }
 
-        /* Handle nested content within main */
-        body > main > * {
-            display: block !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            border-radius: 0 !important;
+        /* Style the semantic elements within main for print */
+        body > main > header {
+            grid-area: header !important;
             background: transparent !important;
-            box-shadow: none !important;
+            border-radius: 0 !important;
+            margin-bottom: 0 !important;
+            padding: 0.25in 0 !important;
+            border-bottom: 1pt solid #ccc;
         }
 
-        /* Reset any nested grid layouts within main */
-        body > main > header,
-        body > main > nav,
-        body > main > aside,
-        body > main > footer {
-            display: block !important;
-            grid-template: none !important;
-            width: auto !important;
-            height: auto !important;
+        body > main > nav {
+            grid-area: nav !important;
+            background: transparent !important;
+            border-radius: 0 !important;
+            margin-right: 0 !important;
+            padding: 0.25in !important;
+            border-right: 1pt solid #ccc;
             overflow: visible !important;
-            margin: 0 0 1em 0 !important;
-            padding: 0 !important;
+            font-size: 10pt; /* Smaller for nav items */
         }
 
-        /* Ensure main content flows naturally */
         body > main > main {
-            display: block !important;
-            grid-template: none !important;
+            grid-area: main !important;
+            background: transparent !important;
+            border-radius: 0 !important;
             overflow: visible !important;
-            min-height: auto !important;
+            min-height: 0 !important;
+            padding: 0.25in !important;
+        }
+
+        body > main > aside {
+            grid-area: aside !important;
+            background: transparent !important;
+            border-radius: 0 !important;
+            margin-left: 0 !important;
+            padding: 0.25in !important;
+            border-left: 1pt solid #ccc;
+            overflow: visible !important;
+            font-size: 10pt; /* Smaller for aside content */
+        }
+
+        body > main > footer {
+            grid-area: footer !important;
+            background: transparent !important;
+            border-radius: 0 !important;
+            margin-top: 0 !important;
+            padding: 0.25in 0 !important;
+            border-top: 1pt solid #ccc;
+            font-size: 10pt;
+        }
+
+        /* Handle empty sections */
+        body > main > header:empty,
+        body > main > nav:empty,
+        body > main > aside:empty,
+        body > main > footer:empty {
+            display: none !important;
         }
 
         /* Page setup for letter size */
         @page {
             size: letter; /* 8.5" x 11" */
-            margin: 0.5in; /* Standard margins */
+            margin: 0.5in;
         }
 
-        /* Improve readability for print */
+        /* Remove visual effects that waste ink */
+        body > main * {
+            box-shadow: none !important;
+            text-shadow: none !important;
+            transition: none !important;
+            animation: none !important;
+        }
+
+        /* Optimize typography for print */
         h1, h2, h3, h4, h5, h6 {
             page-break-after: avoid;
             color: black !important;
@@ -4944,22 +4984,7 @@
             text-decoration: underline !important;
         }
 
-        /* Show URL for external links (optional) */
-        a[href^="http"]:after {
-            content: " (" attr(href) ")";
-            font-size: 10pt;
-            color: #666;
-        }
-
-        /* Remove any shadows, transitions, animations */
-        * {
-            box-shadow: none !important;
-            text-shadow: none !important;
-            transition: none !important;
-            animation: none !important;
-        }
-
-        /* Ensure images fit on page */
+        /* Ensure images fit within their grid areas */
         img {
             max-width: 100% !important;
             height: auto !important;
@@ -4976,6 +5001,13 @@
             border: 1px solid #000 !important;
             padding: 4pt !important;
         }
+
+        /* Adjust grid proportions for print if needed */
+        @supports (grid-template-columns: subgrid) {
+            body > main {
+                grid-template-columns: minmax(1.5in, auto) 1fr minmax(1.5in, auto);
+            }
+        }
     }
 }
 
@@ -4985,9 +5017,9 @@
 @layer components.semantic {
     :where(body > nav) {
 
-        padding: var(--size-2) 0 var(--size-2) var(--size-2);
+        padding: var(--size-2);
 
-        > :where(main) {scrollbar-gutter: stable;}
+        > :where(main) {scrollbar-gutter: auto;}
 
         > :where(main, header, footer) > ul {
             list-style: none;
@@ -5000,6 +5032,8 @@
             > li {
                 position: relative;
                 transition: all 0.3s ease;
+
+                + li {margin-top: var(--size-0);}
 
                 > a {
                     align-items: center;
