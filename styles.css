@@ -4952,15 +4952,13 @@
             }
 
             /* When any item in the nav is hovered, fade all other items */
-            /* But preserve current page visibility */
-            &:has(li:hover) > :where(main, header, footer) > ul > li:not(:hover) {
+            /* &:has(li:hover) > :where(main, header, footer) > ul > li:not(:hover) {
                 opacity: 0.5;
 
-                /* Keep current page more visible even when not hovered */
                 &:has(a[aria-current="page"]) {
                     opacity: 0.75;
                 }
-            }
+            } */
         }
     }
 

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signal Navigation with History</title>
+    <script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@main/bundles/datastar.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .nav-section { margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+        button { margin: 5px; padding: 10px 15px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        button[aria-current="page"] { background: #28a745; }
+        .content-area { min-height: 200px; padding: 20px; background: #f8f9fa; border-radius: 4px; margin: 10px 0; }
+        .history-info { background: #e9ecef; padding: 15px; border-radius: 4px; margin: 10px 0; }
+        .back-forward { display: flex; gap: 10px; margin: 10px 0; }
+    </style>
+</head>
+<body data-signals="{
+    currentPage: 'home',
+    historyStack: ['home'],
+    historyIndex: 0,
+    canGoBack: false,
+    canGoForward: false
+}" 
+data-on-load="
+    // Initialize from URL on page load
+    const path = window.location.pathname.slice(1) || 'home';
+    $currentPage = path;
+    $historyStack = [path];
+    $historyIndex = 0;
+">
+
+<h1>Signal Navigation with History Tracking</h1>
+
+<div class="nav-section">
+    <h3>🧭 Navigation</h3>
+    <button data-on-click="navigateToPage('home')" 
+            data-attr-aria-current="$currentPage === 'home' ? 'page' : null">
+        Home
+    </button>
+    <button data-on-click="navigateToPage('about')" 
+            data-attr-aria-current="$currentPage === 'about' ? 'page' : null">
+        About
+    </button>
+    <button data-on-click="navigateToPage('products')" 
+            data-attr-aria-current="$currentPage === 'products' ? 'page' : null">
+        Products
+    </button>
+    <button data-on-click="navigateToPage('contact')" 
+            data-attr-aria-current="$currentPage === 'contact' ? 'page' : null">
+        Contact
+    </button>
+</div>
+
+<div class="nav-section">
+    <h3>⏮️ Browser History Controls</h3>
+    <div class="back-forward">
+        <button data-on-click="goBack()" 
+                data-attr-disabled="!$canGoBack">
+            ← Back
+        </button>
+        <button data-on-click="goForward()" 
+                data-attr-disabled="!$canGoForward">
+            Forward →
+        </button>
+    </div>
+</div>
+
+<div class="history-info">
+    <h4>📊 History State</h4>
+    <p>Current Page: <strong data-text="$currentPage"></strong></p>
+    <p>History Index: <span data-text="$historyIndex"></span></p>
+    <p>History Stack: <span data-text="JSON.stringify($historyStack)"></span></p>
+    <p>Current URL: <span data-text="window.location.pathname"></span></p>
+    <p>Can Go Back: <span data-text="$canGoBack ? '✅' : '❌'"></span></p>
+    <p>Can Go Forward: <span data-text="$canGoForward ? '✅' : '❌'"></span></p>
+</div>
+
+<div class="content-area">
+    <div data-show="$currentPage === 'home'">
+        <h2>🏠 Home Page</h2>
+        <p>Welcome to the home page! This content loads instantly via signal navigation.</p>
+        <p>Try navigating around and using browser back/forward buttons.</p>
+    </div>
+    
+    <div data-show="$currentPage === 'about'">
+        <h2>ℹ️ About Page</h2>
+        <p>This is the about page. Notice how fast navigation is!</p>
+        <p>The URL updates and history is tracked automatically.</p>
+    </div>
+    
+    <div data-show="$currentPage === 'products'">
+        <h2>📦 Products Page</h2>
+        <p>Browse our amazing products here.</p>
+        <ul>
+            <li>Super Fast Navigation</li>
+            <li>Signal-Based Architecture</li>
+            <li>History Tracking</li>
+        </ul>
+    </div>
+    
+    <div data-show="$currentPage === 'contact'">
+        <h2>📞 Contact Page</h2>
+        <p>Get in touch with us!</p>
+        <p>Email: example@domain.com</p>
+        <p>Phone: (555) 123-4567</p>
+    </div>
+</div>
+
+<script>
+    // Navigation function that updates signals AND history
+    function navigateToPage(page) {
+        // Update the signal
+        window.datastar.signals.currentPage = page;
+        
+        // Update browser history
+        const newUrl = `/${page === 'home' ? '' : page}`;
+        history.pushState({ page }, '', newUrl);
+        
+        // Update history tracking signals
+        const currentHistory = window.datastar.signals.historyStack;
+        const currentIndex = window.datastar.signals.historyIndex;
+        
+        // Trim forward history if we're not at the end
+        const newHistory = currentHistory.slice(0, currentIndex + 1);
+        newHistory.push(page);
+        
+        window.datastar.signals.historyStack = newHistory;
+        window.datastar.signals.historyIndex = newHistory.length - 1;
+        
+        updateHistoryButtons();
+    }
+    
+    // Back navigation
+    function goBack() {
+        const currentIndex = window.datastar.signals.historyIndex;
+        if (currentIndex > 0) {
+            const newIndex = currentIndex - 1;
+            const page = window.datastar.signals.historyStack[newIndex];
+            
+            window.datastar.signals.currentPage = page;
+            window.datastar.signals.historyIndex = newIndex;
+            
+            const newUrl = `/${page === 'home' ? '' : page}`;
+            history.pushState({ page }, '', newUrl);
+            
+            updateHistoryButtons();
+        }
+    }
+    
+    // Forward navigation
+    function goForward() {
+        const currentIndex = window.datastar.signals.historyIndex;
+        const historyStack = window.datastar.signals.historyStack;
+        
+        if (currentIndex < historyStack.length - 1) {
+            const newIndex = currentIndex + 1;
+            const page = historyStack[newIndex];
+            
+            window.datastar.signals.currentPage = page;
+            window.datastar.signals.historyIndex = newIndex;
+            
+            const newUrl = `/${page === 'home' ? '' : page}`;
+            history.pushState({ page }, '', newUrl);
+            
+            updateHistoryButtons();
+        }
+    }
+    
+    // Update back/forward button states
+    function updateHistoryButtons() {
+        const currentIndex = window.datastar.signals.historyIndex;
+        const historyLength = window.datastar.signals.historyStack.length;
+        
+        window.datastar.signals.canGoBack = currentIndex > 0;
+        window.datastar.signals.canGoForward = currentIndex < historyLength - 1;
+    }
+    
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', (event) => {
+        if (event.state && event.state.page) {
+            // Find the page in our history stack
+            const page = event.state.page;
+            const historyStack = window.datastar.signals.historyStack;
+            const pageIndex = historyStack.lastIndexOf(page);
+            
+            if (pageIndex !== -1) {
+                window.datastar.signals.currentPage = page;
+                window.datastar.signals.historyIndex = pageIndex;
+                updateHistoryButtons();
+            }
+        } else {
+            // Fallback to URL parsing
+            const path = window.location.pathname.slice(1) || 'home';
+            window.datastar.signals.currentPage = path;
+        }
+    });
+    
+    // Initialize history buttons on load
+    setTimeout(updateHistoryButtons, 100);
+</script>
+
+</body>
+</html>

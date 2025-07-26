@@ -1,12 +1,15 @@
 <nav id="nav" class=""
     data-signals-current-page="'home'"
+    data-signals-nav-dense="false"
+    data-class-dense="$navDense"
     data-attr-popover="$windowWidth < 640 ? 'auto' : null">
     <header id="nav-header" >
         <ul>
             <li>
                 <a>
                     <div>
-                        <button class="icon-button small" data-on-click="@get('partials/index_nav_dense')">
+                        <!-- How to make this data-onclick a toggle for the navDense signal  -->
+                        <button class="icon-button small" data-on-click="$navDense = !$navDense">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevrons-left-icon lucide-chevrons-left"><path d="m11 17-5-5 5-5"/><path d="m18 17-5-5 5-5"/></svg>
                         </button>
                     </div>
