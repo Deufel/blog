@@ -4854,9 +4854,9 @@
 @layer components.semantic {
     :where(body > nav) {
 
-        padding: var(--size-fluid-1);
+        padding: var(--size-3) var(--size-3) 0 var(--size-3);
 
-        > :where(main) {scrollbar-gutter: auto;}
+        > :where(main) {scrollbar-gutter: stable;}
 
         > :where(main, header, footer) > ul {
             list-style: none;
