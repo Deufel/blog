@@ -3644,6 +3644,9 @@
             &:active {
                 box-shadow: var(--inner-shadow-2);
             }
+            &:focus-visible {
+                outline-offset: -6px;
+            }
         }
 
         &.squared {

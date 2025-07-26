@@ -84,7 +84,7 @@
                            ">
 
                           <button
-                              data-class-selected="$fontScale === 'sm'"
+                              data-attr-aria-selected="$fontScale === 'sm' ? 'true' : 'false'"
                               data-on-click="$fontScale = 'sm'"
                           >
                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-case-lower-icon lucide-case-lower"><circle cx="7" cy="12" r="3"/><path d="M10 9v6"/><circle cx="17" cy="12" r="3"/><path d="M14 7v8"/></svg>
@@ -92,7 +92,7 @@
                           </button>
 
                           <button
-                              data-class-selected="$fontScale === 'md'"
+                              data-attr-aria-selected="$fontScale === 'md' ? 'true' : 'false'"
                               data-on-click="$fontScale = 'md'"
                           >
                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-alarge-small-icon lucide-a-large-small"><path d="M21 14h-5"/><path d="M16 16v-3.5a2.5 2.5 0 0 1 5 0V16"/><path d="M4.5 13h6"/><path d="m3 16 4.5-9 4.5 9"/></svg>
@@ -100,7 +100,7 @@
                           </button>
 
                           <button
-                              data-class-selected="$fontScale === 'lg'"
+                              data-class-aria-selected="$fontScale === 'lg' ? 'true' : 'false'"
                               data-on-click="$fontScale = 'lg'"
                           >
                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-case-upper-icon lucide-case-upper"><path d="m3 15 4-8 4 8"/><path d="M4 13h6"/><path d="M15 11h4.5a2 2 0 0 1 0 4H15V7h4a2 2 0 0 1 0 4"/></svg>
@@ -117,8 +117,8 @@
 
                   <li>
                       <div role="group" id="layout-toggle" class="toggle-button-group small fullwidth ">
-                      <style ready="">.me__10 .selected {color: var(--primary)}</style>
-       <button onclick="selectLayout('fullwidth', this)" class="selected"><icon-align-verticle-space-around><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-vertical-space-around-icon lucide-align-vertical-space-around"><rect width="10" height="6" x="7" y="9" rx="2"></rect><path d="M22 20H2"></path><path d="M22 4H2"></path></svg></icon-align-verticle-space-around>Full Width</button><button onclick="selectLayout('container', this)"><icon-align-horizontal-space-around><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-horizontal-space-around-icon lucide-align-horizontal-space-around"><rect width="6" height="10" x="9" y="7" rx="2"></rect><path d="M4 22V2"></path><path d="M20 22V2"></path></svg></icon-align-horizontal-space-around>Centered</button>             </div>
+                          <button onclick="selectLayout('fullwidth', this)" class="selected"><icon-align-verticle-space-around><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-vertical-space-around-icon lucide-align-vertical-space-around"><rect width="10" height="6" x="7" y="9" rx="2"></rect><path d="M22 20H2"></path><path d="M22 4H2"></path></svg></icon-align-verticle-space-around>Full Width</button><button onclick="selectLayout('container', this)">
+                              <icon-align-horizontal-space-around><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-horizontal-space-around-icon lucide-align-horizontal-space-around"><rect width="6" height="10" x="9" y="7" rx="2"></rect><path d="M4 22V2"></path><path d="M20 22V2"></path></svg></icon-align-horizontal-space-around>Centered</button>             </div>
                   </li>
 
                   <li>
