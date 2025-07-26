@@ -4851,6 +4851,7 @@
 
 /* PRINT STYLES - Adapt main viewport to paper */
 @layer layout.print {
+    /* PRINT STYLES - Simple adaptation to paper */
     @media print {
         /* Hide top-level navigation elements (keep only main) */
         body > header,
@@ -4869,144 +4870,28 @@
             display: block !important;
             padding: 0 !important;
             margin: 0 !important;
-            background: white !important;
-            color: black !important;
-            font-size: 12pt;
-            line-height: 1.4;
         }
 
-        /* Make main content fill the page like the original viewport */
+        /* Let main content fill the page naturally */
         body > main {
-            display: grid !important;
-            grid-template:
-                "header header header" auto
-                "nav main aside" 1fr
-                "footer footer footer" auto
-                / auto 1fr auto;
+            position: static !important;
             width: 100% !important;
-            height: 100vh !important; /* Use full page height */
+            height: 100vh !important;
             overflow: visible !important;
             margin: 0 !important;
-            padding: 0.5in !important; /* Paper margins */
-            background: transparent !important;
-            border-radius: 0 !important;
-            box-shadow: none !important;
-            gap: var(--gap-size, 1rem);
+            padding: 0.5in !important;
         }
 
-        /* Style the semantic elements within main for print */
-        body > main > header {
-            grid-area: header !important;
-            background: transparent !important;
-            border-radius: 0 !important;
-            margin-bottom: 0 !important;
-            padding: 0.25in 0 !important;
-            border-bottom: 1pt solid #ccc;
-        }
-
-        body > main > nav {
-            grid-area: nav !important;
-            background: transparent !important;
-            border-radius: 0 !important;
-            margin-right: 0 !important;
-            padding: 0.25in !important;
-            border-right: 1pt solid #ccc;
-            overflow: visible !important;
-            font-size: 10pt; /* Smaller for nav items */
-        }
-
-        body > main > main {
-            grid-area: main !important;
-            background: transparent !important;
-            border-radius: 0 !important;
-            overflow: visible !important;
-            min-height: 0 !important;
-            padding: 0.25in !important;
-        }
-
-        body > main > aside {
-            grid-area: aside !important;
-            background: transparent !important;
-            border-radius: 0 !important;
-            margin-left: 0 !important;
-            padding: 0.25in !important;
-            border-left: 1pt solid #ccc;
-            overflow: visible !important;
-            font-size: 10pt; /* Smaller for aside content */
-        }
-
-        body > main > footer {
-            grid-area: footer !important;
-            background: transparent !important;
-            border-radius: 0 !important;
-            margin-top: 0 !important;
-            padding: 0.25in 0 !important;
-            border-top: 1pt solid #ccc;
-            font-size: 10pt;
-        }
-
-        /* Handle empty sections */
-        body > main > header:empty,
-        body > main > nav:empty,
-        body > main > aside:empty,
-        body > main > footer:empty {
-            display: none !important;
-        }
-
-        /* Page setup for letter size */
+        /* Page setup */
         @page {
-            size: letter; /* 8.5" x 11" */
+            size: letter;
             margin: 0.5in;
         }
 
-        /* Remove visual effects that waste ink */
-        body > main * {
+        /* Remove print-unfriendly effects */
+        * {
             box-shadow: none !important;
             text-shadow: none !important;
-            transition: none !important;
-            animation: none !important;
-        }
-
-        /* Optimize typography for print */
-        h1, h2, h3, h4, h5, h6 {
-            page-break-after: avoid;
-            color: black !important;
-        }
-
-        p, div, section, article {
-            orphans: 3;
-            widows: 3;
-        }
-
-        /* Handle links for print */
-        a {
-            color: black !important;
-            text-decoration: underline !important;
-        }
-
-        /* Ensure images fit within their grid areas */
-        img {
-            max-width: 100% !important;
-            height: auto !important;
-            page-break-inside: avoid;
-        }
-
-        /* Handle tables */
-        table {
-            border-collapse: collapse !important;
-            width: 100% !important;
-        }
-
-        th, td {
-            border: 1px solid #000 !important;
-            padding: 4pt !important;
-        }
-
-        /* Adjust grid proportions for print if needed */
-        @supports (grid-template-columns: subgrid) {
-            body > main {
-                grid-template-columns: minmax(1.5in, auto) 1fr minmax(1.5in, auto);
-            }
         }
     }
 }
