@@ -11,19 +11,19 @@
                  <button id="button" role="tab"
                      data-attr-aria-selected = "$currentTab === 'button' ? 'true' : null"
                      data-attr-tabindex      = "$currentTab === 'button' ? '0' : '-1'"
-                     data-on-click = "@get('/partials/B_button');  $currentTab = 'button'"
-                     data-on-load__once  = "@get('/partials/B_button');  $currentTab = 'button'"
+                     data-on-click = "@get('partials/B_button');  $currentTab = 'button'"
+                     data-on-load__once  = "@get('partials/B_button');  $currentTab = 'button'"
                  >
                     Button
                  </button>
                  <button id="button-group" role="tab"
                      data-attr-aria-selected = "$currentTab === 'button-group' ? 'true' : null"
                      data-attr-tabindex      = "$currentTab === 'button-group' ? '0' : '-1'"
-                     data-on-click="@get('/partials/actions_button_group');  $currentTab = 'button-group'"
+                     data-on-click="@get('partials/actions_button_group');  $currentTab = 'button-group'"
                      data-on-keydown="
                                  if (document.activeElement !== el) return;
-                                 if (evt.key === 'ArrowRight') @get('/partials/actions_icon_button');
-                                 if (evt.key === 'ArrowLeft') @get('/partials/actions_button');
+                                 if (evt.key === 'ArrowRight') @get('partials/actions_icon_button');
+                                 if (evt.key === 'ArrowLeft') @get('partials/actions_button');
                              "
                  >
                     Button Group
@@ -31,14 +31,14 @@
                  <button id="icon-button" role="tab"
                      data-attr-aria-selected = "$currentTab === 'icon-button' ? 'true' : null"
                      data-attr-tabindex      = "$currentTab === 'icon-button' ? '0' : '-1'"
-                     data-on-click="@get('/partials/actions_icon_button');  $currentTab = 'icon-button'"
+                     data-on-click="@get('partials/actions_icon_button');  $currentTab = 'icon-button'"
                  >
                     Icon Button
                  </button>
                  <button id="toggle-button" role="tab"
                      data-attr-aria-selected = "$currentTab === 'toggle-button' ? 'true' : null"
                      data-attr-tabindex      = "$currentTab === 'toggle-button' ? '0' : '-1'"
-                     data-on-click="@get('/partials/actions_toggle_button');  $currentTab = 'toggle-button'"
+                     data-on-click="@get('partials/actions_toggle_button');  $currentTab = 'toggle-button'"
                  >
                     Toggle Button
                  </button>
