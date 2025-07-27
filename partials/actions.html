@@ -6,40 +6,16 @@
 
     <header id="main-header">
         <nav class="tabs underlined">
-             <div role="tablist" aria-label="CSS Action Component Examples"  data-signals-selectedTab="null"
-                 data-signals="{
-                     currentTab: 'button',
-                     tabs: ['button', 'button-group', 'icon-button', 'toggle-button']
-                 }"
-                 data-computed-currentTabIndex="$tabs.indexOf($currentTab)"
-                 data-on-keydown__window="
-                     // Only handle if focus is on a tab
-                     if (!evt.target.matches('[role=tab]')) return;
-
-                     let handled = false;
-                     let newIndex = $currentTabIndex;
-
-                     // Handle arrow keys and HJKL
-                     if (evt.key === 'ArrowLeft' || evt.key === 'h' || evt.key === 'H' || evt.key === 'k' || evt.key === 'K') {
-                         newIndex = $currentTabIndex > 0 ? $currentTabIndex - 1 : $tabs.length - 1;
-                         handled = true;
-                     } else if (evt.key === 'ArrowRight' || evt.key === 'l' || evt.key === 'L' || evt.key === 'j' || evt.key === 'J') {
-                         newIndex = $currentTabIndex < $tabs.length - 1 ? $currentTabIndex + 1 : 0;
-                         handled = true;
-                     }
-
-                     if (handled) {
-                         evt.preventDefault();
-                         $currentTab = $tabs[newIndex];
-                         // Focus the new tab
-                         document.getElementById($currentTab).focus();
-                     }
-                 ">
+             <div role="tablist" aria-label="CSS Action Component Examples"  data-signals-selectedTab="null">
 
                  <button id="button" role="tab"
                      data-attr-aria-selected = "$currentTab === 'button' ? 'true' : null"
                      data-attr-tabindex      = "$currentTab === 'button' ? '0' : '-1'"
                      data-on-click = "@get('/partials/actions/button');  $currentTab = 'button'"
+                     data-on-keydown="
+                         if (evt.key === 'ArrowRight') @get('/partials/actions_button_group');
+                         if (evt.key === 'ArrowLeft') @get('/partials/actions_toggle_button');
+                     "
                  >
                     Button
                  </button>
@@ -47,6 +23,10 @@
                      data-attr-aria-selected = "$currentTab === 'button-group' ? 'true' : null"
                      data-attr-tabindex      = "$currentTab === 'button-group' ? '0' : '-1'"
                      data-on-click="@get('/partials/actions_button_group');  $currentTab = 'button-group'"
+                     data-on-keydown="
+                         if (evt.key === 'ArrowRight') @get('/partials/actions_icon_button');
+                         if (evt.key === 'ArrowLeft') @get('/partials/actions_button');
+                     "
                  >
                     Button Group
                  </button>

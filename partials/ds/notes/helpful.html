@@ -24,3 +24,11 @@
       }))
   );
 </script>
+
+
+<!-- Keyboard Trigger -->
+<button
+    data-on-keydown="
+        if (evt.key === 'ArrowRight') @get('/partials/next-tab');
+        if (evt.key === 'ArrowLeft') @get('/partials/prev-tab');
+    ">
