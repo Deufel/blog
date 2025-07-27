@@ -4755,6 +4755,7 @@
 
             &:where(:not([popover="auto"])) {
                 border-radius: var(--border-radius);
+                overflow: hidden; /* Add this to clip children */
             }
 
             &:empty {
@@ -4768,8 +4769,6 @@
             > nav,
             > aside,
             > footer {
-                border-radius: var(--radius-2);
-
                 &:empty {
                     scrollbar-gutter: unset;
                 }
