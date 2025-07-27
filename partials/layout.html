@@ -1,11 +1,20 @@
 <main id="main">
-    <header style="background-color: light-dark(var(--color-3), var(--color-9));"><h4> main &GT; header <h4></header>
-    <nav    style="background-color: light-dark(var(--color-4), var(--color-10));"><h4> main &GT; nav </h4></nav>
-    <main   style="background-color: light-dark(var(--color-5), var(--color-11));">
+
+    <nav    id="main-nav"    style="background-color: light-dark(var(--color-4), var(--color-10));"><h4> main &GT; nav </h4></nav>
+    <main   id="main-main"   style="background-color: light-dark(var(--color-5), var(--color-11));">
         <div>
             <h4>main &GT; nav</h4>
         </div>
-        <p>The general idea with this leyout is that each page containes a auto adjusting "hero" grid from the &LT body &GT tag</p>
+        <h2> How it works: </h2>
+        <p> The general idea with this layout is that each page containes an auto adjusting "hero" grid from the &LT; body &GT; tag </p>
+        <p> if you add a <span><code>popover="auto"</code></span> attribute to the body &GT head, aside, fooer, nav &LT; then that section will be moved into a off screen drawer </p>
+        <em> note: the semantic section will determine the drawer direction </em>
+        <p> recommended use is to have the content of the page always be in the body/main/ and use the other sections for UI elements like settings, current page, ect</p>
+        <p> it is also recommended to use the same element and use js to add/remove the popover attribute when the screen gets to small </p>
+        <em> note: that only the content in the body/main will be printed </em>
+        <p> nested grid system each semantic element also allows you to use a nother layer of semantic header/nav/main/aside/footer elements withinit. </p>
+        <p> This starts to get a bit out of html semantic compliance here but I found this to be the easiest to work with and this covers almost all my layout needs</p>
+
         <code class="plain">
 &LT body &GT
     &LT header &GT
@@ -18,7 +27,10 @@
         <article>
             <h4>demo to see what hapens when elements are removed / added to DOM</h4>
             <div class="button-group outlined" role="group">
-                <button class="button" data-on-click="@get('partials/layout')"><span>all</span></button>
+                <button class="button" data-on-click="@get('partials/layout_addheader')"><span>add main/header</span></button>
+                <button class="button" data-on-click="@get('partials/layout_remHeader')"><span>rem main/header</span></button>
+            </div>
+            <div class="button-group outlined" role="group">
                 <button class="button" data-on-click="@get('partials/layout_1')"><span>ex 1</span></button>
                 <button class="button" data-on-click="@get('partials/layout_2')"><span>ex 2</span></button>
                 <button class="button" data-on-click="@get('partials/layout_3')"><span>ex 3</span></button>
@@ -27,6 +39,6 @@
             </div>
         </article>
     </main>
-    <aside  style="background-color: light-dark(var(--color-6), var(--color-12));"> <h4>main &GT; aside</h4> </aside>
-    <footer style="background-color: light-dark(var(--color-7), var(--color-13));"><h4>main &GT; footer</h4></footer>
+    <aside  id="main-aside"  style="background-color: light-dark(var(--color-6), var(--color-12));"> <h4>main &GT; aside</h4> </aside>
+    <footer id="main-footer" style="background-color: light-dark(var(--color-7), var(--color-13));"><h4>main &GT; footer</h4></footer>
 </main>
