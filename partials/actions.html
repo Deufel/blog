@@ -11,7 +11,8 @@
                  <button id="button" role="tab"
                      data-attr-aria-selected = "$currentTab === 'button' ? 'true' : null"
                      data-attr-tabindex      = "$currentTab === 'button' ? '0' : '-1'"
-                     data-on-click="@get('/partials/actions/button');  $currentTab = 'button'"
+                     data-on-click = "@get('/partials/actions/button');  $currentTab = 'button'"
+                     data-on-load  = "@get('/partials/actions/button');  $currentTab = 'button'"
                  >
                     Button
                  </button>
@@ -33,7 +34,7 @@
         </nav>
     </header>
 
-    <nav id="main-nav"></nav>
+    <nav    id="main-nav"></nav>
     <main   id="main-main"> </main>
     <aside  id="main-aside"> </aside>
     <footer id="main-footer"></footer>
