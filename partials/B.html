@@ -1,6 +1,3 @@
-<main id="header-main">
-    <h3>Actions: Buttons</h3>
-</main>
 
 <main id="main">
 
@@ -19,11 +16,11 @@
                  <button id="button-group" role="tab"
                      data-attr-aria-selected = "$currentTab === 'button-group' ? 'true' : null"
                      data-attr-tabindex      = "$currentTab === 'button-group' ? '0' : '-1'"
-                     data-on-click="@get('partials/actions_button_group');  $currentTab = 'button-group'"
+                     data-on-click="@get('partials/B_buttonGroup');  $currentTab = 'button-group'"
                      data-on-keydown="
                                  if (document.activeElement !== el) return;
-                                 if (evt.key === 'ArrowRight') @get('partials/actions_icon_button');
-                                 if (evt.key === 'ArrowLeft') @get('partials/actions_button');
+                                 if (evt.key === 'ArrowRight') @get('partials/B_iconButton.html');
+                                 if (evt.key === 'ArrowLeft') @get('partials/B_button');  $currentTab = 'button'
                              "
                  >
                     Button Group
@@ -31,7 +28,7 @@
                  <button id="icon-button" role="tab"
                      data-attr-aria-selected = "$currentTab === 'icon-button' ? 'true' : null"
                      data-attr-tabindex      = "$currentTab === 'icon-button' ? '0' : '-1'"
-                     data-on-click="@get('partials/actions_icon_button');  $currentTab = 'icon-button'"
+                     data-on-click="@get('partials/B_iconButton.html');  $currentTab = 'icon-button'"
                  >
                     Icon Button
                  </button>
