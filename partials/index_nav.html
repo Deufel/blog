@@ -34,10 +34,8 @@
 
             <li>
                 <a
-                    data-on-click="@get('partials/actions_button'); $currentPage = 'button';"
+                    data-on-click="@get('partials/actions_button'); $currentPage = 'button'; if ($windowWidth < 640 && document.getElementById('nav').matches(':popover-open')) { document.getElementById('nav').hidePopover(); } "
                     data-attr-aria-current="$currentPage === 'button' ? 'page' : null"
-                    popovertarget="nav"
-                    popovertargetaction="hide"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
                       <rect width="41" height="17.872" x="3.5" y="15.629" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" rx="8.936" ry="8.936" stroke-width="2"/>
@@ -49,7 +47,7 @@
 
             <li>
                 <a
-                    data-on-click="@get('partials/actions_button_group'); $currentPage = 'button-group'; el.closest('[popover]').hidePopover()"
+                    data-on-click="@get('partials/actions_button_group'); $currentPage = 'button-group'; if ($windowWidth < 640 && document.getElementById('nav').matches(':popover-open')) { document.getElementById('nav').hidePopover(); } "
                     data-attr-aria-current="$currentPage === 'button-group' ? 'page' : null"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
@@ -63,7 +61,7 @@
 
             <li>
                 <a
-                    data-on-click="@get('partials/actions_icon_button'); $currentPage = 'icon-button'; el.closest('[popover]').hidePopover()"
+                    data-on-click="@get('partials/actions_icon_button'); $currentPage = 'icon-button'; if ($windowWidth < 640 && document.getElementById('nav').matches(':popover-open')) { document.getElementById('nav').hidePopover(); } "
                     data-attr-aria-current="$currentPage === 'icon-button' ? 'page' : null"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M29.442 19.05c1.2.9 2.2 3.2 2 5.7c-.2 1.9-1.2 3.5-2 4.1m-18-9.1v8.7h5.8l7.5 6v-20.9l-7.5 6.2zm21.5-4.6c2.1 1.6 3.8 5.7 3.6 10.2c-.3 3.4-2 6.2-3.6 7.4" stroke-width="2"/></svg>
@@ -74,7 +72,7 @@
 
             <li>
                 <a
-                    data-on-click="@get('partials/actions_tabs'); $currentPage = 'tabs'; el.closest('[popover]').hidePopover()"
+                    data-on-click="@get('partials/actions_tabs'); $currentPage = 'tabs'; if ($windowWidth < 640 && document.getElementById('nav').matches(':popover-open')) { document.getElementById('nav').hidePopover(); } "
                     data-attr-aria-current="$currentPage === 'tabs' ? 'page' : null"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M40.162 14.996V9.328l-21.035-.002a.28.28 0 0 1-.276-.284l-.053-1.167c-.089-1.376-1.03-2.31-2.305-2.31H7.808A2.31 2.31 0 0 0 5.5 7.871v34.564" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M9.349 38.89c-.113 2.015-2.377 3.322-3.849 3.546l34.692-.003a2.31 2.31 0 0 0 2.308-2.309V15.766a.77.77 0 0 0-.77-.77H10.122a.77.77 0 0 0-.77.77z" stroke-width="2"/></svg>
@@ -85,7 +83,7 @@
 
             <li>
                 <a
-                    data-on-click="@get('partials/layout'); $currentPage = 'layout'; el.closest('[popover]').hidePopover()"
+                    data-on-click="@get('partials/layout'); $currentPage = 'layout'; if ($windowWidth < 640 && document.getElementById('nav').matches(':popover-open')) { document.getElementById('nav').hidePopover(); } "
                     data-attr-aria-current="$currentPage === 'layout' ? 'page' : null"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M38.5 5.5h-29a4 4 0 0 0-4 4v29a4 4 0 0 0 4 4h29a4 4 0 0 0 4-4v-29a4 4 0 0 0-4-4M24 5.5v37M42.5 24H24" stroke-width="2"/></svg>
@@ -96,7 +94,7 @@
 
             <li>
                 <a
-                    data-on-click="@get('partials/data_display_chip'); $currentPage = 'chip'; el.closest('[popover]').hidePopover()"
+                    data-on-click="@get('partials/data_display_chip'); $currentPage = 'chip'; if ($windowWidth < 640 && document.getElementById('nav').matches(':popover-open')) { document.getElementById('nav').hidePopover(); } "
                     data-attr-aria-current="$currentPage === 'chip' ? 'page' : null"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M43.5 35.5v-23a4 4 0 0 0-4-4h-31a4 4 0 0 0-4 4v23a4 4 0 0 0 4 4h31a4 4 0 0 0 4-4" stroke-width="2"/></svg>
@@ -111,7 +109,7 @@
             </li>
             <li>
                 <a
-                    data-on-click="@get('partials/ds/attributes'); $currentPage = 'datastar'; el.closest('[popover]').hidePopover()"
+                    data-on-click="@get('partials/ds/attributes'); $currentPage = 'datastar'; if ($windowWidth < 640 && document.getElementById('nav').matches(':popover-open')) { document.getElementById('nav').hidePopover(); } "
                     data-attr-aria-current="$currentPage === 'datastar' ? 'page' : null"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M24 29.13V43.5m-4.51-14.37v9.77m15.1-9.77L24 4.5L13.41 29.13m15.1 0v9.77" stroke-width="2"/></svg>
@@ -126,7 +124,7 @@
         <ul>
             <li>
                 <a
-                    data-on-click="@get('partials/license'); $currentPage = 'license'; el.closest('[popover]').hidePopover()"
+                    data-on-click="@get('partials/license'); $currentPage = 'license'; if ($windowWidth < 640 && document.getElementById('nav').matches(':popover-open')) { document.getElementById('nav').hidePopover(); } "
                     data-attr-aria-current="$currentPage === 'license' ? 'page' : null"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M14.011 15.194h19.978M15.138 36.152h17.724M24 11.848v24.304m-3.05-7.147c0 1.42-2.47 2.57-5.51 2.57s-5.51-1.15-5.51-2.57c0-.18.04-.36.11-.52l5.4-10.3l5.4 10.3c.07.16.11.34.11.52m-10.91-.002h10.8m-5.4-10.818v-2.991m11.61 13.811c0 1.42 2.47 2.57 5.51 2.57s5.51-1.15 5.51-2.57c0-.18-.04-.36-.11-.52l-5.4-10.3l-5.4 10.3c-.07.16-.11.34-.11.52m10.91-.002h-10.8m5.4-10.818v-2.991" stroke-width="2"/></svg>
