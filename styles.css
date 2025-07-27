@@ -4905,8 +4905,9 @@
 }
 
 /* SEMANTIC NAV BAR */
-@layer components.semantic {
-    :where(body > nav) {
+@layer components.base {
+    /* Base navigation styles - sidebar variant */
+    :where(nav.navbar) {
         padding: var(--size-2);
 
         > :where(main) {
@@ -5016,47 +5017,113 @@
         }
     }
 
-    /* Dense navigation variant */
-    :where(body > nav.dense) {
+    /* Toolbar navigation variant */
+    :where(nav.toolbar) {
+        padding: var(--size-2);
+
+        > :where(main) {
+            scrollbar-gutter: auto;
+        }
+
         /* Apply to main, header, and footer containers */
-        & > :where(main, header, footer) > ul {
-            /* List items styling for dense mode */
-            & > li > a {
-                flex-direction: column;
-                justify-content: center;
-                text-align: center;
-                min-block-size: 60px;
-                padding: var(--size-2);
-                gap: var(--size-1);
+        > :where(main, header, footer) > ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
 
-                /* Current page state in dense mode */
-                &[aria-current="page"] {
-                    /* Keep the same background and color */
-                    background-color: light-dark(var(--gray-11), var(--gray-4));
-                    color: light-dark(var(--color-5), var(--color-9));
+            > li {
+                position: relative;
+                transition: all 0.3s ease;
 
-                    /* Adjust border for dense layout */
-                    border-left: none;
-                    border-bottom: 3px solid
-                        light-dark(var(--accent), var(--accent-light));
+                + li {
+                    margin-top: var(--size-0);
                 }
 
-                /* SVG icons - keep centered */
-                & > svg {
-                    align-self: center;
-                    padding-block-start: 0;
-                }
+                > a {
+                    align-items: center;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    text-align: center;
+                    font-size: var(--font-size-sm);
+                    gap: var(--size-1);
+                    min-block-size: 60px;
+                    padding: var(--size-2);
+                    width: 100%;
+                    color: inherit;
+                    text-decoration: none;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
 
-                /* Text content - smaller and centered */
-                & > p {
-                    font-size: var(--font-size-xs);
-                    line-height: 1.2;
-                    margin: 0;
-                }
+                    &:hover {
+                        background-color: light-dark(
+                            var(--gray-2),
+                            var(--gray-14)
+                        );
+                        border-radius: var(--radius-2);
+                    }
 
-                /* Hide end content in dense mode */
-                & > div {
-                    display: none;
+                    &:focus-visible {
+                        outline: 2px solid var(--accent);
+                        outline-offset: -2px;
+                    }
+
+                    @media (prefers-reduced-motion: no-preference) {
+                        &:focus {
+                            transition: outline-offset 0.25s ease;
+                        }
+                        &:focus:not(:active) {
+                            outline-offset: 5px;
+                        }
+                    }
+
+                    &[aria-current="page"] {
+                        background-color: light-dark(
+                            var(--gray-11),
+                            var(--gray-4)
+                        );
+                        color: light-dark(var(--color-5), var(--color-9));
+
+                        /* Adjust border for toolbar layout */
+                        border-radius: var(--radius-2);
+                        border-left: none;
+                        border-bottom: 3px solid
+                            light-dark(var(--accent), var(--accent-light));
+
+                        /* Optional: Add subtle shadow for more polish */
+                        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+                        &:hover {
+                            background-color: light-dark(
+                                var(--gray-11),
+                                var(--gray-4)
+                            );
+                            border-radius: var(--radius-2);
+                        }
+                    }
+
+                    & > svg {
+                        align-self: center;
+                        max-inline-size: var(--size-5);
+                        padding-block-start: 0;
+                        transition: all 0.3s ease;
+                    }
+
+                    & > p {
+                        flex: 1;
+                        line-height: 1.2;
+                        color: inherit;
+                        font-weight: inherit;
+                        font-size: var(--font-size-xs);
+                        transition: all 0.3s ease;
+                        margin: 0;
+                    }
+
+                    /* Hide end content in toolbar mode */
+                    & > div {
+                        display: none;
+                    }
                 }
             }
         }
@@ -5220,7 +5287,7 @@
             "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
             "Courier New", monospace;
         font-size: var(--font-size-xs);
-        line-height: var(--font-lineheight-2);
+        line-height: var(--font-lineheight-00);
         color: var(--text-color-1);
         margin-inline: auto;
 
