@@ -4777,12 +4777,12 @@
 
             > header {
                 grid-area: header;
-                margin-bottom: var(--gap-size);
+                /* margin-bottom: var(--gap-size); */
             }
 
             > nav {
                 grid-area: nav;
-                margin-right: var(--gap-size);
+                /* margin-right: var(--gap-size); */
                 overflow-y: auto;
             }
 
@@ -4794,13 +4794,13 @@
 
             > aside {
                 grid-area: aside;
-                margin-left: var(--gap-size);
+                /* margin-left: var(--gap-size); */
                 overflow-y: auto;
             }
 
             > footer {
                 grid-area: footer;
-                margin-top: var(--gap-size);
+                /* margin-top: var(--gap-size); */
             }
         }
 
