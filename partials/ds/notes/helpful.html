@@ -13,22 +13,14 @@
 
 
 <!-- Simple window resize handler that dispatches a custom event "windowWidth" and using it..  -->
-<script>
-    window.addEventListener('resize', () => {
-        document.body.dispatchEvent(
-            new CustomEvent('windowresize', {
-                detail: { width: window.innerWidth }
-            })
-        );
-    });
-</script>
+
 
 <nav data-attr-popover="$windowWidth < 640 ? 'auto' : null">
 
 <script>
-addEventListener('resize', () =>
-    document.body.dispatchEvent(new CustomEvent('windowresize', {
-        detail: { width: innerWidth }
-    }))
-);
+  addEventListener('resize', () =>
+      document.body.dispatchEvent(new CustomEvent('windowresize', {
+          detail: { width: innerWidth }
+      }))
+  );
 </script>
