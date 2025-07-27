@@ -7,17 +7,17 @@
         </div>
         <p>The general idea with this leyout is that each page containes a auto adjusting "hero" grid from the &LT body &GT tag</p>
         <code class="plain">
-            &LT body &GT
-                &LT header &GT
-                &LT nav    &GT
-                &LT main   &GT
-                &LT aside  &GT
-                &LT footer &GT
-            &LT/body &GT
+&LT body &GT
+    &LT header &GT
+    &LT nav    &GT
+    &LT main   &GT
+    &LT aside  &GT
+    &LT footer &GT
+&LT/body &GT
         </code>
         <article>
             <h4>demo to see what hapens when elements are removed / added to DOM</h4>
-            <div class="button-group" role="group">
+            <div class="button-group outlined" role="group">
                 <button class="button" data-on-click="@get('partials/layout')"><span>all</span></button>
                 <button class="button" data-on-click="@get('partials/layout_1')"><span>ex 1</span></button>
                 <button class="button" data-on-click="@get('partials/layout_2')"><span>ex 2</span></button>
