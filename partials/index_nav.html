@@ -47,6 +47,19 @@
 
             <li>
                 <a
+                    data-on-click="@get('partials/actions'); $currentPage = 'actions'; if ($windowWidth < 640 && document.getElementById('nav').matches(':popover-open')) { document.getElementById('nav').hidePopover(); } "
+                    data-attr-aria-current="$currentPage === 'actions' ? 'page' : null"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
+                      <rect width="41" height="17.872" x="3.5" y="15.629" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" rx="8.936" ry="8.936" stroke-width="2"/>
+                    </svg>
+                    <p>Actions</p>
+                    <div class="chip outlined small">Docs</div>
+                </a>
+            </li>
+
+            <li>
+                <a
                     data-on-click="@get('partials/actions_button_group'); $currentPage = 'button-group'; if ($windowWidth < 640 && document.getElementById('nav').matches(':popover-open')) { document.getElementById('nav').hidePopover(); } "
                     data-attr-aria-current="$currentPage === 'button-group' ? 'page' : null"
                 >
