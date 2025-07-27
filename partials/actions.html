@@ -1,12 +1,40 @@
 <main id="header-main">
-    <h1>Actions</h1>
+    <h3>Actions</h3>
 </main>
 
 <main id="main">
 
     <header id="main-header">
         <nav class="tabs underlined">
-             <div role="tablist" aria-label="CSS Action Component Examples"  data-signals-selectedTab="null">
+             <div role="tablist" aria-label="CSS Action Component Examples"  data-signals-selectedTab="null"
+                 data-signals="{
+                     currentTab: 'button',
+                     tabs: ['button', 'button-group', 'icon-button', 'toggle-button']
+                 }"
+                 data-computed-currentTabIndex="$tabs.indexOf($currentTab)"
+                 data-on-keydown__window="
+                     // Only handle if focus is on a tab
+                     if (!evt.target.matches('[role=tab]')) return;
+
+                     let handled = false;
+                     let newIndex = $currentTabIndex;
+
+                     // Handle arrow keys and HJKL
+                     if (evt.key === 'ArrowLeft' || evt.key === 'h' || evt.key === 'H' || evt.key === 'k' || evt.key === 'K') {
+                         newIndex = $currentTabIndex > 0 ? $currentTabIndex - 1 : $tabs.length - 1;
+                         handled = true;
+                     } else if (evt.key === 'ArrowRight' || evt.key === 'l' || evt.key === 'L' || evt.key === 'j' || evt.key === 'J') {
+                         newIndex = $currentTabIndex < $tabs.length - 1 ? $currentTabIndex + 1 : 0;
+                         handled = true;
+                     }
+
+                     if (handled) {
+                         evt.preventDefault();
+                         $currentTab = $tabs[newIndex];
+                         // Focus the new tab
+                         document.getElementById($currentTab).focus();
+                     }
+                 ">
 
                  <button id="button" role="tab"
                      data-attr-aria-selected = "$currentTab === 'button' ? 'true' : null"
