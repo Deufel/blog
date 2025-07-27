@@ -1753,72 +1753,127 @@
     }
 }
 
-/* TABS */
+/* TABS modified for slider */
 @layer components.base {
     :where(nav.tabs) {
         --_bg-color: transparent;
-        --transition:
-            var(--ease-elastic-in-out-3) & > [role= "tablist"] {button
-                {outline-color: transparent; outline-offset: -4px;
-                &[aria-selected= "true"] {&: focus-visible {outline: 2px solid
-                var(--text-color-1) ;}}}} &.underlined {& > [role= "tablist"]
-                {border-bottom: 1px solid var(--border-color) ;
-                position: relative; display: grid;
+
+        & > [role="tablist"] {
+            button {
+                outline-color: transparent;
+                outline-offset: -4px;
+
+                &[aria-selected="true"] {
+                    &:focus-visible {
+                        outline: 2px solid var(--text-color-1);
+                    }
+                }
+            }
+        }
+
+        &.underlined {
+            & > [role="tablist"] {
+                border-bottom: 1px solid var(--border-color);
+                position: relative;
+                display: grid;
+
                 /* CSS Counter to count tabs automatically */
-                counter-reset: tab-count; button {background: transparent;
-                border: none; font-weight: 500; line-height: 1.5;
-                padding: var(--size-fluid-0),
-            var(--size-fluid-1), 0,
-            var(--size-fluid-1) ; color: var(--text-color-2) ; cursor: pointer;
-                transition: color 0.2s ease;
-                /* Increment counter for each button */
-                counter-increment: tab-count; &: hover {color: var(--primary) ;}
-                &[aria-selected= "true"] {color: var(--primary) ;}}
+                counter-reset: tab-count;
+
+                button {
+                    background: transparent;
+                    border: none;
+                    font-weight: 500;
+                    line-height: 1.5;
+                    padding: 0.25rem 0.5rem;
+                    color: var(--text-color-2);
+                    cursor: pointer;
+                    transition: color 0.2s ease;
+
+                    /* Increment counter for each button */
+                    counter-increment: tab-count;
+
+                    &:hover {
+                        color: var(--primary);
+                    }
+
+                    &[aria-selected="true"] {
+                        color: var(--primary);
+                    }
+                }
+
                 /* After all buttons, set the grid columns based on count */
-                &: : before {content: "" ; grid-column: 1 / -1; display: none;
-                /* This trick uses the counter to set a CSS property */}
+                &::before {
+                    content: "";
+                    grid-column: 1 / -1;
+                    display: none;
+                    /* This trick uses the counter to set a CSS property */
+                }
+
                 /* Dynamic grid columns using counter */
-                &: has(button: nth-child(1): nth-last-child(1))
-                {grid-template-columns: repeat(1, 1fr) ; --total-tabs: 1;}
-                &: has(button: nth-child(1): nth-last-child(2))
-                {grid-template-columns: repeat(2, 1fr) ; --total-tabs: 2;}
-                &: has(button: nth-child(1): nth-last-child(3))
-                {grid-template-columns: repeat(3, 1fr) ; --total-tabs: 3;}
-                &: has(button: nth-child(1): nth-last-child(4))
-                {grid-template-columns: repeat(4, 1fr) ; --total-tabs: 4;}
-                &: has(button: nth-child(1): nth-last-child(5))
-                {grid-template-columns: repeat(5, 1fr) ; --total-tabs: 5;}
-                &: has(button: nth-child(1): nth-last-child(6))
-                {grid-template-columns: repeat(6, 1fr) ; --total-tabs: 6;}
-                &: has(button: nth-child(1): nth-last-child(7))
-                {grid-template-columns: repeat(7, 1fr) ; --total-tabs: 7;}
-                &: has(button: nth-child(1): nth-last-child(7))
-                {grid-template-columns: repeat(7, 1fr) ; --total-tabs: 7;}
-                /* Sliding underline */ &: : after {content: "" ;
-                position: absolute; bottom: -1px; height: 2px;
-                background: var(--primary) ; transition: transform 0.3s
-                var(--transition) ; width: calc(100% / var(--total-tabs, 4)) ;
-                left: 0;
-                transform: translateX(calc(var(--selected-index, 0) * 100%)) ;}
+                &:has(button:nth-child(1):nth-last-child(1)) {
+                    grid-template-columns: repeat(1, 1fr);
+                    --total-tabs: 1;
+                }
+                &:has(button:nth-child(1):nth-last-child(2)) {
+                    grid-template-columns: repeat(2, 1fr);
+                    --total-tabs: 2;
+                }
+                &:has(button:nth-child(1):nth-last-child(3)) {
+                    grid-template-columns: repeat(3, 1fr);
+                    --total-tabs: 3;
+                }
+                &:has(button:nth-child(1):nth-last-child(4)) {
+                    grid-template-columns: repeat(4, 1fr);
+                    --total-tabs: 4;
+                }
+                &:has(button:nth-child(1):nth-last-child(5)) {
+                    grid-template-columns: repeat(5, 1fr);
+                    --total-tabs: 5;
+                }
+                &:has(button:nth-child(1):nth-last-child(6)) {
+                    grid-template-columns: repeat(6, 1fr);
+                    --total-tabs: 6;
+                }
+
+                /* Sliding underline */
+                &::after {
+                    content: "";
+                    position: absolute;
+                    bottom: -1px;
+                    height: 2px;
+                    background: var(--primary);
+                    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                    width: calc(100% / var(--total-tabs, 4));
+                    left: 0;
+                    transform: translateX(
+                        calc(var(--selected-index, 0) * 100%)
+                    );
+                }
+
                 /* Set selected index based on which button has aria-selected="true" */
-                &: has(button: nth-child(1) [aria-selected= "true"])
-                {--selected-index: 0;}
-                &: has(button: nth-child(2) [aria-selected= "true"])
-                {--selected-index: 1;}
-                &: has(button: nth-child(3) [aria-selected= "true"])
-                {--selected-index: 2;}
-                &: has(button: nth-child(4) [aria-selected= "true"])
-                {--selected-index: 3;}
-                &: has(button: nth-child(5) [aria-selected= "true"])
-                {--selected-index: 4;}
-                &: has(button: nth-child(6) [aria-selected= "true"])
-                {--selected-index: 5;}
-                &: has(button: nth-child(7) [aria-selected= "true"])
-                {--selected-index: 6;}
-                &: has(button: nth-child(8) [aria-selected= "true"])
-                {--selected-index: 7;}}};
+                &:has(button:nth-child(1)[aria-selected="true"]) {
+                    --selected-index: 0;
+                }
+                &:has(button:nth-child(2)[aria-selected="true"]) {
+                    --selected-index: 1;
+                }
+                &:has(button:nth-child(3)[aria-selected="true"]) {
+                    --selected-index: 2;
+                }
+                &:has(button:nth-child(4)[aria-selected="true"]) {
+                    --selected-index: 3;
+                }
+                &:has(button:nth-child(5)[aria-selected="true"]) {
+                    --selected-index: 4;
+                }
+                &:has(button:nth-child(6)[aria-selected="true"]) {
+                    --selected-index: 5;
+                }
+            }
+        }
     }
-} /* Tab - modified - slider - underlined */
+}
 
 /* Table */
 @layer components.base {
