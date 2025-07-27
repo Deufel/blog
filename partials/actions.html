@@ -6,7 +6,7 @@
 
     <header id="main-header">
         <nav class="tabs underlined">
-             <div role="tablist" aria-label="CSS Action Component Examples"  data-signals-selectedTab="button">
+             <div role="tablist" aria-label="CSS Action Component Examples"  data-signals-selectedTab="null">
 
                  <button id="button" role="tab"
                      data-attr-aria-selected = "$currentTab === 'button' ? 'true' : null"
@@ -18,7 +18,7 @@
                  <button id="button-group" role="tab"
                      data-attr-aria-selected = "$currentTab === 'button-group' ? 'true' : null"
                      data-attr-tabindex      = "$currentTab === 'button-group' ? '0' : '-1'"
-                     data-on-click="@get('/partials/actions_button_group');  $currentTab = 'button_group'"
+                     data-on-click="@get('/partials/actions_button_group');  $currentTab = 'button-group'"
                  >
                     Button Group
                  </button>
