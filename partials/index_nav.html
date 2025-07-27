@@ -34,9 +34,10 @@
 
             <li>
                 <a
-                    data-on-click="@get('partials/actions_button'); $currentPage = 'button'; el.closest('[popover]').hidePopover()"
+                    data-on-click="@get('partials/actions_button'); $currentPage = 'button';"
                     data-attr-aria-current="$currentPage === 'button' ? 'page' : null"
-                    data-on-keydown=" if (evt.key === 'ArrowDown') { evt.preventDefault(); const next = el.nextElementSibling; if (next && next.focus) { next.focus(); } } "
+                    popovertarget="nav"
+                    popovertargetaction="hide"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
                       <rect width="41" height="17.872" x="3.5" y="15.629" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" rx="8.936" ry="8.936" stroke-width="2"/>
