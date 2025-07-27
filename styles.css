@@ -4721,7 +4721,7 @@
         overscroll-behavior: none;
         display: grid;
         grid-template:
-            "header main aside" auto
+            "header header header" auto
             "nav main aside" 1fr
             "footer footer footer" auto
             / auto 1fr auto;
