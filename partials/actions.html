@@ -6,25 +6,29 @@
 
     <header id="main-header">
         <nav class="tabs underlined">
-             <div role="tablist" aria-label="tabs"  data-signals-selected-tab="button">
-                 <button id="button" role="tab" aria-controls="tabpanel-1" aria-selected="true" tabindex="0"
-                     data-on-click="@get('/examples/lazy_tabs/2')"
-                 >
-                 Button
-                 </button>
-                 <button id="underlined-tab-2" role="tab" aria-controls="tabpanel-2" aria-selected="false" tabindex="-1">
-                 Button Group
-                 </button>
-                 <button id="underlined-tab-3" role="tab" aria-controls="tabpanel-3" aria-selected="false" tabindex="-1">
-                 Icon Button
-                 </button>
-                 <button id="underlined-tab-1" role="tab" aria-controls="tabpanel-1" aria-selected="fase" tabindex="-1">
-                 Toggle Button
-                 </button>
-                 <button id="underlined-tab-2" role="tab" aria-controls="tabpanel-2" aria-selected="false" tabindex="-1">
-                 Tabs
-                 </button>
+             <div role="tablist" aria-label="CSS Action Component Examples"  data-signals-selectedTab="button">
 
+                 <button id="button" role="tab"
+                     data-attr-aria-selected = "$currentTab === 'button' ? 'true' : null"
+                     data-attr-tabindex      = "$currentTab === 'button' ? '0' : '-1'"
+                     data-on-click="@get('/partials/actions/button');  $currentTab = 'button'"
+                 >
+                    Button
+                 </button>
+                 <button id="button-group" role="tab"
+                     data-attr-aria-selected = "$currentTab === 'button-group' ? 'true' : null"
+                     data-attr-tabindex      = "$currentTab === 'button-group' ? '0' : '-1'"
+                     data-on-click="@get('/partials/actions_button_group');  $currentTab = 'button_group'"
+                 >
+                    Button Group
+                 </button>
+                 <button id="icon-button" role="tab"
+                     data-attr-aria-selected = "$currentTab === 'icon-button' ? 'true' : null"
+                     data-attr-tabindex      = "$currentTab === 'icon-button' ? '0' : '-1'"
+                     data-on-click="@get('/partials/actions_icon_button');  $currentTab = 'icon-button'"
+                 >
+                    Icon Button
+                 </button>
              </div>
         </nav>
     </header>
