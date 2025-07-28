@@ -5372,6 +5372,10 @@
         transform: rotate(180deg);
     }
 
+    .trimmed > * {
+        text-box: trim-both cap alphabetic;
+    }
+
     /* Plain class for monospace legal document styling */
     .plain {
         /* Typography */
