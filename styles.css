@@ -5368,10 +5368,6 @@
         transition: transform 0.3s ease; /* This handles BOTH directions */
     }
 
-    .rotate-180 {
-        transform: rotate(180deg);
-    }
-
     .trimmed > * {
         text-box: trim-both cap alphabetic;
     }
@@ -5384,6 +5380,7 @@
             "Courier New", monospace;
         font-size: var(--font-size-xs);
         line-height: var(--font-lineheight-00);
+        text-box: trim-both cap alphabetic;
         color: var(--text-color-1);
         margin-inline: auto;
 

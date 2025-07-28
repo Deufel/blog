@@ -12,230 +12,262 @@
     --drawer-animation-easing: var(--ease-3, cubic-bezier(0.25, 0, 0.3, 1));
 }
 
-/* ===== BASE DRAWER STYLES ===== */
-header[popover],
-nav[popover],
-aside[popover],
-footer[popover] {
-    /* Reset popover defaults */
-    border: none;
-    padding: 0;
-    margin: 0;
-    outline: none;
-    max-width: none;
-    max-height: none;
-    scrollbar-width: thin;
-    scrollbar-gutter: stable both-edges;
+@layer transitions {
+    /* Animating */
+    [popover] {
+        &:popover-open {
+            /*   0. BEFORE-OPEN STATE   */
+            /*  initial state for what we're animating *in* from  */
+            @starting-style {
+                opacity: 0;
+            }
 
-    /* Appearance */
-    background: var(--drawer-background);
-    border: 1px solid var(--drawer-border-color);
-    box-shadow: var(--drawer-shadow);
+            /*   1. OPEN STATE   */
+            /*  state when popover is open, BOTH:
+            what we're transitioning *in* to
+            and transitioning *out* from */
+            opacity: 1;
+        }
 
-    /* Maintain your semantic grid structure */
-    display: grid;
-    grid-template:
-        "header header header" auto
-        "nav main aside" 1fr
-        "footer footer footer" auto
-        / auto 1fr auto;
-    overflow: hidden;
+        /*   2. AFTER-OPEN-IS-CLOSED STATE   */
+        /*  initial state for what we're animating *out* to */
+        opacity: 0;
 
-    /* Nested sections maintain structure */
-    > header {
-        grid-area: header;
-        margin-bottom: var(--gap-size, 6px);
-    }
-    > nav {
-        grid-area: nav;
-        margin-right: var(--gap-size, 6px);
-        overflow-y: auto;
-    }
-    > main {
-        grid-area: main;
-        overflow-y: auto;
-        min-height: 0;
-    }
-    > aside {
-        grid-area: aside;
-        margin-left: var(--gap-size, 6px);
-        overflow-y: auto;
-    }
-    > footer {
-        grid-area: footer;
-        margin-top: var(--gap-size, 6px);
-    }
-
-    /* Base transition properties for both element and backdrop */
-    &,
-    &::backdrop {
+        /*  enumarate transitioning properties, including display */
         transition:
-            display var(--drawer-animation-duration) allow-discrete,
-            overlay var(--drawer-animation-duration) allow-discrete,
-            opacity var(--drawer-animation-duration)
-                var(--drawer-animation-easing),
-            transform var(--drawer-animation-duration)
-                var(--drawer-animation-easing),
-            background-color var(--drawer-animation-duration)
-                var(--drawer-animation-easing),
-            backdrop-filter var(--drawer-animation-duration)
-                var(--drawer-animation-easing);
+            opacity 0.5s,
+            display 0.5s;
     }
 
-    /* Exit stage - default state */
-    opacity: 0;
-
-    /* Backdrop default state */
-    &::backdrop {
-        background-color: rgb(0 0 0 / 0%);
-        backdrop-filter: blur(0px);
-    }
-
-    /* On stage - when popover is open */
-    &:popover-open {
-        opacity: 1;
-
-        &::backdrop {
-            background-color: var(--drawer-backdrop-color);
-            backdrop-filter: blur(2px);
-        }
-    }
-}
-
-/* ===== HEADER DRAWER (Top) - Full width, grid-controlled height ===== */
-header[popover] {
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    border-radius: 0 0 var(--drawer-border-radius) var(--drawer-border-radius);
-    border-top: none;
-
-    /* Exit stage to */
-    transform: translateY(-100%);
-
-    /* On stage */
-    &:popover-open {
-        transform: translateY(0);
-    }
-
-    /* Enter stage from */
-    @starting-style {
-        &:popover-open,
-        &:popover-open::backdrop {
-            opacity: 0;
-        }
-
-        &:popover-open {
-            transform: translateY(-100%);
-        }
-    }
-}
-
-/* ===== NAV DRAWER (Left) - Full height, grid-controlled width ===== */
-nav[popover] {
-    height: 100svh;
-    max-width: 80vw;
-    border-radius: 0 var(--drawer-border-radius) var(--drawer-border-radius) 0;
-    border-left: none;
-
-    /* Exit stage to */
-    transform: translateX(-100%);
-
-    /* On stage */
-    &:popover-open {
-        transform: translateX(0);
-    }
-
-    /* Enter stage from */
-    @starting-style {
-        &:popover-open,
-        &:popover-open::backdrop {
-            opacity: 0;
-        }
-
-        &:popover-open {
-            transform: translateX(-100%);
-        }
-    }
-}
-
-/* ===== ASIDE DRAWER (Right) - Full height, grid-controlled width ===== */
-aside[popover] {
-    left: auto;
-    height: 100svh;
-    max-width: 80vw;
-    border-radius: var(--drawer-border-radius) 0 0 var(--drawer-border-radius);
-    border-right: none;
-
-    /* Exit stage to */
-    transform: translateX(100%);
-
-    /* On stage */
-    &:popover-open {
-        transform: translateX(0);
-    }
-
-    /* Enter stage from */
-    @starting-style {
-        &:popover-open,
-        &:popover-open::backdrop {
-            opacity: 0;
-        }
-
-        &:popover-open {
-            transform: translateX(100%);
-        }
-    }
-}
-
-/* ===== FOOTER DRAWER (Bottom) - Full width, grid-controlled height ===== */
-footer[popover] {
-    top: auto;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    border-radius: var(--drawer-border-radius) var(--drawer-border-radius) 0 0;
-    border-bottom: none;
-    padding-bottom: env(safe-area-inset-bottom, 0);
-
-    /* Exit stage to */
-    transform: translateY(100%);
-
-    /* On stage */
-    &:popover-open {
-        transform: translateY(0);
-    }
-
-    /* Enter stage from */
-    @starting-style {
-        &:popover-open,
-        &:popover-open::backdrop {
-            opacity: 0;
-        }
-
-        &:popover-open {
-            transform: translateY(100%);
-        }
-    }
-}
-
-/* ===== REDUCED MOTION SUPPORT ===== */
-@media (prefers-reduced-motion: reduce) {
+    /* ===== BASE DRAWER STYLES ===== */
     header[popover],
     nav[popover],
     aside[popover],
     footer[popover] {
-        &,
-        &::backdrop {
-            transition: none !important;
+        /* Reset popover defaults */
+        border: none;
+        padding: 0;
+        margin: 0;
+        outline: none;
+        max-width: none;
+        max-height: none;
+        scrollbar-width: thin;
+        scrollbar-gutter: stable both-edges;
+
+        /* Appearance */
+        background: var(--drawer-background);
+        border: 1px solid var(--drawer-border-color);
+        box-shadow: var(--drawer-shadow);
+
+        /* Maintain your semantic grid structure */
+        display: grid;
+        grid-template:
+            "header header header" auto
+            "nav main aside" 1fr
+            "footer footer footer" auto
+            / auto 1fr auto;
+        overflow: hidden;
+
+        /* Nested sections maintain structure */
+        > header {
+            grid-area: header;
+            margin-bottom: var(--gap-size, 6px);
+        }
+        > nav {
+            grid-area: nav;
+            margin-right: var(--gap-size, 6px);
+            overflow-y: auto;
+        }
+        > main {
+            grid-area: main;
+            overflow-y: auto;
+            min-height: 0;
+        }
+        > aside {
+            grid-area: aside;
+            margin-left: var(--gap-size, 6px);
+            overflow-y: auto;
+        }
+        > footer {
+            grid-area: footer;
+            margin-top: var(--gap-size, 6px);
         }
 
+        /* Base transition properties for both element and backdrop */
+        &,
+        &::backdrop {
+            transition:
+                display var(--drawer-animation-duration) allow-discrete,
+                overlay var(--drawer-animation-duration) allow-discrete,
+                opacity var(--drawer-animation-duration)
+                    var(--drawer-animation-easing),
+                transform var(--drawer-animation-duration)
+                    var(--drawer-animation-easing),
+                background-color var(--drawer-animation-duration)
+                    var(--drawer-animation-easing),
+                backdrop-filter var(--drawer-animation-duration)
+                    var(--drawer-animation-easing);
+        }
+
+        /* Exit stage - default state */
+        opacity: 0;
+
+        /* Backdrop default state */
+        &::backdrop {
+            background-color: rgb(0 0 0 / 0%);
+            backdrop-filter: blur(0px);
+        }
+
+        /* On stage - when popover is open */
+        &:popover-open {
+            opacity: 1;
+
+            &::backdrop {
+                background-color: var(--drawer-backdrop-color);
+                backdrop-filter: blur(2px);
+            }
+        }
+    }
+
+    /* ===== HEADER DRAWER (Top) - Full width, grid-controlled height ===== */
+    header[popover] {
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        border-radius: 0 0 var(--drawer-border-radius)
+            var(--drawer-border-radius);
+        border-top: none;
+
+        /* Exit stage to */
+        transform: translateY(-100%);
+
+        /* On stage */
+        &:popover-open {
+            transform: translateY(0);
+        }
+
+        /* Enter stage from */
         @starting-style {
+            &:popover-open,
+            &:popover-open::backdrop {
+                opacity: 0;
+            }
+
             &:popover-open {
-                opacity: 1 !important;
-                transform: none !important;
+                transform: translateY(-100%);
+            }
+        }
+    }
+
+    /* ===== NAV DRAWER (Left) - Full height, grid-controlled width ===== */
+    nav[popover] {
+        height: 100svh;
+        max-width: 80vw;
+        border-radius: 0 var(--drawer-border-radius) var(--drawer-border-radius)
+            0;
+        border-left: none;
+
+        /* Exit stage to */
+        transform: translateX(-100%);
+
+        /* On stage */
+        &:popover-open {
+            transform: translateX(0);
+        }
+
+        /* Enter stage from */
+        @starting-style {
+            &:popover-open,
+            &:popover-open::backdrop {
+                opacity: 0;
+            }
+
+            &:popover-open {
+                transform: translateX(-100%);
+            }
+        }
+    }
+
+    /* ===== ASIDE DRAWER (Right) - Full height, grid-controlled width ===== */
+    aside[popover] {
+        left: auto;
+        height: 100svh;
+        max-width: 80vw;
+        border-radius: var(--drawer-border-radius) 0 0
+            var(--drawer-border-radius);
+        border-right: none;
+
+        /* Exit stage to */
+        transform: translateX(100%);
+
+        /* On stage */
+        &:popover-open {
+            transform: translateX(0);
+        }
+
+        /* Enter stage from */
+        @starting-style {
+            &:popover-open,
+            &:popover-open::backdrop {
+                opacity: 0;
+            }
+
+            &:popover-open {
+                transform: translateX(100%);
+            }
+        }
+    }
+
+    /* ===== FOOTER DRAWER (Bottom) - Full width, grid-controlled height ===== */
+    footer[popover] {
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        border-radius: var(--drawer-border-radius) var(--drawer-border-radius) 0
+            0;
+        border-bottom: none;
+        padding-bottom: env(safe-area-inset-bottom, 0);
+
+        /* Exit stage to */
+        transform: translateY(100%);
+
+        /* On stage */
+        &:popover-open {
+            transform: translateY(0);
+        }
+
+        /* Enter stage from */
+        @starting-style {
+            &:popover-open,
+            &:popover-open::backdrop {
+                opacity: 0;
+            }
+
+            &:popover-open {
+                transform: translateY(100%);
+            }
+        }
+    }
+
+    /* ===== REDUCED MOTION SUPPORT ===== */
+    @media (prefers-reduced-motion: reduce) {
+        header[popover],
+        nav[popover],
+        aside[popover],
+        footer[popover] {
+            &,
+            &::backdrop {
+                transition: none !important;
+            }
+
+            @starting-style {
+                &:popover-open {
+                    opacity: 1 !important;
+                    transform: none !important;
+                }
             }
         }
     }
