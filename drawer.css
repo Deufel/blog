@@ -1,5 +1,5 @@
-/* ===== VIEW TRANSITIONS DRAWER SYSTEM CSS ===== */
-/* Modern drawer system using View Transitions API for mobile-first smooth animations */
+/* ===== MODAL DRAWER SYSTEM CSS - ANIMATION BASED ===== */
+/* Let the grid system handle sizing, we just handle positioning and animations */
 
 /* CSS Variables */
 :root {
@@ -12,15 +12,83 @@
     --drawer-animation-easing: var(--ease-3, cubic-bezier(0.25, 0, 0.3, 1));
 }
 
+/* ===== KEYFRAME ANIMATIONS ===== */
+@keyframes drawer-fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes drawer-slide-in-down {
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes drawer-slide-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes drawer-slide-in-right {
+    from {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes drawer-slide-in-left {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes backdrop-fade-in {
+    from {
+        background-color: rgb(0 0 0 / 0%);
+        backdrop-filter: blur(0px);
+    }
+    to {
+        background-color: var(--drawer-backdrop-color);
+        backdrop-filter: blur(2px);
+    }
+}
+
 /* ===== BASE DRAWER STYLES ===== */
-.drawer {
-    /* Reset and positioning */
-    position: fixed;
-    z-index: 1000;
+header[popover],
+nav[popover],
+aside[popover],
+footer[popover] {
+    /* Reset popover defaults */
     border: none;
     padding: 0;
     margin: 0;
     outline: none;
+    max-width: none;
+    max-height: none;
     scrollbar-width: thin;
     scrollbar-gutter: stable both-edges;
 
@@ -29,7 +97,7 @@
     border: 1px solid var(--drawer-border-color);
     box-shadow: var(--drawer-shadow);
 
-    /* Grid structure */
+    /* Maintain your semantic grid structure */
     display: grid;
     grid-template:
         "header header header" auto
@@ -37,10 +105,6 @@
         "footer footer footer" auto
         / auto 1fr auto;
     overflow: hidden;
-
-    /* Initially hidden */
-    visibility: hidden;
-    opacity: 0;
 
     /* Nested sections maintain structure */
     > header {
@@ -66,85 +130,68 @@
         grid-area: footer;
         margin-top: var(--gap-size, 6px);
     }
+
+    /* Default backdrop styles */
+    &::backdrop {
+        background-color: rgb(0 0 0 / 0%);
+        backdrop-filter: blur(0px);
+    }
+
+    /* Backdrop animation when popover opens */
+    &:popover-open::backdrop {
+        animation: backdrop-fade-in var(--drawer-animation-duration)
+            var(--drawer-animation-easing) forwards;
+    }
 }
 
-/* Active state */
-.drawer.drawer-open {
-    visibility: visible;
-    opacity: 1;
-}
-
-/* ===== BACKDROP ===== */
-.drawer-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--drawer-backdrop-color);
-    backdrop-filter: blur(2px);
-    z-index: 999;
-    opacity: 0;
-    visibility: hidden;
-}
-
-.drawer-backdrop.backdrop-open {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* ===== DRAWER POSITIONS ===== */
-
-/* Header Drawer (Top) */
-.drawer--top {
+/* ===== HEADER DRAWER (Top) - Full width, grid-controlled height ===== */
+header[popover] {
     top: 0;
     left: 0;
     right: 0;
     width: 100%;
     border-radius: 0 0 var(--drawer-border-radius) var(--drawer-border-radius);
     border-top: none;
-    view-transition-name: drawer-top;
-    transform: translateY(-100%);
+
+    /* Animation when popover opens */
+    &:popover-open {
+        animation: drawer-slide-in-down var(--drawer-animation-duration)
+            var(--drawer-animation-easing) forwards;
+    }
 }
 
-.drawer--top.drawer-open {
-    transform: translateY(0);
-}
-
-/* Nav Drawer (Left) */
-.drawer--left {
-    left: 0;
-    top: 0;
+/* ===== NAV DRAWER (Left) - Full height, grid-controlled width ===== */
+nav[popover] {
     height: 100svh;
-    max-width: min(80vw, 400px);
+    max-width: 80vw;
     border-radius: 0 var(--drawer-border-radius) var(--drawer-border-radius) 0;
     border-left: none;
-    view-transition-name: drawer-left;
-    transform: translateX(-100%);
+
+    /* Animation when popover opens */
+    &:popover-open {
+        animation: drawer-slide-in-right var(--drawer-animation-duration)
+            var(--drawer-animation-easing) forwards;
+    }
 }
 
-.drawer--left.drawer-open {
-    transform: translateX(0);
-}
-
-/* Aside Drawer (Right) */
-.drawer--right {
-    right: 0;
-    top: 0;
+/* ===== ASIDE DRAWER (Right) - Full height, grid-controlled width ===== */
+aside[popover] {
+    left: auto;
     height: 100svh;
-    max-width: min(80vw, 400px);
+    max-width: 80vw;
     border-radius: var(--drawer-border-radius) 0 0 var(--drawer-border-radius);
     border-right: none;
-    view-transition-name: drawer-right;
-    transform: translateX(100%);
+
+    /* Animation when popover opens */
+    &:popover-open {
+        animation: drawer-slide-in-left var(--drawer-animation-duration)
+            var(--drawer-animation-easing) forwards;
+    }
 }
 
-.drawer--right.drawer-open {
-    transform: translateX(0);
-}
-
-/* Footer Drawer (Bottom) */
-.drawer--bottom {
+/* ===== FOOTER DRAWER (Bottom) - Full width, grid-controlled height ===== */
+footer[popover] {
+    top: auto;
     bottom: 0;
     left: 0;
     right: 0;
@@ -152,206 +199,47 @@
     border-radius: var(--drawer-border-radius) var(--drawer-border-radius) 0 0;
     border-bottom: none;
     padding-bottom: env(safe-area-inset-bottom, 0);
-    view-transition-name: drawer-bottom;
-    transform: translateY(100%);
-}
 
-.drawer--bottom.drawer-open {
-    transform: translateY(0);
-}
-
-/* ===== VIEW TRANSITION STYLES ===== */
-/* These styles define how the animations work during view transitions */
-
-/* Backdrop transition */
-.drawer-backdrop {
-    view-transition-name: drawer-backdrop;
-}
-
-::view-transition-group(drawer-backdrop) {
-    animation-duration: var(--drawer-animation-duration);
-    animation-timing-function: var(--drawer-animation-easing);
-}
-
-::view-transition-old(drawer-backdrop),
-::view-transition-new(drawer-backdrop) {
-    animation-duration: var(--drawer-animation-duration);
-    animation-timing-function: var(--drawer-animation-easing);
-}
-
-/* Drawer transition groups */
-::view-transition-group(drawer-top),
-::view-transition-group(drawer-left),
-::view-transition-group(drawer-right),
-::view-transition-group(drawer-bottom) {
-    animation-duration: var(--drawer-animation-duration);
-    animation-timing-function: var(--drawer-animation-easing);
-}
-
-/* Custom animations for each direction */
-::view-transition-old(drawer-top),
-::view-transition-new(drawer-top) {
-    animation-name: slide-top;
-    animation-duration: var(--drawer-animation-duration);
-    animation-timing-function: var(--drawer-animation-easing);
-}
-
-::view-transition-old(drawer-left),
-::view-transition-new(drawer-left) {
-    animation-name: slide-left;
-    animation-duration: var(--drawer-animation-duration);
-    animation-timing-function: var(--drawer-animation-easing);
-}
-
-::view-transition-old(drawer-right),
-::view-transition-new(drawer-right) {
-    animation-name: slide-right;
-    animation-duration: var(--drawer-animation-duration);
-    animation-timing-function: var(--drawer-animation-easing);
-}
-
-::view-transition-old(drawer-bottom),
-::view-transition-new(drawer-bottom) {
-    animation-name: slide-bottom;
-    animation-duration: var(--drawer-animation-duration);
-    animation-timing-function: var(--drawer-animation-easing);
-}
-
-/* ===== KEYFRAME ANIMATIONS ===== */
-@keyframes slide-top {
-    from {
-        transform: translateY(-100%);
-    }
-    to {
-        transform: translateY(0);
-    }
-}
-
-@keyframes slide-left {
-    from {
-        transform: translateX(-100%);
-    }
-    to {
-        transform: translateX(0);
-    }
-}
-
-@keyframes slide-right {
-    from {
-        transform: translateX(100%);
-    }
-    to {
-        transform: translateX(0);
-    }
-}
-
-@keyframes slide-bottom {
-    from {
-        transform: translateY(100%);
-    }
-    to {
-        transform: translateY(0);
-    }
-}
-
-@keyframes fade-in {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes fade-out {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
-}
-
-/* ===== MOBILE OPTIMIZATIONS ===== */
-@media (max-width: 768px) {
-    .drawer--left,
-    .drawer--right {
-        max-width: 85vw;
-    }
-
-    /* Ensure touch targets are adequate */
-    .drawer * {
-        min-height: 44px;
-    }
-
-    /* Handle safe areas on mobile */
-    .drawer--left {
-        padding-top: env(safe-area-inset-top, 0);
-        padding-left: env(safe-area-inset-left, 0);
-    }
-
-    .drawer--right {
-        padding-top: env(safe-area-inset-top, 0);
-        padding-right: env(safe-area-inset-right, 0);
-    }
-
-    .drawer--top {
-        padding-top: env(safe-area-inset-top, 0);
-    }
-
-    .drawer--bottom {
-        padding-bottom: env(safe-area-inset-bottom, 0);
+    /* Animation when popover opens */
+    &:popover-open {
+        animation: drawer-slide-in-up var(--drawer-animation-duration)
+            var(--drawer-animation-easing) forwards;
     }
 }
 
 /* ===== REDUCED MOTION SUPPORT ===== */
 @media (prefers-reduced-motion: reduce) {
-    /* Disable view transitions for users who prefer reduced motion */
-    ::view-transition-group(*),
-    ::view-transition-old(*),
-    ::view-transition-new(*) {
-        animation: none !important;
+    header[popover],
+    nav[popover],
+    aside[popover],
+    footer[popover] {
+        &:popover-open,
+        &:popover-open::backdrop {
+            animation: none !important;
+        }
     }
 
-    .drawer {
-        transition:
-            opacity 0.1s ease,
-            visibility 0.1s ease !important;
-        transform: none !important;
+    /* Provide immediate visibility for reduced motion */
+    header[popover]:popover-open,
+    nav[popover]:popover-open,
+    aside[popover]:popover-open,
+    footer[popover]:popover-open {
+        opacity: 1;
+        transform: none;
     }
 
-    .drawer-backdrop {
-        transition:
-            opacity 0.1s ease,
-            visibility 0.1s ease !important;
-    }
-}
-
-/* ===== FALLBACK STYLES FOR BROWSERS WITHOUT VIEW TRANSITIONS ===== */
-@supports not (view-transition-name: test) {
-    .drawer {
-        transition:
-            opacity var(--drawer-animation-duration)
-                var(--drawer-animation-easing),
-            transform var(--drawer-animation-duration)
-                var(--drawer-animation-easing),
-            visibility var(--drawer-animation-duration)
-                var(--drawer-animation-easing);
-    }
-
-    .drawer-backdrop {
-        transition:
-            opacity var(--drawer-animation-duration)
-                var(--drawer-animation-easing),
-            visibility var(--drawer-animation-duration)
-                var(--drawer-animation-easing);
+    header[popover]:popover-open::backdrop,
+    nav[popover]:popover-open::backdrop,
+    aside[popover]:popover-open::backdrop,
+    footer[popover]:popover-open::backdrop {
+        background-color: var(--drawer-backdrop-color);
+        backdrop-filter: blur(2px);
     }
 }
 
 /* ===== PRINT STYLES ===== */
 @media print {
-    .drawer,
-    .drawer-backdrop {
+    [popover] {
         display: none !important;
     }
 }
