@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme-mode="dark" data-font-scale="md" data-theme-color="cyan"><head>
+<html lang="en" data-signals="{themeMode: 'dark', fontScale: 'md', themeColor: 'cyan'}">
     <head>
         <meta charset="UTF-8">
         <title>Some Usefull CSS</title>
@@ -21,11 +21,11 @@
     </head>
 
     <body data-signals="{windowWidth: window.innerWidth, currentPage: 'home'}" data-on-windowresize="$windowWidth = evt.detail.width">
-        <header id="header" data-on-load="@get('partials/index_header.html')">  </header>
-        <nav    id="nav"    data-on-load="@get('partials/index_nav.html')"  > </nav>
-        <main   id="main"   data-on-load="@get('partials/index_main.html')">  </main>
-        <aside  id="aside"  data-on-load="@get('partials/index_aside.html')"></aside>
-        <footer id="footer" data-on-load="@get('partials/index_footer.html')"></footer>
+        <header id="header" data-on-load="@get('partials/_header.html')">  </header>
+        <nav    id="nav"    data-on-load="@get('partials/_nav.html')"  > </nav>
+        <main   id="main"   data-on-load="@get('partials/_main.html')">  </main>
+        <aside  id="aside"  data-on-load="@get('partials/_aside.html')"></aside>
+        <footer id="footer" data-on-load="@get('partials/_footer.html')"></footer>
 
         <script>
           // Simple window resize handler that dispatches a custom event
