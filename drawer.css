@@ -1,4 +1,4 @@
-/* ===== MODAL DRAWER SYSTEM CSS - ANIMATION BASED ===== */
+/* ===== MODAL DRAWER SYSTEM CSS - IMPROVED STARTING STYLES ===== */
 /* Let the grid system handle sizing, we just handle positioning and animations */
 
 /* CSS Variables */
@@ -10,71 +10,6 @@
     --drawer-border-radius: 12px;
     --drawer-animation-duration: 0.3s;
     --drawer-animation-easing: var(--ease-3, cubic-bezier(0.25, 0, 0.3, 1));
-}
-
-/* ===== KEYFRAME ANIMATIONS ===== */
-@keyframes drawer-fade-in {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes drawer-slide-in-down {
-    from {
-        opacity: 0;
-        transform: translateY(-100%);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes drawer-slide-in-up {
-    from {
-        opacity: 0;
-        transform: translateY(100%);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes drawer-slide-in-right {
-    from {
-        opacity: 0;
-        transform: translateX(-100%);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes drawer-slide-in-left {
-    from {
-        opacity: 0;
-        transform: translateX(100%);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes backdrop-fade-in {
-    from {
-        background-color: rgb(0 0 0 / 0%);
-        backdrop-filter: blur(0px);
-    }
-    to {
-        background-color: var(--drawer-backdrop-color);
-        backdrop-filter: blur(2px);
-    }
 }
 
 /* ===== BASE DRAWER STYLES ===== */
@@ -106,10 +41,6 @@ footer[popover] {
         / auto 1fr auto;
     overflow: hidden;
 
-    /* IMPORTANT: Hidden by default - only show when popover is open */
-    opacity: 0;
-    visibility: hidden;
-
     /* Nested sections maintain structure */
     > header {
         grid-area: header;
@@ -135,22 +66,39 @@ footer[popover] {
         margin-top: var(--gap-size, 6px);
     }
 
-    /* Default backdrop styles */
+    /* Base transition properties for both element and backdrop */
+    &,
+    &::backdrop {
+        transition:
+            display var(--drawer-animation-duration) allow-discrete,
+            overlay var(--drawer-animation-duration) allow-discrete,
+            opacity var(--drawer-animation-duration)
+                var(--drawer-animation-easing),
+            transform var(--drawer-animation-duration)
+                var(--drawer-animation-easing),
+            background-color var(--drawer-animation-duration)
+                var(--drawer-animation-easing),
+            backdrop-filter var(--drawer-animation-duration)
+                var(--drawer-animation-easing);
+    }
+
+    /* Exit stage - default state */
+    opacity: 0;
+
+    /* Backdrop default state */
     &::backdrop {
         background-color: rgb(0 0 0 / 0%);
         backdrop-filter: blur(0px);
     }
 
-    /* Show when popover is open */
+    /* On stage - when popover is open */
     &:popover-open {
         opacity: 1;
-        visibility: visible;
-    }
 
-    /* Backdrop animation when popover opens */
-    &:popover-open::backdrop {
-        animation: backdrop-fade-in var(--drawer-animation-duration)
-            var(--drawer-animation-easing) forwards;
+        &::backdrop {
+            background-color: var(--drawer-backdrop-color);
+            backdrop-filter: blur(2px);
+        }
     }
 }
 
@@ -163,10 +111,24 @@ header[popover] {
     border-radius: 0 0 var(--drawer-border-radius) var(--drawer-border-radius);
     border-top: none;
 
-    /* Animation when popover opens */
+    /* Exit stage to */
+    transform: translateY(-100%);
+
+    /* On stage */
     &:popover-open {
-        animation: drawer-slide-in-down var(--drawer-animation-duration)
-            var(--drawer-animation-easing) forwards;
+        transform: translateY(0);
+    }
+
+    /* Enter stage from */
+    @starting-style {
+        &:popover-open,
+        &:popover-open::backdrop {
+            opacity: 0;
+        }
+
+        &:popover-open {
+            transform: translateY(-100%);
+        }
     }
 }
 
@@ -177,10 +139,24 @@ nav[popover] {
     border-radius: 0 var(--drawer-border-radius) var(--drawer-border-radius) 0;
     border-left: none;
 
-    /* Animation when popover opens */
+    /* Exit stage to */
+    transform: translateX(-100%);
+
+    /* On stage */
     &:popover-open {
-        animation: drawer-slide-in-right var(--drawer-animation-duration)
-            var(--drawer-animation-easing) forwards;
+        transform: translateX(0);
+    }
+
+    /* Enter stage from */
+    @starting-style {
+        &:popover-open,
+        &:popover-open::backdrop {
+            opacity: 0;
+        }
+
+        &:popover-open {
+            transform: translateX(-100%);
+        }
     }
 }
 
@@ -192,10 +168,24 @@ aside[popover] {
     border-radius: var(--drawer-border-radius) 0 0 var(--drawer-border-radius);
     border-right: none;
 
-    /* Animation when popover opens */
+    /* Exit stage to */
+    transform: translateX(100%);
+
+    /* On stage */
     &:popover-open {
-        animation: drawer-slide-in-left var(--drawer-animation-duration)
-            var(--drawer-animation-easing) forwards;
+        transform: translateX(0);
+    }
+
+    /* Enter stage from */
+    @starting-style {
+        &:popover-open,
+        &:popover-open::backdrop {
+            opacity: 0;
+        }
+
+        &:popover-open {
+            transform: translateX(100%);
+        }
     }
 }
 
@@ -210,10 +200,24 @@ footer[popover] {
     border-bottom: none;
     padding-bottom: env(safe-area-inset-bottom, 0);
 
-    /* Animation when popover opens */
+    /* Exit stage to */
+    transform: translateY(100%);
+
+    /* On stage */
     &:popover-open {
-        animation: drawer-slide-in-up var(--drawer-animation-duration)
-            var(--drawer-animation-easing) forwards;
+        transform: translateY(0);
+    }
+
+    /* Enter stage from */
+    @starting-style {
+        &:popover-open,
+        &:popover-open::backdrop {
+            opacity: 0;
+        }
+
+        &:popover-open {
+            transform: translateY(100%);
+        }
     }
 }
 
@@ -223,33 +227,16 @@ footer[popover] {
     nav[popover],
     aside[popover],
     footer[popover] {
-        &:popover-open,
-        &:popover-open::backdrop {
-            animation: none !important;
+        &,
+        &::backdrop {
+            transition: none !important;
         }
-    }
 
-    /* Provide immediate visibility for reduced motion */
-    header[popover]:popover-open,
-    nav[popover]:popover-open,
-    aside[popover]:popover-open,
-    footer[popover]:popover-open {
-        opacity: 1;
-        transform: none;
-    }
-
-    header[popover]:popover-open::backdrop,
-    nav[popover]:popover-open::backdrop,
-    aside[popover]:popover-open::backdrop,
-    footer[popover]:popover-open::backdrop {
-        background-color: var(--drawer-backdrop-color);
-        backdrop-filter: blur(2px);
-    }
-}
-
-/* ===== PRINT STYLES ===== */
-@media print {
-    [popover] {
-        display: none !important;
+        @starting-style {
+            &:popover-open {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
     }
 }
