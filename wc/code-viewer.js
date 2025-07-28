@@ -255,8 +255,8 @@ class CodeViewer extends HTMLElement {
 
     try {
       // Handle data URLs
-      if (src.startsWith('data:')) {
-        const code = decodeURIComponent(src.split(',')[1] || '');
+      if (src.startsWith("data:")) {
+        const code = decodeURIComponent(src.split(",")[1] || "");
         this.codeContent = code;
         this.displayCode(code);
         return;
@@ -339,16 +339,22 @@ class CodeViewer extends HTMLElement {
 
     // Define Datastar Pro attributes (check these first for proper coloring)
     const proDatastarAttrs = [
-      'data-animate', 'data-custom-validity', 'data-on-raf', 'data-on-resize',
-      'data-persist', 'data-query-string', 'data-replace-url', 'data-scroll-into-view',
-      'data-view-transition'
+      "data-animate",
+      "data-custom-validity",
+      "data-on-raf",
+      "data-on-resize",
+      "data-persist",
+      "data-query-string",
+      "data-replace-url",
+      "data-scroll-into-view",
+      "data-view-transition",
     ];
 
     // Handle Pro attributes first with special styling
-    proDatastarAttrs.forEach(attr => {
+    proDatastarAttrs.forEach((attr) => {
       const regex = new RegExp(
         `(${this.escapeRegex(attr)}(?:-[\\w-]+)*(?:__[\\w.-]+)*)\\s*=\\s*(&quot;[^&quot;]*&quot;|'[^']*')`,
-        'gi'
+        "gi",
       );
 
       highlighted = highlighted.replace(regex, (match, attrName, attrValue) => {
@@ -369,7 +375,7 @@ class CodeViewer extends HTMLElement {
 
         const highlightedValue = this.highlightDatastarExpression(attrValue);
         return `<span class="datastar-attr">${attrName}</span>${equals}<span class="datastar-value">${highlightedValue}</span>`;
-      }
+      },
     );
 
     // Handle data-* attributes without values (like data-ignore-morph)
@@ -381,140 +387,36 @@ class CodeViewer extends HTMLElement {
           return match;
         }
         return ` <span class="datastar-attr">${attrName}</span>`;
-      }
+      },
     );
 
     // Handle regular attributes (non data-*)
     highlighted = highlighted.replace(
       /(?<!<span class="[\w-]*">)\s([a-zA-Z][\w-]*)(\s*=\s*)(&quot;[^&quot;]*&quot;|'[^']*')/g,
       (match, attrName, equals, attrValue) => {
-        if (!attrName.startsWith('data-') && !match.includes('<span class="')) {
+        if (!attrName.startsWith("data-") && !match.includes('<span class="')) {
           return ` <span class="attribute">${attrName}</span>${equals}<span class="value">${attrValue}</span>`;
         }
         return match;
-      }
+      },
     );
 
     // Handle regular attributes without values
     highlighted = highlighted.replace(
       /\s([a-zA-Z][\w-]*)(?=\s|&gt;)/g,
       (match, attrName) => {
-        if (!attrName.startsWith('data-') && !match.includes('<span class="')) {
+        if (!attrName.startsWith("data-") && !match.includes('<span class="')) {
           return ` <span class="attribute">${attrName}</span>`;
         }
         return match;
-      }
+      },
     );
 
     return highlighted;
   }
 
   escapeRegex(string) {
-    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\  highlightHTML(code) {
-    let highlighted = this.escapeHtml(code);
-
-    // Handle DOCTYPE
-    highlighted = highlighted.replace(
-      /(&lt;!DOCTYPE[^&gt;]*&gt;)/gi,
-      '<span class="doctype">$1</span>',
-    );
-
-    // Handle comments
-    highlighted = highlighted.replace(
-      /(&lt;!--[\s\S]*?--&gt;)/g,
-      '<span class="comment">$1</span>',
-    );
-
-    // Handle opening and closing tags
-    highlighted = highlighted.replace(
-      /(&lt;\/?)([\w-]+)/g,
-      '$1<span class="tag">$2</span>',
-    );
-
-    // Define Datastar core attributes
-    const coreDatastarAttrs = [
-      'data-attr', 'data-bind', 'data-class', 'data-computed', 'data-effect',
-      'data-ignore', 'data-ignore-morph', 'data-indicator', 'data-json-signals',
-      'data-on', 'data-on-intersect', 'data-on-interval', 'data-on-load',
-      'data-on-signal-patch', 'data-on-signal-patch-filter', 'data-preserve-attr',
-      'data-ref', 'data-show', 'data-signals', 'data-style', 'data-text'
-    ];
-
-    // Define Datastar Pro attributes
-    const proDatastarAttrs = [
-      'data-animate', 'data-custom-validity', 'data-on-raf', 'data-on-resize',
-      'data-persist', 'data-query-string', 'data-replace-url', 'data-scroll-into-view',
-      'data-view-transition'
-    ];
-
-    // Enhanced Datastar attribute highlighting with modifiers and sub-attributes
-    // Handle core Datastar attributes with their variations and modifiers
-    coreDatastarAttrs.forEach(attr => {
-      const baseAttr = attr.replace('data-', '');
-
-      // Match the attribute with optional suffixes, modifiers, and values
-      const regex = new RegExp(
-        `(${attr}(?:-[\\w-]+)*(?:__[\\w.-]+)*)\\s*=\\s*(&quot;[^&quot;]*&quot;|'[^']*')`,
-        'gi'
-      );
-
-      highlighted = highlighted.replace(regex, (match, attrName, attrValue) => {
-        // Highlight the attribute value content for Datastar expressions
-        const highlightedValue = this.highlightDatastarExpression(attrValue);
-        return `<span class="datastar-attr">${attrName}</span>=<span class="datastar-value">${highlightedValue}</span>`;
-      });
-    });
-
-    // Handle Pro attributes with special styling
-    proDatastarAttrs.forEach(attr => {
-      const regex = new RegExp(
-        `(${attr}(?:-[\\w-]+)*(?:__[\\w.-]+)*)\\s*=\\s*(&quot;[^&quot;]*&quot;|'[^']*')`,
-        'gi'
-      );
-
-      highlighted = highlighted.replace(regex, (match, attrName, attrValue) => {
-        const highlightedValue = this.highlightDatastarExpression(attrValue);
-        return `<span class="datastar-pro-attr">${attrName}</span>=<span class="datastar-value">${highlightedValue}</span>`;
-      });
-    });
-
-    // Handle generic data-* attributes that might be custom Datastar extensions
-    highlighted = highlighted.replace(
-      /(data-[\w-]+(?:__[\w.-]+)*)(\s*=\s*)(&quot;[^&quot;]*&quot;|'[^']*')/g,
-      (match, attrName, equals, attrValue) => {
-        // If it's not already highlighted as a core or pro attribute
-        if (!match.includes('<span class="datastar-')) {
-          const highlightedValue = this.highlightDatastarExpression(attrValue);
-          return `<span class="datastar-attr">${attrName}</span>${equals}<span class="datastar-value">${highlightedValue}</span>`;
-        }
-        return match;
-      }
-    );
-
-    // Handle regular attributes (but not data-* ones that were already handled)
-    highlighted = highlighted.replace(
-      /(?<!<span class="[\w-]*">)([\w-]+)(\s*=\s*)(&quot;[^&quot;]*&quot;|'[^']*')/g,
-      (match, attrName, equals, attrValue) => {
-        if (!attrName.startsWith('data-')) {
-          return `<span class="attribute">${attrName}</span>${equals}<span class="value">${attrValue}</span>`;
-        }
-        return match;
-      }
-    );
-
-    // Handle attributes without values
-    highlighted = highlighted.replace(
-      /\s([\w-]+)(?=\s|&gt;)/g,
-      (match, attrName) => {
-        if (attrName.startsWith('data-')) {
-          return ` <span class="datastar-attr">${attrName}</span>`;
-        }
-        return ` <span class="attribute">${attrName}</span>`;
-      }
-    );
-
-    return highlighted;
-  }');
+    return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   }
 
   highlightDatastarExpression(attrValue) {
@@ -526,37 +428,37 @@ class CodeViewer extends HTMLElement {
     // Highlight signals ($variable including nested like $user.name)
     highlighted = highlighted.replace(
       /(\$[\w.]+)/g,
-      '<span class="datastar-signal">$1</span>'
+      '<span class="datastar-signal">$1</span>',
     );
 
     // Highlight actions (@action with parentheses)
     highlighted = highlighted.replace(
       /(@[\w]+(?:\([^)]*\))?)/g,
-      '<span class="datastar-action">$1</span>'
+      '<span class="datastar-action">$1</span>',
     );
 
     // Highlight JavaScript operators and comparison
     highlighted = highlighted.replace(
       /(\s*)(===|!==|==|!=|&&|\|\||[+\-*/%=<>!]|\?|:)(\s*)/g,
-      '$1<span class="keyword">$2</span>$3'
+      '$1<span class="keyword">$2</span>$3',
     );
 
     // Highlight string literals within expressions (but not the whole expression)
     highlighted = highlighted.replace(
       /('(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*")/g,
-      '<span class="string">$1</span>'
+      '<span class="string">$1</span>',
     );
 
     // Highlight numbers
     highlighted = highlighted.replace(
       /\b(\d+(?:\.\d+)?)\b/g,
-      '<span class="value">$1</span>'
+      '<span class="value">$1</span>',
     );
 
     // Highlight boolean and null values
     highlighted = highlighted.replace(
       /\b(true|false|null|undefined)\b/g,
-      '<span class="keyword">$1</span>'
+      '<span class="keyword">$1</span>',
     );
 
     // Return with quotes, but don't style the outer quotes
@@ -572,9 +474,30 @@ class CodeViewer extends HTMLElement {
 
   highlightJS(code) {
     const keywords = [
-      "function", "var", "let", "const", "if", "else", "for", "while", "return",
-      "class", "extends", "import", "export", "default", "async", "await",
-      "try", "catch", "finally", "throw", "new", "this", "super", "static"
+      "function",
+      "var",
+      "let",
+      "const",
+      "if",
+      "else",
+      "for",
+      "while",
+      "return",
+      "class",
+      "extends",
+      "import",
+      "export",
+      "default",
+      "async",
+      "await",
+      "try",
+      "catch",
+      "finally",
+      "throw",
+      "new",
+      "this",
+      "super",
+      "static",
     ];
 
     let highlighted = this.escapeHtml(code);
@@ -594,10 +517,33 @@ class CodeViewer extends HTMLElement {
 
   highlightPython(code) {
     const keywords = [
-      "def", "class", "if", "elif", "else", "for", "while", "return",
-      "import", "from", "as", "try", "except", "finally", "raise", "with",
-      "lambda", "and", "or", "not", "in", "is", "None", "True", "False",
-      "async", "await"
+      "def",
+      "class",
+      "if",
+      "elif",
+      "else",
+      "for",
+      "while",
+      "return",
+      "import",
+      "from",
+      "as",
+      "try",
+      "except",
+      "finally",
+      "raise",
+      "with",
+      "lambda",
+      "and",
+      "or",
+      "not",
+      "in",
+      "is",
+      "None",
+      "True",
+      "False",
+      "async",
+      "await",
     ];
 
     let highlighted = this.escapeHtml(code);
