@@ -21,11 +21,11 @@
     </head>
 
     <body data-signals="{windowWidth: window.innerWidth, currentPage: 'home'}" data-on-windowresize="$windowWidth = evt.detail.width">
-        <header id="header" data-on-load="@get('partials/_header.html')">  </header>
-        <nav    id="nav"    data-on-load="@get('partials/_nav.html')"  > </nav>
-        <main   id="main"   data-on-load="@get('partials/_main.html')">  </main>
-        <aside  id="aside"  data-on-load="@get('partials/_aside.html')"></aside>
-        <footer id="footer" data-on-load="@get('partials/_footer.html')"></footer>
+        <header id="header" data-on-load="@get('partials/index-header.html')">  </header>
+        <nav    id="nav"    data-on-load="@get('partials/index-nav.html')"  > </nav>
+        <main   id="main"   data-on-load="@get('partials/index-main.html')">  </main>
+        <aside  id="aside"  data-on-load="@get('partials/index-aside.html')"></aside>
+        <footer id="footer" data-on-load="@get('partials/index-footer.html')"></footer>
 
         <script>
           // Simple window resize handler that dispatches a custom event
