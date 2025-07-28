@@ -28,8 +28,6 @@
         <footer id="footer" data-on-load="@get('partials/index_footer.html')"></footer>
 
         <script>
-          // Forces Mobile browsers to use :active pseudo class
-          document.addEventListener('touchstart', () => {}, { passive: true });
           // Simple window resize handler that dispatches a custom event
           addEventListener('resize', () =>
               document.body.dispatchEvent(new CustomEvent('windowresize', {
@@ -37,6 +35,5 @@
               }))
           );
         </script>
-
     </body>
 </html>
