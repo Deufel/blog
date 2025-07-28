@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datastar Tab System with data-ignore-morph</title>
+    <script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@main/bundles/datastar.js"></script>
+    <style>
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+
+        .tabs button {
+            background: none;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tabs button[aria-selected="true"] {
+            border-bottom-color: #007bff;
+            background-color: #f0f8ff;
+        }
+
+        #main-main {
+            min-height: 200px;
+            padding: 20px;
+            border: 1px solid #eee;
+            background-color: #fafafa;
+        }
+
+        .loading {
+            opacity: 0.5;
+        }
+
+        .control-panel {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<main id="main">
+    <header id="main-header">
+        <nav class="tabs underlined">
+            <div role="tablist" aria-label="CSS Action Component Examples" data-signals-currentTab="'button'">
+                <button id="button" role="tab"
+                    data-attr-aria-selected="$currentTab === 'button' ? 'true' : null"
+                    data-attr-tabindex="$currentTab === 'button' ? '0' : '-1'"
+                    data-on-click="$currentTab = 'button'"
+                >
+                   Button
+                </button>
+                <button id="button-group" role="tab"
+                    data-attr-aria-selected="$currentTab === 'button-group' ? 'true' : null"
+                    data-attr-tabindex="$currentTab === 'button-group' ? '0' : '-1'"
+                    data-on-click="$currentTab = 'button-group'"
+                >
+                   Button Group
+                </button>
+                <button id="icon-button" role="tab"
+                    data-attr-aria-selected="$currentTab === 'icon-button' ? 'true' : null"
+                    data-attr-tabindex="$currentTab === 'icon-button' ? '0' : '-1'"
+                    data-on-click="$currentTab = 'icon-button'"
+                >
+                   Icon Button
+                </button>
+                <button id="toggle-button" role="tab"
+                    data-attr-aria-selected="$currentTab === 'toggle-button' ? 'true' : null"
+                    data-attr-tabindex="$currentTab === 'toggle-button' ? '0' : '-1'"
+                    data-on-click="$currentTab = 'toggle-button'"
+                >
+                   Toggle Button
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Control panel that will NOT be morphed when content updates -->
+    <div class="control-panel"
+         data-ignore-morph
+         data-signals-lastLoadedTab="null"
+         data-effect="$currentTab && $currentTab !== $lastLoadedTab && (@get('partials/button/' + $currentTab + '.html'), $lastLoadedTab = $currentTab)"
+         data-indicator-loading
+         data-class-loading="$loading">
+
+        <h3>Control Panel (Protected from morphing)</h3>
+        <p>Current Tab: <span data-text="$currentTab"></span></p>
+        <p>Last Loaded: <span data-text="$lastLoadedTab"></span></p>
+        <p>Loading: <span data-text="$loading ? 'Yes' : 'No'"></span></p>
+
+        <!-- This loading indicator will work properly because this div won't be morphed -->
+        <div data-show="$loading" style="color: orange;">🔄 Loading content...</div>
+    </div>
+
+    <nav id="main-nav"></nav>
+    <main id="main-main">
+        <!-- This content WILL be morphed when responses come back -->
+        <div data-show="!$currentTab">Select a tab to view content</div>
+    </main>
+    <aside id="main-aside"></aside>
+    <footer id="main-footer"></footer>
+</main>
+
+<!-- Mock server responses for demonstration -->
+<script>
+// This is just for demonstration - in a real app, your server would handle these routes
+if (typeof window !== 'undefined') {
+    const originalFetch = window.fetch;
+    window.fetch = function(url, options) {
+        if (url.includes('partials/button/')) {
+            const tabName = url.split('/').pop().replace('.html', '');
+
+            // Simulate some delay to see the loading state
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    const mockContent = `
+                        <div id="main-main">
+                            <h2>${tabName.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())} Content</h2>
+                            <p>This is the content for the ${tabName} tab.</p>
+                            <p>Loaded at: ${new Date().toLocaleTimeString()}</p>
+                            <p>Request count: ${Math.floor(Math.random() * 100)}</p>
+
+                            <!-- Some dynamic content to show morphing works -->
+                            <div style="background: #e8f4f8; padding: 10px; margin: 10px 0;">
+                                <strong>Dynamic Content:</strong>
+                                <ul>
+                                    <li>Tab: ${tabName}</li>
+                                    <li>Timestamp: ${Date.now()}</li>
+                                    <li>Random: ${Math.random().toFixed(4)}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    `;
+
+                    resolve(new Response(mockContent, {
+                        headers: { 'Content-Type': 'text/html' }
+                    }));
+                }, 500); // 500ms delay to simulate network
+            });
+        }
+        return originalFetch.apply(this, arguments);
+    };
+}
+</script>
+
+</body>
+</html>

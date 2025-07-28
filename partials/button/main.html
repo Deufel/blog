@@ -35,15 +35,26 @@
                  </button>
              </div>
         </nav>
+        <!-- Control panel that will NOT be morphed when content updates -->
+        <div class="control-panel"
+             data-ignore-morph
+             data-signals-lastLoadedTab="null"
+             data-effect="$currentTab && $currentTab !== $lastLoadedTab && (@get('partials/button/' + $currentTab + '.html'), $lastLoadedTab = $currentTab)"
+             data-indicator-loading
+             data-class-loading="$loading">
+
+            <h3>Control Panel (Protected from morphing)</h3>
+            <p>Current Tab: <span data-text="$currentTab"></span></p>
+            <p>Last Loaded: <span data-text="$lastLoadedTab"></span></p>
+            <p>Loading: <span data-text="$loading ? 'Yes' : 'No'"></span></p>
+
+            <!-- This loading indicator will work properly because this div won't be morphed -->
+            <div data-show="$loading" style="color: orange;">🔄 Loading content...</div>
+        </div>
     </header>
 
     <nav    id="main-nav"></nav>
-    <main id="main-main"
-        data-effect="$currentTab && @get('partials/button/' + $currentTab + '.html')"
-        data-indicator-loading
-        data-class-loading="$loading"
-    >
-    </main>
+    <main id="main-main"> </main>
     <aside  id="main-aside"> </aside>
     <footer id="main-footer"></footer>
 </main>
