@@ -66,30 +66,39 @@ footer[popover] {
         margin-top: var(--gap-size, 6px);
     }
 
-    /* Animation properties */
-    transition:
-        opacity var(--drawer-animation-duration) var(--drawer-animation-easing),
-        transform var(--drawer-animation-duration)
-            var(--drawer-animation-easing),
-        overlay var(--drawer-animation-duration) allow-discrete,
-        display var(--drawer-animation-duration) allow-discrete;
-
-    /* Backdrop */
+    /* Base animation properties for all drawers */
+    &,
     &::backdrop {
-        background-color: rgb(0 0 0 / 0%);
-        backdrop-filter: blur(0px);
         transition:
+            display var(--drawer-animation-duration) allow-discrete,
+            overlay var(--drawer-animation-duration) allow-discrete,
+            opacity var(--drawer-animation-duration)
+                var(--drawer-animation-easing),
+            transform var(--drawer-animation-duration)
+                var(--drawer-animation-easing),
             background-color var(--drawer-animation-duration)
                 var(--drawer-animation-easing),
             backdrop-filter var(--drawer-animation-duration)
-                var(--drawer-animation-easing),
-            overlay var(--drawer-animation-duration) allow-discrete,
-            display var(--drawer-animation-duration) allow-discrete;
+                var(--drawer-animation-easing);
+
+        /* Exit Stage To */
+        opacity: 0;
     }
 
-    &:popover-open::backdrop {
-        background-color: var(--drawer-backdrop-color);
-        backdrop-filter: blur(2px);
+    /* On Stage */
+    &:popover-open {
+        opacity: 1;
+
+        &::backdrop {
+            background-color: var(--drawer-backdrop-color);
+            backdrop-filter: blur(2px);
+        }
+    }
+
+    /* Backdrop styling */
+    &::backdrop {
+        background-color: rgb(0 0 0 / 0%);
+        backdrop-filter: blur(0px);
     }
 }
 
@@ -99,23 +108,27 @@ header[popover] {
     left: 0;
     right: 0;
     width: 100%;
-    /* Height handled by grid system */
     border-radius: 0 0 var(--drawer-border-radius) var(--drawer-border-radius);
     border-top: none;
 
+    /* Exit Stage To */
+    transform: translateY(-100%);
+
+    /* On Stage */
     &:popover-open {
-        opacity: 1;
         transform: translateY(0);
     }
 
-    opacity: 0;
-    transform: translateY(-100%);
-}
+    /* Enter Stage From */
+    @starting-style {
+        &:popover-open,
+        &:popover-open::backdrop {
+            opacity: 0;
+        }
 
-@starting-style {
-    header[popover]:popover-open {
-        opacity: 0;
-        transform: translateY(-100%);
+        &:popover-open {
+            transform: translateY(-100%);
+        }
     }
 }
 
@@ -126,19 +139,24 @@ nav[popover] {
     border-radius: 0 var(--drawer-border-radius) var(--drawer-border-radius) 0;
     border-left: none;
 
+    /* Exit Stage To */
+    transform: translateX(-100%);
+
+    /* On Stage */
     &:popover-open {
-        opacity: 1;
         transform: translateX(0);
     }
 
-    opacity: 0;
-    transform: translateX(-100%);
-}
+    /* Enter Stage From */
+    @starting-style {
+        &:popover-open,
+        &:popover-open::backdrop {
+            opacity: 0;
+        }
 
-@starting-style {
-    nav[popover]:popover-open {
-        opacity: 0;
-        transform: translateX(-100%);
+        &:popover-open {
+            transform: translateX(-100%);
+        }
     }
 }
 
@@ -150,19 +168,24 @@ aside[popover] {
     border-radius: var(--drawer-border-radius) 0 0 var(--drawer-border-radius);
     border-right: none;
 
+    /* Exit Stage To */
+    transform: translateX(100%);
+
+    /* On Stage */
     &:popover-open {
-        opacity: 1;
         transform: translateX(0);
     }
 
-    opacity: 0;
-    transform: translateX(100%);
-}
+    /* Enter Stage From */
+    @starting-style {
+        &:popover-open,
+        &:popover-open::backdrop {
+            opacity: 0;
+        }
 
-@starting-style {
-    aside[popover]:popover-open {
-        opacity: 0;
-        transform: translateX(100%);
+        &:popover-open {
+            transform: translateX(100%);
+        }
     }
 }
 
@@ -173,35 +196,28 @@ footer[popover] {
     left: 0;
     right: 0;
     width: 100%;
-    /* Height handled by grid system */
     border-radius: var(--drawer-border-radius) var(--drawer-border-radius) 0 0;
     border-bottom: none;
     padding-bottom: env(safe-area-inset-bottom, 0);
 
+    /* Exit Stage To */
+    transform: translateY(100%);
+
+    /* On Stage */
     &:popover-open {
-        opacity: 1;
         transform: translateY(0);
     }
 
-    opacity: 0;
-    transform: translateY(100%);
-}
+    /* Enter Stage From */
+    @starting-style {
+        &:popover-open,
+        &:popover-open::backdrop {
+            opacity: 0;
+        }
 
-@starting-style {
-    footer[popover]:popover-open {
-        opacity: 0;
-        transform: translateY(100%);
-    }
-}
-
-/* ===== BACKDROP STARTING STYLES ===== */
-@starting-style {
-    header[popover]:popover-open::backdrop,
-    nav[popover]:popover-open::backdrop,
-    aside[popover]:popover-open::backdrop,
-    footer[popover]:popover-open::backdrop {
-        background-color: rgb(0 0 0 / 0%);
-        backdrop-filter: blur(0px);
+        &:popover-open {
+            transform: translateY(100%);
+        }
     }
 }
 
@@ -211,15 +227,17 @@ footer[popover] {
     nav[popover],
     aside[popover],
     footer[popover] {
-        transition: none !important;
-    }
+        &,
+        &::backdrop {
+            transition: none !important;
+        }
 
-    @starting-style {
-        header[popover]:popover-open,
-        nav[popover]:popover-open,
-        aside[popover]:popover-open,
-        footer[popover] 1 !important;
-            transform: none !important;
+        @starting-style {
+            &:popover-open,
+            &:popover-open::backdrop {
+                opacity: 1 !important;
+                transform: none !important;
+            }
         }
     }
 }
