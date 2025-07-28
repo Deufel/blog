@@ -164,16 +164,67 @@ class CodeViewer extends HTMLElement {
                         .attribute { color: #0550ae; }
                         .value { color: #032f62; }
                         .doctype { color: #6f42c1; font-weight: bold; }
+
+                        /* Enhanced Datastar attribute highlighting */
                         .datastar-attr {
                             color: #8250df;
                             font-weight: bold;
-                            background: rgba(130, 80, 223, 0.1);
-                            padding: 1px 2px;
-                            border-radius: 2px;
+                            background: linear-gradient(90deg, rgba(130, 80, 223, 0.15) 0%, rgba(130, 80, 223, 0.08) 100%);
+                            padding: 1px 3px;
+                            border-radius: 3px;
+                            border-left: 2px solid #8250df;
                         }
+
                         .datastar-value {
                             color: #0969da;
                             font-weight: 500;
+                            background: rgba(9, 105, 218, 0.08);
+                            padding: 1px 2px;
+                            border-radius: 2px;
+                        }
+
+                        .datastar-signal {
+                            color: #e36209;
+                            font-weight: bold;
+                            background: rgba(227, 98, 9, 0.1);
+                            padding: 0 1px;
+                            border-radius: 2px;
+                        }
+
+                        .datastar-action {
+                            color: #d1242f;
+                            font-weight: bold;
+                            background: rgba(209, 36, 47, 0.1);
+                            padding: 0 1px;
+                            border-radius: 2px;
+                        }
+
+                        .datastar-modifier {
+                            color: #6f42c1;
+                            font-weight: 500;
+                            font-style: italic;
+                        }
+
+                        /* Pro attribute highlighting */
+                        .datastar-pro-attr {
+                            color: #d4a72c;
+                            font-weight: bold;
+                            background: linear-gradient(90deg, rgba(212, 167, 44, 0.15) 0%, rgba(212, 167, 44, 0.08) 100%);
+                            padding: 1px 3px;
+                            border-radius: 3px;
+                            border-left: 2px solid #d4a72c;
+                            position: relative;
+                        }
+
+                        .datastar-pro-attr::after {
+                            content: "PRO";
+                            position: absolute;
+                            top: -8px;
+                            right: -2px;
+                            font-size: 8px;
+                            color: #d4a72c;
+                            font-weight: bold;
+                            opacity: 0.7;
                         }
                     </style>
 
@@ -203,6 +254,14 @@ class CodeViewer extends HTMLElement {
     }
 
     try {
+      // Handle data URLs
+      if (src.startsWith("data:")) {
+        const code = decodeURIComponent(src.split(",")[1] || "");
+        this.codeContent = code;
+        this.displayCode(code);
+        return;
+      }
+
       const response = await fetch(src);
       if (!response.ok) {
         throw new Error(
@@ -278,31 +337,140 @@ class CodeViewer extends HTMLElement {
       '$1<span class="tag">$2</span>',
     );
 
-    // Handle data-* attributes with special highlighting
+    // Define Datastar core attributes
+    const coreDatastarAttrs = [
+      "data-attr",
+      "data-bind",
+      "data-class",
+      "data-computed",
+      "data-effect",
+      "data-ignore",
+      "data-ignore-morph",
+      "data-indicator",
+      "data-json-signals",
+      "data-on",
+      "data-on-intersect",
+      "data-on-interval",
+      "data-on-load",
+      "data-on-signal-patch",
+      "data-on-signal-patch-filter",
+      "data-preserve-attr",
+      "data-ref",
+      "data-show",
+      "data-signals",
+      "data-style",
+      "data-text",
+    ];
+
+    // Define Datastar Pro attributes
+    const proDatastarAttrs = [
+      "data-animate",
+      "data-custom-validity",
+      "data-on-raf",
+      "data-on-resize",
+      "data-persist",
+      "data-query-string",
+      "data-replace-url",
+      "data-scroll-into-view",
+      "data-view-transition",
+    ];
+
+    // Enhanced Datastar attribute highlighting with modifiers and sub-attributes
+    // Handle core Datastar attributes with their variations and modifiers
+    coreDatastarAttrs.forEach((attr) => {
+      const baseAttr = attr.replace("data-", "");
+
+      // Match the attribute with optional suffixes, modifiers, and values
+      const regex = new RegExp(
+        `(${attr}(?:-[\\w-]+)*(?:__[\\w.-]+)*)\\s*=\\s*(&quot;[^&quot;]*&quot;|'[^']*')`,
+        "gi",
+      );
+
+      highlighted = highlighted.replace(regex, (match, attrName, attrValue) => {
+        // Highlight the attribute value content for Datastar expressions
+        const highlightedValue = this.highlightDatastarExpression(attrValue);
+        return `<span class="datastar-attr">${attrName}</span>=<span class="datastar-value">${highlightedValue}</span>`;
+      });
+    });
+
+    // Handle Pro attributes with special styling
+    proDatastarAttrs.forEach((attr) => {
+      const regex = new RegExp(
+        `(${attr}(?:-[\\w-]+)*(?:__[\\w.-]+)*)\\s*=\\s*(&quot;[^&quot;]*&quot;|'[^']*')`,
+        "gi",
+      );
+
+      highlighted = highlighted.replace(regex, (match, attrName, attrValue) => {
+        const highlightedValue = this.highlightDatastarExpression(attrValue);
+        return `<span class="datastar-pro-attr">${attrName}</span>=<span class="datastar-value">${highlightedValue}</span>`;
+      });
+    });
+
+    // Handle generic data-* attributes that might be custom Datastar extensions
     highlighted = highlighted.replace(
-      /(data-[\w-]+)(\s*=\s*)(&quot;[^&quot;]*&quot;|'[^']*')/g,
-      '<span class="datastar-attr">$1</span>$2<span class="datastar-value">$3</span>',
+      /(data-[\w-]+(?:__[\w.-]+)*)(\s*=\s*)(&quot;[^&quot;]*&quot;|'[^']*')/g,
+      (match, attrName, equals, attrValue) => {
+        // If it's not already highlighted as a core or pro attribute
+        if (!match.includes('<span class="datastar-')) {
+          const highlightedValue = this.highlightDatastarExpression(attrValue);
+          return `<span class="datastar-attr">${attrName}</span>${equals}<span class="datastar-value">${highlightedValue}</span>`;
+        }
+        return match;
+      },
     );
 
     // Handle regular attributes (but not data-* ones that were already handled)
     highlighted = highlighted.replace(
-      /(?<!data-[\w-])\b([\w-]+)(\s*=\s*)(&quot;[^&quot;]*&quot;|'[^']*')/g,
-      '<span class="attribute">$1</span>$2<span class="value">$3</span>',
+      /(?<!<span class="[\w-]*">)([\w-]+)(\s*=\s*)(&quot;[^&quot;]*&quot;|'[^']*')/g,
+      (match, attrName, equals, attrValue) => {
+        if (!attrName.startsWith("data-")) {
+          return `<span class="attribute">${attrName}</span>${equals}<span class="value">${attrValue}</span>`;
+        }
+        return match;
+      },
     );
 
-    // Handle attributes without values (like aria-selected, tabindex, etc.)
+    // Handle attributes without values
     highlighted = highlighted.replace(
       /\s([\w-]+)(?=\s|&gt;)/g,
-      ' <span class="attribute">$1</span>',
-    );
-
-    // Fix any double-highlighted data attributes
-    highlighted = highlighted.replace(
-      /<span class="attribute">(data-[\w-]+)<\/span>/g,
-      '<span class="datastar-attr">$1</span>',
+      (match, attrName) => {
+        if (attrName.startsWith("data-")) {
+          return ` <span class="datastar-attr">${attrName}</span>`;
+        }
+        return ` <span class="attribute">${attrName}</span>`;
+      },
     );
 
     return highlighted;
+  }
+
+  highlightDatastarExpression(attrValue) {
+    // Remove quotes for processing
+    let content = attrValue.slice(1, -1); // Remove surrounding quotes
+    let highlighted = content;
+
+    // Highlight signals ($variable)
+    highlighted = highlighted.replace(
+      /(\$[\w.]+)/g,
+      '<span class="datastar-signal">$1</span>',
+    );
+
+    // Highlight actions (@action)
+    highlighted = highlighted.replace(
+      /(@[\w]+)/g,
+      '<span class="datastar-action">$1</span>',
+    );
+
+    // Highlight modifiers (__modifier.tag)
+    highlighted = highlighted.replace(
+      /(__)([\\w.-]+)/g,
+      '$1<span class="datastar-modifier">$2</span>',
+    );
+
+    // Return with quotes
+    return (
+      attrValue.charAt(0) + highlighted + attrValue.charAt(attrValue.length - 1)
+    );
   }
 
   highlightCSS(code) {
