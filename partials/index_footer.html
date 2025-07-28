@@ -2,14 +2,10 @@
     <header id="footer-header"> </header>
     <nav    id="footer-nav">    </nav>
     <main   id="footer-main">   </main>
-    <aside  id="footer-aside"
-        data-signals-currentTab__ifmissing="null"
-    >
-
-        <div data-text="'$currentPage: ' + $currentPage"></div>
-        <div data-text="'$windowWidth: ' + $windowWidth + 'px'"></div>
-        <div data-text="'$currentTab: ' + $currentTab"></div>
-
+    <aside  id="footer-aside" >
+        <div data-text="'currentPage: ' + ($currentPage || 'undefined')"></div>
+        <div data-text="'windowWidth: ' + ($windowWidth || 'undefined')"></div>
+        <div data-text="'currentTab: ' +  ($currentTab  || 'undefined')"></div>
     </aside>
     <footer id="footer-footer"> </footer>
 </footer>
