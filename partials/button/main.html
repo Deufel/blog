@@ -22,14 +22,14 @@
                  <button id="icon-button" role="tab"
                      data-attr-aria-selected = "$currentTab === 'icon-button' ? 'true' : null"
                      data-attr-tabindex      = "$currentTab === 'icon-button' ? '0' : '-1'"
-                     data-on-click="@get('partials/button/icon-button.html');  $currentTab = 'icon-button'"
+                     data-on-click="$currentTab = 'icon-button'"
                  >
                     Icon Button
                  </button>
                  <button id="toggle-button" role="tab"
                      data-attr-aria-selected = "$currentTab === 'toggle-button' ? 'true' : null"
                      data-attr-tabindex      = "$currentTab === 'toggle-button' ? '0' : '-1'"
-                     data-on-click="@get('partials/button/toggle-button.html');  $currentTab = 'toggle-button'"
+                     data-on-click="$currentTab = 'toggle-button'"
                  >
                     Toggle Button
                  </button>
