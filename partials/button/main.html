@@ -1,10 +1,7 @@
-
 <main id="main">
-
     <header id="main-header">
         <nav class="tabs underlined">
-             <div role="tablist" aria-label="CSS Action Component Examples"  data-signals-currentTab="'button'">
-
+             <div role="tablist" aria-label="CSS Action Component Examples"  data-signals-currentTab="'button-group'">
                  <button id="button" role="tab"
                      data-attr-aria-selected = "$currentTab === 'button' ? 'true' : null"
                      data-attr-tabindex      = "$currentTab === 'button' ? '0' : '-1'"
@@ -48,13 +45,19 @@
             <p>Last Loaded: <span data-text="$lastLoadedTab"></span></p>
             <p>Loading: <span data-text="$loading ? 'Yes' : 'No'"></span></p>
 
-            <!-- This loading indicator will work properly because this div won't be morphed -->
             <div data-show="$loading" style="color: orange;">🔄 Loading content...</div>
         </div>
     </header>
 
     <nav    id="main-nav"></nav>
-    <main id="main-main"> </main>
+    <main   id="main-main"> </main>
     <aside  id="main-aside"> </aside>
-    <footer id="main-footer"></footer>
+    <footer id="main-footer">
+        <code-viewer
+            src="partials/button/main.html"
+            filename="main.html"
+            height="60svh">
+        </code-viewer>
+    </footer>
+
 </main>
