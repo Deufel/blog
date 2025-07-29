@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-signals="{themeMode: 'dark', fontScale: 'md', themeColor: 'cyan'}">
+<html lang="en" data-signals="{themeMode: 'dark', fontScale: 'md', themeColor: 'cyan', layoutWidth: 'fullwidth'}">
     <head>
         <meta charset="UTF-8">
         <title>Some Usefull CSS</title>
@@ -20,7 +20,24 @@
 
     </head>
 
-    <body data-signals="{windowWidth: window.innerWidth, currentPage: 'home'}" data-on-windowresize="$windowWidth = evt.detail.width">
+    <body data-signals="{windowWidth: window.innerWidth, currentPage: 'home'}"
+        data-on-windowresize="$windowWidth = evt.detail.width"
+        data-style-width="$layoutWidth === 'container' ? 'min(100%, 1200px)' : ''"
+        data-on-load="
+            window.layoutBroadcast = new BroadcastChannel('layout-updates');
+            window.layoutBroadcast.onmessage = (e) => {
+                if (e.data.type === 'layout-change') {
+                    $layoutWidth = e.data.layoutWidth;
+                }
+            };
+        "
+        data-effect="
+            window.layoutBroadcast?.postMessage({
+                type: 'layout-change',
+                layoutWidth: $layoutWidth
+            });
+        "
+    >
         <header id="header" data-on-load="@get('partials/index-header.html')">  </header>
         <nav    id="nav"    data-on-load="@get('partials/index-nav.html')"  > </nav>
         <main   id="main"   data-on-load="@get('partials/index-main.html')">  </main>

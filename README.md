@@ -10,6 +10,8 @@ A minimal custom CSS file based on slight modifications of [OpenProps UI](https:
 
 This project is a flat-file CSS implementation that adapts and slightly changes styles from two open-source CSS libraries. It is intended for lightweight, simple use cases without the overhead of a full framework.
 
+update: July 2025 These components are increasingly being built intended for use with [Datastar](https://data-star.dev/).
+
 ## Usage
 
 Download or link the `styles.css` file into your project; but be aware this is not minified or optimized for production use.
