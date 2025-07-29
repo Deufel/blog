@@ -1,25 +1,19 @@
-<main id="header-main">
-    <h3>Layout</h3>
-</main>
-
 <footer id="header-footer">
     <div class="--stack">
         <div class="button-group" role="group">
-            <button class="button small filled" data-on-click="@get('partials/layout_addHeader')"><span> + header</span></button>
-            <button class="button small filled" data-on-click="@get('partials/layout_addNav')"><span> + Nav </span></button>
-            <button class="button small filled" data-on-click="@get('partials/layout_addAside')"><span> + Aside </span></button>
-            <button class="button small filled" data-on-click="@get('partials/layout_addFooter')"><span> + Footer </span></button>
+            <button class="button small filled" data-on-click="@get('partials/layout/add-header')"><span> + header </span></button>
+            <button class="button small filled" data-on-click="@get('partials/layout/add-nav')">   <span> + Nav    </span></button>
+            <button class="button small filled" data-on-click="@get('partials/layout/add-aside')"> <span> + Aside  </span></button>
+            <button class="button small filled" data-on-click="@get('partials/layout/add-footer')"><span> + Footer </span></button>
         </div>
         <div class="button-group" role="group">
-            <button class="button small outlined" data-on-click="@get('partials/layout_remHeader')"><span> - header</span></button>
-            <button class="button small outlined" data-on-click="@get('partials/layout_remNav')"><span> - Nav </span></button>
-            <button class="button small outlined" data-on-click="@get('partials/layout_remAside')"><span> - Aside </span></button>
-            <button class="button small outlined" data-on-click="@get('partials/layout_remFooter')"><span> - Footer </span></button>
+            <button class="button small outlined" data-on-click="@get('partials/layout/rem-header)"> <span> - header </span></button>
+            <button class="button small outlined" data-on-click="@get('partials/layout/rem-nav')">   <span> - Nav    </span></button>
+            <button class="button small outlined" data-on-click="@get('partials/layout/rem-aside)">  <span> - Aside  </span></button>
+            <button class="button small outlined" data-on-click="@get('partials/layout/rem-footer')"><span> - Footer </span></button>
         </div>
     </div>
 </footer>
-
-
 
 <main id="main">
     <header id="main-header" style="background-color: light-dark(var(--color-3), var(--color-9));"><h4> main &GT; header <h4></header>
