@@ -4,31 +4,27 @@
         <div> <h3> Components </h3></div>
         <div>
             <nav class="tabs underlined">
-                 <div role="tablist" aria-label="CSS Action Component Examples"  data-signals-currentTab="'button-group'">
+                 <div role="tablist" aria-label="CSS Action Component Examples"  data-signals-currentTab="'null'">
                      <button id="button" role="tab"
                          data-attr-aria-selected = "$currentTab === 'button' ? 'true' : null"
-                         data-attr-tabindex      = "$currentTab === 'button' ? '0' : '-1'"
-                         data-on-click = "$currentTab = 'button'; @get('partials/components/button.html)"
+                         data-on-click = "$currentTab = 'button'; @get('partials/components/button')"
                      >
                         Button
                      </button>
                      <button id="button-group" role="tab"
                          data-attr-aria-selected = "$currentTab === 'button-group' ? 'true' : null"
-                         data-attr-tabindex      = "$currentTab === 'button-group' ? '0' : '-1'"
                          data-on-click="$currentTab = 'button-group'; @get('partials/components/button-group')"
                      >
                         Button Group
                      </button>
                      <button id="icon-button" role="tab"
                          data-attr-aria-selected = "$currentTab === 'icon-button' ? 'true' : null"
-                         data-attr-tabindex      = "$currentTab === 'icon-button' ? '0' : '-1'"
                          data-on-click="$currentTab = 'icon-button'; @get('partials/components/icon-button')"
                      >
                         Icon Button
                      </button>
                      <button id="toggle-button" role="tab"
                          data-attr-aria-selected = "$currentTab === 'toggle-button' ? 'true' : null"
-                         data-attr-tabindex      = "$currentTab === 'toggle-button' ? '0' : '-1'"
                          data-on-click="$currentTab = 'toggle-button'; @get('partials/components/toggle-button')"
                      >
                         Toggle Button
