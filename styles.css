@@ -1449,6 +1449,13 @@
         --primary-dark: oklch(from var(--primary) calc(l * 0.75) c h);
         --primary-contrast: var(--gray-1);
 
+        /* Custom Gradient */
+        --gradient-primary: conic-gradient(
+            from 0.5turn at bottom center var(--gradient-space),
+            light-dark(var(--color-4), var(--color-10)),
+            white
+        );
+
         /* Text */
         --text-color-1: light-dark(var(--gray-15), var(--gray-1));
         --text-color-1-contrast: light-dark(var(--gray-2), var(--gray-15));
