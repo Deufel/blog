@@ -1,46 +1,49 @@
-<main id="main">
-    <header class="--split">
-        <div class="avatar rounded">
-            <img src="vendor/rocket.avif">
-        </div>
+<aside  id="main-aside"> </aside>
+<main   id="main-main"> </main>
 
+
+
+<header id="main-header" class="--split">
+    <div class="avatar rounded">
+        <img src="vendor/rocket.avif">
+    </div>
+
+    <div>
+        <nav class="tabs underlined">
+            <div role="tablist" aria-label="Underlined tabs">
+                <button id="tab-1" role="tab" aria-controls="tabpanel-1" aria-selected="false" tabindex="0" data-on-click="@get('partials/ds/data')">
+                    data-*
+                </button>
+                <button id="tab-2" role="tab" aria-controls="tabpanel-2" aria-selected="false" tabindex="0" data-on-click="@get('partials/ds/patching')">
+                    Patching
+                </button>
+                <button id="tab-3" role="tab" aria-controls="tabpanel-3" aria-selected="false" tabindex="0" data-on-click="@get('partials/ds/patching')">
+                    Signals
+                </button>
+            </div>
+        </nav>
+    </div>
+</header>
+
+
+<nav id="main-nav">
+    <button class="button elevated"
+        data-on-click="alert('I’m sorry, Dave. I’m afraid I can’t do that.')">
+        Open the pod bay doors, HAL.
+    </button>
+</nav>
+
+<footer id="main-footer" class="--flank:end">
+        <div></div>
         <div>
-            <nav class="tabs underlined">
-                <div role="tablist" aria-label="Underlined tabs">
-                    <button id="tab-1" role="tab" aria-controls="tabpanel-1" aria-selected="false" tabindex="0" data-on-click="@get('partials/ds/data')">
-                        data-*
-                    </button>
-                    <button id="tab-2" role="tab" aria-controls="tabpanel-2" aria-selected="false" tabindex="0" data-on-click="@get('partials/ds/patching')">
-                        Patching
-                    </button>
-                    <button id="tab-3" role="tab" aria-controls="tabpanel-3" aria-selected="false" tabindex="0" data-on-click="@get('partials/ds/patching')">
-                        Signals
-                    </button>
-                </div>
-            </nav>
+            <small> <a> https://data-star.dev/ </a> </small>
         </div>
-    </header>
+</footer>
 
-
-    <nav>
-        <button class="button elevated"
-            data-on-click="alert('I’m sorry, Dave. I’m afraid I can’t do that.')">
-            Open the pod bay doors, HAL.
-        </button>
-    </nav>
-
-    <footer class="--flank:end">
-          <div></div>
-          <div>
-              <small> <a> https://data-star.dev/ </a> </small>
-          </div>
-    </footer>
-
-</main>
 
 <main id="footer-main">
     <code-viewer
-        src="partials/ds/main.html"
+        src="partials/ds/main"
         filename="partials/ds/main.html"
         height="60svh">
     </code-viewer>
