@@ -1,63 +1,65 @@
 
 
- <header id="main-header" class="--split">
-     <div> <h3> Layout </h3></div>
-     <div>
-         <nav class="tabs underlined">
-              <div role="tablist" aria-label="layout sections"  data-signals-currentTab="'about'">
-                  <button id="about" role="tab"
-                      data-attr-aria-selected = "$currentTab === 'about' ? 'true' : null"
-                      data-on-click = "$currentTab = 'about'; @get('partials/main-layout')"
-                  >
-                    About
-                  </button>
-                  <button id="utils" role="tab"
-                      data-attr-aria-selected = "$currentTab === 'utils' ? 'true' : null"
-                      data-on-click = "$currentTab = 'utils'; @get('partials/layout/utils')"
-                  >
-                    Utilities
-                  </button>
-                  <button id="demo" role="tab"
-                      data-attr-aria-selected = "$currentTab === 'demo' ? 'true' : null"
-                      data-on-click = "$currentTab = 'demo'; @get('partials/layout/demo')"
-                  >
-                    Demo
-                  </button>
-              </div>
-         </nav>
-     </div>
- </header>
+<main id="main">
+    <header id="main-header" class="--split">
+        <div> <h3> Layout </h3></div>
+        <div>
+            <nav class="tabs underlined">
+                 <div role="tablist" aria-label="layout sections"  data-signals-currentTab="'about'">
+                     <button id="about" role="tab"
+                         data-attr-aria-selected = "$currentTab === 'about' ? 'true' : null"
+                         data-on-click = "$currentTab = 'about'; @get('partials/main-layout')"
+                     >
+                       About
+                     </button>
+                     <button id="utils" role="tab"
+                         data-attr-aria-selected = "$currentTab === 'utils' ? 'true' : null"
+                         data-on-click = "$currentTab = 'utils'; @get('partials/layout/utils')"
+                     >
+                       Utilities
+                     </button>
+                     <button id="demo" role="tab"
+                         data-attr-aria-selected = "$currentTab === 'demo' ? 'true' : null"
+                         data-on-click = "$currentTab = 'demo'; @get('partials/layout/demo')"
+                     >
+                       Demo
+                     </button>
+                 </div>
+            </nav>
+        </div>
+    </header>
 
-<nav    id="main-nav"></nav>
+   <nav    id="main-nav"></nav>
 
-<main   id="main-main" >
-    <div>
-        <h4>main &GT; nav</h4>
-    </div>
-    <h2> How it works: </h2>
-    <p> The general idea with this layout is that each page containes an auto adjusting "hero" grid from the &LT; body &GT; tag </p>
-    <p> if you add a <span><code>popover="auto"</code></span> attribute to the body &GT head, aside, fooer, nav &LT; then that section will be moved into a off screen drawer </p>
-    <em> note: the semantic section will determine the drawer direction </em>
-    <p> recommended use is to have the content of the page always be in the body/main/ and use the other sections for UI elements like settings, current page, ect</p>
-    <p> it is also recommended to use the same element and use js to add/remove the popover attribute when the screen gets to small </p>
-    <em> note: that only the content in the body/main will be printed </em>
-    <p> nested grid system each semantic element also allows you to use a nother layer of semantic header/nav/main/aside/footer elements withinit. </p>
-    <p> This starts to get a bit out of html semantic compliance here but I found this to be the easiest to work with and this covers almost all my layout needs</p>
+   <main   id="main-main" >
+       <div>
+           <h4>main &GT; nav</h4>
+       </div>
+       <h2> How it works: </h2>
+       <p> The general idea with this layout is that each page containes an auto adjusting "hero" grid from the &LT; body &GT; tag </p>
+       <p> if you add a <span><code>popover="auto"</code></span> attribute to the body &GT head, aside, fooer, nav &LT; then that section will be moved into a off screen drawer </p>
+       <em> note: the semantic section will determine the drawer direction </em>
+       <p> recommended use is to have the content of the page always be in the body/main/ and use the other sections for UI elements like settings, current page, ect</p>
+       <p> it is also recommended to use the same element and use js to add/remove the popover attribute when the screen gets to small </p>
+       <em> note: that only the content in the body/main will be printed </em>
+       <p> nested grid system each semantic element also allows you to use a nother layer of semantic header/nav/main/aside/footer elements withinit. </p>
+       <p> This starts to get a bit out of html semantic compliance here but I found this to be the easiest to work with and this covers almost all my layout needs</p>
 
-    <code class="plain">
-&LT body &GT
-    &LT header &GT
-    &LT nav    &GT
-    &LT main   &GT
-    &LT aside  &GT
-    &LT footer &GT
-&LT/body &GT
-    </code>
+       <code class="plain">
+   &LT body &GT
+       &LT header &GT
+       &LT nav    &GT
+       &LT main   &GT
+       &LT aside  &GT
+       &LT footer &GT
+   &LT/body &GT
+       </code>
+   </main>
+
+   <aside  id="main-aside"> </aside>
+
+   <footer id="main-footer"> </footer>
 </main>
-
-<aside  id="main-aside"> </aside>
-
-<footer id="main-footer"> </footer>
 
 <main id="footer-main">
     <code-viewer
