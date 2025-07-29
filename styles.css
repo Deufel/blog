@@ -1428,9 +1428,9 @@
 
         /* Mike colors*/
 
-        body {
+        /* body {
             background-image: light-dark(var(--gradient-23), var(--gradient-9));
-        }
+        } */
 
         /* --_bg-color: light-dark(var(--gray-3), var(--gray-14)); */
         /* --bg-color-nav: light-dark(var(--gray-4), var(--gray-13)); */
