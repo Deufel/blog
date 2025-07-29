@@ -1429,12 +1429,9 @@
         /* Mike colors*/
 
         body {
-            background-image: var(--gradient-5);
-
-            @media (--OSdark) {
-                background-image: var(--gradient-15);
-            }
+            background-image: light-dark(var(--gradient-9), var(--gradient-23));
         }
+
         /* --_bg-color: light-dark(var(--gray-3), var(--gray-14)); */
         /* --bg-color-nav: light-dark(var(--gray-4), var(--gray-13)); */
         --surface-hue: light-dark(
