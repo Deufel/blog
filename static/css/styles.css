@@ -1426,7 +1426,30 @@
         /* Mike Layout*/
         --min-column-size: 40ch;
 
-        /* Mike colors*/
+        /* Mike Spacing */
+        :root {
+            --step--2: clamp(0.7813rem, 0.7747rem + 0.0326vw, 0.8rem);
+            --step--1: clamp(0.9375rem, 0.9158rem + 0.1087vw, 1rem);
+            --step-0: clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem);
+            --step-1: clamp(1.35rem, 1.2761rem + 0.3696vw, 1.5625rem);
+            --step-2: clamp(1.62rem, 1.5041rem + 0.5793vw, 1.9531rem);
+            --step-3: clamp(1.944rem, 1.771rem + 0.8651vw, 2.4414rem);
+            --step-4: clamp(2.3328rem, 2.0827rem + 1.2504vw, 3.0518rem);
+            --step-5: clamp(2.7994rem, 2.4462rem + 1.7658vw, 3.8147rem);
+
+            --ratio: 1.3;
+            --s-5: calc(var(--s-4) / var(--ratio));
+            --s-4: calc(var(--s-3) / var(--ratio));
+            --s-3: calc(var(--s-2) / var(--ratio));
+            --s-2: calc(var(--s-1) / var(--ratio));
+            --s-1: calc(var(--s0) / var(--ratio));
+            --s0: 1rem;
+            --s1: calc(var(--s0) * var(--ratio));
+            --s2: calc(var(--s1) * var(--ratio));
+            --s3: calc(var(--s2) * var(--ratio));
+            --s4: calc(var(--s3) * var(--ratio));
+            --s5: calc(var(--s4) * var(--ratio));
+        }
 
         /* body {
             background-image: light-dark(var(--gradient-23), var(--gradient-9));
@@ -1448,13 +1471,6 @@
         --primary-light: oklch(from var(--primary) calc(l * 1.25) c h);
         --primary-dark: oklch(from var(--primary) calc(l * 0.75) c h);
         --primary-contrast: var(--gray-1);
-
-        /* Custom Gradient */
-        --gradient-primary: conic-gradient(
-            from 0.5turn at bottom center var(--gradient-space),
-            light-dark(var(--color-4), var(--color-10)),
-            white
-        );
 
         /* Text */
         --text-color-1: light-dark(var(--gray-15), var(--gray-1));
