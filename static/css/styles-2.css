@@ -1,4 +1,4 @@
-@layer vars, reset,
+@layer vars, reset, layout, theme, semantic,
 
 
 
@@ -586,6 +586,148 @@
 }
 
 @layer layout {
+    @layer layout.desktop {
+        body {
+            --padding-size: var(--size-fluid-0);
+            --gap-size: var(--size-fluid-0);
+            --border-radius: var(--size-fluid-1);
+
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100svh;
+            overflow: hidden;
+            overscroll-behavior: none;
+            display: grid;
+            grid-template:
+                "header header header" auto
+                "nav main aside" 1fr
+                "footer footer footer" auto
+                / auto 1fr auto;
+            padding: var(--padding-size);
+            margin-inline: auto; /* allows for easy centering */
+
+            .ultrawide {
+                width: min(100%, 1200px);
+            }
+
+            /* Generic styles for all direct children */
+            > main,
+            > header,
+            > nav,
+            > aside,
+            > footer {
+                display: grid;
+                grid-template:
+                    "header header header" auto
+                    "nav main aside" 1fr
+                    "footer footer footer" auto
+                    / auto 1fr auto;
+                min-height: 0;
+                /* scrollbar-gutter: stable both-edges; */
+
+                &:where(:not([popover="auto"])) {
+                    border-radius: var(--border-radius);
+                    overflow: hidden; /* Add this to clip children */
+                }
+
+                &:empty {
+                    display: none;
+                    scrollbar-gutter: unset;
+                }
+
+                /* Generic styles for all grandchildren */
+                > main,
+                > header,
+                > nav,
+                > aside,
+                > footer {
+                    &:empty {
+                        scrollbar-gutter: unset;
+                    }
+                }
+
+                > header {
+                    grid-area: header;
+                    /* margin-bottom: var(--gap-size); */
+                }
+
+                > nav {
+                    grid-area: nav;
+                    /* margin-right: var(--gap-size); */
+                    overflow-y: auto;
+                }
+
+                > main {
+                    grid-area: main;
+                    overflow: auto;
+                    min-height: 0;
+                }
+
+                > aside {
+                    grid-area: aside;
+                    /* margin-left: var(--gap-size); */
+                    overflow-y: auto;
+                }
+
+                > footer {
+                    grid-area: footer;
+                    /* margin-top: var(--gap-size); */
+                }
+            }
+
+            /* Header specific styles */
+            > header {
+                grid-area: header;
+                margin-bottom: var(--gap-size);
+                > aside {
+                    place-items: center;
+                    grid-auto-flow: column;
+                    display: inline-grid;
+                    column-gap: var(--size-3);
+                }
+                > main {
+                    place-items: center;
+                    grid-auto-flow: column;
+                    display: inline-grid;
+                    column-gap: var(--size-3);
+                }
+                > nav {
+                    place-items: center;
+                    grid-auto-flow: column;
+                    display: inline-grid;
+                    column-gap: var(--size-3);
+                }
+            }
+
+            /* Nav specific styles */
+            > nav {
+                grid-area: nav;
+                margin-right: var(--gap-size);
+                background-color: var(--surface-hue);
+            }
+
+            /* Main specific styles */
+            > main {
+                grid-area: main;
+                background-color: var(--surface-tonal);
+            }
+
+            /* Aside specific styles */
+            > aside {
+                grid-area: aside;
+                margin-left: var(--gap-size);
+                background-color: var(--surface-hue);
+            }
+
+            /* Footer specific styles */
+            > footer {
+                grid-area: footer;
+                margin-top: var(--gap-size);
+                scrollbar-gutter: auto;
+            }
+        }
+    }
 }
 
 @layer semantic.button {
