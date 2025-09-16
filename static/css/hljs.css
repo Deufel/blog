@@ -1,17 +1,11 @@
+/* Custom Highlight.js theme using your design system */
 @layer hljs {
     .hljs {
         background: var(--surface-elevated);
         color: var(--text-color-1);
-        padding: var(--s1);
-        border-radius: var(--border-radius);
-        border: var(--border-width) solid var(--border-color);
+        display: block;
         overflow-x: auto;
-        font-family:
-            "Fira Code", "SF Mono", Monaco, "Cascadia Code", "Roboto Mono",
-            Consolas, "Courier New", monospace;
-        font-size: var(--font-size-sm);
-        line-height: var(--font-lineheight-3);
-        box-shadow: var(--shadow-2);
+        padding: 1em;
     }
 
     /* Comments and documentation */
