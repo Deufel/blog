@@ -20,90 +20,25 @@
         <ul>
             <hr>
             <li>
-                <details class="card">
-                    <summary id="2025" aria-controls="blogs-list">2025</summary>
-                    <div>
-                        <ul>
-                            <li>
-                                <a>Python Imports</a>
-                            </li>
-                            <li>
-                                <a>September 16, 2025</a>
-                            </li>
-                        </ul>
-                    </div>
-                </details>
-            </li>
-            <li>
-                <strong>TIL</strong>
-            </li>
-
-            <li>
                 <a
-                    data-on-click="@get('partials/index-main'); $currentPage = 'home'; if ($windowWidth < 640 && document.getElementById('nav').matches(':popover-open')) { document.getElementById('nav').hidePopover(); } "
-                    data-attr-aria-current="$currentPage === 'home' ? 'page' : null"
+                    data-on-click="@get('partials/blog/main'); $currentPage = 'blog'; if ($windowWidth < 640 && document.getElementById('nav').matches(':popover-open')) { document.getElementById('nav').hidePopover(); } "
+                    data-attr-aria-current="$currentPage === 'blog' ? 'page' : null"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M42.63 21.85L26 7.64a3 3 0 0 0-3.9 0L5.37 21.85a2.43 2.43 0 0 0-.29 3.44a2.39 2.39 0 0 0 1.92.87h2.09v13.29a1.63 1.63 0 0 0 1.63 1.63h7.35a1.63 1.63 0 0 0 1.63-1.63v-8.18a1 1 0 0 1 1-1h6.64a1 1 0 0 1 1 1v8.18a1.63 1.63 0 0 0 1.63 1.63h7.35a1.63 1.63 0 0 0 1.63-1.63V26.16H41a2.44 2.44 0 0 0 1.59-4.31Z" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M32.45 13.18V7.92a.4.4 0 0 1 .39-.39h5.68a.4.4 0 0 1 .39.39h0v10.75" stroke-width="2"/></svg>
-                    <p>Home</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M37.31 15.93L12.24 41L5.5 42.5L7 35.76l.51-.51l28-28l.51-.51l1.76 1.76l.55-.5l2.46-2.5h0l1.71 1.71L40 9.68l-.52.51l1.8 1.81l-3 3l1.41 1.42l1.45 1.44l-4.88 4.88m1.55-14.26l1.71 1.71m-1.21 4.74l-1 1M7 35.76L12.24 41" stroke-width="2"/></svg>
+                    <p>Blog</p>
                 </a>
             </li>
-
             <hr>
             <li>
-                <strong>CSS</strong>
-            </li>
-
-            <li>
                 <a
-                    data-on-click="@get('partials/main-layout'); $currentPage = 'layout'; if ($windowWidth < 640 && document.getElementById('nav').matches(':popover-open')) { document.getElementById('nav').hidePopover(); } "
-                    data-attr-aria-current="$currentPage === 'layout' ? 'page' : null"
+                    data-on-click="@get('partials/link/main'); $currentPage = 'links'; if ($windowWidth < 640 && document.getElementById('nav').matches(':popover-open')) { document.getElementById('nav').hidePopover(); } "
+                    data-attr-aria-current="$currentPage === 'links' ? 'page' : null"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M38.5 5.5h-29a4 4 0 0 0-4 4v29a4 4 0 0 0 4 4h29a4 4 0 0 0 4-4v-29a4 4 0 0 0-4-4M24 5.5v37M42.5 24H24" stroke-width="2"/></svg>
-                    <p>Layout</p>
-                    <div class="chip outlined small">in progress</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="m17.253 23.954l14.475.037m-11.096 8.69h-6.96a8.681 8.681 0 1 1 0-17.362h6.644m8.034 0h6.96a8.681 8.681 0 1 1 0 17.362h-6.645" stroke-width="2"/></svg>
+                    <p>Links</p>
                 </a>
             </li>
 
-            <li>
-                <a
-                    data-on-click="@get('partials/main-components'); $currentPage = 'components'; if ($windowWidth < 640 && document.getElementById('nav').matches(':popover-open')) { document.getElementById('nav').hidePopover(); } "
-                    data-attr-aria-current="$currentPage === 'components' ? 'page' : null"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
-                      <rect width="41" height="17.872" x="3.5" y="15.629" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" rx="8.936" ry="8.936" stroke-width="2"/>
-                    </svg>
-                    <p>UI Components</p>
-                    <div class="chip outlined small">80%</div>
-                </a>
-            </li>
-
-            <hr>
-            <li>
-                <strong> DataStar </strong>
-            </li>
-            <li>
-                <a
-                    data-on-click="@get('partials/main-ds'); $currentPage = 'datastar'; if ($windowWidth < 640 && document.getElementById('nav').matches(':popover-open')) { document.getElementById('nav').hidePopover(); } "
-                    data-attr-aria-current="$currentPage === 'datastar' ? 'page' : null"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M24 29.13V43.5m-4.51-14.37v9.77m15.1-9.77L24 4.5L13.41 29.13m15.1 0v9.77" stroke-width="2"/></svg>
-                    <p>Data Star</p>
-                    <div class="chip small outlined">testing</div>
-                </a>
-            </li>
-
-            <li> <strong>Experiments</strong> </li>
-
-            <li>
-                <a
-                    data-on-click="@get('partials/main-testing'); $currentPage = 'testing'; if ($windowWidth < 640 && document.getElementById('nav').matches(':popover-open')) { document.getElementById('nav').hidePopover(); } "
-                    data-attr-aria-current="$currentPage === 'testing' ? 'page' : null"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><path fill="currentColor" d="M11.709 4.998L7 5h4.709zM36.289 43v.002l4.71-.002z"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M13.542 10.826c10.663 0 10.486 26.348 20.972 26.348m7.986-7.366c-1.974 4.168-4.333 7.366-7.986 7.366M13.542 10.826c-3.675 0-6.062 3.13-8.042 7.232" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M38.5 5.5h-29a4 4 0 0 0-4 4v29a4 4 0 0 0 4 4h29a4 4 0 0 0 4-4v-29a4 4 0 0 0-4-4" stroke-width="2"/></svg>
-                    <p>Head swaps</p>
-                    <div class="chip outlined small">Development</div>
-                </a>
-            </li>
         </ul>
     </main>
 
