@@ -7,33 +7,50 @@
     <hr>
 
     <section>
-        <h4>Basic Import Types</h4>
-        <ul>
-            <li>
-                <p><strong>Direct Import</strong> <code>import os      </code> </p>
-                <p>Usage:                         <code>os.path.join() </code> </p>
-            </li>
-            <li>
-                <p><strong>From Import</strong> <code>from os import path </code> </p>
-                <p>Usage:                       <code>path.join()         </code> </p>
-            </li>
-            <li>
-                <p><strong>Star Import</strong> <code>from os import *</code> </p>
-                <p>Usage:                       <code>join()</code> </p>
-                <em>Note: will import all methods or methods in the __all__ when that exists</em>
-            </li>
-        </ul>
+        <strong>1. Basic Import Types</strong>
+        <pre><code class="hljs">
+# Direct import
+import os
+# Usage: os.path.join()
+
+# From import
+from os import path
+# Usage: path.join()
+
+# Star import
+from os import *
+# Usage: join() (if join was exported)>
+        </code></pre>
     </section>
 
     <section>
-        <h4>Barrel Export</h4>
-        <em>aka a "re-export module"</em>
-        <p>Some packages have a module that is soley for importing other modules</p>
-        <code>from fastcore.all import *</code>
+        <strong>2. How</strong><code>from fastcore.all import *</code><strong>Works</strong>
+        <p>When you use a star import; python will...</p>
+        <ol>
+            <li>Find the module</li>
+            <li>Executes the module runs the code in <code>all.py</code></li>
+            <li>Imports the symbols: Brings in everything from __all__ (or will use public names)</li>
+        </ol>
     </section>
 
     <section>
-        <pre><code class="hljs language-javascript">
+        <h4>Step-by-step Import Process</h4>
+        <h4>Module Loading Order</h4>
+        <pre><code>
+            # When you do: from fastcore.all import *
+
+            # Step 1: Python finds fastcore/all.py
+            # Step 2: Python executes all.py line by line:
+
+            from .imports import *      # Loads fastcore/imports.py, executes it, imports all public symbols
+            from .foundation import *   # Loads fastcore/foundation.py, executes it, imports all public symbols
+            from .utils import *        # Loads fastcore/utils.py, executes it, imports all public symbols
+            # ... and so on for each line
+        </code></pre>
+    </section>
+
+    <section>
+        <pre><code class="hljs">
         function hello() {
             console.log("Hello, world!");
         }
