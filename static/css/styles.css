@@ -2524,17 +2524,6 @@
             text-wrap: balance;
         }
     }
-
-    /* Reset highlight.js elements */
-    pre code.hljs {
-        background: unset;
-        padding: unset;
-        border-radius: unset;
-    }
-
-    .hljs {
-        background: unset !important;
-    }
 }
 
 /* ARTICLE CARD */
