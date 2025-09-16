@@ -1,0 +1,192 @@
+@layer hljs {
+    .hljs {
+        background: var(--surface-elevated);
+        color: var(--text-color-1);
+        padding: var(--s1);
+        border-radius: var(--border-radius);
+        border: var(--border-width) solid var(--border-color);
+        overflow-x: auto;
+        font-family:
+            "Fira Code", "SF Mono", Monaco, "Cascadia Code", "Roboto Mono",
+            Consolas, "Courier New", monospace;
+        font-size: var(--font-size-sm);
+        line-height: var(--font-lineheight-3);
+        box-shadow: var(--shadow-2);
+    }
+
+    /* Comments and documentation */
+    .hljs-comment,
+    .hljs-quote,
+    .hljs-meta {
+        color: var(--text-color-2);
+        font-style: italic;
+    }
+
+    /* Keywords, control flow */
+    .hljs-keyword,
+    .hljs-selector-tag,
+    .hljs-type,
+    .hljs-literal,
+    .hljs-built_in {
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    /* Strings and text */
+    .hljs-string,
+    .hljs-title.function_,
+    .hljs-attr {
+        color: var(--green);
+    }
+
+    /* Numbers */
+    .hljs-number,
+    .hljs-regexp {
+        color: var(--orange);
+    }
+
+    /* Functions and methods */
+    .hljs-function,
+    .hljs-title,
+    .hljs-title.class_,
+    .hljs-title.class_.inherited__ {
+        color: var(--blue);
+        font-weight: 600;
+    }
+
+    /* Variables and identifiers */
+    .hljs-variable,
+    .hljs-name,
+    .hljs-property,
+    .hljs-symbol {
+        color: var(--color-11);
+    }
+
+    /* Tags and markup */
+    .hljs-tag,
+    .hljs-doctag {
+        color: var(--red);
+    }
+
+    /* Attributes in markup */
+    .hljs-attribute {
+        color: var(--color-9);
+    }
+
+    /* Emphasis and highlighting */
+    .hljs-emphasis {
+        font-style: italic;
+    }
+
+    .hljs-strong {
+        font-weight: bold;
+    }
+
+    .hljs-deletion {
+        background: color-mix(in srgb, var(--red) 20%, transparent);
+        color: var(--red);
+    }
+
+    .hljs-addition {
+        background: color-mix(in srgb, var(--green) 20%, transparent);
+        color: var(--green);
+    }
+
+    /* Language-specific adjustments */
+
+    /* Python */
+    .hljs-subst {
+        color: var(--text-color-1);
+    }
+
+    /* JavaScript/TypeScript */
+    .hljs-template-tag,
+    .hljs-template-variable {
+        color: var(--primary);
+    }
+
+    /* CSS */
+    .hljs-selector-class,
+    .hljs-selector-id {
+        color: var(--color-10);
+    }
+
+    .hljs-selector-pseudo {
+        color: var(--primary);
+    }
+
+    /* HTML */
+    .hljs-tag .hljs-name {
+        color: var(--red);
+    }
+
+    .hljs-tag .hljs-attr {
+        color: var(--color-9);
+    }
+
+    /* Markdown */
+    .hljs-section {
+        color: var(--primary);
+        font-weight: bold;
+    }
+
+    .hljs-bullet,
+    .hljs-code {
+        color: var(--color-8);
+    }
+
+    .hljs-link {
+        color: var(--blue);
+        text-decoration: underline;
+    }
+
+    /* JSON */
+    .hljs-attr {
+        color: var(--blue);
+    }
+
+    /* Shell/Bash */
+    .hljs-params {
+        color: var(--text-color-1);
+    }
+
+    /* Ensure good contrast for all theme colors */
+    :root[data-theme-color="red"] .hljs-keyword {
+        color: var(--color-8);
+    }
+
+    :root[data-theme-color="blue"] .hljs-keyword {
+        color: var(--color-8);
+    }
+
+    :root[data-theme-color="green"] .hljs-keyword {
+        color: var(--color-8);
+    }
+
+    :root[data-theme-color="purple"] .hljs-keyword {
+        color: var(--color-8);
+    }
+
+    :root[data-theme-color="orange"] .hljs-keyword {
+        color: var(--color-8);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .hljs {
+            font-size: var(--font-size-xs);
+            padding: var(--s0);
+        }
+    }
+
+    /* Font scale adjustments */
+    [data-font-scale="sm"] .hljs {
+        font-size: var(--font-size-xs);
+        line-height: var(--font-lineheight-2);
+    }
+
+    [data-font-scale="lg"] .hljs {
+        font-size: var(--font-size-md);
+        line-height: var(--font-lineheight-4);
+    }
+}
