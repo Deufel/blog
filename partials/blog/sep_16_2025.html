@@ -1,24 +1,37 @@
-<main id="main-main">
+<main id="main-main" class="padding">
     <hgroup>
         <h3>Python Import Mechanics</h3>
         <small>September 16, 2025</small>
     </hgroup>
 
+    <hr>
+
     <section>
         <h4>Basic Import Types</h4>
-        <code>
-            # Direct import
-            import os
-            # Usage: os.path.join()
-
-            # From Import
-            from os import path
-            # usage: path.join()
-
-            # Star import
-            from os import *
-            # usage: join() (iff join was exported ie present in the __all__)
-        </code>
+        <ul>
+            <li>
+                <p>Direct Import</p>
+                <code>import os</code>
+                <p>Usage:
+                    <code>os.path.join()</code>
+                </p>
+            </li>
+            <li>
+                <p>From Import</p>
+                <code>from os import path</code>
+                <p>Usage:
+                    <code>path.join()</code>
+                </p>
+            </li>
+            <li>
+                <p>Star Import</p>
+                <code>from os import *</code>
+                <p>Usage:
+                    <code>join()</code>
+                </p>
+                <small><em>note:</em>will import all mothods or methods in the __all__</small>
+            </li>
+        </ul>
     </section>
 
     <section>
