@@ -46,12 +46,11 @@
         <ul>
             <li>
                 <a
-                    data-on-click="@get('partials/license'); $currentPage = 'license'; if ($windowWidth < 640 && document.getElementById('nav').matches(':popover-open')) { document.getElementById('nav').hidePopover(); } "
-                    data-attr-aria-current="$currentPage === 'license' ? 'page' : null"
+                    data-on-click="footer.togglePopover(); $currentPage = 'notes'; if ($windowWidth < 640 && document.getElementById('nav').matches(':popover-open')) { document.getElementById('nav').hidePopover(); } "
+                    data-attr-aria-current="$currentPage === 'notes' ? 'page' : null"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M14.011 15.194h19.978M15.138 36.152h17.724M24 11.848v24.304m-3.05-7.147c0 1.42-2.47 2.57-5.51 2.57s-5.51-1.15-5.51-2.57c0-.18.04-.36.11-.52l5.4-10.3l5.4 10.3c.07.16.11.34.11.52m-10.91-.002h10.8m-5.4-10.818v-2.991m11.61 13.811c0 1.42 2.47 2.57 5.51 2.57s5.51-1.15 5.51-2.57c0-.18-.04-.36-.11-.52l-5.4-10.3l-5.4 10.3c-.07.16-.11.34-.11.52m10.91-.002h-10.8m5.4-10.818v-2.991" stroke-width="2"/></svg>
-                    <p>Licenses</p>
-                    <div class="chip outlined small">Ver. 0.1</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M5.5 21.423h37m-37 5.572h37m-37 5.572h37m-37 5.571h37m-37-21.066c1.077.727 2.144 1.454 2.786 1.2c.652-.265.878-1.512 1.596-1.597c.718-.075 1.926 1.01 2.88 1.115c.945.104 1.634-.765 2.522-.926c.897-.16 2.002.387 2.852.529c.859.142 1.463-.123 2.172-.283c.698-.151 1.492-.208 2.011-.151c.51.047.746.198 1.247.226c.51.029 1.284-.066 2.058-.141s1.55-.123 2.23-.161c.67-.038 1.246-.075 2.001-.01c.756.067 1.681.227 2.304.199c.624-.028.935-.236 1.577-.264c.643-.029 1.606.132 2.314.056c.699-.085 1.133-.415 1.71-.462c.566-.057 1.274.16 1.86.283c.585.113 1.039.132 1.501-.02c.463-.14.926-.462 1.38-.783m-.001-1.22h-37" stroke-width="2"/><rect width="37" height="37" x="5.5" y="5.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" rx="4" ry="4" stroke-width="2"/></svg>
+                    <p>Quick Notes</p>
                 </a>
             </li>
         </ul>
