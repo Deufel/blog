@@ -37,23 +37,23 @@ from os import *
         <h4>Step-by-step Import Process</h4>
         <h4>Module Loading Order</h4>
         <pre><code class="hljs language-python">
-            # When you do: from fastcore.all import *
+# When you do: from fastcore.all import *
 
-            # Step 1: Python finds fastcore/all.py
-            # Step 2: Python executes all.py line by line:
+# Step 1: Python finds fastcore/all.py
+# Step 2: Python executes all.py line by line:
 
-            from .imports import *      # Loads fastcore/imports.py, executes it, imports all public symbols
-            from .foundation import *   # Loads fastcore/foundation.py, executes it, imports all public symbols
-            from .utils import *        # Loads fastcore/utils.py, executes it, imports all public symbols
-            # ... and so on for each line
+from .imports import *      # Loads fastcore/imports.py, executes it, imports all public symbols
+from .foundation import *   # Loads fastcore/foundation.py, executes it, imports all public symbols
+from .utils import *        # Loads fastcore/utils.py, executes it, imports all public symbols
+# ... and so on for each line
         </code></pre>
     </section>
 
     <section>
-        <pre><code class="hljs language-python">
-        function hello() {
-            console.log("Hello, world!");
-        }
+        <pre><code class="hljs">
+function hello() {
+    console.log("Hello, world!");
+}
         </code></pre>
     </section>
 
