@@ -4835,23 +4835,27 @@
         > header {
             grid-area: header;
             margin-bottom: var(--gap-size);
+            overflow: visible;
             > aside {
                 place-items: center;
                 grid-auto-flow: column;
                 display: inline-grid;
                 column-gap: var(--size-3);
+                overflow: visible;
             }
             > main {
                 place-items: center;
                 grid-auto-flow: column;
                 display: inline-grid;
                 column-gap: var(--size-3);
+                overflow: visible;
             }
             > nav {
                 place-items: center;
                 grid-auto-flow: column;
                 display: inline-grid;
                 column-gap: var(--size-3);
+                overflow: visible;
             }
         }
 
