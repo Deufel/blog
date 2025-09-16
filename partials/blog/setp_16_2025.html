@@ -1,0 +1,30 @@
+<main id="main-main">
+    <hgroup>
+        <h3>Python Import Mechanics</h3>
+        <small>September 16, 2025</small>
+    </hgroup>
+
+    <section>
+        <h4>Basic Import Types</h4>
+        <code>
+            # Direct import
+            import os
+            # Usage: os.path.join()
+
+            # From Import
+            from os import path
+            # usage: path.join()
+
+            # Star import
+            from os import *
+            # usage: join() (iff join was exported ie present in the __all__)
+        </code>
+    </section>
+
+    <section>
+        <h4>Barrel Export</h4>
+        <em>aka a "re-export module"</em>
+        <p>Some packages have a module that is soley for importing other modules</p>
+        <code>from fastcore.all import *</code>
+    </section>
+</main>
