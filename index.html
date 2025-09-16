@@ -53,6 +53,12 @@
               }))
           );
         </script>
-        <script>hljs.highlightAll();</script>
+        <script>
+          // Listen for when elements are patched (HTML updates)
+          document.addEventListener('datastar-patch-elements', function(event) {
+              // Highlight all code blocks in the updated content
+              hljs.highlightAll();
+          });
+        </script>
     </body>
 </html>
