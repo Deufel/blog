@@ -2182,7 +2182,7 @@
         /* Size */
         &.small {
             button {
-                min-block-size: 2.1875rem; /* 35px */
+                block-size: 2.1875rem; /* 35px */
             }
         }
 
