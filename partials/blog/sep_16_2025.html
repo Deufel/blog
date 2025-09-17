@@ -12,41 +12,108 @@
 
 
     <section>
-        <h4>1. Basic Imports</h4>
-        <pre style="margin: 0;" class="--center-hor"><code class="hljs language-python"># Direct import
-import os
-# Usage: os.path.join()
-
-# From import
-from os import path
-# Usage: path.join()
-
-# Star import
-from os import *
-# Usage: join() (if join was exported)>
-</code></pre>
-    </section>
-
-    <section>
-        <h4>2. Star Imports</h4>
+        <h4>Step-by-Step Import Process for * imports</h4>
         <ol>
-            <li>Find the module</li>
-            <li>Executes the module runs the code in <code>all.py</code></li>
-            <li>Imports the symbols: Brings in everything from __all__ (or will use public names)</li>
+
+            <li class="h5">Module Loading Order</li>
+            <pre style="margin: 0;" class="--center-hor"><code class="hljs language-python">#python
+# When you do: from fastcore.all import *
+
+# Step 1: Python finds fastcore/all.py
+# Step 2: Python executes all.py line by line:
+
+from .imports import *      # Loads fastcore/imports.py, executes it, imports all public symbols
+from .foundation import *   # Loads fastcore/foundation.py, executes it, imports all public symbols
+from .utils import *        # Loads fastcore/utils.py, executes it, imports all public symbols
+# ... and so on for each line</code></pre>
+
+            <li class="h5">What Gets Imported</li>
+            Each module can control what <code>import *</code> brings in:
+            <pre style="margin: 0;" class="--center-hor"><code class="hljs language-python">#python
+# In fastcore/utils.py:
+def listify(obj): pass
+def first(seq): pass
+def _private_helper(): pass  # Won't be imported with *
+
+# Option 1: No __all__ defined
+# import * brings: listify, first (but not _private_helper)
+
+# Option 2: __all__ explicitly defined
+__all__ = ['listify']
+# import * brings: only listify</code></pre>
+
+            <li class="h5">Chaning Behavior</li>
+            <pre style="margin: 0;" class="--center-hor"><code class="hljs language-python">#python
+# fastcore/all.py acts like a "collector":
+
+# It doesn't define its own functions
+# It just re-exports everything from submodules
+# Think of it as: "Give me everything from every submodule"
+
+# So the chain is:
+# your_code.py → fastcore/all.py → fastcore/utils.py (actual functions)
+#                              → fastcore/foundation.py (actual classes)
+#                              → fastcore/net.py (actual networking)
+#                              → etc.</code></pre>
         </ol>
     </section>
 
     <section>
-        <h4>Step-by-step Import Process</h4>
-        <h4>Module Loading Order</h4>
+        <h4>Why This Breaks Marimo</h4>
+        <pre style="margin: 0;" class="--center-hor"><code class="hljs language-python">#python
+# In regular Python:
+from fastcore.all import *
+result = listify([1, 2, 3])  # Works fine
+
+# In marimo:
+# Cell 1: from fastcore.all import *
+# Cell 2: result = listify([1, 2, 3])
+# Marimo: "Where is listify defined? I can't track this dependency!"</code></pre>
     </section>
 
     <section>
-        <pre><code class="hljs"> //javascript
-function hello() {
-    console.log("Hello, world!");
-} </code></pre>
+        <h4>The Fix</h4>
+        <p>Instead of:</p>
+        <pre style="margin: 0;" class="--center-hor"><code class="hljs language-python">#python
+from fastcore.all import *</code></pre>
+        <p>You Need:</p>
+        <pre style="margin: 0;" class="--center-hor"><code class="hljs language-python">#python
+from fastcore.utils import listify, first
+from fastcore.foundation import L, T
+from fastcore.net import urlread
+# etc. - only what you actually use</code></pre>
+
     </section>
 
-    <div data-effect="hljs.highlightAll()"></div>
+    <section>
+        <h4>Consider a Modern Python Alternative to import *</h4>
+        <p>Many libraries now use this pattern instead:</p>
+        <pre style="margin: 0;" class="--center-hor"><code class="hljs language-python">#python
+# fastcore/__init__.py (instead of all.py)
+from .utils import listify, first
+from .foundation import L, T
+from .net import urlread
+
+# Usage:
+import fastcore
+fastcore.listify([1, 2, 3])
+
+# Or:
+from fastcore import listify, L, urlread</code></pre>
+        <p>The <code>import *</code> pattern is convienient for notebooks but it breaks marimo's dependency tracking.</p>
+        <p>You need to replace all the start imports with explicit imports of just what you actually use.</p>
+    </section>
+
+    <section>
+        <h6>External Reference</h6>
+        <ul>
+            <li>
+                <a href="https://docs.marimo.io/guides/understanding_errors/import_star/?h=import">Marimo Docs</a>
+            </li>
+            <li>
+                <a href="https://docs.python.org/3/reference/simple_stmts.html#index-34">Python Docs</a>
+            </li>
+        </ul>
+    </section>
+
 </main>
