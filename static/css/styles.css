@@ -1104,9 +1104,9 @@
         --font-size-h3: var(--font-size-fluid-1);
         --font-size-h4: var(--font-size-3);
         --font-size-h5: var(--font-size-2);
-        --font-size-h6: var(--font-size-fluid-0);
+        --font-size-h6: var(--font-size-1);
         --font-size-lg: var(--font-size-3);
-        --font-size-md: var(--font-size-fluid-1);
+        --font-size-md: var(--font-size-2);
         --font-size-sm: var(--font-size-1);
         --font-size-xs: var(--font-size-0);
 
@@ -1149,7 +1149,6 @@
         scrollbar-color: var(--color-7) transparent;
 
         /* transition: scrollbar-color 0.3s ease;
-
         &:not(:hover) {
             scrollbar-color: var(--color-5) transparent;
         } */
@@ -1212,15 +1211,15 @@
 
         /* Text */
         --text-color-1: light-dark(var(--gray-15), var(--gray-1));
-        --text-color-1-contrast: light-dark(var(--gray-2), var(--gray-15));
+        --text-color-1-contrast: light-dark(var(--gray-2), var(--gray-14));
         --text-color-2: light-dark(var(--gray-13), var(--gray-4));
         --text-color-2-contrast: light-dark(var(--gray-4), var(--gray-13));
 
         /* Surface */
         --surface-default: light-dark(var(--gray-1), var(--gray-13));
         --surface-filled: light-dark(var(--gray-3), var(--gray-15));
-        --surface-tonal: light-dark(var(--gray-3), var(--gray-12));
-        --surface-elevated: light-dark(var(--gray-1), var(--gray-12));
+        --surface-tonal: light-dark(var(--gray-5), var(--gray-9));
+        --surface-elevated: light-dark(var(--gray-2), var(--gray-12));
 
         /* Shadows */
         --shadow-color: light-dark(220 3% 15%, 220 40% 2%);
