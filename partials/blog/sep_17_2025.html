@@ -1,0 +1,19 @@
+
+<header id="main-header">
+    <h3>Random TIL</h3>
+    <small>September 17, 2025</small>
+    <span class="chip outlined small">datastar</span>
+    <hr>
+</header>
+
+<main id="main-main" class="padding">
+    <section>
+        <h4>Datastar</h4>
+        <p>to run a script on a partial use data effect do not rely on a existing script tag at the bottom of the dom tree on the page that will be patched into.</script></p>
+        <pre style="margin: 0;" class="--center-hor"><code class="hljs language-python">
+            &ltdiv class="sr-only" data-effect="hljs.highlightAll();"&gt&lt/div&gt
+        </code></pre>
+        <p>example to get the syntax highlighting i need this on the partials incoming not the index page.</p>
+
+    <div class="sr-only" data-effect="hljs.highlightAll();"></div>
+</main>
