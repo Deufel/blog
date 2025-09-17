@@ -5,7 +5,7 @@
         <title>Mike Deufel</title>
         <meta name="viewport" content="width=device-width,initial-scale=1">
 
-        <!-- CSS -->
+        <!-- CSS first initalize layer to be safe? -->
         <style>
             @layer openprops, normalize, OPUIutils, theme, layout.desktop, layout.print, components.base, components.has-deps, components.semantic, hljs,  transition, utils;
         </style>
@@ -13,13 +13,11 @@
         <link id="drawer-styles" rel="stylesheet" href="static/css/drawer.css" layer="transitions">
 
         <!-- Web Components -->
-        <script type="module" src="static/js/wc/code-highlighter.js"></script>
 
-        <!-- Vendor -->
-        <!-- <script type="module" src="vendor/datastar.js"></script> -->
+        <!-- Vendor Datastar-->
         <script type="module" src="https://cdn.jsdelivr.net/gh/starfederation/datastar@main/bundles/datastar.js"></script>
 
-        <!-- Highlight JS -->
+        <!-- Vendor Highlight JS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css" layer="hljs">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
 
