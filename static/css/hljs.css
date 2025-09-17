@@ -1,7 +1,0 @@
-:root[data-theme-mode="light"] {
-    @import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css");
-}
-
-:root[data-theme-mode="dark"] {
-    @import url("https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css");
-}
