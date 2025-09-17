@@ -5398,6 +5398,12 @@
     :where([class*="--flex"][class*="\:end"]) {
         justify-content: flex-end;
     }
+    :where([class*="--center-hor"]) {
+        margin-inline: auto;
+    }
+    :where([class*="--center-ver"]) {
+        margin-block: auto;
+    }
 
     .icon-button {
         transition: transform 0.3s ease; /* This handles BOTH directions */
