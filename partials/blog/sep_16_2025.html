@@ -10,8 +10,7 @@
 
     <section>
         <strong>1. Basic Import Types</strong>
-        <pre><code class="hljs language-python">
-# Direct import
+        <pre style="margin: 0;"><code class="hljs language-python"># Direct import
 import os
 # Usage: os.path.join()
 
@@ -44,9 +43,9 @@ from os import *
 # Step 1: Python finds fastcore/all.py
 # Step 2: Python executes all.py line by line:
 
-from .imports import *      # Loads fastcore/imports.py, executes it, imports all public symbols
-from .foundation import *   # Loads fastcore/foundation.py, executes it, imports all public symbols
-from .utils import *        # Loads fastcore/utils.py, executes it, imports all public symbols
+from .imports import *     # Loads fastcore/imports.py, executes it, imports all public symbols
+from .foundation import *  # Loads fastcore/foundation.py, exec. it, imports all public symbols
+from .utils import *       # Loads fastcore/utils.py, executes it, imports all public symbols
 # ... and so on for each line
         </code></pre>
     </section>
