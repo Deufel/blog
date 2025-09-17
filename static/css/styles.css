@@ -1216,10 +1216,10 @@
         --text-color-2-contrast: light-dark(var(--gray-4), var(--gray-13));
 
         /* Surface */
-        --surface-default: light-dark(var(--gray-1), var(--gray-13));
-        --surface-filled: light-dark(var(--gray-3), var(--gray-15));
-        --surface-tonal: light-dark(var(--gray-5), var(--gray-9));
-        --surface-elevated: light-dark(var(--gray-2), var(--gray-12));
+        --surface-default: light-dark(var(--gray-1), var(--gray-16));
+        --surface-filled: light-dark(var(--gray-2), var(--gray-15));
+        --surface-tonal: light-dark(var(--gray-3), var(--gray-14));
+        --surface-elevated: light-dark(var(--gray-4), var(--gray-13));
 
         /* Shadows */
         --shadow-color: light-dark(220 3% 15%, 220 40% 2%);
