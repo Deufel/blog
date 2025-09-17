@@ -1198,6 +1198,10 @@
             color-mix(in srgb, var(--color-4), var(--gray-3) 93%),
             color-mix(in srgb, var(--color-2), var(--gray-13) 93%)
         );
+        --surface-hue-2: light-dark(
+            color-mix(in srgb, var(--color-4), var(--gray-4) 93%),
+            color-mix(in srgb, var(--color-2), var(--gray-12) 93%)
+        );
         --surface-hue-alt: light-dark(
             color-mix(in srgb, var(--color-5), var(--gray-4) 90%),
             color-mix(in srgb, var(--color-13), var(--gray-5) 90%)
