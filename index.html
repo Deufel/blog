@@ -24,7 +24,9 @@
 
     </head>
 
-    <body data-signals="{windowWidth: window.innerWidth, currentPage: 'home'}"
+    <body
+        data-store="{btn: $btn}"
+        data-signals="{windowWidth: window.innerWidth, currentPage: 'home'}"
         data-on-windowresize="$windowWidth = evt.detail.width"
         data-style-width="$layoutWidth === 'container' ? 'min(100%, 1200px)' : ''"
         data-on-load="
