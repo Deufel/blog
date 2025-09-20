@@ -1,4 +1,4 @@
-const $btn = {
+const btn = {
   // Base styles + elevated variant
   background:
     "light-dark(color-mix(in oklch, var(--gray-2) 97%, var(--color-16)), color-mix(in oklch, var(--gray-13) 97%, var(--color-1)))",
