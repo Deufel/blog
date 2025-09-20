@@ -5261,6 +5261,12 @@
 
 /* Utility Class Crutches try not to use to much.. */
 @layer utils {
+    :where(class*="--truncate") {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
     :is(
             [class*="--cluster"],
             [class*="--flank"],
