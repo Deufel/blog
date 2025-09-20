@@ -1,44 +1,38 @@
-<main id="header-main">
-    <h3>Blog</h3>
-</main>
-
 <main id="main">
-    <main id="main-main">
+    <header id="main-header">
         <h3>Blog</h3>
+        <hr>
+    </header>
+
+    <main id="main-main" class="--grid">
+        <article class="outlined" data-on-click="@get('partials/blog/01_imports')" style="width: 30ch;">
+          <hgroup>
+            <p>code</p>
+            <h2 class="h3">Python Import Mechanics</h2>
+            <p>September 16, 2025</p>
+          </hgroup>
+          <div class="content">
+            Reexploring python imports and why import * does not work in marimo notebooks.
+          </div>
+        </article>
+
+        <article class="outlined" data-on-click="@get('partials/blog/02_til')" style="width: 30ch;">
+            <hgroup>
+                <p>Overline</p>
+                <h2 class="h3">Headline</h2>
+                <p>Subhead</p>
+            </hgroup>
+            <div class="content">
+                Explain more about the topic shown in the headline and subhead through
+                supporting text.
+            </div>
+            <div class="actions">
+                <button class="button elevated"><span>Share</span></button>
+                <button class="button elevated"><span>Read</span></button>
+            </div>
+        </article>
+
     </main>
-
-    <article class="tonal --size-content-2">
-      <hgroup>
-        <p>code</p>
-        <h2 class="h3">Python Import Mechanics</h2>
-        <p>September 16, 2025</p>
-      </hgroup>
-      <div class="content">
-        Reexploring python imports and why import * does not work in marimo notebooks.
-      </div>
-      <div class="actions">
-          <button class="button elevated"><span>Share</span></button>
-          <button class="button elevated"><span>Read</span></button>
-      </div>
-    </article>
-
-
-    <article class="tonal --size-content-2">
-        <hgroup>
-            <p>Overline</p>
-            <h2 class="h3">Headline</h2>
-            <p>Subhead</p>
-        </hgroup>
-        <div class="content">
-            Explain more about the topic shown in the headline and subhead through
-            supporting text.
-        </div>
-        <div class="actions">
-            <button class="button elevated"><span>Share</span></button>
-            <button class="button elevated"><span>Read</span></button>
-        </div>
-    </article>
-
 
    <footer id="main-footer">
        <small>github.com/deufel/blog</small>
