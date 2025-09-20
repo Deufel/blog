@@ -1,0 +1,60 @@
+
+<header id="main-header">
+    <h3>Marimo Simple Local Server</h3>
+    <small>September 20, 2025</small>
+    <span class="chip outlined small">python</span>
+    <span class="chip filled small">marimo</span>
+    <hr>
+</header>
+
+<main id="main-main" class="padding">
+    <section>
+        <h4>Simple NB Server</h4>
+        <ol>
+            <li class="h5">Under the hood we are using a starlette server</li>
+            <p>further more we are using the fastHTML jupyter module to run this is a seperate thread</p>
+            <p>Make sure these go in seperate cells so they can be properly reactive</p>
+            <p>I think this code can be cleaned up a bit but this is working stable so its in a "good enough" state for me at the moment.</p>
+            <p><strong>cell 1</strong></p>
+            <pre style="margin: 0;" ><code class="hljs language-python">server_switch = mo.ui.switch(label="FastHTML Server")
+            get_server, set_server = mo.state(None)</code></pre>
+            <p><strong>cell 2</strong></p>
+            <pre style="margin: 0;" ><code class="hljs language-python">if server_switch.value:
+                # Start server only if not already running
+                if get_server() is None:
+                    server = JupyUvi(fastapp, port=8000)
+                    set_server(server)
+                    status = "Server started at http://localhost:8000"
+                else:
+                    status = "Server already running at http://localhost:8000"
+            else:
+                # Stop server if running
+                current_server = get_server()
+                if current_server is not None:
+                    current_server.stop()
+                    set_server(None)
+                    status = "Server stopped"
+                else:
+                    status = "Server already stopped"</code></pre>
+            <p><strong>cell 2</strong></p>
+            <pre style="margin: 0;" ><code class="hljs language-python">_status = mo.md(f"**Status:** {status}")
+            mo.vstack([ server_switch, _status])</code></pre>
+    </section>
+
+    <section>
+        <h6>External Reference</h6>
+        <ul>
+            <li>
+                <a href="https://docs.marimo.io/guides/interactivity/">Marimo Docs - Interactivity</a>
+            </li>
+            <li>
+                <a href="https://docs.marimo.io/guides/state/?h=state">Marimo Docs - State</a>
+            </li>
+            <li>
+                <a href="https://fastht.ml/docs/tutorials/jupyter_and_fasthtml.html">FastHTML Docs - Jupyter</a>
+            </li>
+        </ul>
+    </section>
+
+    <div class="sr-only" data-effect="hljs.highlightAll();"></div>
+</main>
