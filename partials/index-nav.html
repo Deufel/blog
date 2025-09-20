@@ -65,10 +65,7 @@
                     </p>
                     <div class="end">
                         <label class="switch">
-                          <input type="checkbox"
-                              role="switch"
-                              data-on-change="$event.target.checked ? @get('/partials/head/styles') : @get('/partials/styles-empty')"
-                          />
+                            <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/styles.html') : @get('partials/head/styles-empty.html')" />
                         </label>
                     </div>
                 </a>
