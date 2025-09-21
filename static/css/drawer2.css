@@ -1,5 +1,5 @@
-/* ===== MODAL DRAWER SYSTEM CSS - OPEN PROPS ANIMATIONS ===== */
-/* Using Open Props built-in keyframes for simpler, more reliable animations */
+/* ===== MODAL DRAWER SYSTEM CSS - PROPER TOP LAYER ANIMATIONS ===== */
+/* Using correct popover animation patterns with allow-discrete and overlay */
 
 /* CSS Variables */
 :root {
@@ -8,265 +8,33 @@
     --drawer-border-color: var(--border-color, #e0e0e0);
     --drawer-shadow: var(--shadow-4);
     --drawer-border-radius: var(--radius-3);
-    --drawer-animation-duration: var(--animation-duration-normal);
-    --drawer-animation-easing: var(--ease-out-3);
+    --drawer-animation-duration: var(--animation-duration-normal, 0.3s);
+    --drawer-animation-easing: var(--ease-out-3, ease-out);
 }
 
 @layer transition {
-    :where(html) {
-        --animation-fade-in: fade-in 0.5s var(--ease-3);
-        --animation-fade-in-bloom: fade-in-bloom 2s var(--ease-3);
-        --animation-fade-out: fade-out 0.5s var(--ease-3);
-        --animation-fade-out-bloom: fade-out-bloom 2s var(--ease-3);
-        --animation-scale-up: scale-up 0.5s var(--ease-3);
-        --animation-scale-down: scale-down 0.5s var(--ease-3);
-        --animation-slide-out-up: slide-out-up 0.5s var(--ease-3);
-        --animation-slide-out-down: slide-out-down 0.5s var(--ease-3);
-        --animation-slide-out-right: slide-out-right 0.5s var(--ease-3);
-        --animation-slide-out-left: slide-out-left 0.5s var(--ease-3);
-        --animation-slide-in-up: slide-in-up 0.5s var(--ease-3);
-        --animation-slide-in-down: slide-in-down 0.5s var(--ease-3);
-        --animation-slide-in-right: slide-in-right 0.5s var(--ease-3);
-        --animation-slide-in-left: slide-in-left 0.5s var(--ease-3);
-        --animation-shake-x: shake-x 0.75s var(--ease-out-5);
-        --animation-shake-y: shake-y 0.75s var(--ease-out-5);
-        --animation-shake-z: shake-z 1s var(--ease-in-out-3);
-        --animation-spin: spin 2s linear infinite;
-        --animation-ping: ping 5s var(--ease-out-3) infinite;
-        --animation-blink: blink 1s var(--ease-out-3) infinite;
-        --animation-float: float 3s var(--ease-in-out-3) infinite;
-        --animation-bounce: bounce 2s var(--ease-squish-2) infinite;
-        --animation-pulse: pulse 2s var(--ease-out-3) infinite;
-    }
-    @keyframes fade-in {
-        to {
-            opacity: 1;
-        }
-    }
-    @keyframes fade-in-bloom {
-        0% {
-            filter: brightness(1) blur(20px);
-            opacity: 0;
-        }
-        10% {
-            filter: brightness(2) blur(10px);
-            opacity: 1;
-        }
-        to {
-            filter: brightness(1) blur(0);
-            opacity: 1;
-        }
-    }
-    @keyframes fade-out {
-        to {
-            opacity: 0;
-        }
-    }
-    @keyframes fade-out-bloom {
-        to {
-            filter: brightness(1) blur(20px);
-            opacity: 0;
-        }
-        10% {
-            filter: brightness(2) blur(10px);
-            opacity: 1;
-        }
-        0% {
-            filter: brightness(1) blur(0);
-            opacity: 1;
-        }
-    }
-    @keyframes scale-up {
-        to {
-            transform: scale(1.25);
-        }
-    }
-    @keyframes scale-down {
-        to {
-            transform: scale(0.75);
-        }
-    }
-    @keyframes slide-out-up {
-        to {
-            transform: translateY(-100%);
-        }
-    }
-    @keyframes slide-out-down {
-        to {
-            transform: translateY(100%);
-        }
-    }
-    @keyframes slide-out-right {
-        to {
-            transform: translateX(100%);
-        }
-    }
-    @keyframes slide-out-left {
-        to {
-            transform: translateX(-100%);
-        }
-    }
-    @keyframes slide-in-up {
-        0% {
-            transform: translateY(100%);
-        }
-    }
-    @keyframes slide-in-down {
-        0% {
-            transform: translateY(-100%);
-        }
-    }
-    @keyframes slide-in-right {
-        0% {
-            transform: translateX(-100%);
-        }
-    }
-    @keyframes slide-in-left {
-        0% {
-            transform: translateX(100%);
-        }
-    }
-    @keyframes shake-x {
-        0%,
-        to {
-            transform: translateX(0);
-        }
-        20% {
-            transform: translateX(-5%);
-        }
-        40% {
-            transform: translateX(5%);
-        }
-        60% {
-            transform: translateX(-5%);
-        }
-        80% {
-            transform: translateX(5%);
-        }
-    }
-    @keyframes shake-y {
-        0%,
-        to {
-            transform: translateY(0);
-        }
-        20% {
-            transform: translateY(-5%);
-        }
-        40% {
-            transform: translateY(5%);
-        }
-        60% {
-            transform: translateY(-5%);
-        }
-        80% {
-            transform: translateY(5%);
-        }
-    }
-    @keyframes shake-z {
-        0%,
-        to {
-            transform: rotate(0deg);
-        }
-        20% {
-            transform: rotate(-2deg);
-        }
-        40% {
-            transform: rotate(2deg);
-        }
-        60% {
-            transform: rotate(-2deg);
-        }
-        80% {
-            transform: rotate(2deg);
-        }
-    }
-    @keyframes spin {
-        to {
-            transform: rotate(1turn);
-        }
-    }
-    @keyframes ping {
-        90%,
-        to {
-            opacity: 0;
-            transform: scale(2);
-        }
-    }
-    @keyframes blink {
-        0%,
-        to {
-            opacity: 1;
-        }
-        50% {
-            opacity: 0.5;
-        }
-    }
-    @keyframes float {
-        50% {
-            transform: translateY(-25%);
-        }
-    }
-    @keyframes bounce {
-        25% {
-            transform: translateY(-20%);
-        }
-        40% {
-            transform: translateY(-3%);
-        }
-        0%,
-        60%,
-        to {
-            transform: translateY(0);
-        }
-    }
-    @keyframes pulse {
-        50% {
-            transform: scale(0.9);
-        }
-    }
-    @media (prefers-color-scheme: dark) {
-        @keyframes fade-in-bloom {
-            0% {
-                filter: brightness(1) blur(20px);
-                opacity: 0;
-            }
-            10% {
-                filter: brightness(0.5) blur(10px);
-                opacity: 1;
-            }
-            to {
-                filter: brightness(1) blur(0);
-                opacity: 1;
-            }
-        }
-    }
-    @media (prefers-color-scheme: dark) {
-        @keyframes fade-out-bloom {
-            to {
-                filter: brightness(1) blur(20px);
-                opacity: 0;
-            }
-            10% {
-                filter: brightness(0.5) blur(10px);
-                opacity: 1;
-            }
-            0% {
-                filter: brightness(1) blur(0);
-                opacity: 1;
-            }
-        }
-    }
-
     /* ===== GENERAL POPOVER ANIMATION (non-drawer popovers) ===== */
     [popover]:not(header[popover]):not(nav[popover]):not(aside[popover]):not(
             footer[popover]
         ) {
+        /* Base state - closed */
         opacity: 0;
-        transition: var(--animation-fade-in);
 
+        /* Transition with allow-discrete for display and overlay */
+        transition:
+            opacity var(--drawer-animation-duration)
+                var(--drawer-animation-easing),
+            display var(--drawer-animation-duration) allow-discrete,
+            overlay var(--drawer-animation-duration) allow-discrete;
+
+        /* Open state */
         &:popover-open {
             opacity: 1;
-            animation: var(--animation-fade-in);
+
+            /* Starting style - where animation begins from */
+            @starting-style {
+                opacity: 0;
+            }
         }
     }
 
@@ -327,29 +95,52 @@
             margin-top: var(--size-2);
         }
 
-        /* Default state - hidden but ready for animation */
+        /* Base closed state - opacity and transform set per drawer type */
         opacity: 0;
 
-        /* Backdrop styling */
+        /* CRITICAL: Transition with allow-discrete for top layer */
+        transition:
+            transform var(--drawer-animation-duration)
+                var(--drawer-animation-easing),
+            opacity var(--drawer-animation-duration)
+                var(--drawer-animation-easing),
+            display var(--drawer-animation-duration) allow-discrete,
+            overlay var(--drawer-animation-duration) allow-discrete;
+
+        /* Backdrop base state */
         &::backdrop {
             background-color: transparent;
             backdrop-filter: blur(0px);
-            transition: var(--animation-fade-in);
+
+            /* Backdrop transition with allow-discrete */
+            transition:
+                background-color var(--drawer-animation-duration)
+                    var(--drawer-animation-easing),
+                backdrop-filter var(--drawer-animation-duration)
+                    var(--drawer-animation-easing),
+                display var(--drawer-animation-duration) allow-discrete,
+                overlay var(--drawer-animation-duration) allow-discrete;
         }
 
-        /* When open - use Open Props animations */
+        /* Open state - shared styles */
         &:popover-open {
             opacity: 1;
 
+            /* Backdrop open state */
             &::backdrop {
                 background-color: var(--drawer-backdrop-color);
                 backdrop-filter: blur(var(--blur-1));
-                animation: var(--animation-fade-in);
+
+                /* Backdrop starting style */
+                @starting-style {
+                    background-color: transparent;
+                    backdrop-filter: blur(0px);
+                }
             }
         }
     }
 
-    /* ===== HEADER DRAWER (Top) - Using slide-in-up ===== */
+    /* ===== HEADER DRAWER (Top) ===== */
     body > header[popover] {
         top: 0 !important;
         left: 0 !important;
@@ -359,13 +150,22 @@
             var(--drawer-border-radius);
         border-top: none;
 
+        /* Base closed state */
+        transform: translateY(-100%);
+
+        /* Open state */
         &:popover-open {
-            /* Use Open Props slide-in-up animation */
-            animation: var(--animation-slide-in-up);
+            transform: translateY(0);
+
+            /* Starting style - animation entry point */
+            @starting-style {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
         }
     }
 
-    /* ===== NAV DRAWER (Left) - Using slide-in-left ===== */
+    /* ===== NAV DRAWER (Left) ===== */
     body > nav[popover] {
         top: 0 !important;
         left: 0 !important;
@@ -379,13 +179,22 @@
             0;
         border-left: none;
 
+        /* Base closed state */
+        transform: translateX(-100%);
+
+        /* Open state */
         &:popover-open {
-            /* Use Open Props slide-in-left animation */
-            animation: var(--animation-slide-in-left);
+            transform: translateX(0);
+
+            /* Starting style - animation entry point */
+            @starting-style {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
         }
     }
 
-    /* ===== ASIDE DRAWER (Right) - Using slide-in-right ===== */
+    /* ===== ASIDE DRAWER (Right) ===== */
     body > aside[popover] {
         top: 0 !important;
         left: auto !important;
@@ -399,13 +208,22 @@
             var(--drawer-border-radius);
         border-right: none;
 
+        /* Base closed state */
+        transform: translateX(100%);
+
+        /* Open state */
         &:popover-open {
-            /* Use Open Props slide-in-right animation */
-            animation: var(--animation-slide-in-right);
+            transform: translateX(0);
+
+            /* Starting style - animation entry point */
+            @starting-style {
+                transform: translateX(100%);
+                opacity: 0;
+            }
         }
     }
 
-    /* ===== FOOTER DRAWER (Bottom) - Using slide-in-down ===== */
+    /* ===== FOOTER DRAWER (Bottom) ===== */
     body > footer[popover] {
         top: auto !important;
         bottom: 0 !important;
@@ -417,76 +235,18 @@
         border-bottom: none;
         padding-bottom: env(safe-area-inset-bottom, 0);
 
+        /* Base closed state */
+        transform: translateY(100%);
+
+        /* Open state */
         &:popover-open {
-            /* Use Open Props slide-in-down animation */
-            animation: var(--animation-slide-in-down);
-        }
-    }
-
-    /* ===== CUSTOM SLIDE ANIMATIONS FOR BETTER DRAWER FEEL ===== */
-    /* Override Open Props slide distances for drawer-specific behavior */
-    body > nav[popover]:popover-open {
-        animation: drawerSlideInLeft var(--drawer-animation-duration)
-            var(--drawer-animation-easing);
-    }
-
-    body > aside[popover]:popover-open {
-        animation: drawerSlideInRight var(--drawer-animation-duration)
-            var(--drawer-animation-easing);
-    }
-
-    body > header[popover]:popover-open {
-        animation: drawerSlideInDown var(--drawer-animation-duration)
-            var(--drawer-animation-easing);
-    }
-
-    body > footer[popover]:popover-open {
-        animation: drawerSlideInUp var(--drawer-animation-duration)
-            var(--drawer-animation-easing);
-    }
-
-    /* Custom keyframes optimized for drawers */
-    @keyframes drawerSlideInLeft {
-        from {
-            transform: translateX(-100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-
-    @keyframes drawerSlideInRight {
-        from {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-
-    @keyframes drawerSlideInDown {
-        from {
-            transform: translateY(-100%);
-            opacity: 0;
-        }
-        to {
             transform: translateY(0);
-            opacity: 1;
-        }
-    }
 
-    @keyframes drawerSlideInUp {
-        from {
-            transform: translateY(100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateY(0);
-            opacity: 1;
+            /* Starting style - animation entry point */
+            @starting-style {
+                transform: translateY(100%);
+                opacity: 0;
+            }
         }
     }
 
@@ -498,15 +258,6 @@
         /* Ensure navbar components work inside drawers */
         height: 100%;
         overflow-y: auto;
-    }
-
-    /* ===== ENHANCED INTERACTION STATES ===== */
-    body > header[popover]:popover-open,
-    body > nav[popover]:popover-open,
-    body > aside[popover]:popover-open,
-    body > footer[popover]:popover-open {
-        /* Add subtle scale for premium feel */
-        animation-fill-mode: both;
     }
 
     /* ===== MOBILE OPTIMIZATIONS ===== */
@@ -521,23 +272,34 @@
 
     /* ===== REDUCED MOTION SUPPORT ===== */
     @media (prefers-reduced-motion: reduce) {
-        body > header[popover]:popover-open,
-        body > nav[popover]:popover-open,
-        body > aside[popover]:popover-open,
-        body > footer[popover]:popover-open {
-            /* Use Open Props fade animation instead of slide */
-            animation: var(--animation-fade-in) !important;
-        }
+        body > header[popover],
+        body > nav[popover],
+        body > aside[popover],
+        body > footer[popover] {
+            /* Simplified transition - remove transform */
+            transition:
+                opacity var(--drawer-animation-duration),
+                display var(--drawer-animation-duration) allow-discrete,
+                overlay var(--drawer-animation-duration) allow-discrete;
 
-        /* Remove custom keyframes for reduced motion */
-        @keyframes drawerSlideInLeft,
-        @keyframes drawerSlideInRight,
-        @keyframes drawerSlideInDown,
-        @keyframes drawerSlideInUp {
-            from,
-            to {
-                transform: none;
-                opacity: 1;
+            /* Remove transforms for reduced motion */
+            transform: none !important;
+
+            &:popover-open {
+                transform: none !important;
+
+                @starting-style {
+                    opacity: 0;
+                    transform: none !important;
+                }
+            }
+
+            &::backdrop {
+                transition:
+                    background-color var(--drawer-animation-duration),
+                    backdrop-filter var(--drawer-animation-duration),
+                    display var(--drawer-animation-duration) allow-discrete,
+                    overlay var(--drawer-animation-duration) allow-discrete;
             }
         }
     }
