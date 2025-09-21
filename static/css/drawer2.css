@@ -1,15 +1,15 @@
-/* ===== MODAL DRAWER SYSTEM CSS - LAYER COMPATIBLE ===== */
-/* Let the grid system handle sizing, we just handle positioning and animations */
+/* ===== MODAL DRAWER SYSTEM CSS - OPEN PROPS ANIMATIONS ===== */
+/* Using Open Props built-in keyframes for simpler, more reliable animations */
 
 /* CSS Variables */
 :root {
     --drawer-backdrop-color: rgba(0, 0, 0, 0.5);
     --drawer-background: var(--surface-hue, #ffffff);
     --drawer-border-color: var(--border-color, #e0e0e0);
-    --drawer-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    --drawer-border-radius: 12px;
-    --drawer-animation-duration: 0.3s;
-    --drawer-animation-easing: var(--ease-3, cubic-bezier(0.25, 0, 0.3, 1));
+    --drawer-shadow: var(--shadow-4);
+    --drawer-border-radius: var(--radius-3);
+    --drawer-animation-duration: var(--animation-duration-normal);
+    --drawer-animation-easing: var(--ease-out-3);
 }
 
 @layer transition {
@@ -18,17 +18,11 @@
             footer[popover]
         ) {
         opacity: 0;
-        transition:
-            opacity 0.5s,
-            display 0.5s allow-discrete,
-            overlay 0.5s allow-discrete;
+        transition: var(--animation-fade-in);
 
         &:popover-open {
             opacity: 1;
-
-            @starting-style {
-                opacity: 0;
-            }
+            animation: var(--animation-fade-in);
         }
     }
 
@@ -52,9 +46,9 @@
         scrollbar-gutter: stable both-edges;
         overflow: hidden !important;
 
-        /* Appearance */
+        /* Appearance using Open Props */
         background: var(--drawer-background);
-        border: 1px solid var(--drawer-border-color);
+        border: var(--border-size-1) solid var(--drawer-border-color);
         box-shadow: var(--drawer-shadow);
 
         /* Maintain your semantic grid structure */
@@ -67,11 +61,11 @@
         /* Nested sections maintain structure */
         > header {
             grid-area: header;
-            margin-bottom: var(--gap-size, 6px);
+            margin-bottom: var(--size-2);
         }
         > nav {
             grid-area: nav;
-            margin-right: var(--gap-size, 6px);
+            margin-right: var(--size-2);
             overflow-y: auto;
         }
         > main {
@@ -81,51 +75,37 @@
         }
         > aside {
             grid-area: aside;
-            margin-left: var(--gap-size, 6px);
+            margin-left: var(--size-2);
             overflow-y: auto;
         }
         > footer {
             grid-area: footer;
-            margin-top: var(--gap-size, 6px);
+            margin-top: var(--size-2);
         }
 
-        /* Base transition properties - SAME FOR ALL DRAWERS */
-        transition:
-            transform var(--drawer-animation-duration)
-                var(--drawer-animation-easing),
-            opacity var(--drawer-animation-duration)
-                var(--drawer-animation-easing),
-            display var(--drawer-animation-duration) allow-discrete,
-            overlay var(--drawer-animation-duration) allow-discrete;
-
-        /* Default closed state - opacity only */
+        /* Default state - hidden but ready for animation */
         opacity: 0;
 
         /* Backdrop styling */
         &::backdrop {
-            background-color: rgb(0 0 0 / 0%);
+            background-color: transparent;
             backdrop-filter: blur(0px);
-            transition:
-                background-color var(--drawer-animation-duration)
-                    var(--drawer-animation-easing),
-                backdrop-filter var(--drawer-animation-duration)
-                    var(--drawer-animation-easing),
-                display var(--drawer-animation-duration) allow-discrete,
-                overlay var(--drawer-animation-duration) allow-discrete;
+            transition: var(--animation-fade-in);
         }
 
-        /* When open - shared backdrop styles */
+        /* When open - use Open Props animations */
         &:popover-open {
             opacity: 1;
 
             &::backdrop {
                 background-color: var(--drawer-backdrop-color);
-                backdrop-filter: blur(2px);
+                backdrop-filter: blur(var(--blur-1));
+                animation: var(--animation-fade-in);
             }
         }
     }
 
-    /* ===== HEADER DRAWER (Top) - Full width, grid-controlled height ===== */
+    /* ===== HEADER DRAWER (Top) - Using slide-in-up ===== */
     body > header[popover] {
         top: 0 !important;
         left: 0 !important;
@@ -135,21 +115,13 @@
             var(--drawer-border-radius);
         border-top: none;
 
-        /* Default closed state */
-        transform: translateY(-100%);
-
-        /* Open state - WORKING PATTERN */
         &:popover-open {
-            transform: translateY(0);
-
-            @starting-style {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
+            /* Use Open Props slide-in-up animation */
+            animation: var(--animation-slide-in-up);
         }
     }
 
-    /* ===== NAV DRAWER (Left) - Full height, grid-controlled width ===== */
+    /* ===== NAV DRAWER (Left) - Using slide-in-left ===== */
     body > nav[popover] {
         top: 0 !important;
         left: 0 !important;
@@ -158,25 +130,18 @@
         height: 100svh !important;
         max-width: 80vw !important;
         width: auto !important;
+        min-width: var(--size-content-1);
         border-radius: 0 var(--drawer-border-radius) var(--drawer-border-radius)
             0;
         border-left: none;
 
-        /* Default closed state */
-        transform: translateX(-100%);
-
-        /* Open state - WORKING PATTERN */
         &:popover-open {
-            transform: translateX(0);
-
-            @starting-style {
-                transform: translateX(-100%);
-                opacity: 0;
-            }
+            /* Use Open Props slide-in-left animation */
+            animation: var(--animation-slide-in-left);
         }
     }
 
-    /* ===== ASIDE DRAWER (Right) - Full height, grid-controlled width ===== */
+    /* ===== ASIDE DRAWER (Right) - Using slide-in-right ===== */
     body > aside[popover] {
         top: 0 !important;
         left: auto !important;
@@ -185,25 +150,18 @@
         height: 100svh !important;
         max-width: 80vw !important;
         width: auto !important;
+        min-width: var(--size-content-1);
         border-radius: var(--drawer-border-radius) 0 0
             var(--drawer-border-radius);
         border-right: none;
 
-        /* Default closed state */
-        transform: translateX(100%);
-
-        /* Open state - WORKING PATTERN */
         &:popover-open {
-            transform: translateX(0);
-
-            @starting-style {
-                transform: translateX(100%);
-                opacity: 0;
-            }
+            /* Use Open Props slide-in-right animation */
+            animation: var(--animation-slide-in-right);
         }
     }
 
-    /* ===== FOOTER DRAWER (Bottom) - Full width, grid-controlled height ===== */
+    /* ===== FOOTER DRAWER (Bottom) - Using slide-in-down ===== */
     body > footer[popover] {
         top: auto !important;
         bottom: 0 !important;
@@ -215,17 +173,76 @@
         border-bottom: none;
         padding-bottom: env(safe-area-inset-bottom, 0);
 
-        /* Default closed state */
-        transform: translateY(100%);
-
-        /* Open state - WORKING PATTERN */
         &:popover-open {
-            transform: translateY(0);
+            /* Use Open Props slide-in-down animation */
+            animation: var(--animation-slide-in-down);
+        }
+    }
 
-            @starting-style {
-                transform: translateY(100%);
-                opacity: 0;
-            }
+    /* ===== CUSTOM SLIDE ANIMATIONS FOR BETTER DRAWER FEEL ===== */
+    /* Override Open Props slide distances for drawer-specific behavior */
+    body > nav[popover]:popover-open {
+        animation: drawerSlideInLeft var(--drawer-animation-duration)
+            var(--drawer-animation-easing);
+    }
+
+    body > aside[popover]:popover-open {
+        animation: drawerSlideInRight var(--drawer-animation-duration)
+            var(--drawer-animation-easing);
+    }
+
+    body > header[popover]:popover-open {
+        animation: drawerSlideInDown var(--drawer-animation-duration)
+            var(--drawer-animation-easing);
+    }
+
+    body > footer[popover]:popover-open {
+        animation: drawerSlideInUp var(--drawer-animation-duration)
+            var(--drawer-animation-easing);
+    }
+
+    /* Custom keyframes optimized for drawers */
+    @keyframes drawerSlideInLeft {
+        from {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes drawerSlideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes drawerSlideInDown {
+        from {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes drawerSlideInUp {
+        from {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
         }
     }
 
@@ -239,35 +256,44 @@
         overflow-y: auto;
     }
 
+    /* ===== ENHANCED INTERACTION STATES ===== */
+    body > header[popover]:popover-open,
+    body > nav[popover]:popover-open,
+    body > aside[popover]:popover-open,
+    body > footer[popover]:popover-open {
+        /* Add subtle scale for premium feel */
+        animation-fill-mode: both;
+    }
+
+    /* ===== MOBILE OPTIMIZATIONS ===== */
+    @media (hover: none) and (pointer: coarse) {
+        body > nav[popover],
+        body > aside[popover] {
+            /* Better mobile drawer widths */
+            min-width: var(--size-content-2);
+            max-width: 85vw !important;
+        }
+    }
+
     /* ===== REDUCED MOTION SUPPORT ===== */
     @media (prefers-reduced-motion: reduce) {
-        body > header[popover],
-        body > nav[popover],
-        body > aside[popover],
-        body > footer[popover] {
-            transition:
-                opacity var(--drawer-animation-duration),
-                display var(--drawer-animation-duration) allow-discrete,
-                overlay var(--drawer-animation-duration) allow-discrete;
+        body > header[popover]:popover-open,
+        body > nav[popover]:popover-open,
+        body > aside[popover]:popover-open,
+        body > footer[popover]:popover-open {
+            /* Use Open Props fade animation instead of slide */
+            animation: var(--animation-fade-in) !important;
+        }
 
-            /* Remove transform from default state */
-            transform: none !important;
-
-            &:popover-open {
-                transform: none !important;
-
-                @starting-style {
-                    opacity: 0;
-                    transform: none !important;
-                }
-            }
-
-            &::backdrop {
-                transition:
-                    background-color var(--drawer-animation-duration),
-                    backdrop-filter var(--drawer-animation-duration),
-                    display var(--drawer-animation-duration) allow-discrete,
-                    overlay var(--drawer-animation-duration) allow-discrete;
+        /* Remove custom keyframes for reduced motion */
+        @keyframes drawerSlideInLeft,
+        @keyframes drawerSlideInRight,
+        @keyframes drawerSlideInDown,
+        @keyframes drawerSlideInUp {
+            from,
+            to {
+                transform: none;
+                opacity: 1;
             }
         }
     }
