@@ -79,6 +79,7 @@
             grid-area: nav;
             margin-right: var(--size-2);
             overflow-y: auto;
+            max-width: 80vw;
         }
         > main {
             grid-area: main;
@@ -89,6 +90,7 @@
             grid-area: aside;
             margin-left: var(--size-2);
             overflow-y: auto;
+            max-width: 80vw;
         }
         > footer {
             grid-area: footer;
