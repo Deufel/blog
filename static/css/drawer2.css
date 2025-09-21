@@ -1,4 +1,4 @@
-/* ===== MODAL DRAWER SYSTEM CSS - FIXED TRANSITIONS ===== */
+/* ===== MODAL DRAWER SYSTEM CSS - FIXED WITH WORKING PATTERN ===== */
 /* Let the grid system handle sizing, we just handle positioning and animations */
 
 /* CSS Variables */
@@ -13,22 +13,23 @@
 }
 
 @layer transitions {
-    /* ===== SIMPLIFIED GENERAL POPOVER ANIMATION ===== */
+    /* ===== GENERAL POPOVER ANIMATION (non-drawer popovers) ===== */
     [popover]:not(header[popover]):not(nav[popover]):not(aside[popover]):not(
             footer[popover]
         ) {
-        &:popover-open {
-            @starting-style {
-                opacity: 0;
-            }
-            opacity: 1;
-        }
-
         opacity: 0;
         transition:
             opacity 0.5s,
             display 0.5s allow-discrete,
             overlay 0.5s allow-discrete;
+
+        &:popover-open {
+            opacity: 1;
+
+            @starting-style {
+                opacity: 0;
+            }
+        }
     }
 
     /* ===== BASE DRAWER STYLES ===== */
@@ -60,11 +61,6 @@
             / auto 1fr auto;
         overflow: hidden;
 
-        /* Force hardware acceleration for mobile */
-        will-change: transform, opacity;
-        transform-style: preserve-3d;
-        backface-visibility: hidden;
-
         /* Nested sections maintain structure */
         > header {
             grid-area: header;
@@ -90,32 +86,32 @@
             margin-top: var(--gap-size, 6px);
         }
 
-        /* CONSOLIDATED transition properties */
+        /* Base transition properties - SAME FOR ALL DRAWERS */
         transition:
-            display var(--drawer-animation-duration) allow-discrete,
-            overlay var(--drawer-animation-duration) allow-discrete,
+            transform var(--drawer-animation-duration)
+                var(--drawer-animation-easing),
             opacity var(--drawer-animation-duration)
                 var(--drawer-animation-easing),
-            transform var(--drawer-animation-duration)
-                var(--drawer-animation-easing);
+            display var(--drawer-animation-duration) allow-discrete,
+            overlay var(--drawer-animation-duration) allow-discrete;
 
-        /* Backdrop transitions */
+        /* Default closed state - opacity only */
+        opacity: 0;
+
+        /* Backdrop styling */
         &::backdrop {
             background-color: rgb(0 0 0 / 0%);
             backdrop-filter: blur(0px);
             transition:
-                display var(--drawer-animation-duration) allow-discrete,
-                overlay var(--drawer-animation-duration) allow-discrete,
                 background-color var(--drawer-animation-duration)
                     var(--drawer-animation-easing),
                 backdrop-filter var(--drawer-animation-duration)
-                    var(--drawer-animation-easing);
+                    var(--drawer-animation-easing),
+                display var(--drawer-animation-duration) allow-discrete,
+                overlay var(--drawer-animation-duration) allow-discrete;
         }
 
-        /* Default closed state - opacity handled per drawer type */
-        opacity: 0;
-
-        /* When open - shared styles */
+        /* When open - shared backdrop styles */
         &:popover-open {
             opacity: 1;
 
@@ -128,7 +124,6 @@
 
     /* ===== HEADER DRAWER (Top) - Full width, grid-controlled height ===== */
     header[popover] {
-        /* Positioning */
         position: fixed;
         top: 0;
         left: 0;
@@ -141,11 +136,10 @@
         /* Default closed state */
         transform: translateY(-100%);
 
-        /* Open state */
+        /* Open state - WORKING PATTERN */
         &:popover-open {
             transform: translateY(0);
 
-            /* Starting style for entry animation */
             @starting-style {
                 transform: translateY(-100%);
                 opacity: 0;
@@ -155,14 +149,12 @@
 
     /* ===== NAV DRAWER (Left) - Full height, grid-controlled width ===== */
     nav[popover] {
-        /* Positioning */
         position: fixed;
         top: 0;
         left: 0;
         height: 100vh;
         height: 100svh;
         max-width: 80vw;
-        min-width: 280px;
         border-radius: 0 var(--drawer-border-radius) var(--drawer-border-radius)
             0;
         border-left: none;
@@ -170,11 +162,10 @@
         /* Default closed state */
         transform: translateX(-100%);
 
-        /* Open state */
+        /* Open state - WORKING PATTERN */
         &:popover-open {
             transform: translateX(0);
 
-            /* Starting style for entry animation */
             @starting-style {
                 transform: translateX(-100%);
                 opacity: 0;
@@ -184,14 +175,12 @@
 
     /* ===== ASIDE DRAWER (Right) - Full height, grid-controlled width ===== */
     aside[popover] {
-        /* Positioning */
         position: fixed;
         top: 0;
         right: 0;
         height: 100vh;
         height: 100svh;
         max-width: 80vw;
-        min-width: 280px;
         border-radius: var(--drawer-border-radius) 0 0
             var(--drawer-border-radius);
         border-right: none;
@@ -199,11 +188,10 @@
         /* Default closed state */
         transform: translateX(100%);
 
-        /* Open state */
+        /* Open state - WORKING PATTERN */
         &:popover-open {
             transform: translateX(0);
 
-            /* Starting style for entry animation */
             @starting-style {
                 transform: translateX(100%);
                 opacity: 0;
@@ -213,7 +201,6 @@
 
     /* ===== FOOTER DRAWER (Bottom) - Full width, grid-controlled height ===== */
     footer[popover] {
-        /* Positioning */
         position: fixed;
         bottom: 0;
         left: 0;
@@ -227,26 +214,14 @@
         /* Default closed state */
         transform: translateY(100%);
 
-        /* Open state */
+        /* Open state - WORKING PATTERN */
         &:popover-open {
             transform: translateY(0);
 
-            /* Starting style for entry animation */
             @starting-style {
                 transform: translateY(100%);
                 opacity: 0;
             }
-        }
-    }
-
-    /* ===== MOBILE OPTIMIZATIONS ===== */
-    @media (hover: none) and (pointer: coarse) {
-        header[popover],
-        nav[popover],
-        aside[popover],
-        footer[popover] {
-            /* Slightly slower on mobile for better perception */
-            transition-duration: calc(var(--drawer-animation-duration) * 1.2);
         }
     }
 
@@ -256,23 +231,29 @@
         nav[popover],
         aside[popover],
         footer[popover] {
-            &,
-            &::backdrop {
-                transition:
-                    display var(--drawer-animation-duration) allow-discrete,
-                    overlay var(--drawer-animation-duration) allow-discrete,
-                    opacity var(--drawer-animation-duration);
-                /* Remove transform transitions */
-            }
+            transition:
+                opacity var(--drawer-animation-duration),
+                display var(--drawer-animation-duration) allow-discrete,
+                overlay var(--drawer-animation-duration) allow-discrete;
 
-            /* No transform animations */
+            /* Remove transform from default state */
             transform: none !important;
 
-            @starting-style {
-                &:popover-open {
+            &:popover-open {
+                transform: none !important;
+
+                @starting-style {
                     opacity: 0;
                     transform: none !important;
                 }
+            }
+
+            &::backdrop {
+                transition:
+                    background-color var(--drawer-animation-duration),
+                    backdrop-filter var(--drawer-animation-duration),
+                    display var(--drawer-animation-duration) allow-discrete,
+                    overlay var(--drawer-animation-duration) allow-discrete;
             }
         }
     }
