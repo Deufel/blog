@@ -1,4 +1,4 @@
-/* ===== MODAL DRAWER SYSTEM CSS - FIXED WITH WORKING PATTERN ===== */
+/* ===== MODAL DRAWER SYSTEM CSS - LAYER COMPATIBLE ===== */
 /* Let the grid system handle sizing, we just handle positioning and animations */
 
 /* CSS Variables */
@@ -12,7 +12,7 @@
     --drawer-animation-easing: var(--ease-3, cubic-bezier(0.25, 0, 0.3, 1));
 }
 
-@layer transitions {
+@layer transition {
     /* ===== GENERAL POPOVER ANIMATION (non-drawer popovers) ===== */
     [popover]:not(header[popover]):not(nav[popover]):not(aside[popover]):not(
             footer[popover]
@@ -33,19 +33,24 @@
     }
 
     /* ===== BASE DRAWER STYLES ===== */
-    header[popover],
-    nav[popover],
-    aside[popover],
-    footer[popover] {
+    body > header[popover],
+    body > nav[popover],
+    body > aside[popover],
+    body > footer[popover] {
+        /* Override layout defaults with higher specificity */
+        position: fixed !important;
+        display: grid !important;
+
         /* Reset popover defaults */
         border: none;
         padding: 0;
-        margin: 0;
+        margin: 0 !important;
         outline: none;
         max-width: none;
         max-height: none;
         scrollbar-width: thin;
         scrollbar-gutter: stable both-edges;
+        overflow: hidden !important;
 
         /* Appearance */
         background: var(--drawer-background);
@@ -53,13 +58,11 @@
         box-shadow: var(--drawer-shadow);
 
         /* Maintain your semantic grid structure */
-        display: grid;
         grid-template:
             "header header header" auto
             "nav main aside" 1fr
             "footer footer footer" auto
             / auto 1fr auto;
-        overflow: hidden;
 
         /* Nested sections maintain structure */
         > header {
@@ -123,12 +126,11 @@
     }
 
     /* ===== HEADER DRAWER (Top) - Full width, grid-controlled height ===== */
-    header[popover] {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
+    body > header[popover] {
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
         border-radius: 0 0 var(--drawer-border-radius)
             var(--drawer-border-radius);
         border-top: none;
@@ -148,13 +150,14 @@
     }
 
     /* ===== NAV DRAWER (Left) - Full height, grid-controlled width ===== */
-    nav[popover] {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100vh;
-        height: 100svh;
-        max-width: 80vw;
+    body > nav[popover] {
+        top: 0 !important;
+        left: 0 !important;
+        right: auto !important;
+        height: 100vh !important;
+        height: 100svh !important;
+        max-width: 80vw !important;
+        width: auto !important;
         border-radius: 0 var(--drawer-border-radius) var(--drawer-border-radius)
             0;
         border-left: none;
@@ -174,13 +177,14 @@
     }
 
     /* ===== ASIDE DRAWER (Right) - Full height, grid-controlled width ===== */
-    aside[popover] {
-        position: fixed;
-        top: 0;
-        right: 0;
-        height: 100vh;
-        height: 100svh;
-        max-width: 80vw;
+    body > aside[popover] {
+        top: 0 !important;
+        left: auto !important;
+        right: 0 !important;
+        height: 100vh !important;
+        height: 100svh !important;
+        max-width: 80vw !important;
+        width: auto !important;
         border-radius: var(--drawer-border-radius) 0 0
             var(--drawer-border-radius);
         border-right: none;
@@ -200,12 +204,12 @@
     }
 
     /* ===== FOOTER DRAWER (Bottom) - Full width, grid-controlled height ===== */
-    footer[popover] {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
+    body > footer[popover] {
+        top: auto !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
         border-radius: var(--drawer-border-radius) var(--drawer-border-radius) 0
             0;
         border-bottom: none;
@@ -225,12 +229,22 @@
         }
     }
 
+    /* ===== ENSURE DRAWER CONTENT RESPECTS LAYOUT ===== */
+    body > header[popover] > nav.navbar,
+    body > nav[popover] > main > nav.navbar,
+    body > aside[popover] > main > nav.navbar,
+    body > footer[popover] > nav.navbar {
+        /* Ensure navbar components work inside drawers */
+        height: 100%;
+        overflow-y: auto;
+    }
+
     /* ===== REDUCED MOTION SUPPORT ===== */
     @media (prefers-reduced-motion: reduce) {
-        header[popover],
-        nav[popover],
-        aside[popover],
-        footer[popover] {
+        body > header[popover],
+        body > nav[popover],
+        body > aside[popover],
+        body > footer[popover] {
             transition:
                 opacity var(--drawer-animation-duration),
                 display var(--drawer-animation-duration) allow-discrete,
