@@ -1,5 +1,8 @@
 # About
-A simple design system based on css
+A CSS Layout system
+
+## Overview
+![Alt text](static/img/layout.png)
 
 # CSS
 
