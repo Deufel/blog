@@ -1,25 +1,23 @@
 <main id="main">
-    <header id="main-header">
-        <h1>Home</h1>
-    </header>
-
-    <main id="main-main" class="card outlined">
-       <section>
-           <h2> Features </h2>
-           <ul>
-               <li>
-                   <p>Theme will broadcast to other open tabs</p>
-                   <p>Day / Night / System</p>
-                   <p>Font size</p>
-                   <p>Centered viewport (for large screens)</p>
-               </li>
-           </ul>
-       </section>
+    <header id="main-header" style="background-color: light-dark(var(--color-3), var(--color-9));"><h4> main &GT; header <h4></header>
+    <nav    id="main-nav"    style="background-color: light-dark(var(--color-4), var(--color-10));"><h4> main &GT; nav </h4></nav>
+    <main   id="main-main"   style="background-color: light-dark(var(--color-5), var(--color-11));">
+            <h4>main &GT; nav</h4>
+        <div class="--stack">
+            <div class="button-group" role="group">
+                <button class="button small filled" data-on-click="@get('partials/layout/add-header')"> <span> + Header </span></button>
+                <button class="button small filled" data-on-click="@get('partials/layout/add-nav')">    <span> + Nav    </span></button>
+                <button class="button small filled" data-on-click="@get('partials/layout/add-aside')">  <span> + Aside  </span></button>
+                <button class="button small filled" data-on-click="@get('partials/layout/add-footer')"> <span> + Footer </span></button>
+            </div>
+            <div class="button-group" role="group">
+                <button class="button small outlined" data-on-click="@get('partials/layout/rem-header')"> <span> - Header </span></button>
+                <button class="button small outlined" data-on-click="@get('partials/layout/rem-nav')">    <span> - Nav    </span></button>
+                <button class="button small outlined" data-on-click="@get('partials/layout/rem-aside')">  <span> - Aside  </span></button>
+                <button class="button small outlined" data-on-click="@get('partials/layout/rem-footer')"> <span> - Footer </span></button>
+            </div>
+        </div>
     </main>
-
-    <aside id="main-aside"></aside>
-
-    <footer id="main-footer" class="--flex:row:end">
-        <small><a href="https://deufel.github.io/css">https://deufel.github.io/blog</a></small>
-    </footer>
-<main>
+    <aside  id="main-aside"  style="background-color: light-dark(var(--color-6), var(--color-12));"> <h4>main &GT; aside</h4> </aside>
+    <footer id="main-footer" style="background-color: light-dark(var(--color-7), var(--color-13));"><h4>main &GT; footer</h4></footer>
+</main>
