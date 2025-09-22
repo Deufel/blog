@@ -11,4 +11,17 @@
         <button>unstyled button</button>
         <button data-style="$btn">test button</button>
     </main>
+    <article>
+       <h3>Custom Events</h3>
+        <pre style="margin: 0;" class="--center-hor"><code class="hljs language-html">#html
+        &ltscript&gt
+            // Simple window resize handler that dispatches a custom event
+            addEventListener('resize', () =>
+                document.body.dispatchEvent(new CustomEvent('windowresize', {
+                    detail: { width: innerWidth }
+                }))
+            );
+        &lt/script&gt
+        </code></pre>
+    </article>
 </main>
