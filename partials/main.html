@@ -1,7 +1,10 @@
 <main id="main">
-    <header id="main-header" style="background-color: light-dark(var(--color-3), var(--color-9));"><h4>main &GT; header <h4></header>
-    <nav    id="main-nav"    style="background-color: light-dark(var(--color-4), var(--color-10));"><h4>main &GT; nav </h4></nav>
-    <main   id="main-main"   style="background-color: light-dark(var(--color-5), var(--color-11));"><h4>main &GT; nav</h4></main>
-    <aside  id="main-aside"  style="background-color: light-dark(var(--color-6), var(--color-12));"><h4>main &GT; aside</h4></aside>
-    <footer id="main-footer" style="background-color: light-dark(var(--color-7), var(--color-13));"><h4>main &GT; footer</h4></footer>
+    <label class="switch">
+        <input type="checkbox" checked role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_0_reset') : @get('partials/head/css_0_reset_blank')" />
+    </label>
+
+    <label class="switch">
+        <input type="checkbox" checked role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_1_composition') : @get('partials/head/css_1_composition_blank')" />
+    </label>
+
 </main>

@@ -17,11 +17,20 @@
 }
 
 @layer composition.layout {
-    display: grid;
-    grid-template:
-        "header header header" auto
-        "nav    main   aside"  1fr
-       / auto   1fr    auto;
+    body {
+        background-color: darkcyan;
+        display: grid;
+        grid-template:
+            "header header header" auto
+            "nav    main   aside"  1fr
+        / auto   1fr    auto;
+    }
+
+    body > header {background-color: aliceblue}
+    body > nav    {background-color: beige}
+    body > aside  {background-color: plum}
+    body > main   {background-color: salmon}
+    body > footer {background-color: seagreen;
 }
 
 
