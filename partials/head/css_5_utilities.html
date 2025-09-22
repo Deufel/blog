@@ -1,1 +1,12 @@
-<style id="css_5_utilities"> </style>
+<style id="css_5_utilities">
+@layer css_5_utilities {
+    where(.icon-button) {
+        transition: transform 0.3s ease; /* This handles BOTH directions */
+    }
+
+    where(.trimmed) > * {
+        text-box: trim-both cap alphabetic;
+    }
+}
+
+</style>
