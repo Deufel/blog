@@ -1,43 +1,217 @@
 <main id="main">
-    <code>&lt <strong>main  </strong> id="main" &gt</code>
+    <div class="theme-demo">
+        <header>
+            <h1>Advanced Color Theme System</h1>
+            <p>A sophisticated design system using algorithmic color generation with gray mixing for subtle, accessible interfaces.</p>
+        </header>
 
-    <label class="switch">
-        1_reset
-        <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_1_reset') : @get('partials/head/css_1_reset_blank')" />
-    </label>
+        <section class="theme-switcher">
+            <button class="theme-button active" onclick="setTheme('')">Default</button>
+            <button class="theme-button" onclick="setTheme('high-contrast')">High Contrast</button>
+            <button class="theme-button" onclick="setTheme('vibrant')">Vibrant</button>
+            <button class="theme-button" onclick="setTheme('warm')">Warm</button>
+            <button class="theme-button" onclick="setTheme('cool')">Cool</button>
+            <button class="theme-button" onclick="setTheme('nature')">Nature</button>
+        </section>
 
-    <label class="switch">
-        2_tokens
-        <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_2_tokens') : @get('partials/head/css_2_tokens_blank')" />
-    </label>
+        <section>
+            <h2>Surface System</h2>
+            <p>Surfaces use <code>color-mix()</code> to blend generated colors with grays for subtle, sophisticated tints.</p>
 
-    <label class="switch">
-        3_theme
-        <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_3_theme') : @get('partials/head/css_3_theme_blank')" />
-    </label>
+            <div class="surface-showcase">
+                <div class="surface-card surface-1">
+                    <strong>Surface 1</strong>
+                    <div class="color-info">
+                        Base surface<br>
+                        95% gray mix
+                    </div>
+                </div>
+                <div class="surface-card surface-2">
+                    <strong>Surface 2</strong>
+                    <div class="color-info">
+                        Elevated surface<br>
+                        93% gray mix
+                    </div>
+                </div>
+                <div class="surface-card surface-3">
+                    <strong>Surface 3</strong>
+                    <div class="color-info">
+                        Higher elevation<br>
+                        93% gray mix
+                    </div>
+                </div>
+                <div class="surface-card surface-4">
+                    <strong>Surface 4</strong>
+                    <div class="color-info">
+                        Accent surface<br>
+                        90% gray mix
+                    </div>
+                </div>
+                <div class="surface-card interactive">
+                    <strong>Interactive</strong>
+                    <div class="color-info">
+                        Hover states<br>
+                        85% gray mix
+                    </div>
+                </div>
+                <div class="surface-card accent">
+                    <strong>Accent</strong>
+                    <div class="color-info">
+                        Emphasis<br>
+                        70% gray mix
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <label class="switch">
-        4_base
-        <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_4_base') : @get('partials/head/css_4_base_blank')" />
-    </label>
+        <section>
+            <h2>State Surfaces</h2>
+            <div class="surface-showcase">
+                <div class="surface-card success">
+                    <strong>Success</strong>
+                    <div class="color-info">
+                        Positive feedback<br>
+                        Green + gray mix
+                    </div>
+                </div>
+                <div class="surface-card warning">
+                    <strong>Warning</strong>
+                    <div class="color-info">
+                        Caution states<br>
+                        Orange + gray mix
+                    </div>
+                </div>
+                <div class="surface-card error">
+                    <strong>Error</strong>
+                    <div class="color-info">
+                        Error states<br>
+                        Red + gray mix
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <label class="switch">
-        5_layout
-        <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_5_layout') : @get('partials/head/css_5_layout_blank')" />
-    </label>
+        <section>
+            <h2>Generated Color Palette</h2>
+            <p>16 algorithmically generated colors from a single hue value, with configurable chroma and rotation.</p>
+            <div class="color-palette">
+                <div class="color-swatch" style="background: var(--color-1)">1</div>
+                <div class="color-swatch" style="background: var(--color-2)">2</div>
+                <div class="color-swatch" style="background: var(--color-3)">3</div>
+                <div class="color-swatch" style="background: var(--color-4)">4</div>
+                <div class="color-swatch" style="background: var(--color-5)">5</div>
+                <div class="color-swatch" style="background: var(--color-6)">6</div>
+                <div class="color-swatch" style="background: var(--color-7)">7</div>
+                <div class="color-swatch" style="background: var(--color-8)">8</div>
+                <div class="color-swatch" style="background: var(--color-9)">9</div>
+                <div class="color-swatch" style="background: var(--color-10)">10</div>
+                <div class="color-swatch" style="background: var(--color-11)">11</div>
+                <div class="color-swatch" style="background: var(--color-12)">12</div>
+                <div class="color-swatch" style="background: var(--color-13)">13</div>
+                <div class="color-swatch" style="background: var(--color-14)">14</div>
+                <div class="color-swatch" style="background: var(--color-15)">15</div>
+                <div class="color-swatch" style="background: var(--color-16)">16</div>
+            </div>
+        </section>
 
-    <label class="switch">
-        6_utilities
-        <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_6_utilities') : @get('partials/head/css_6_utilities_blank')" />
-    </label>
+        <section class="component-showcase">
+            <div class="component-group">
+                <h3>Buttons & Interactions</h3>
+                <button class="demo-button">Primary Action</button>
+                <button class="demo-button secondary">Secondary Action</button>
+                <br>
+                <button class="demo-button" style="background: var(--color-success)">Success</button>
+                <button class="demo-button" style="background: var(--color-warning)">Warning</button>
+                <button class="demo-button" style="background: var(--color-error)">Error</button>
+            </div>
 
-    <label class="switch">
-        7_components
-        <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_7_components') : @get('partials/head/css_7_components_blank')" />
-    </label>
+            <div class="component-group">
+                <h3>Form Elements</h3>
+                <input type="text" class="demo-input" placeholder="Enter your text here...">
+                <input type="email" class="demo-input" placeholder="your@email.com">
+                <textarea class="demo-input" rows="3" placeholder="Your message..."></textarea>
+            </div>
 
-    <label class="switch">
-        8_exceptions
-        <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_8_exceptions') : @get('partials/head/css_8_exceptions_blank')" />
-    </label>
+            <div class="component-group">
+                <h3>Cards & Content</h3>
+                <div class="demo-card">
+                    <h4 style="margin-top: 0;">Card Title</h4>
+                    <p style="margin-bottom: 0; color: var(--text-secondary);">
+                        This card demonstrates the surface mixing system with subtle hover effects.
+                    </p>
+                </div>
+                <div class="demo-card">
+                    <h4 style="margin-top: 0;">Another Card</h4>
+                    <p style="margin-bottom: 0; color: var(--text-secondary);">
+                        Hover over cards to see the elevation changes in action.
+                    </p>
+                </div>
+            </div>
+
+            <div class="component-group">
+                <h3>Alert Messages</h3>
+                <div class="alert success">
+                    <strong>Success!</strong> Your changes have been saved successfully.
+                </div>
+                <div class="alert warning">
+                    <strong>Warning:</strong> Please review your input before submitting.
+                </div>
+                <div class="alert error">
+                    <strong>Error:</strong> Something went wrong. Please try again.
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Technical Details</h2>
+            <div style="background: var(--surface-2); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
+                <h3>Key Features:</h3>
+                <ul style="color: var(--text-secondary); line-height: 1.7;">
+                    <li><strong>Algorithmic Generation:</strong> 16 colors from 3 variables (hue, chroma, rotation)</li>
+                    <li><strong>Gray Mixing:</strong> Subtle color mixing with grays for sophisticated surfaces</li>
+                    <li><strong>Automatic Dark Mode:</strong> Uses <code>light-dark()</code> for seamless theme switching</li>
+                    <li><strong>Progressive Enhancement:</strong> More color in interactive elements, less in backgrounds</li>
+                    <li><strong>Accessibility First:</strong> Maintains contrast ratios while adding personality</li>
+                    <li><strong>Easy Theming:</strong> Change one hue value to completely rebrand</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function setTheme(theme) {
+            // Remove existing theme
+            document.documentElement.removeAttribute('data-theme');
+
+            // Add new theme if specified
+            if (theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+            }
+
+            // Update active button
+            document.querySelectorAll('.theme-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Add some interactive behavior
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effects to surface cards
+            const surfaceCards = document.querySelectorAll('.surface-card');
+            surfaceCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                    this.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+                });
+
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+        });
+    </script>
+
+
 </main>
