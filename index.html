@@ -56,7 +56,16 @@
             <p>Click the button below to load in the <code>Style Loader</code></p>
             <button data-on-click="@get('partials/main.html')">Style Loader</button>
         </main>
-        <aside  id="aside" > <code>&lt <strong>aside   </strong> id="aside"  &gt</code> </aside>
+        <aside  id="aside" > <code>&lt <strong>aside   </strong> id="aside"  &gt</code>
+            <hr><span><strong>Signals</strong></span><hr>
+            <div data-text="'currentPage: ' + ($currentPage  || 'undefined')"></div>
+            <div data-text="'windowWidth: ' + ($windowWidth  || 'undefined')"></div>
+            <div data-text="'currentTab: '  + ($currentTab   || 'undefined')"></div>
+            <div data-text="'themeMode: '   + ($themeMode    || 'undefined')"></div>
+            <div data-text="'fontScale: '   +  ($fontScale   || 'undefined')"></div>
+            <div data-text="'layoutWidth : '+  ($layoutWidth || 'undefined')"></div>
+            <div data-text="'Button styl : '+  ($btn         || 'undefined')"></div>
+        </aside>
         <footer id="footer"> <code>&lt <strong>footer  </strong> id="footer" &gt</code> </footer>
 
         <!--These articles are always in drawers one of the top of the screen and the other from the bottom-->

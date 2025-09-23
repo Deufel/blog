@@ -1,443 +1,441 @@
 <style id="css_4_layout">
 
-@layer css_4_layout.body {
-    body {
-        --padding-size: var(--size-fluid-0);
-        --gap-size: var(--size-fluid-0);
+    @layer css_4_layout.body {
+        body {
+            --padding-size: var(--size-fluid-0);
+            --gap-size: var(--size-fluid-0);
 
-        background-color: var(--well-2);
-        position: fixed;
-        inset: 0;
-        width: 100%;
-        height: 100svh;
-        overflow: hidden;
-        overscroll-behavior: none;
-        margin-inline: auto; /* allows for easy centering */
-    }
-}
-
-
-@layer css_4_layout.page{
-    body {
-        background-color: darkcyan;
-        display: grid;
-        grid-template:
-            "header header header" auto
-            "nav    main   aside"  1fr
-            "nav    footer aside" auto
-        / auto   1fr    auto;
+            background-color: var(--well-2);
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100svh;
+            overflow: hidden;
+            overscroll-behavior: none;
+            margin-inline: auto; /* allows for easy centering */
+        }
     }
 
-    body > header {background-color: var(--surface-1); grid-area: header;}
-    body > nav    {background-color: var(--surface-2);     grid-area: nav;}
-    body > aside  {background-color: var(--surface-3);      grid-area: aside;}
-    body > main   {background-color: var(--surface-4);    grid-area: main;}
-    body > footer {background-color: var(--well-1);  grid-area: footer};
-}
+
+    @layer css_4_layout.page{
+        body {
+            background-color: var(--color-bg);
+            gap: var(--size-1);
+            display: grid;
+            grid-template:
+                "header header header" auto
+                "nav    main   aside"  1fr
+            / auto   1fr    auto;
+        }
+
+        body > header {background-color: var(--surface-1); grid-area: header;}
+        body > nav    {background-color: var(--surface-2); grid-area: nav;}
+        body > aside  {background-color: var(--surface-3); grid-area: aside;}
+        body > main   {background-color: var(--surface-4); grid-area: main;}
+    }
 
 
-@layer css_4_layout.drawers{
-    [popover] {
-        &:popover-open {
-            /*   0. BEFORE-OPEN STATE   */
-            /*  initial state for what we're animating *in* from  */
-            @starting-style {
-                opacity: 0;
+    @layer css_4_layout.drawers{
+        [popover] {
+            &:popover-open {
+                /*   0. BEFORE-OPEN STATE   */
+                /*  initial state for what we're animating *in* from  */
+                @starting-style {
+                    opacity: 0;
+                }
+
+                /*   1. OPEN STATE   */
+                /*  state when popover is open, BOTH:
+                what we're transitioning *in* to
+                and transitioning *out* from */
+                opacity: 1;
             }
 
-            /*   1. OPEN STATE   */
-            /*  state when popover is open, BOTH:
-            what we're transitioning *in* to
-            and transitioning *out* from */
-            opacity: 1;
-        }
+            /*   2. AFTER-OPEN-IS-CLOSED STATE   */
+            /*  initial state for what we're animating *out* to */
+            opacity: 0;
 
-        /*   2. AFTER-OPEN-IS-CLOSED STATE   */
-        /*  initial state for what we're animating *out* to */
-        opacity: 0;
-
-        /*  enumarate transitioning properties, including display */
-        transition:
-            opacity 0.5s,
-            display 0.5s;
-    }
-
-    /* ===== BASE DRAWER STYLES ===== */
-    header[popover],
-    nav[popover],
-    aside[popover],
-    footer[popover] {
-        /* Reset popover defaults */
-        border: none;
-        padding: 0;
-        margin: 0;
-        outline: none;
-        max-width: none;
-        max-height: none;
-        scrollbar-width: thin;
-        scrollbar-gutter: stable both-edges;
-
-        /* Appearance */
-        background: var(--drawer-background);
-        border: 1px solid var(--drawer-border-color);
-        box-shadow: var(--drawer-shadow);
-
-        /* Maintain your semantic grid structure */
-        display: grid;
-        grid-template:
-            "header header header" auto
-            "nav main aside" 1fr
-            / auto 1fr auto;
-        overflow: hidden;
-
-        /* Nested sections maintain structure */
-        > header {
-            grid-area: header;
-            margin-bottom: var(--gap-size, 6px);
-        }
-        > nav {
-            grid-area: nav;
-            margin-right: var(--gap-size, 6px);
-            overflow-y: auto;
-        }
-        > main {
-            grid-area: main;
-            overflow-y: auto;
-            min-height: 0;
-        }
-        > aside {
-            grid-area: aside;
-            margin-left: var(--gap-size, 6px);
-            overflow-y: auto;
-        }
-        > footer {
-            grid-area: footer;
-            margin-top: var(--gap-size, 6px);
-        }
-
-        /* Base transition properties for both element and backdrop */
-        &,
-        &::backdrop {
+            /*  enumarate transitioning properties, including display */
             transition:
-                display var(--drawer-animation-duration) allow-discrete,
-                overlay var(--drawer-animation-duration) allow-discrete,
-                opacity var(--drawer-animation-duration)
-                    var(--drawer-animation-easing),
-                transform var(--drawer-animation-duration)
-                    var(--drawer-animation-easing),
-                background-color var(--drawer-animation-duration)
-                    var(--drawer-animation-easing),
-                backdrop-filter var(--drawer-animation-duration)
-                    var(--drawer-animation-easing);
+                opacity 0.5s,
+                display 0.5s;
         }
 
-        /* Exit stage - default state */
-        opacity: 0;
-
-        /* Backdrop default state */
-        &::backdrop {
-            background-color: rgb(0 0 0 / 0%);
-            backdrop-filter: blur(0px);
-        }
-
-        /* On stage - when popover is open */
-        &:popover-open {
-            opacity: 1;
-
-            &::backdrop {
-                background-color: var(--drawer-backdrop-color);
-                backdrop-filter: blur(2px);
-            }
-        }
-    }
-
-    /* ===== HEADER DRAWER (Top) - Full width, grid-controlled height ===== */
-    header[popover] {
-        top: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        border-radius: 0 0 var(--drawer-border-radius)
-            var(--drawer-border-radius);
-        border-top: none;
-
-        /* Exit stage to */
-        transform: translateY(-100%);
-
-        /* On stage */
-        &:popover-open {
-            transform: translateY(0);
-        }
-
-        /* Enter stage from */
-        @starting-style {
-            &:popover-open,
-            &:popover-open::backdrop {
-                opacity: 0;
-            }
-
-            &:popover-open {
-                transform: translateY(-100%);
-            }
-        }
-    }
-
-    /* ===== NAV DRAWER (Left) - Full height, grid-controlled width ===== */
-    nav[popover] {
-        height: 100svh;
-        max-width: 80vw;
-        border-radius: 0 var(--drawer-border-radius) var(--drawer-border-radius)
-            0;
-        border-left: none;
-
-        /* Exit stage to */
-        transform: translateX(-100%);
-
-        /* On stage */
-        &:popover-open {
-            transform: translateX(0);
-        }
-
-        /* Enter stage from */
-        @starting-style {
-            &:popover-open,
-            &:popover-open::backdrop {
-                opacity: 0;
-            }
-
-            &:popover-open {
-                transform: translateX(-100%);
-            }
-        }
-    }
-
-    /* ===== ASIDE DRAWER (Right) - Full height, grid-controlled width ===== */
-    aside[popover] {
-        left: auto;
-        height: 100svh;
-        max-width: 80vw;
-        border-radius: var(--drawer-border-radius) 0 0
-            var(--drawer-border-radius);
-        border-right: none;
-
-        /* Exit stage to */
-        transform: translateX(100%);
-
-        /* On stage */
-        &:popover-open {
-            transform: translateX(0);
-        }
-
-        /* Enter stage from */
-        @starting-style {
-            &:popover-open,
-            &:popover-open::backdrop {
-                opacity: 0;
-            }
-
-            &:popover-open {
-                transform: translateX(100%);
-            }
-        }
-    }
-
-    /* ===== FOOTER DRAWER (Bottom) - Full width, grid-controlled height ===== */
-    footer[popover] {
-        top: auto;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        border-radius: var(--drawer-border-radius) var(--drawer-border-radius) 0
-            0;
-        border-bottom: none;
-        padding-bottom: env(safe-area-inset-bottom, 0);
-
-        /* Exit stage to */
-        transform: translateY(100%);
-
-        /* On stage */
-        &:popover-open {
-            transform: translateY(0);
-        }
-
-        /* Enter stage from */
-        @starting-style {
-            &:popover-open,
-            &:popover-open::backdrop {
-                opacity: 0;
-            }
-
-            &:popover-open {
-                transform: translateY(100%);
-            }
-        }
-    }
-
-    /* ===== REDUCED MOTION SUPPORT ===== */
-    @media (prefers-reduced-motion: reduce) {
+        /* ===== BASE DRAWER STYLES ===== */
         header[popover],
         nav[popover],
         aside[popover],
         footer[popover] {
-            &,
-            &::backdrop {
-                transition: none !important;
+            /* Reset popover defaults */
+            border: none;
+            padding: 0;
+            margin: 0;
+            outline: none;
+            max-width: none;
+            max-height: none;
+            scrollbar-width: thin;
+            scrollbar-gutter: stable both-edges;
+
+            /* Appearance */
+            background: var(--drawer-background);
+            border: 1px solid var(--drawer-border-color);
+            box-shadow: var(--drawer-shadow);
+
+            /* Maintain your semantic grid structure */
+            display: grid;
+            grid-template:
+                "header header header" auto
+                "nav main aside" 1fr
+                / auto 1fr auto;
+            overflow: hidden;
+
+            /* Nested sections maintain structure */
+            > header {
+                grid-area: header;
+                margin-bottom: var(--gap-size, 6px);
+            }
+            > nav {
+                grid-area: nav;
+                margin-right: var(--gap-size, 6px);
+                overflow-y: auto;
+            }
+            > main {
+                grid-area: main;
+                overflow-y: auto;
+                min-height: 0;
+            }
+            > aside {
+                grid-area: aside;
+                margin-left: var(--gap-size, 6px);
+                overflow-y: auto;
+            }
+            > footer {
+                grid-area: footer;
+                margin-top: var(--gap-size, 6px);
             }
 
+            /* Base transition properties for both element and backdrop */
+            &,
+            &::backdrop {
+                transition:
+                    display var(--drawer-animation-duration) allow-discrete,
+                    overlay var(--drawer-animation-duration) allow-discrete,
+                    opacity var(--drawer-animation-duration)
+                        var(--drawer-animation-easing),
+                    transform var(--drawer-animation-duration)
+                        var(--drawer-animation-easing),
+                    background-color var(--drawer-animation-duration)
+                        var(--drawer-animation-easing),
+                    backdrop-filter var(--drawer-animation-duration)
+                        var(--drawer-animation-easing);
+            }
+
+            /* Exit stage - default state */
+            opacity: 0;
+
+            /* Backdrop default state */
+            &::backdrop {
+                background-color: rgb(0 0 0 / 0%);
+                backdrop-filter: blur(0px);
+            }
+
+            /* On stage - when popover is open */
+            &:popover-open {
+                opacity: 1;
+
+                &::backdrop {
+                    background-color: var(--drawer-backdrop-color);
+                    backdrop-filter: blur(2px);
+                }
+            }
+        }
+
+        /* ===== HEADER DRAWER (Top) - Full width, grid-controlled height ===== */
+        header[popover] {
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            border-radius: 0 0 var(--drawer-border-radius)
+                var(--drawer-border-radius);
+            border-top: none;
+
+            /* Exit stage to */
+            transform: translateY(-100%);
+
+            /* On stage */
+            &:popover-open {
+                transform: translateY(0);
+            }
+
+            /* Enter stage from */
             @starting-style {
+                &:popover-open,
+                &:popover-open::backdrop {
+                    opacity: 0;
+                }
+
                 &:popover-open {
-                    opacity: 1 !important;
-                    transform: none !important;
+                    transform: translateY(-100%);
+                }
+            }
+        }
+
+        /* ===== NAV DRAWER (Left) - Full height, grid-controlled width ===== */
+        nav[popover] {
+            height: 100svh;
+            max-width: 80vw;
+            border-radius: 0 var(--drawer-border-radius) var(--drawer-border-radius)
+                0;
+            border-left: none;
+
+            /* Exit stage to */
+            transform: translateX(-100%);
+
+            /* On stage */
+            &:popover-open {
+                transform: translateX(0);
+            }
+
+            /* Enter stage from */
+            @starting-style {
+                &:popover-open,
+                &:popover-open::backdrop {
+                    opacity: 0;
+                }
+
+                &:popover-open {
+                    transform: translateX(-100%);
+                }
+            }
+        }
+
+        /* ===== ASIDE DRAWER (Right) - Full height, grid-controlled width ===== */
+        aside[popover] {
+            left: auto;
+            height: 100svh;
+            max-width: 80vw;
+            border-radius: var(--drawer-border-radius) 0 0
+                var(--drawer-border-radius);
+            border-right: none;
+
+            /* Exit stage to */
+            transform: translateX(100%);
+
+            /* On stage */
+            &:popover-open {
+                transform: translateX(0);
+            }
+
+            /* Enter stage from */
+            @starting-style {
+                &:popover-open,
+                &:popover-open::backdrop {
+                    opacity: 0;
+                }
+
+                &:popover-open {
+                    transform: translateX(100%);
+                }
+            }
+        }
+
+        /* ===== FOOTER DRAWER (Bottom) - Full width, grid-controlled height ===== */
+        footer[popover] {
+            top: auto;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            border-radius: var(--drawer-border-radius) var(--drawer-border-radius) 0
+                0;
+            border-bottom: none;
+            padding-bottom: env(safe-area-inset-bottom, 0);
+
+            /* Exit stage to */
+            transform: translateY(100%);
+
+            /* On stage */
+            &:popover-open {
+                transform: translateY(0);
+            }
+
+            /* Enter stage from */
+            @starting-style {
+                &:popover-open,
+                &:popover-open::backdrop {
+                    opacity: 0;
+                }
+
+                &:popover-open {
+                    transform: translateY(100%);
+                }
+            }
+        }
+
+        /* ===== REDUCED MOTION SUPPORT ===== */
+        @media (prefers-reduced-motion: reduce) {
+            header[popover],
+            nav[popover],
+            aside[popover],
+            footer[popover] {
+                &,
+                &::backdrop {
+                    transition: none !important;
+                }
+
+                @starting-style {
+                    &:popover-open {
+                        opacity: 1 !important;
+                        transform: none !important;
+                    }
                 }
             }
         }
     }
-}
 
-@layer css_4_layout.primitives {
-    :is(
+
+    @layer css_4_layout.primitives {
+        :is(
+                [class*="--cluster"],
+                [class*="--flank"],
+                [class*="--frame"],
+                [class*="--grid"],
+                [class*="--split"],
+                [class*="--flex"]
+            )
+            > * {
+            margin-block: 0;
+            margin-inline: 0;
+        }
+        :where(
             [class*="--cluster"],
             [class*="--flank"],
             [class*="--frame"],
             [class*="--grid"],
+            [class*="--stack"],
             [class*="--split"],
             [class*="--flex"]
-        )
-        > * {
-        margin-block: 0;
-        margin-inline: 0;
-    }
-    :where(
-        [class*="--cluster"],
-        [class*="--flank"],
-        [class*="--frame"],
-        [class*="--grid"],
-        [class*="--stack"],
-        [class*="--split"],
-        [class*="--flex"]
-    ) {
-        gap: var(--size-1);
-    }
+        ) {
+            gap: var(--size-1);
+        }
 
-    :where([class*="--cluster"]) {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        align-items: center;
+        :where([class*="--cluster"]) {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        :where([class*="--flank"]) {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            --content-percentage: initial;
+            --flank-size: initial;
+        }
+        :where([class*="--flank"]:not([class*="\:end"]) > :first-child),
+        :where([class*="--flank"][class*="\:start"] > :first-child) {
+            flex-basis: var(--flank-size, auto);
+            flex-grow: 1;
+        }
+        :where([class*="--flank"]:not([class*="\:end"]) > :last-child),
+        :where([class*="--flank"][class*="\:start"] > :last-child) {
+            flex-basis: 0;
+            flex-grow: 999;
+            min-inline-size: var(--content-percentage, 50%);
+        }
+        :where([class*="--flank"][class*="\:end"] > :last-child) {
+            flex-basis: var(--flank-size, auto);
+            flex-grow: 1;
+        }
+        :where([class*="--flank"][class*="\:end"] > :first-child) {
+            flex-basis: 0;
+            flex-grow: 999;
+            min-inline-size: var(--content-percentage, 50%);
+        }
+        :where([class*="--frame"]) {
+            display: flex;
+            aspect-ratio: 1 / 1;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        :where([class*="--frame"] > img),
+        :where([class*="--frame"] > video) {
+            block-size: 100%;
+            inline-size: 100%;
+            object-fit: cover;
+        }
+        :where([class*="--frame"][class*="\:square"]) {
+            aspect-ratio: 1 / 1;
+        }
+        :where([class*="--frame"][class*="\:landscape"]) {
+            aspect-ratio: 16 / 9;
+        }
+        :where([class*="--frame"][class*="\:portrait"]) {
+            aspect-ratio: 9 / 16;
+        }
+        :where([class*="--grid"]) {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(min(var(--min-column-size, 20ch), 100%), 1fr)
+            );
+            --min-column-size: initial;
+        }
+        :where([class*="--span-grid"]) {
+            grid-column: 1 / -1;
+        }
+        :where([class*="--split"]) {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        :where([class*="--split"]),
+        :where([class*="--split"][class*="\:row"]) {
+            flex-direction: row;
+            block-size: auto;
+            inline-size: 100%;
+        }
+        :where([class*="--split"]:not([class*="\:column"]) > :first-child) {
+            flex: 0 1 auto;
+        }
+        :where([class*="--split"][class*="\:column"]) {
+            flex-direction: column;
+            block-size: auto;
+            inline-size: auto;
+            align-self: stretch;
+        }
+        :where([class*="--stack"]) {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: stretch;
+        }
+        :where([class*="--flex"]) {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        :where([class*="--flex"]),
+        :where([class*="--flex"][class*="\:row"]) {
+            flex-direction: row;
+            block-size: auto;
+            inline-size: 100%;
+        }
+        :where([class*="--flex"][class*="\:column"]) {
+            flex-direction: column;
+            block-size: auto;
+            inline-size: auto;
+            align-self: stretch;
+            align-items: stretch;
+        }
+        /* New :end modifier for --flex */
+        :where([class*="--flex"][class*="\:end"]) {
+            justify-content: flex-end;
+        }
     }
-    :where([class*="--flank"]) {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        --content-percentage: initial;
-        --flank-size: initial;
-    }
-    :where([class*="--flank"]:not([class*="\:end"]) > :first-child),
-    :where([class*="--flank"][class*="\:start"] > :first-child) {
-        flex-basis: var(--flank-size, auto);
-        flex-grow: 1;
-    }
-    :where([class*="--flank"]:not([class*="\:end"]) > :last-child),
-    :where([class*="--flank"][class*="\:start"] > :last-child) {
-        flex-basis: 0;
-        flex-grow: 999;
-        min-inline-size: var(--content-percentage, 50%);
-    }
-    :where([class*="--flank"][class*="\:end"] > :last-child) {
-        flex-basis: var(--flank-size, auto);
-        flex-grow: 1;
-    }
-    :where([class*="--flank"][class*="\:end"] > :first-child) {
-        flex-basis: 0;
-        flex-grow: 999;
-        min-inline-size: var(--content-percentage, 50%);
-    }
-    :where([class*="--frame"]) {
-        display: flex;
-        aspect-ratio: 1 / 1;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-    }
-    :where([class*="--frame"] > img),
-    :where([class*="--frame"] > video) {
-        block-size: 100%;
-        inline-size: 100%;
-        object-fit: cover;
-    }
-    :where([class*="--frame"][class*="\:square"]) {
-        aspect-ratio: 1 / 1;
-    }
-    :where([class*="--frame"][class*="\:landscape"]) {
-        aspect-ratio: 16 / 9;
-    }
-    :where([class*="--frame"][class*="\:portrait"]) {
-        aspect-ratio: 9 / 16;
-    }
-    :where([class*="--grid"]) {
-        display: grid;
-        grid-template-columns: repeat(
-            auto-fit,
-            minmax(min(var(--min-column-size, 20ch), 100%), 1fr)
-        );
-        --min-column-size: initial;
-    }
-    :where([class*="--span-grid"]) {
-        grid-column: 1 / -1;
-    }
-    :where([class*="--split"]) {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: center;
-    }
-    :where([class*="--split"]),
-    :where([class*="--split"][class*="\:row"]) {
-        flex-direction: row;
-        block-size: auto;
-        inline-size: 100%;
-    }
-    :where([class*="--split"]:not([class*="\:column"]) > :first-child) {
-        flex: 0 1 auto;
-    }
-    :where([class*="--split"][class*="\:column"]) {
-        flex-direction: column;
-        block-size: auto;
-        inline-size: auto;
-        align-self: stretch;
-    }
-    :where([class*="--stack"]) {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: stretch;
-    }
-    :where([class*="--flex"]) {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-    }
-    :where([class*="--flex"]),
-    :where([class*="--flex"][class*="\:row"]) {
-        flex-direction: row;
-        block-size: auto;
-        inline-size: 100%;
-    }
-    :where([class*="--flex"][class*="\:column"]) {
-        flex-direction: column;
-        block-size: auto;
-        inline-size: auto;
-        align-self: stretch;
-        align-items: stretch;
-    }
-    /* New :end modifier for --flex */
-    :where([class*="--flex"][class*="\:end"]) {
-        justify-content: flex-end;
-    }
-}
-
-
 
 
 </style>
