@@ -1,8 +1,6 @@
 <style id="css_3_theme">
 @layer css_3_theme {
     :where(html) {
-
-
         /* Mike */
         --bg-color-body: aliceblue;
         --bg-color-header: aliceblue;
@@ -12,37 +10,39 @@
         --bg-color-aside: var(--surface-hue);
 
 
-      --palette-hue: 250;
-      --palette-hue-rotate-by: 0;
-      --palette-chroma: 0.15;
+        /* Standard Need to refactor*/
+        --palette-hue: 250;
+        --palette-hue-rotate-by: 0;
+        --palette-chroma: 0.15;
 
-      --link:         light-dark(var(--indigo-3), var(--indigo-6));
-      --link-visited: light-dark(var(--purple-3), var(--purple-6));
+        --link:         light-dark(var(--indigo-3), var(--indigo-6));
+        --link-visited: light-dark(var(--purple-3), var(--purple-6));
 
-      --text-1: var(--gray-0);
-      --text-2: var(--gray-4);
+        --text-1: var(--gray-0);
+        --text-2: var(--gray-4);
 
 
-      --surface-1: color-mix(var(--gray-3), var(--color-7));
-      --surface-2: color-mix(var(--gray-3), var(--color-6));
-      --surface-3: color-mix(var(--gray-3), var(--color-5));
-      --surface-4: color-mix(var(--gray-3), var(--color-4));
-      --surface-5: color-mix(var(--gray-2), var(--color-2));
-      --well-1:    light-dark(var(--gray-10), var(--gray-4));
-      --well-1:    light-dark(var(--gray-11), var(--gray-3));
+        --surface-1: color-mix(var(--gray-3), var(--color-7));
+        --surface-2: color-mix(var(--gray-3), var(--color-6));
+        --surface-3: color-mix(var(--gray-3), var(--color-5));
+        --surface-4: color-mix(var(--gray-3), var(--color-4));
+        --surface-5: color-mix(var(--gray-2), var(--color-2));
+        --well-1:    light-dark(var(--gray-10), var(--gray-4));
+        --well-1:    light-dark(var(--gray-11), var(--gray-3));
 
-      --scrollthumb-color: var(--gray-6);
+        --scrollthumb-color: var(--gray-6);
 
-      --drawer-backdrop-color: rgba(0, 0, 0, 0.5);
-      --drawer-background: var(--surface-hue, #ffffff);
-      --drawer-border-color: var(--border-color, #e0e0e0);
-      --drawer-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-      --drawer-border-radius: 12px;
-      --drawer-animation-duration: 0.3s;
-      --drawer-animation-easing: var(--ease-3, cubic-bezier(0.25, 0, 0.3, 1));
+        --drawer-backdrop-color: rgba(0, 0, 0, 0.5);
+        --drawer-background: var(--surface-hue, #ffffff);
+        --drawer-border-color: var(--border-color, #e0e0e0);
+        --drawer-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        --drawer-border-radius: 12px;
+        --drawer-animation-duration: 0.3s;
+        --drawer-animation-easing: var(--ease-3, cubic-bezier(0.25, 0, 0.3, 1));
 
-      & :where(dialog) {
-        background-color: var(--surface-2);
-      }
+        & :where(dialog) {
+            background-color: var(--surface-2);
+        }
+    }
 }
 </style>
