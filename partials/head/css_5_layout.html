@@ -86,6 +86,7 @@
         flex-grow: 999;
         min-inline-size: var(--content-percentage, 50%);
     }
+
     :where([class*="--frame"]) {
         display: flex;
         aspect-ratio: 1 / 1;
@@ -167,6 +168,25 @@
     /* New :end modifier for --flex */
     :where([class*="--flex"][class*="\:end"]) {
         justify-content: flex-end;
+    }
+}
+
+@layer css_5_layout.primitives {
+    /* Add these new grid-flank utilities */
+    :where([class*="--grid-flank"]) {
+        display: grid;
+        align-items: center;
+        --content-percentage: initial;
+        --flank-size: initial;
+    }
+
+    :where([class*="--grid-flank"]:not([class*="\:end"])),
+    :where([class*="--grid-flank"][class*="\:start"]) {
+        grid-template-columns: var(--flank-size, auto) 1fr;
+    }
+
+    :where([class*="--grid-flank"][class*="\:end"]) {
+        grid-template-columns: 1fr var(--flank-size, auto);
     }
 }
 
