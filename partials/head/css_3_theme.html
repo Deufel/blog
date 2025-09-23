@@ -1,47 +1,93 @@
 <style id="css_3_theme">
-@layer css_3_theme {
+/* ===== THEME VARIATIONS ===== */
+@layer css_3_themes {
+    /* Default theme - already defined in tokens */
+
+    /* High contrast theme */
+    [data-theme="high-contrast"] {
+        --palette-chroma: 0.08; /* Reduced saturation */
+
+        /* Override mixed colors with more gray-dominant versions */
+        --surface-1: light-dark(var(--gray-1), var(--gray-15));
+        --surface-2: light-dark(var(--gray-2), var(--gray-14));
+        --surface-3: light-dark(var(--gray-3), var(--gray-13));
+        --text-primary: light-dark(var(--gray-16), var(--gray-1));
+        --border-strong: light-dark(var(--gray-8), var(--gray-8));
+    }
+
+    /* Vibrant theme */
+    [data-theme="vibrant"] {
+        --palette-chroma: 0.25; /* Increased saturation */
+
+        /* More color in the mix */
+        --surface-2: light-dark(
+            color-mix(in srgb, var(--color-5), var(--gray-3) 85%),
+            color-mix(in srgb, var(--color-3), var(--gray-13) 85%)
+        );
+        --surface-accent: light-dark(
+            color-mix(in srgb, var(--color-9), var(--gray-6) 60%),
+            color-mix(in srgb, var(--color-7), var(--gray-9) 60%)
+        );
+    }
+
+    /* Warm theme */
+    [data-theme="warm"] {
+        --palette-hue: 25; /* Orange base */
+        --palette-hue-rotate-by: 2;
+    }
+
+    /* Cool theme */
+    [data-theme="cool"] {
+        --palette-hue: 200; /* Blue base */
+        --palette-hue-rotate-by: -1;
+    }
+
+    /* Nature theme */
+    [data-theme="nature"] {
+        --palette-hue: 140; /* Green base */
+        --palette-chroma: 0.18;
+        --palette-hue-rotate-by: 3;
+    }
+}
+
+/* ===== SEMANTIC MAPPINGS ===== */
+@layer css_3_themes {
     :where(:root) {
-        /* Mike */
-        --bg-color-body: aliceblue;
-        --bg-color-header: aliceblue;
-        --bg-color-nav: var(--surface-hue);
-        --bg-color-main: var(--surface-hue-alt);
-        --bg-color-aside: var(--surface-hue);
-        --gap-body: var(--size-1);
+        /* Layout surfaces */
+        --bg-body: var(--surface-1);
+        --bg-header: var(--surface-2);
+        --bg-nav: var(--surface-3);
+        --bg-main: var(--surface-1);
+        --bg-aside: var(--surface-2);
+        --bg-footer: var(--surface-3);
 
-        /* Standard Need to refactor*/
-        --palette-hue: 250;
-        --palette-hue-rotate-by: 0;
-        --palette-chroma: 0.15;
+        /* Component surfaces */
+        --bg-card: var(--surface-2);
+        --bg-card-hover: var(--surface-3);
+        --bg-input: var(--surface-1);
+        --bg-input-focus: var(--surface-2);
+        --bg-button: var(--surface-interactive);
+        --bg-button-hover: var(--surface-interactive-hover);
 
-        --link:         light-dark(var(--indigo-3), var(--indigo-6));
-        --link-visited: light-dark(var(--purple-3), var(--purple-6));
+        /* State colors */
+        --color-success: oklch(70% 0.15 140);
+        --color-warning: oklch(75% 0.15 60);
+        --color-error: oklch(65% 0.15 15);
+        --color-info: var(--brand-primary);
 
-        --text-1: var(--gray-0);
-        --text-2: var(--gray-4);
-
-
-        --surface-1: color-mix(var(--gray-3), var(--color-7));
-        --surface-2: color-mix(var(--gray-3), var(--color-6));
-        --surface-3: color-mix(var(--gray-3), var(--color-5));
-        --surface-4: color-mix(var(--gray-3), var(--color-4));
-        --surface-5: color-mix(var(--gray-2), var(--color-2));
-        --well-1:    light-dark(var(--gray-10), var(--gray-4));
-        --well-1:    light-dark(var(--gray-11), var(--gray-3));
-
-        --scrollthumb-color: var(--gray-6);
-
-        --drawer-backdrop-color: rgba(0, 0, 0, 0.5);
-        --drawer-background: var(--surface-hue, #ffffff);
-        --drawer-border-color: var(--border-color, #e0e0e0);
-        --drawer-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-        --drawer-border-radius: 12px;
-        --drawer-animation-duration: 0.3s;
-        --drawer-animation-easing: var(--ease-3, cubic-bezier(0.25, 0, 0.3, 1));
-
-        & :where(dialog) {
-            background-color: var(--surface-2);
-        }
+        /* Mixed state surfaces */
+        --surface-success: light-dark(
+            color-mix(in srgb, var(--color-success), var(--gray-2) 90%),
+            color-mix(in srgb, var(--color-success), var(--gray-14) 90%)
+        );
+        --surface-warning: light-dark(
+            color-mix(in srgb, var(--color-warning), var(--gray-2) 90%),
+            color-mix(in srgb, var(--color-warning), var(--gray-14) 90%)
+        );
+        --surface-error: light-dark(
+            color-mix(in srgb, var(--color-error), var(--gray-2) 90%),
+            color-mix(in srgb, var(--color-error), var(--gray-14) 90%)
+        );
     }
 }
 </style>
