@@ -1,9 +1,24 @@
 <style id="css_3_theme">
-@layer css_3_theme.colors {
-    --color-1: var(--green-6)
-    --color-2: var(--blue-6)
-    --color-3: var(--red-4)
-    --color-4: var(--violet-6)
-    --color-5: var(--orange-6)
+@layer css_3_theme {
+    :where(html) {
+
+      --link:         light-dark(var(--indigo-3), var(--indigo-6));
+      --link-visited: light-dark(var(--purple-3), var(--purple-6));
+
+      --text-1: var(--gray-0);
+      --text-2: var(--gray-4);
+
+      --surface-1: var(--gray-9);
+      --surface-2: var(--gray-8);
+      --surface-3: var(--gray-7);
+      --surface-4: var(--gray-6);
+      --well-1:    light-dark(var(--gray-10), var(--gray-4));
+      --well-1:    light-dark(var(--gray-11), var(--gray-3));
+
+      --scrollthumb-color: var(--gray-6);
+
+      & :where(dialog) {
+        background-color: var(--surface-2);
+      }
 }
 </style>
