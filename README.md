@@ -34,6 +34,9 @@ Is it single-purpose? → Utilities
 Is it a component? → Components
 Is it an override? → Exceptions
 ```
+#### Base Vs Layout
+  - Is this about how individual elements look? -> Base,
+  - or how they work together? -> Layout
 
 ### Where do the colors belong?
  - Layer 2 - Tokens (ALL color values)
