@@ -1,5 +1,5 @@
 <style id="css_5_utilities">
-@layer css_5_utilities {
+@layer css_5_utilities.layout {
     :is(.visually-hidden, .sr-only) {
       inline-size: 0;
       block-size: 0;
@@ -38,6 +38,22 @@
     .trimmed > * {
         text-box: trim-both cap alphabetic;
     }
+}
+
+
+@layer css_5_utilities.color {
+
+    :where(.surface) {
+        --_surface: initial;
+        background: var(--_surface, var(--surface-3));
+    }
+    :where(.surface) :where(.surface) {
+        --_surface: var(--surface-2);
+    }
+    :where(.surface) :where(.surface) :where(.surface) {
+        --_surface: var(--surface-1);
+    }
+
 }
 
 </style>
