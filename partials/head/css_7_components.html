@@ -1,1 +1,61 @@
-<style id="css_7_components"> </style>
+<style id="css_7_components">
+@layer css_7_components {
+    .theme-demo {
+        display: grid;
+        gap: 1rem;
+        max-width: 800px;
+    }
+
+    .surface-showcase {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin: 2rem 0;
+    }
+
+    .surface-card {
+        padding: 1rem;
+        border-radius: 8px;
+        border: 1px solid var(--border-subtle);
+        text-align: center;
+        font-size: 0.875rem;
+    }
+
+    .surface-card.surface-1 { background: var(--surface-1); }
+    .surface-card.surface-2 { background: var(--surface-2); }
+    .surface-card.surface-3 { background: var(--surface-3); }
+    .surface-card.surface-4 { background: var(--surface-4); }
+    .surface-card.interactive { background: var(--surface-interactive); }
+    .surface-card.accent { background: var(--surface-accent); }
+
+    .theme-switcher {
+        display: flex;
+        gap: 0.5rem;
+        margin: 1rem 0;
+        flex-wrap: wrap;
+    }
+
+    .theme-button {
+        padding: 0.5rem 1rem;
+        background: var(--bg-button);
+        border: 1px solid var(--border-medium);
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.875rem;
+        color: var(--text-primary);
+    }
+
+    .theme-button:hover {
+        background: var(--bg-button-hover);
+    }
+
+    .color-info {
+        font-family: monospace;
+        font-size: 0.75rem;
+        opacity: 0.7;
+        margin-top: 0.5rem;
+    }
+}
+
+
+</style>

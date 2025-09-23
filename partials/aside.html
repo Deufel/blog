@@ -1,224 +1,44 @@
-<aside id="aside" popover="auto">
-<header>
-         <ul class="list">
-           <li class="margin">
-             <div class="start">
-               <div class="avatar">
-                   <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4QAqRXhpZgAASUkqAAgAAAABADEBAgAHAAAAGgAAAAAAAABQaWNhc2EAAP/bAIQAAwICCA0KCgkNDQoLCgoKCAsNCggLDQgNCAgICAoNCggICAoICA0IDQgICAgIDQgKDQoOCg4ICAsNCggNCAgNCAEDBAQGBQYKBgYKDQ0LDg0NEA0QDw8NDRAPDQ0NEA8NDQ8NDQ0NDQ8PDQ0NDQ0NDQ0NDQ0ODQ8NDQ0NDQ0NDQ0N/8AAEQgAYABgAwERAAIRAQMRAf/EAB0AAAEFAQEBAQAAAAAAAAAAAAYDBAUHCAkBAgD/xABAEAACAQIEAQoCCAQEBwAAAAABAgMEEQAFEiExBgcIEyJBUXGB8GGhIzJCcpGxwdEJFOHxJFJiwhVFZXOSorL/xAAaAQACAwEBAAAAAAAAAAAAAAABAwACBAUG/8QANxEAAgECAwQHBgUFAQAAAAAAAAECAxEEIUESMVGBBWFxkaGx8BMUIsHR4SMyQrLxQ2JyosIz/9oADAMBAAIRAxEAPwDXGVQdgev/ANHGVDZbx6tPgix3BT4IDmh0yOS/V57Wt3TrSTgW4A0kUTed5Kd2vtxt3YTP8x0KbvBetfudBejPBfJMnP8A0zLh+FJGP0w6G5GTEf8ArLtZaMVPi5lF0gwSDTOMzgiRpZZI4Y1BLSTOsSKALks7lQLAX44jaSuwqLbsldjnKK6GRBJG8csbcHhdZVb7roWB9DiIjTWTH6U+CAcx7W+Jtt3n+wwG7BSJAXtw+f8AQ4ly1ioMpj7PqffzwpDpD6OLBFj6niwQMwV/EO5PRpX09UJYS70axvTdagmRad6mRKjqCwYpOrSwK+2uSBYl1vIqlNTJ3N2Hd47PX5/x5mwOjxmNKlFSZWtRTTVeX0VDFUR00olMMgp0HaAsQrEHSWC3Fthe2HwVkkZa13Jzs7NuxbiQ4uJFVixCGOOlDzVNV5uGnPWUkFFTmKBpCFSfrpeukEXZCmdGjjEqm8nUshtoW3B6QqNT2U3uPYdD0YSp3klvfy3/AC5h10P+bo0suYpFGYqCY0ssY1ax/OHrhUaPpGIvAtG5FtILCzv2hG/o6UnGV92n05etxi6ajBTilvs8urTvd8jTKxY655wd0dOLj4XPy/risluLIeSjECU5lMex+8fyXC0XkSUcWCUHtNFgoqUn0nuiymZrC8Zp4KuNtJqJ4TMZKXq5gsDGOSJ/oZ5hUJ2iAysCpEjYrOG0OpVNjeW3yC5r6KmGqKGBJmip45Z4okikqRTRKiGeRVDSWC7Bibd2GRjZC5ScmHEceLFD3q2N7W24ki+9uA4cAePpvvYhK/5zuamSYpNC+mZF0EPYiSPUWAJNiNLtq48C1rNfVzMbhZVbShvWnG/0O10djY4e8ZrJ534W6uDCzkTkBhgjhIAKqNRXgZCBrINl2LXtsLCwsLADZRpKlBRXp6nNxFZ1qjm9fLQIlTDzMKRxb+/0IxLXCBvO9znS0aU7rAJhNOsRs3V9VcXDn6OUuCAwsLcB3XIVNtWQyK2rg9k52YfEfO/7YCJIlI1wSg+plxYqPo0wSDqFcEg8jA4+7eOIQXy1LIL/AFm3I8C25FvhfFkEp/nT58Jo1Ao6aWudGdbwvCiq4Q21fzFZRdYva03RnJJJCEAE82WNg57MbO2udr8FZM7cOjKns9uV1fcsr24vaat59hcsSkgXFiQLjjpPeL99jtfHSOIKpHiAHcS4JCj+mUyDLY52Z0FPX0L3j72ndqYIw1xgq7VYQ3J4g6WIAwqcb2fB/JjabzfYP8mG7en+7FEBktGuLFCQp1wQD+JcWIOoxiEFJ4mKkA2bYgncXBvZh4NaxtvYmxBtiBQw5Nco+seaKxV6dlVw1mGqSMODGw+sCG2JC/FRhdOspylFb4tJ80n5MdUouEYye6SbXJ2+QC8rec/kzlpbrp6WGWxkMak1E7BrjWtNF10vb3XsoA1jxsbGGHp03eMUmOnia9dbMpNrw+gEcmf4gWQzVsVGgqwszpElVLEkcJlkYBFZTP1qBnKpraJQpYFtK3YOyMzg0aaxBYyzvPooY3nkYJFEpd3NyEReLGwJsBvsMBu28KVzOHPF0msiqYGoFqlAnMN50bR1HVVCOHbgwBaK1wG2O4I1AZ6kpP4YrmxsFZ3YeZJJ2m8v1H74K3gZORSDFxZIU9sFAH0ZGCQcx4hB1HiEMd9MTnarKEZjFCWQ1aUDCWM6GhJAhlZW0NfWqRR6eza7MrK1tXOpVnTxVWHGEZR47X5ZPuUbczp1cOq2EpT4TlGXXG20l33vxXUc4aWFFGlQqqO5QFHnYWxtWQhu5KUwYd9vBlJBU+IIsQQdwwtb4WGGIqdkujdztrmGWU1Xe8wXqagbdmshAEuwJsJbrOgO+iaO4BuBcztWZYlYoI0kAhtiDuCveCO8MBpIOx1WOA+ADkH0luRUNPneY0tMixwRzxBII9hEJqGnmZIlJ2QSTuVjFhGGCKoRUC54KzaXHLuNTd0m/WZ0iyRe0Sb2sd+G9x34K3iWT8ar4/O2LCzzIMmCM5BWzhdguk3VnOpiD2yestqsPq998GwAjjjxYgunv3bEIOYziEMv9Jrmvesqpad5XjilpIVVKdQ5NpJS0jq0b9pHXsWDBbK2xAt53GSdLFxqJNtwaSXC93fXgenwMY1cJKEmklNNt9lla+S1MzVf8P5jcLJmLWIt/hr6t/8AsLwHfijxeJeUaUu5/YYsHhP1Vl3x+5niqyN1maluNcdS9PqIt20nMdyNyvaG43I4bkY7yqfh7bWl2uV2vkcX2d6mwn+qyfOyfPebJ/hu86IjnrcpfsvODURK1wf5mmXRUQm/2jGI3CbG0E3HTs6E1JXi73zXYZ6sJR3q1sn2m2eRnKCdy4lVwUEYBaFqYMWvr0K7NqsQNwT3ebGN9TO8jmn0oKQnlLnLdwloCL+L5PQi/ppb8cCFnJ9Xn/A5v4Y9nzZdtb0lK53tGsMQ3NiDMx+DOzILW8EB+OOdLEPQ7CwEF+Zt+AtS9I3Mgd1pm843B/8AWoX8jgLET6vXMDwNLi/D6BRlfSZqftQxH7rMn59Zi/vD1Qp4CL3SfcE9J0mT9qnA+7OT8v5f9cW95/tFPo+36vD7kxS9JWDvhmH3GRr+VymGe8JaPwFe5S0a8Scy7pC0TbFKhT/qVDb4krO1vW3liqxUOsjwVRar12oDuUPOzA+ZRSRSmIJTBWleBptBd57Dql3k1W03BOm9/HHJxNVPF0XGVsprdfRaHZwtBxwlZSjfOGtteIUxcsNf/NnT7lHFD+H8xTS29cdKV5ZKs12KH/UWc1JR/oJ9rk/KSOYecUSjNp0EiuozSc9axW0n+OZusYroXtk3OnSBcgBQLBqjtUXG+jV+Vr5ZX13WKX2aqlbVO2fU7Z59RvXms5maCOagzNFiM9SAryyKsr0s6ROEmprqTCXiR4nIsXBsxYGw5PR8JvD0HGTStn4v7HV6QqRjiK8ZrXLwy+fI1G829vZ2x6Q8szmZ0ls3jlzavlQbGZEJ/wAz01NFAxB22Jg28QL74tFWQy+5A3k+b9vbwO58j3nHnrHrnImf+O+G5+H74ZZspkKZPn0xciw072tudiOPv0wckB3YXUec/j4Lv+Lm4HpgbTKbCJCmzgePou3/AJMdz5C2KOIMkSkNftuRbwG3vzOKJFWCGd5+iyVEjdpUhpbr51Lr4WFi6n2MYa0Px6b/AMv2nUw7/AqLs8z4yvlzARfUyD4E29Lk435GGz4IqjIOYHMq2WsqqaITQ08/0g1hHdmGsrErWEjBSJCmoEg9kOSAXU5ylTlGCbavw17WjLWpxjVjKbSTtx07F5lg5dynlL0umw6hopRxsxKA7kEEXSRlupBGq6kEA44uBdoQ2dL+bO3jYKU57WqXkjUw6R0Bo/pEmmmWMgwqREHkVPtTg6jqYXDKo430J3ei9ums7nlvc5qWVretDnnPzkqbhopAbubhg5GpiQGLsurTfTqO54m5w1dIU0s0/D6geAqXya9ciQosy7Y7/kPxxzkztBtlVIjQySmWNWQi0TEAyg2+p2tRtc37NttmPb6tMqrjNRUXZ6m2nh4ypObkk1pxEqTNx5/AbD18eGNRhJyDMOF9h4cPlit7bi2zfeSUGcW4bee5wCriLJm3oPE7XxCuyA/L+pe5KnsOiK67WcRyB1uxH2WAPZI8DfhjDWfxJm6ikotAE2ed+rh8vLEUg7JtToFcvYGpJqYEtIryvImg3GtwEZXAPWJIgItxjZGJGmVCOvg5WhZ9fmed6Rjee1ppyKWq+b80VVPSszsI2+jeUku8DC8JcsSSwj0oxPEoSABbHOlTlGTXW+47UKyqwU+/t1HeX1Z3vw98MXzQGyjucHK0WVrd5ubfkPXb++MMrt3NUbWzIuLMO13k/IY6CMNwuocmdoWnMkKqpt1byaZHIt9SK1yLNcMbA6WAJIAKniFGagotvjbLvN0MJKdP2jkkuF8+48o8xtw/E/oMOb4mdR4EgM3tve/xP6YiuwisfKLF9kptD6nzDvO/wH6+GKN2yRFG+bBXlfmha99lA4Dh79jjjHUnwNtOnbMq+trSdhsPz8/2wtOxJRuWLzPZtJA5nSWaBwCA0EjQsyn7LFWXUCQDpa4JANuyLCFZp5PMZKhCUbSSa6/WQYQ59K7PK8kkrMSxeokad2v/AJpHZmNh2VW9lAAUKABh8arebzM9SlGKtFJE1l2dm1z6e/ffiSmnkK2Ws2Vhzi1d2J9ge/e2F2ImC1POAdtz4n9PDDXJsoopFiZXTqaKWRhuGOlxPp1sWivEaYmx0qFluoDHStyQFA586rWIjGP7e3O/XuPQUaUXhZSa/wBt/LqBFc29++OOwkcByvuHEdccWuBIk6Cqt792wuUhqiSEuaADCLtmhJIBc/q2Ym/D4e/nhUkkMTuQsEAXtN6Dh6nGOUr/AAxHRiorakfqXlCbm1/L3wxaMGirqph/yYzC6b+n+o/th+0lkZ7bWbCGJGAv54KVhM5XdgYz1Lne3jc7+n9e/EbAkf/Z" alt="Mike Deufell">               </div>
-             </div>
-             <div class="text">
-                 <p>First Last</p>
-                 <p>First.Last@domain.com</p>
-             </div>
-             <div class="end">
-                 <div class="chip small outlined">
-                     <span class="text">Admin</span>
-                 </div>
-             </div>
-           </li>
-         </ul>
-    </header>
-    <main>
-        <ul class="list">
-            <li>
-                <strong>Theme</strong>
-            </li>
 
-            <!-- Fixed Theme Mode Section -->
-            <li>
-                <div role="group" id="theme-toggle" class="toggle-button-group small fullwidth"
-                                data-signals-theme-mode="'light'"
-                                data-persist="{include: /^themeMode$/}"
-                                data-on-load="
-                                    window.themeBroadcast = new BroadcastChannel('theme-updates');
-                                    window.themeBroadcast.onmessage = (e) => {
-                                        if (e.data.type === 'theme-mode-change') {
-                                            $themeMode = e.data.themeMode;
-                                        }
-                                    };
-                                "
-                                data-effect="
-                                    document.documentElement.setAttribute('data-theme-mode', $themeMode || 'light');
-                                    window.themeBroadcast?.postMessage({
-                                        type: 'theme-mode-change',
-                                        themeMode: $themeMode
-                                    });
-                                "
-                            >
-                    <button data-attr-aria-selected="$themeMode === 'system' ? 'true' : 'false'" data-on-click="$themeMode = 'system'" >
-                        <icon-orbi><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-orbit-icon lucide-orbit"><path d="M20.341 6.484A10 10 0 0 1 10.266 21.85"></path><path d="M3.659 17.516A10 10 0 0 1 13.74 2.152"></path><circle cx="12" cy="12" r="3"></circle><circle cx="19" cy="5" r="2"></circle><circle cx="5" cy="19" r="2"></circle></svg></icon-orbi>
-                        System
-                    </button>
-                    <button data-attr-aria-selected="$themeMode === 'light' ? 'true' : 'false'" data-on-click="$themeMode = 'light'" >
-                        <icon-sun><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun-icon lucide-sun"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg></icon-sun>
-                        Light
-                    </button>
-                    <button data-attr-aria-selected="$themeMode === 'dark' ? 'true' : 'false'" data-on-click="$themeMode = 'dark'" >
-                        <icon-moon><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon-icon lucide-moon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></icon-moon>
-                        Dark
-                    </button>
-                </div>
-            </li>
-                  <li>
-                      <strong>Text Size</strong>
-                  </li>
+<aside id="aside">
+    <code>&lt <strong>main  </strong> id="main" &gt</code>
 
-                  <li>
-                      <div role="group" id="font-scale-toggle" class="toggle-button-group small fullwidth"
-                           data-signals-font-scale="'md'"
-                           data-persist="{include: /^fontScale$/}"
-                           data-on-load="
-                              window.fontBroadcast = new BroadcastChannel('font-updates');
-                              window.fontBroadcast.onmessage = (e) => {
-                                  if (e.data.type === 'font-change') {
-                                      $fontScale = e.data.fontScale;
-                                  }
-                              };
-                           "
-                           data-effect="
-                              document.documentElement.setAttribute('data-font-scale', $fontScale || 'md');
-                              window.fontBroadcast?.postMessage({
-                                  type: 'font-change',
-                                  fontScale: $fontScale
-                              });
-                           ">
+    <label class="switch">
+        1_reset
+        <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_1_reset') : @get('partials/head/css_1_reset_blank')" />
+    </label>
 
-                          <button
-                              data-attr-aria-selected="$fontScale === 'sm' ? 'true' : 'false'"
-                              data-on-click="$fontScale = 'sm'"
-                          >
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-case-lower-icon lucide-case-lower"><circle cx="7" cy="12" r="3"/><path d="M10 9v6"/><circle cx="17" cy="12" r="3"/><path d="M14 7v8"/></svg>
-                              <span>Small</span>
-                          </button>
+    <label class="switch">
+        2_tokens
+        <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_2_tokens') : @get('partials/head/css_2_tokens_blank')" />
+    </label>
 
-                          <button
-                              data-attr-aria-selected="$fontScale === 'md' ? 'true' : 'false'"
-                              data-on-click="$fontScale = 'md'"
-                          >
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-alarge-small-icon lucide-a-large-small"><path d="M21 14h-5"/><path d="M16 16v-3.5a2.5 2.5 0 0 1 5 0V16"/><path d="M4.5 13h6"/><path d="m3 16 4.5-9 4.5 9"/></svg>
-                              <span>Medium</span>
-                          </button>
+    <label class="switch">
+        3_theme
+        <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_3_theme') : @get('partials/head/css_3_theme_blank')" />
+    </label>
 
-                          <button
-                              data-attr-aria-selected="$fontScale === 'lg' ? 'true' : 'false'"
-                              data-on-click="$fontScale = 'lg'"
-                          >
-                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-case-upper-icon lucide-case-upper"><path d="m3 15 4-8 4 8"/><path d="M4 13h6"/><path d="M15 11h4.5a2 2 0 0 1 0 4H15V7h4a2 2 0 0 1 0 4"/></svg>
-                              <span>Large</span>
+    <label class="switch">
+        4_base
+        <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_4_base') : @get('partials/head/css_4_base_blank')" />
+    </label>
 
-                          </button>
+    <label class="switch">
+        5_layout
+        <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_5_layout') : @get('partials/head/css_5_layout_blank')" />
+    </label>
 
-                           </div>
-                    </li>
-                    <li>
-                        <strong>Layout</strong>
-                    </li>
-                    <li>
-                        <div role="group"
-                            id="layout-toggle"
-                            class="toggle-button-group small fullwidth"
-                            data-persist="{include: /^layoutWidth$/}">
-                            <button data-aria-selected="$layoutWidth === 'fullwidth'"
-                                    data-on-click="$layoutWidth = 'fullwidth'">
-                                <icon-align-verticle-space-around>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-vertical-space-around-icon lucide-align-vertical-space-around">
-                                        <rect width="10" height="6" x="7" y="9" rx="2"></rect>
-                                        <path d="M22 20H2"></path>
-                                        <path d="M22 4H2"></path>
-                                    </svg>
-                                </icon-align-verticle-space-around>
-                                Full Width
-                            </button>
-                            <button data-aria-selected="$layoutWidth === 'container'"
-                                    data-on-click="$layoutWidth = 'container'">
-                                <icon-align-horizontal-space-around>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-horizontal-space-around-icon lucide-align-horizontal-space-around">
-                                        <rect width="6" height="10" x="9" y="7" rx="2"></rect>
-                                        <path d="M4 22V2"></path>
-                                        <path d="M20 22V2"></path>
-                                    </svg>
-                                </icon-align-horizontal-space-around>
-                                Centered
-                            </button>
-                        </div>
-                    </li>
+    <label class="switch">
+        6_utilities
+        <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_6_utilities') : @get('partials/head/css_6_utilities_blank')" />
+    </label>
 
-                    <li>
-                        <strong>Color</strong>
-                    </li>
+    <label class="switch">
+        7_components
+        <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_7_components') : @get('partials/head/css_7_components_blank')" />
+    </label>
 
-                    <!-- Fixed Color Theme Section -->
-                    <li>
-                        <div role="group"
-                            id="color-toggle"
-                            class="toggle-button-group small fullwidth"
-                            data-signals-theme-color="'green'"
-                            data-persist="{include: /^themeColor$/}"
-                            data-on-load="
-                                window.colorBroadcast = new BroadcastChannel('color-updates');
-                                window.colorBroadcast.onmessage = (e) => {
-                                    if (e.data.type === 'color-change') {
-                                        $themeColor = e.data.themeColor;
-                                    }
-                                };
-                            "
-                            data-effect="
-                                document.documentElement.setAttribute('data-theme-color', $themeColor || 'green');
-                                window.colorBroadcast?.postMessage({
-                                    type: 'color-change',
-                                    themeColor: $themeColor
-                                });
-                            ">
-                            <button data-class-selected="$themeColor === 'cyan'"
-                                    data-on-click="$themeColor = 'cyan'">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="oklch(0.58 0.1869 245)" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                                </svg>
-                            </button>
-
-                            <button data-class-selected="$themeColor === 'blue'"
-                                    data-on-click="$themeColor = 'blue'">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="oklch(0.58 0.1869 275)" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                                </svg>
-                            </button>
-
-                            <button data-class-selected="$themeColor === 'indigo'"
-                                    data-on-click="$themeColor = 'indigo'">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="oklch(0.58 0.1869 305)" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                                </svg>
-                            </button>
-
-                            <button data-class-selected="$themeColor === 'pink'"
-                                    data-on-click="$themeColor = 'pink'">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="oklch(0.58 0.1869 25)" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                                </svg>
-                            </button>
-
-
-                            <button data-class-selected="$themeColor === 'lime'"
-                                    data-on-click="$themeColor = 'lime'">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="oklch(0.58 0.1869 160)" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                                </svg>
-                            </button>
-
-                        </div>
-                    </li>
-            </ul>
-
-        </main>
-       <footer>
-         <ul class="list">
-           <li>
-<button hx-post="/p/logout" hx-target="body">               <div class="text">
-                 <p>Logout</p>
-               </div>
-               <div class="end">
-<icon-log-out><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out-icon lucide-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg></icon-log-out>               </div>
-</button>           </li>
-         </ul>
-       </footer>
+    <label class="switch">
+        8_exceptions
+        <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_8_exceptions') : @get('partials/head/css_8_exceptions_blank')" />
+    </label>
 </aside>
