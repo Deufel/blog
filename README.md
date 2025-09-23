@@ -14,18 +14,20 @@ Everything must fit into one of these layers
 
 ```css
 @layer css_1_reset;      /* Browser normalization */
-@layer css_2_tokens;     /* All design tokens (colors, spacing, etc) */
-@layer css_3_base;       /* Element defaults (html, body, h1, etc) */
-@layer css_4_layout;     /* Composition primitives (grid, flex, flow) */
-@layer css_5_utilities;  /* Single-purpose classes (.text-center, .bg-primary) */
-@layer css_6_components; /* All components (buttons, cards, forms, nav) */
-@layer css_7_exceptions; /* Context overrides */
+@layer css_2_tokens;     /* All design tokens (colors, spacing, etc)(theme-agnostic) */
+@layer css_3_themes;     /* Theme variations for easy swapping */
+@layer css_4_base;       /* Element defaults (html, body, h1, etc) */
+@layer css_5_layout;     /* Composition primitives (grid, flex, flow) */
+@layer css_6_utilities;  /* Single-purpose classes (.text-center, .bg-primary) */
+@layer css_7_components; /* All components (buttons, cards, forms, nav) */
+@layer css_8_exceptions; /* Context overrides */
 ```
 
 ### What Goes Where
 ```
 Is it a browser default? → Reset
 Is it a design token? → Tokens
+Is it a Theme Specific? → Theme
 Is it element styling? → Base
 Is it layout/positioning? → Layout
 Is it single-purpose? → Utilities
@@ -51,15 +53,13 @@ The 80/20 Rule
   - 20% of colors → Components (semantic meaning)
   - 100% of color values → Tokens
 
-### Layout
+## Layout
 ![Alt text](static/img/layout.png)
 
-
-# CSS
-inspiration from
+## Hat Tip
 [open props](https://open-props.style/)
 [opui](https://open-props-ui.netlify.app/)
-[other styles](https://deufel.github.io/css/)
+[piccalil](https://piccalil.li/)
 
-# Link
-[My Website](https://deufel.github.io/blog/)
+## Demo
+[Interactive Demo](https://deufel.github.io/blog/)

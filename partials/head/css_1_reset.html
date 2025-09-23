@@ -1,5 +1,7 @@
 <style id="css_1_reset">
+
 @layer css_1_reset {
+    /* https://piccalil.li/blog/a-more-modern-css-reset/ */
     /* Box sizing rules */
     *,
     *::before,
@@ -26,16 +28,10 @@
     list-style: none;
     }
 
-    /* Set core body defaults for "app like" body */
+    /* Set core body defaults */
     body {
-        position: relative;
-        inset: 0;
-        margin: 0; /* Essential */
-        margin-inline: auto;
-        height: 100svh;
-        line-height: 1.5; /* Recommended */
-        overflow: hidden;
-        overscroll-behavior: none;
+    min-height: 100vh;
+    line-height: 1.5;
     }
 
     /* Set shorter line heights on headings and interactive elements */
