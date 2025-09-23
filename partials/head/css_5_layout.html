@@ -1,6 +1,7 @@
 <style id="css_5_layout">
 
 @layer css_5_layout{
+
     body {
         position: relative;
         inset: 0;
@@ -87,6 +88,7 @@
         min-inline-size: var(--content-percentage, 50%);
     }
 
+
     :where([class*="--frame"]) {
         display: flex;
         aspect-ratio: 1 / 1;
@@ -171,24 +173,7 @@
     }
 }
 
-@layer css_5_layout.primitives {
-    /* Add these new grid-flank utilities */
-    :where([class*="--grid-flank"]) {
-        display: grid;
-        align-items: center;
-        --content-percentage: initial;
-        --flank-size: initial;
-    }
 
-    :where([class*="--grid-flank"]:not([class*="\:end"])),
-    :where([class*="--grid-flank"][class*="\:start"]) {
-        grid-template-columns: var(--flank-size, auto) 1fr;
-    }
-
-    :where([class*="--grid-flank"][class*="\:end"]) {
-        grid-template-columns: 1fr var(--flank-size, auto);
-    }
-}
 
 
 </style>
