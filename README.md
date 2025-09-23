@@ -23,6 +23,7 @@ Everything must fit into one of these layers
 ```
 
 ### What Goes Where
+```
 Is it a browser default? → Reset
 Is it a design token? → Tokens
 Is it element styling? → Base
@@ -30,6 +31,7 @@ Is it layout/positioning? → Layout
 Is it single-purpose? → Utilities
 Is it a component? → Components
 Is it an override? → Exceptions
+```
 
 ### Where do the colors belong?
  - Layer 2 - Tokens (ALL color values)
@@ -37,22 +39,17 @@ Is it an override? → Exceptions
  - Layer 5 - Utilities (Flexible color classes)
  - Layer 6 - Components (Component-specific colors)
 
-Put in Utilities when:
-  - Flexible/reusable styling
-  - Multiple variants needed
-  - User might want to override
-  - Decorative/theme-dependent
-
-Put in Components when:
-  - Essential to component function
-  - Color communicates meaning/state
-  - Shouldn't be easily overridden
-  - Part of component identity
+| Use Utilities When | Use Components When |
+|-------------------|-------------------|
+| Flexible/reusable styling | Essential to component function |
+| Multiple variants needed | Color communicates meaning/state |
+| User might want to override | Shouldn't be easily overridden |
+| Decorative/theme-dependent | Part of component identity |
 
 The 80/20 Rule
-  80% of colors → Utilities (flexible theming)
-  20% of colors → Components (semantic meaning)
-  100% of color values → Tokens
+  - 80% of colors → Utilities (flexible theming)
+  - 20% of colors → Components (semantic meaning)
+  - 100% of color values → Tokens
 
 ### Layout
 ![Alt text](static/img/layout.png)
