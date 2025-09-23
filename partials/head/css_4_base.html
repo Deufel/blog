@@ -1,34 +1,173 @@
-<style id="css_4_layout">
+<style id="css_4_base">
 
-    @layer css_4_layout.body {
+    @layer css_4_base{
         body {
-
-
-            background-color: var(--color-bg);
+            position: relative;
             inset: 0;
+            margin: 0; /* Essential */
             margin-inline: auto; /* allows for easy centering */
             height: 100svh;
+            line-height: 1.5;
             overflow: hidden;
             overscroll-behavior: none;
-        }
-    }
 
-
-    @layer css_4_layout.page{
-        body {
-            background-color: var(--color-bg);
-            gap: var(--size-1);
-            display: grid;
             grid-template:
                 "header header header" auto
                 "nav    main   aside"  1fr
             / auto   1fr    auto;
+
+            /* THEME */
+            background-color: var(--bg-color-body);
+            gap: var(--gap-body);
         }
 
-        body > header {background-color: var(--surface-1); grid-area: header;}
-        body > nav    {background-color: var(--surface-2); grid-area: nav;}
-        body > aside  {background-color: var(--surface-3); grid-area: aside;}
-        body > main   {background-color: var(--surface-4); grid-area: main;}
+        body > header {background-color: var(--bg-color-header); grid-area: header;}
+        body > nav    {background-color: var(--bg-color-nav); grid-area: nav;}
+        body > aside  {background-color: var(--bg-color-aside); grid-area: aside;}
+        body > main   {background-color: var(--bg-color-main); grid-area: main;}
+    }
+
+
+    @layer css_4_layout.primitives {
+        :is(
+                [class*="--cluster"],
+                [class*="--flank"],
+                [class*="--frame"],
+                [class*="--grid"],
+                [class*="--split"],
+                [class*="--flex"]
+            )
+            > * {
+            margin-block: 0;
+            margin-inline: 0;
+        }
+        :where(
+            [class*="--cluster"],
+            [class*="--flank"],
+            [class*="--frame"],
+            [class*="--grid"],
+            [class*="--stack"],
+            [class*="--split"],
+            [class*="--flex"]
+        ) {
+            gap: var(--size-1);
+        }
+
+        :where([class*="--cluster"]) {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        :where([class*="--flank"]) {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            --content-percentage: initial;
+            --flank-size: initial;
+        }
+        :where([class*="--flank"]:not([class*="\:end"]) > :first-child),
+        :where([class*="--flank"][class*="\:start"] > :first-child) {
+            flex-basis: var(--flank-size, auto);
+            flex-grow: 1;
+        }
+        :where([class*="--flank"]:not([class*="\:end"]) > :last-child),
+        :where([class*="--flank"][class*="\:start"] > :last-child) {
+            flex-basis: 0;
+            flex-grow: 999;
+            min-inline-size: var(--content-percentage, 50%);
+        }
+        :where([class*="--flank"][class*="\:end"] > :last-child) {
+            flex-basis: var(--flank-size, auto);
+            flex-grow: 1;
+        }
+        :where([class*="--flank"][class*="\:end"] > :first-child) {
+            flex-basis: 0;
+            flex-grow: 999;
+            min-inline-size: var(--content-percentage, 50%);
+        }
+        :where([class*="--frame"]) {
+            display: flex;
+            aspect-ratio: 1 / 1;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        :where([class*="--frame"] > img),
+        :where([class*="--frame"] > video) {
+            block-size: 100%;
+            inline-size: 100%;
+            object-fit: cover;
+        }
+        :where([class*="--frame"][class*="\:square"]) {
+            aspect-ratio: 1 / 1;
+        }
+        :where([class*="--frame"][class*="\:landscape"]) {
+            aspect-ratio: 16 / 9;
+        }
+        :where([class*="--frame"][class*="\:portrait"]) {
+            aspect-ratio: 9 / 16;
+        }
+        :where([class*="--grid"]) {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(min(var(--min-column-size, 20ch), 100%), 1fr)
+            );
+            --min-column-size: initial;
+        }
+        :where([class*="--span-grid"]) {
+            grid-column: 1 / -1;
+        }
+        :where([class*="--split"]) {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+        :where([class*="--split"]),
+        :where([class*="--split"][class*="\:row"]) {
+            flex-direction: row;
+            block-size: auto;
+            inline-size: 100%;
+        }
+        :where([class*="--split"]:not([class*="\:column"]) > :first-child) {
+            flex: 0 1 auto;
+        }
+        :where([class*="--split"][class*="\:column"]) {
+            flex-direction: column;
+            block-size: auto;
+            inline-size: auto;
+            align-self: stretch;
+        }
+        :where([class*="--stack"]) {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: stretch;
+        }
+        :where([class*="--flex"]) {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        :where([class*="--flex"]),
+        :where([class*="--flex"][class*="\:row"]) {
+            flex-direction: row;
+            block-size: auto;
+            inline-size: 100%;
+        }
+        :where([class*="--flex"][class*="\:column"]) {
+            flex-direction: column;
+            block-size: auto;
+            inline-size: auto;
+            align-self: stretch;
+            align-items: stretch;
+        }
+        /* New :end modifier for --flex */
+        :where([class*="--flex"][class*="\:end"]) {
+            justify-content: flex-end;
+        }
     }
 
 
@@ -288,149 +427,6 @@
                     }
                 }
             }
-        }
-    }
-
-
-    @layer css_4_layout.primitives {
-        :is(
-                [class*="--cluster"],
-                [class*="--flank"],
-                [class*="--frame"],
-                [class*="--grid"],
-                [class*="--split"],
-                [class*="--flex"]
-            )
-            > * {
-            margin-block: 0;
-            margin-inline: 0;
-        }
-        :where(
-            [class*="--cluster"],
-            [class*="--flank"],
-            [class*="--frame"],
-            [class*="--grid"],
-            [class*="--stack"],
-            [class*="--split"],
-            [class*="--flex"]
-        ) {
-            gap: var(--size-1);
-        }
-
-        :where([class*="--cluster"]) {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            align-items: center;
-        }
-        :where([class*="--flank"]) {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            --content-percentage: initial;
-            --flank-size: initial;
-        }
-        :where([class*="--flank"]:not([class*="\:end"]) > :first-child),
-        :where([class*="--flank"][class*="\:start"] > :first-child) {
-            flex-basis: var(--flank-size, auto);
-            flex-grow: 1;
-        }
-        :where([class*="--flank"]:not([class*="\:end"]) > :last-child),
-        :where([class*="--flank"][class*="\:start"] > :last-child) {
-            flex-basis: 0;
-            flex-grow: 999;
-            min-inline-size: var(--content-percentage, 50%);
-        }
-        :where([class*="--flank"][class*="\:end"] > :last-child) {
-            flex-basis: var(--flank-size, auto);
-            flex-grow: 1;
-        }
-        :where([class*="--flank"][class*="\:end"] > :first-child) {
-            flex-basis: 0;
-            flex-grow: 999;
-            min-inline-size: var(--content-percentage, 50%);
-        }
-        :where([class*="--frame"]) {
-            display: flex;
-            aspect-ratio: 1 / 1;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-        :where([class*="--frame"] > img),
-        :where([class*="--frame"] > video) {
-            block-size: 100%;
-            inline-size: 100%;
-            object-fit: cover;
-        }
-        :where([class*="--frame"][class*="\:square"]) {
-            aspect-ratio: 1 / 1;
-        }
-        :where([class*="--frame"][class*="\:landscape"]) {
-            aspect-ratio: 16 / 9;
-        }
-        :where([class*="--frame"][class*="\:portrait"]) {
-            aspect-ratio: 9 / 16;
-        }
-        :where([class*="--grid"]) {
-            display: grid;
-            grid-template-columns: repeat(
-                auto-fit,
-                minmax(min(var(--min-column-size, 20ch), 100%), 1fr)
-            );
-            --min-column-size: initial;
-        }
-        :where([class*="--span-grid"]) {
-            grid-column: 1 / -1;
-        }
-        :where([class*="--split"]) {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-        }
-        :where([class*="--split"]),
-        :where([class*="--split"][class*="\:row"]) {
-            flex-direction: row;
-            block-size: auto;
-            inline-size: 100%;
-        }
-        :where([class*="--split"]:not([class*="\:column"]) > :first-child) {
-            flex: 0 1 auto;
-        }
-        :where([class*="--split"][class*="\:column"]) {
-            flex-direction: column;
-            block-size: auto;
-            inline-size: auto;
-            align-self: stretch;
-        }
-        :where([class*="--stack"]) {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: stretch;
-        }
-        :where([class*="--flex"]) {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        :where([class*="--flex"]),
-        :where([class*="--flex"][class*="\:row"]) {
-            flex-direction: row;
-            block-size: auto;
-            inline-size: 100%;
-        }
-        :where([class*="--flex"][class*="\:column"]) {
-            flex-direction: column;
-            block-size: auto;
-            inline-size: auto;
-            align-self: stretch;
-            align-items: stretch;
-        }
-        /* New :end modifier for --flex */
-        :where([class*="--flex"][class*="\:end"]) {
-            justify-content: flex-end;
         }
     }
 
