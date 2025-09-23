@@ -26,11 +26,16 @@
     list-style: none;
     }
 
-    /* Set core body defaults */
+    /* Set core body defaults for "app like" body */
     body {
-    min-height: 100svh;
-    line-height: 1.5;
-    margin: 0;
+        position: relative;
+        inset: 0;
+        margin: 0; /* Essential */
+        margin-inline: auto;
+        height: 100svh;
+        line-height: 1.5; /* Recommended */
+        overflow: hidden;
+        overscroll-behavior: none;
     }
 
     /* Set shorter line heights on headings and interactive elements */
