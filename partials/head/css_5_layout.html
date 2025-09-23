@@ -1,5 +1,32 @@
 <style id="css_5_layout">
 
+@layer css_4_base{
+    body {
+        position: relative;
+        inset: 0;
+        margin: 0; /* Essential */
+        margin-inline: auto; /* allows for easy centering */
+        height: 100svh;
+        line-height: 1.5;
+        overflow: hidden;
+        overscroll-behavior: none;
+
+        grid-template:
+            "header header header" auto
+            "nav    main   aside"  1fr
+        / auto   1fr    auto;
+
+        /* THEME */
+        background-color: var(--bg-color-body);
+        gap: var(--gap-body);
+    }
+
+    body > header {background-color: var(--bg-color-header); grid-area: header;}
+    body > nav    {background-color: var(--bg-color-nav); grid-area: nav;}
+    body > aside  {background-color: var(--bg-color-aside); grid-area: aside;}
+    body > main   {background-color: var(--bg-color-main); grid-area: main;}
+}
+
 @layer css_4_layout.primitives {
     :is(
             [class*="--cluster"],
@@ -142,61 +169,263 @@
     }
 }
 
-@layer css_5_layout {
-    :is(.visually-hidden, .sr-only) {
-      inline-size: 0;
-      block-size: 0;
-      overflow: hidden;
+@layer css_4_layout.drawers{
+    [popover] {
+        &:popover-open {
+            /*   0. BEFORE-OPEN STATE   */
+            /*  initial state for what we're animating *in* from  */
+            @starting-style {
+                opacity: 0;
+            }
+
+            /*   1. OPEN STATE   */
+            /*  state when popover is open, BOTH:
+            what we're transitioning *in* to
+            and transitioning *out* from */
+            opacity: 1;
+        }
+
+        /*   2. AFTER-OPEN-IS-CLOSED STATE   */
+        /*  initial state for what we're animating *out* to */
+        opacity: 0;
+
+        /*  enumarate transitioning properties, including display */
+        transition:
+            opacity 0.5s,
+            display 0.5s;
     }
 
-    .border-between-inline > * + * {
-      border-inline-start-width: var(--border);
+    /* ===== BASE DRAWER STYLES ===== */
+    header[popover],
+    nav[popover],
+    aside[popover],
+    footer[popover] {
+        /* Reset popover defaults */
+        border: none;
+        padding: 0;
+        margin: 0;
+        outline: none;
+        max-width: none;
+        max-height: none;
+        scrollbar-width: thin;
+        scrollbar-gutter: stable both-edges;
+
+        /* Appearance */
+        background: var(--drawer-background);
+        border: 1px solid var(--drawer-border-color);
+        box-shadow: var(--drawer-shadow);
+
+        /* Maintain your semantic grid structure */
+        display: grid;
+        grid-template:
+            "header header header" auto
+            "nav main aside" 1fr
+            / auto 1fr auto;
+        overflow: hidden;
+
+        /* Nested sections maintain structure */
+        > header {
+            grid-area: header;
+            margin-bottom: var(--gap-size, 6px);
+        }
+        > nav {
+            grid-area: nav;
+            margin-right: var(--gap-size, 6px);
+            overflow-y: auto;
+        }
+        > main {
+            grid-area: main;
+            overflow-y: auto;
+            min-height: 0;
+        }
+        > aside {
+            grid-area: aside;
+            margin-left: var(--gap-size, 6px);
+            overflow-y: auto;
+        }
+        > footer {
+            grid-area: footer;
+            margin-top: var(--gap-size, 6px);
+        }
+
+        /* Base transition properties for both element and backdrop */
+        &,
+        &::backdrop {
+            transition:
+                display var(--drawer-animation-duration) allow-discrete,
+                overlay var(--drawer-animation-duration) allow-discrete,
+                opacity var(--drawer-animation-duration)
+                    var(--drawer-animation-easing),
+                transform var(--drawer-animation-duration)
+                    var(--drawer-animation-easing),
+                background-color var(--drawer-animation-duration)
+                    var(--drawer-animation-easing),
+                backdrop-filter var(--drawer-animation-duration)
+                    var(--drawer-animation-easing);
+        }
+
+        /* Exit stage - default state */
+        opacity: 0;
+
+        /* Backdrop default state */
+        &::backdrop {
+            background-color: rgb(0 0 0 / 0%);
+            backdrop-filter: blur(0px);
+        }
+
+        /* On stage - when popover is open */
+        &:popover-open {
+            opacity: 1;
+
+            &::backdrop {
+                background-color: var(--drawer-backdrop-color);
+                backdrop-filter: blur(2px);
+            }
+        }
     }
 
-    .border-between-block > * + * {
-      border-block-start-width: var(--border);
+    /* ===== HEADER DRAWER (Top) - Full width, grid-controlled height ===== */
+    header[popover] {
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        border-radius: 0 0 var(--drawer-border-radius)
+            var(--drawer-border-radius);
+        border-top: none;
+
+        /* Exit stage to */
+        transform: translateY(-100%);
+
+        /* On stage */
+        &:popover-open {
+            transform: translateY(0);
+        }
+
+        /* Enter stage from */
+        @starting-style {
+            &:popover-open,
+            &:popover-open::backdrop {
+                opacity: 0;
+            }
+
+            &:popover-open {
+                transform: translateY(-100%);
+            }
+        }
     }
 
-    .gradient-border {
-      border-width: var(--size-3);
-      border-image-slice: 1;
-      border-image-source: var(--conic-gradient-3);
+    /* ===== NAV DRAWER (Left) - Full height, grid-controlled width ===== */
+    nav[popover] {
+        height: 100svh;
+        max-width: 80vw;
+        border-radius: 0 var(--drawer-border-radius) var(--drawer-border-radius)
+            0;
+        border-left: none;
+
+        /* Exit stage to */
+        transform: translateX(-100%);
+
+        /* On stage */
+        &:popover-open {
+            transform: translateX(0);
+        }
+
+        /* Enter stage from */
+        @starting-style {
+            &:popover-open,
+            &:popover-open::backdrop {
+                opacity: 0;
+            }
+
+            &:popover-open {
+                transform: translateX(-100%);
+            }
+        }
     }
 
-    .truncate {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    /* ===== ASIDE DRAWER (Right) - Full height, grid-controlled width ===== */
+    aside[popover] {
+        left: auto;
+        height: 100svh;
+        max-width: 80vw;
+        border-radius: var(--drawer-border-radius) 0 0
+            var(--drawer-border-radius);
+        border-right: none;
+
+        /* Exit stage to */
+        transform: translateX(100%);
+
+        /* On stage */
+        &:popover-open {
+            transform: translateX(0);
+        }
+
+        /* Enter stage from */
+        @starting-style {
+            &:popover-open,
+            &:popover-open::backdrop {
+                opacity: 0;
+            }
+
+            &:popover-open {
+                transform: translateX(100%);
+            }
+        }
     }
 
-    .fade-up-and-in {
-      opacity: 0;
-      animation:
-        var(--animation-fade-in) forwards,
-        var(--animation-slide-in-up) forwards;
-      animation-delay: .3s, 0s;
-      animation-duration: .7s, 1s;
+    /* ===== FOOTER DRAWER (Bottom) - Full width, grid-controlled height ===== */
+    footer[popover] {
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        border-radius: var(--drawer-border-radius) var(--drawer-border-radius) 0
+            0;
+        border-bottom: none;
+        padding-bottom: env(safe-area-inset-bottom, 0);
+
+        /* Exit stage to */
+        transform: translateY(100%);
+
+        /* On stage */
+        &:popover-open {
+            transform: translateY(0);
+        }
+
+        /* Enter stage from */
+        @starting-style {
+            &:popover-open,
+            &:popover-open::backdrop {
+                opacity: 0;
+            }
+
+            &:popover-open {
+                transform: translateY(100%);
+            }
+        }
     }
 
-    .trimmed > * {
-        text-box: trim-both cap alphabetic;
-    }
-}
+    /* ===== REDUCED MOTION SUPPORT ===== */
+    @media (prefers-reduced-motion: reduce) {
+        header[popover],
+        nav[popover],
+        aside[popover],
+        footer[popover] {
+            &,
+            &::backdrop {
+                transition: none !important;
+            }
 
-
-@layer css_5_layout {
-
-    :where(.surface) {
-        --_surface: initial;
-        background: var(--_surface, var(--surface-3));
+            @starting-style {
+                &:popover-open {
+                    opacity: 1 !important;
+                    transform: none !important;
+                }
+            }
+        }
     }
-    :where(.surface) :where(.surface) {
-        --_surface: var(--surface-2);
-    }
-    :where(.surface) :where(.surface) :where(.surface) {
-        --_surface: var(--surface-1);
-    }
-
 }
 
 </style>
