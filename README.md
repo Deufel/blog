@@ -40,9 +40,10 @@ Is it an override? → Exceptions
 
 ### Where do the colors belong?
  - Layer 2 - Tokens (ALL color values)
- - Layer 3 - Base (Element defaults)
+ - Layer 3 - Theme (Themes (using tokens)
+ - Layer 4 - Base (Element defaults)
  - Layer 5 - Utilities (Flexible color classes)
- - Layer 6 - Components (Component-specific colors)
+ - Layer 7 - Components (Component-specific colors)
 
 | Use Utilities When | Use Components When |
 |-------------------|-------------------|
