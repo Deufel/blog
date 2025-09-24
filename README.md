@@ -1,5 +1,5 @@
 # About
-A CSS Design System
+A CSS Design System (work in progress)
 
 ## Core Ideas
  - Responsive by default
@@ -28,8 +28,8 @@ Everything must fit into one of these layers
 Is it a browser default? → Reset
 Is it a design token? → Tokens
 Is it a Theme Specific? → Theme
-Is it element styling? → Base
-Is it layout/positioning? → Layout
+Is it element styling + page layouts? → Base (workign on where page layouts should go...ideally you could use this with or with out the page layouts so in that case the page layouts need to be in a seperate layer but also my reset/ base are kind of the same...)
+Is it layout/positioning [flow]? → Layout
 Is it single-purpose? → Utilities
 Is it a component? → Components
 Is it an override? → Exceptions
@@ -37,6 +37,10 @@ Is it an override? → Exceptions
 #### Base Vs Layout
   - Is this about how individual elements look? -> Base,
   - or how they work together? -> Layout
+
+  Note: thinking that I may just make base the place where the theme is applied to core elements; then make layout.page (for page structure) and then layout.utils (for flow)
+
+  then utilities would be for... things like color utils, and size utils ...  ? maybe will keep working and hopefully this becomes obvious..
 
 ### Where do the colors belong?
  - Layer 2 - Tokens (ALL color values)
@@ -60,10 +64,11 @@ The 80/20 Rule
 ## Layout
 ![Alt text](static/img/layout.png)
 
-## Hat Tip
+## h/t
 [open props](https://open-props.style/)
 [opui](https://open-props-ui.netlify.app/)
 [piccalil](https://piccalil.li/)
+[datastar](https://data-star.dev/)
 
 ## Demo
 [Interactive Demo](https://deufel.github.io/blog/)
