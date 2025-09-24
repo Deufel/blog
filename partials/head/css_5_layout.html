@@ -2,7 +2,12 @@
 
 @layer css_5_layout {
 
-    :where([class*="--wrapper"]) { width: 100%; height: 100%; box-sizing: border-box; margin: 0; padding: 0; min-width: 0; min-height: 0; }
+    :where([class*="--wrapper"]) {  width: 100%;  height: 100%;  box-sizing: border-box;  margin: 0;  padding: 0;  min-width: 0;  min-height: 0;
+        /* No display property - let content decide */
+    }
+
+    /* Fill modifier - makes any element fill its container */
+    :where([class*="\:fill"]) { width: 100%; height: 100%; }
 
     :is(   [class*="--cluster"], [class*="--flank"], [class*="--frame"], [class*="--grid"], [class*="--split"], [class*="--flex"] ) > * { margin-block: 0; margin-inline: 0; }
     :where([class*="--cluster"], [class*="--flank"], [class*="--frame"], [class*="--grid"], [class*="--stack"], [class*="--split"], [class*="--flex"] ) { gap: var(--size-1); }
@@ -30,28 +35,12 @@
     }
 
 
-    :where([class*="--frame"]) {
-        display: flex;
-        aspect-ratio: 1 / 1;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-    }
+    :where([class*="--frame"]) { display: flex; aspect-ratio: 1 / 1; justify-content: center; align-items: center; overflow: hidden; }
     :where([class*="--frame"] > img),
-    :where([class*="--frame"] > video) {
-        block-size: 100%;
-        inline-size: 100%;
-        object-fit: cover;
-    }
-    :where([class*="--frame"][class*="\:square"]) {
-        aspect-ratio: 1 / 1;
-    }
-    :where([class*="--frame"][class*="\:landscape"]) {
-        aspect-ratio: 16 / 9;
-    }
-    :where([class*="--frame"][class*="\:portrait"]) {
-        aspect-ratio: 9 / 16;
-    }
+    :where([class*="--frame"] > video) { block-size: 100%; inline-size: 100%; object-fit: cover; }
+    :where([class*="--frame"][class*="\:square"]) { aspect-ratio: 1 / 1; }
+    :where([class*="--frame"][class*="\:landscape"]) { aspect-ratio: 16 / 9; }
+    :where([class*="--frame"][class*="\:portrait"]) { aspect-ratio: 9 / 16; }
     :where([class*="--grid"]) {
         display: grid;
         grid-template-columns: repeat(
