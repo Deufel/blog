@@ -93,6 +93,13 @@
         flex-wrap: wrap;
         align-items: center;
     }
+
+    /* Prevents flex children from being larger than container */
+    :where([class*="--flex"]) > * {
+        margin-block: 0;
+        margin-inline: 0;
+        min-height: 0;
+    }
     :where([class*="--flex"]),
     :where([class*="--flex"][class*="\:row"]) {
         flex-direction: row;
