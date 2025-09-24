@@ -113,7 +113,7 @@
     :where([class*="--flex"][class*="\:lr"]) { justify-content: space-between; flex-wrap: nowrap; }
     :where([class*="--flex"][class*="\:center"]) { justify-content: center; }
     :where([class*="--flex"][class*="\:space-between"]) { justify-content: space-between; flex-wrap: nowrap; }
-    :where([class*="--flex"][class*="\:column"]) { flex-direction: column; block-size: auto; inline-size: auto; align-self: stretch; align-items: stretch; }
+    :where([class*="--flex"][class*="\:column"]) { flex-direction: column; block-size: 100%; inline-size: 100%; align-self: stretch; align-items: stretch; min-height: 0; }
 
     /* TMB (Top-Middle-Bottom) extension for flex column */
     :where([class*="--flex"][class*="\:column"][class*="\:tmb"]) { position: relative; flex-wrap: nowrap;
@@ -123,11 +123,11 @@
     }
 
     /* TB (Top-Bottom) extension for flex column */
-    :where([class*="--flex"][class*="\:column"][class*="\:tb"]) { justify-content: space-between; flex-wrap: nowrap; height: 100%; min-height: 0; }
+    :where([class*="--flex"][class*="\:column"][class*="\:tb"]) {  justify-content: space-between;  flex-wrap: nowrap;  }
     /* M (Middle) extension for flex column */
-    :where([class*="--flex"][class*="\:column"][class*="\:m"]) { justify-content: center; align-items: center; }
+    :where([class*="--flex"][class*="\:column"][class*="\:m"]) {  justify-content: center;  align-items: center;  }
     /* B (Bottom) extension for flex column */
-    :where([class*="--flex"][class*="\:column"][class*="\:b"]) { justify-content: flex-end; }
+    :where([class*="--flex"][class*="\:column"][class*="\:b"]) {  justify-content: flex-end;  }
 }
 
 @layer css_5_layout.primitives {
