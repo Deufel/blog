@@ -1,72 +1,10 @@
 <style id="css_5_layout">
 
-@layer css_5_layout{
-
-    body {
-        position: relative;
-        inset: 0;
-        margin: 0; /* Essential */
-        margin-inline: auto; /* allows for easy centering */
-        height: 100svh;
-        line-height: 1.5;
-        overflow: hidden;
-        overscroll-behavior: none;
-
-        display: grid; /* ← ADD THIS! */
-        grid-template:
-            "header header header" auto
-            "nav    main   aside"  1fr
-        / auto   1fr    auto;
-
-        /* THEME */
-        background-color: var(--bg-color-body);
-        gap: var(--gap-body);
-    }
-
-    body > header {background-color: var(--bg-color-header); grid-area: header;}
-    body > nav    {background-color: var(--bg-color-nav); grid-area: nav;overflow-y: auto}
-    body > aside  {background-color: var(--bg-color-aside); grid-area: aside;overflow-y: auto}
-    body > main   {background-color: var(--bg-color-main); grid-area: main;overflow-y: auto}
-}
-
-@layer css_5_layout.primitives {
-    :is(
-            [class*="--cluster"],
-            [class*="--flank"],
-            [class*="--frame"],
-            [class*="--grid"],
-            [class*="--split"],
-            [class*="--flex"]
-        )
-        > * {
-        margin-block: 0;
-        margin-inline: 0;
-    }
-    :where(
-        [class*="--cluster"],
-        [class*="--flank"],
-        [class*="--frame"],
-        [class*="--grid"],
-        [class*="--stack"],
-        [class*="--split"],
-        [class*="--flex"]
-    ) {
-        gap: var(--size-1);
-    }
-
-    :where([class*="--cluster"]) {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        align-items: center;
-    }
-    :where([class*="--flank"]) {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        --content-percentage: initial;
-        --flank-size: initial;
-    }
+@layer css_5_layout {
+    :is(   [class*="--cluster"], [class*="--flank"], [class*="--frame"], [class*="--grid"], [class*="--split"], [class*="--flex"] ) > * { margin-block: 0; margin-inline: 0; }
+    :where([class*="--cluster"], [class*="--flank"], [class*="--frame"], [class*="--grid"], [class*="--stack"], [class*="--split"], [class*="--flex"] ) { gap: var(--size-1); }
+    :where([class*="--cluster"]) { display: flex; flex-wrap: wrap; justify-content: flex-start; align-items: center; }
+    :where([class*="--flank"]) { display: flex; flex-wrap: wrap; align-items: center; --content-percentage: initial; --flank-size: initial; }
     :where([class*="--flank"]:not([class*="\:end"]) > :first-child),
     :where([class*="--flank"][class*="\:start"] > :first-child) {
         flex-basis: var(--flank-size, auto);
