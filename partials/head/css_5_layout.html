@@ -86,7 +86,6 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: stretch;
-        margin-block: 1px; /* required for scroll bar appearing when stack "pushes" in to grid border */
     }
     :where([class*="--flex"]) {
         display: flex;
@@ -94,12 +93,7 @@
         align-items: center;
     }
 
-    /* Prevents flex children from being larger than container */
-    :where([class*="--flex"]) > * {
-        margin-block: 0;
-        margin-inline: 0;
-        min-height: 0;
-    }
+
     :where([class*="--flex"]),
     :where([class*="--flex"][class*="\:row"]) {
         flex-direction: row;
