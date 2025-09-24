@@ -1,45 +1,48 @@
 <aside id="aside">
-    <div class="--stack">
-        <code>&lt <strong>Aside</strong> id="aside" &gt</code>
+    <div class="grid-tb">
+       <div>
+           <code>&lt <strong>Aside</strong> id="aside" &gt</code>
+       </div>
+        <div>
+            <label class="switch">
+                1_reset
+                <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_1_reset') : @get('partials/head/css_1_reset_blank')" />
+            </label>
 
-        <label class="switch">
-            1_reset
-            <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_1_reset') : @get('partials/head/css_1_reset_blank')" />
-        </label>
+            <label class="switch">
+                2_tokens
+                <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_2_tokens') : @get('partials/head/css_2_tokens_blank')" />
+            </label>
 
-        <label class="switch">
-            2_tokens
-            <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_2_tokens') : @get('partials/head/css_2_tokens_blank')" />
-        </label>
+            <label class="switch">
+                3_theme
+                <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_3_theme') : @get('partials/head/css_3_theme_blank')" />
+            </label>
 
-        <label class="switch">
-            3_theme
-            <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_3_theme') : @get('partials/head/css_3_theme_blank')" />
-        </label>
+            <label class="switch">
+                4_base
+                <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_4_base') : @get('partials/head/css_4_base_blank')" />
+            </label>
 
-        <label class="switch">
-            4_base
-            <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_4_base') : @get('partials/head/css_4_base_blank')" />
-        </label>
+            <label class="switch">
+                5_layout
+                <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_5_layout') : @get('partials/head/css_5_layout_blank')" />
+            </label>
 
-        <label class="switch">
-            5_layout
-            <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_5_layout') : @get('partials/head/css_5_layout_blank')" />
-        </label>
+            <label class="switch">
+                6_utilities
+                <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_6_utilities') : @get('partials/head/css_6_utilities_blank')" />
+            </label>
 
-        <label class="switch">
-            6_utilities
-            <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_6_utilities') : @get('partials/head/css_6_utilities_blank')" />
-        </label>
+            <label class="switch">
+                7_components
+                <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_7_components') : @get('partials/head/css_7_components_blank')" />
+            </label>
 
-        <label class="switch">
-            7_components
-            <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_7_components') : @get('partials/head/css_7_components_blank')" />
-        </label>
-
-        <label class="switch">
-            8_exceptions
-            <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_8_exceptions') : @get('partials/head/css_8_exceptions_blank')" />
-        </label>
+            <label class="switch">
+                8_exceptions
+                <input type="checkbox" role="switch" data-on-change="evt.target.checked ? @get('partials/head/css_8_exceptions') : @get('partials/head/css_8_exceptions_blank')" />
+            </label>
+        </div>
     </div>
 </aside>

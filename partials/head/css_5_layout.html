@@ -173,12 +173,25 @@
     }
 }
 
-@layer css_6_utilities {
+@layer css_5_layout.primitives {
     /* grid-lcr: will place 3 grid childeren in left center right; or iff 2 then left, right */
-      .grid-lcr { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline;}
-      .grid-lcr > :nth-child(2):not(:last-child) { justify-self: center; }
-      .grid-lcr > :nth-child(2):last-child { justify-self: end; }
-      .grid-lcr > * { display: flex; align-items: center; line-height: 1.2; }
+    .grid-lcr { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline;}
+    .grid-lcr > :nth-child(2):not(:last-child) { justify-self: center; }
+    .grid-lcr > :nth-child(2):last-child { justify-self: end; }
+    .grid-lcr > * { display: flex; align-items: center; line-height: 1.2; }
+
+    /* Top-Middle-Bottom (exactly 3 children) */
+    .grid-tmb { display: grid; grid-template-rows: auto 1fr auto; gap: 0; }
+    .grid-tmb > :nth-child(2) { align-self: center; }
+
+    /* Top-Top-Bottom (exactly 3 children, first 2 at top) */
+    .grid-ttb { display: grid; grid-template-rows: auto auto 1fr; gap: 0; }
+    .grid-ttb > :nth-child(3) { align-self: end; }
+
+    /* Top-Bottom (exactly 2 children) */
+    .grid-tb { display: grid; grid-template-rows: auto 1fr; gap: 0; }
+    .grid-tb > :nth-child(2) { align-self: end; }
+    }
 }
 
 
