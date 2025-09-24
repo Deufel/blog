@@ -109,31 +109,24 @@
         > :nth-child(3) { flex: 1; display: flex; justify-content: flex-end; }
     }
 
-    :where([class*="--flex"][class*="\:lr"]) {
-        justify-content: space-between;
-        flex-wrap: nowrap;
+    :where([class*="--flex"][class*="\:lr"]) { justify-content: space-between; flex-wrap: nowrap; }
+    :where([class*="--flex"][class*="\:center"]) { justify-content: center; }
+    :where([class*="--flex"][class*="\:space-between"]) { justify-content: space-between; flex-wrap: nowrap; }
+    :where([class*="--flex"][class*="\:column"]) { flex-direction: column; block-size: auto; inline-size: auto; align-self: stretch; align-items: stretch; }
+
+    /* TMB (Top-Middle-Bottom) extension for flex column */
+    :where([class*="--flex"][class*="\:column"][class*="\:tmb"]) { position: relative; flex-wrap: nowrap;
+        > :nth-child(1) { flex: 1; display: flex; align-items: flex-start; }
+        > :nth-child(2) { position: absolute; top: 50%; transform: translateY(-50%); width: 100%; }
+        > :nth-child(3) { flex: 1; display: flex; align-items: flex-end; }
     }
 
-    :where([class*="--flex"][class*="\:center"]) {
-        justify-content: center;
-    }
-
-    :where([class*="--flex"][class*="\:space-between"]) {
-        justify-content: space-between;
-        flex-wrap: nowrap;
-    }
-
-    :where([class*="--flex"][class*="\:column"]) {
-        flex-direction: column;
-        block-size: auto;
-        inline-size: auto;
-        align-self: stretch;
-        align-items: stretch;
-    }
-    /* New :end modifier for --flex */
-    :where([class*="--flex"][class*="\:end"]) {
-        justify-content: flex-end;
-    }
+    /* TB (Top-Bottom) extension for flex column */
+    :where([class*="--flex"][class*="\:column"][class*="\:tb"]) { justify-content: space-between; flex-wrap: nowrap; }
+    /* M (Middle) extension for flex column */
+    :where([class*="--flex"][class*="\:column"][class*="\:m"]) { justify-content: center; align-items: center; }
+    /* B (Bottom) extension for flex column */
+    :where([class*="--flex"][class*="\:column"][class*="\:b"]) { justify-content: flex-end; }
 }
 
 @layer css_5_layout.primitives {
