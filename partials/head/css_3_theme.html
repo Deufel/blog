@@ -2,6 +2,7 @@
 /* ===== THEME VARIATIONS ===== */
 @layer css_3_themes {
     /* Default theme - already defined in tokens */
+    :where(:root) {color-scheme: light dark;}
 
     /* High contrast theme */
     [data-theme="high-contrast"] {
@@ -40,6 +41,7 @@
     [data-theme="cool"] {
         --palette-hue: 200; /* Blue base */
         --palette-hue-rotate-by: -1;
+
     }
 
     /* Nature theme */
