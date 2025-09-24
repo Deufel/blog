@@ -3,7 +3,6 @@
 @layer css_6_utilities {
     :is(.visually-hidden, .sr-only) { inline-size: 0; block-size: 0; overflow: hidden; }
     .truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .trimmed > * { text-box: trim-both cap alphabetic; }
     .gradient-border { border-width: var(--size-3); border-image-slice: 1; border-image-source: var(--conic-gradient-3); }
     .border-between-inline > * + * { border-inline-start-width: var(--border); }
     .border-between-block > * + * { border-block-start-width: var(--border); }

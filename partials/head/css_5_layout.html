@@ -175,9 +175,10 @@
 
 @layer css_6_utilities {
     /* grid-lcr: will place 3 grid childeren in left center right; or iff 2 then left, right */
-      .grid-lcr { display: grid; grid-template-columns: auto 1fr auto; align-items: center;}
+      .grid-lcr { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline;}
       .grid-lcr > :nth-child(2):not(:last-child) { justify-self: center; }
       .grid-lcr > :nth-child(2):last-child { justify-self: end; }
+      .grid-lcr > * { display: flex; align-items: center; line-height: 1.2; }
 }
 
 
