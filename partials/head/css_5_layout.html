@@ -99,6 +99,30 @@
         block-size: auto;
         inline-size: 100%;
     }
+    /* LCR extension for flex system */
+    :where([class*="--flex"][class*="\:lcr"]) {
+        position: relative;
+        flex-wrap: nowrap; /* Override wrap for lcr */
+
+        > :nth-child(1) { flex: 1; display: flex; justify-content: flex-start; }
+        > :nth-child(2) { position: absolute; left: 50%; transform: translateX(-50%); }
+        > :nth-child(3) { flex: 1; display: flex; justify-content: flex-end; }
+    }
+
+    :where([class*="--flex"][class*="\:lr"]) {
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+
+    :where([class*="--flex"][class*="\:center"]) {
+        justify-content: center;
+    }
+
+    :where([class*="--flex"][class*="\:space-between"]) {
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+
     :where([class*="--flex"][class*="\:column"]) {
         flex-direction: column;
         block-size: auto;

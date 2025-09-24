@@ -32,10 +32,10 @@
         width: 100%;
 
         /* Layout component styles */
-        #header { background-color: var(--bg-color-header); grid-area: header; }
-        #nav    { background-color: var(--bg-color-nav);    grid-area: nav;   overflow-y: auto; }
-        #aside  { background-color: var(--bg-color-aside);  grid-area: aside; overflow-y: auto; }
-        #main   { background-color: var(--bg-color-main);   grid-area: main;  overflow-y: auto; }
+        #header { background-color: var(--bg-color-header); grid-area: header; display: flex; flex-direction: row; }
+        #nav    { background-color: var(--bg-color-nav);    grid-area: nav;    display: flex; flex-direction: column; overflow-y: auto; }
+        #aside  { background-color: var(--bg-color-aside);  grid-area: aside;  display: flex; flex-direction: column; overflow-y: auto; }
+        #main   { background-color: var(--bg-color-main);   grid-area: main;   display: flex; flex-direction: column; overflow-y: auto; }
     }
 
 }
