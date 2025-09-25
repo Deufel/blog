@@ -18,6 +18,18 @@
             scrollbar-width: thin;
             scrollbar-color: var(--color-7) transparent;
         }
+
+        /* ROOT PROPERTIES */
+        @property --spinner-rotation {
+            syntax: "<angle>";
+            inherits: false;
+            initial-value: 0deg;
+        }
+
+        @keyframes spinner-rotate {
+            to { --spinner-rotation: 360deg; }
+        }
+
     }
 
     .app-layout {

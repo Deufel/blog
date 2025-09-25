@@ -396,6 +396,66 @@
     }
 }
 
+@layer css_7_components.modifiers {
+    /* General loading class */
+    .loading {
+        animation: spinner-rotate 1.5s linear infinite;
+        border: solid 4px transparent;
+        background:
+            linear-gradient(var(--bg, #2a2a2a) 0 0) padding-box,
+            conic-gradient(
+                from var(--spinner-rotation),
+                transparent 0deg,
+                var(--color, #0ea5e9) 90deg,
+                transparent 180deg
+            ) border-box;
+    }
+
+    /* Variants */
+    .loading.circle {
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .loading.button {
+        border-radius: 8px;
+        padding: 12px 24px;
+        cursor: not-allowed;
+        font-size: 16px;
+        color: #ccc;
+    }
+
+    .loading.card {
+        border-radius: 12px;
+        padding: 24px;
+        min-width: 200px;
+        text-align: center;
+    }
+
+    /* Color variants */
+    .loading.blue { --color: #3b82f6; }
+    .loading.green { --color: #10b981; }
+    .loading.purple { --color: #8b5cf6; }
+    .loading.orange { --color: #f97316; }
+
+    /* Size variants */
+    .loading.small {
+        border-width: 2px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .loading.large {
+        border-width: 6px;
+        width: 100px;
+        height: 100px;
+    }
+}
+
 
 /* CALENDAR */
 @layer css_7_components.base {
