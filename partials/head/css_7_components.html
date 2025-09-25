@@ -163,244 +163,237 @@
 
 /* BUTTON */
 @layer css_7_components.base {
-    /* Button styles - DaisyUI inspired */
-            .btn {
-                /* Base layout */
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                gap: 0.375rem;
-                flex-wrap: nowrap;
-                flex-shrink: 0;
+    .btn {
+      /* Base layout */
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.375rem;
+      flex-wrap: nowrap;
+      flex-shrink: 0;
 
-                /* Sizing */
-                height: 2.5rem;
-                padding-inline: 1rem;
-                min-width: fit-content;
+      /* Sizing */
+      height: 2.5rem;
+      padding-inline: 1rem;
+      min-width: fit-content;
 
-                /* Typography */
-                font-size: 0.875rem;
-                font-weight: 600;
-                text-align: center;
-                line-height: 1;
+      /* Typography */
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-align: center;
+      line-height: 1;
 
-                /* Appearance */
-                border-radius: 0.5rem;
-                border: 1px solid;
-                background-color: var(--btn-bg, #f3f4f6);
-                color: var(--btn-fg, #374151);
-                border-color: var(--btn-border, #d1d5db);
+      /* Appearance */
+      border-radius: 0.5rem;
+      border: 1px solid;
+      background-color: var(--btn-bg, #f3f4f6);
+      color: var(--btn-fg, #374151);
+      border-color: var(--btn-border, #d1d5db);
 
-                /* Depth effects */
-                box-shadow:
-                    0 0.5px 0 0.5px rgba(255, 255, 255, 0.1) inset,
-                    0 3px 2px -2px rgba(0, 0, 0, 0.1),
-                    0 4px 3px -2px rgba(0, 0, 0, 0.05);
-                text-shadow: 0 0.5px rgba(255, 255, 255, 0.1);
+      /* Depth effects */
+      box-shadow:
+        0 0.5px 0 0.5px rgba(255, 255, 255, 0.1) inset,
+        0 3px 2px -2px rgba(0, 0, 0, 0.1),
+        0 4px 3px -2px rgba(0, 0, 0, 0.05);
+      text-shadow: 0 0.5px rgba(255, 255, 255, 0.1);
 
-                /* Interaction */
-                cursor: pointer;
-                user-select: none;
-                touch-action: manipulation;
+      /* Interaction */
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+      outline-offset: 2px;
 
-                /* Smooth transitions */
-                transition: all 0.2s cubic-bezier(0, 0, 0.2, 1);
-            }
+      /* Smooth transitions */
+      transition: all 0.2s cubic-bezier(0, 0, 0.2, 1);
+    }
 
-            /* Hover state */
-            @media (hover: hover) {
-                .btn:hover:not(:disabled) {
-                    --btn-bg: color-mix(in srgb, var(--btn-bg, #f3f4f6), #000 7%);
-                    transform: translateY(-1px);
-                    box-shadow:
-                        0 0.5px 0 0.5px rgba(255, 255, 255, 0.15) inset,
-                        0 4px 6px -1px rgba(0, 0, 0, 0.15),
-                        0 6px 8px -2px rgba(0, 0, 0, 0.1);
-                }
-            }
+    /* Hover state */
+    @media (hover: hover) {
+      .btn:hover:not(:disabled) {
+        --btn-bg: color-mix(in srgb, var(--btn-bg, #f3f4f6), #000 7%);
+        transform: translateY(-1px);
+        box-shadow:
+          0 0.5px 0 0.5px rgba(255, 255, 255, 0.15) inset,
+          0 4px 6px -1px rgba(0, 0, 0, 0.15),
+          0 6px 8px -2px rgba(0, 0, 0, 0.1);
+      }
+    }
 
-            /* Active state */
-            .btn:active:not(:disabled) {
-                --btn-bg: color-mix(in srgb, var(--btn-bg, #f3f4f6), #000 5%);
-                --btn-border: color-mix(in srgb, var(--btn-border, #d1d5db), #000 7%);
-                transform: translateY(0.5px);
-                box-shadow:
-                    0 1px 2px rgba(0, 0, 0, 0.1) inset,
-                    0 1px 1px rgba(0, 0, 0, 0.05);
-            }
+    /* Active state */
+    .btn:active:not(:disabled) {
+      --btn-bg: color-mix(in srgb, var(--btn-bg, #f3f4f6), #000 5%);
+      --btn-border: color-mix(in srgb, var(--btn-border, #d1d5db), #000 7%);
+      transform: translateY(0.5px);
+      box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.1) inset,
+        0 1px 1px rgba(0, 0, 0, 0.05);
+    }
 
-            /* Updated Focus state with smooth outline animation */
-            @media(prefers-reduced-motion: no-preference) {
-                .btn:focus {
-                    transition: outline-offset .25s ease;
-                }
-                .btn:focus:not(:active) {
-                    outline-offset: 5px;
-                }
-            }
+    /* Focus state */
+    .btn:focus-visible {
+      outline: 2px solid #3b82f6;
+      outline-offset: 2px;
+    }
 
-            .btn:focus-visible {
-                outline: 2px solid #3b82f6;
-                outline-offset: 2px;
-            }
+    /* Disabled state */
+    .btn:disabled {
+      pointer-events: none;
+      background-color: color-mix(in srgb, #9ca3af 20%, transparent);
+      color: color-mix(in srgb, #6b7280 40%, transparent);
+      border-color: transparent;
+      box-shadow: none;
+      text-shadow: none;
+      cursor: not-allowed ;
+    }
 
-            /* Disabled state */
-            .btn:disabled {
-                pointer-events: none;
-                background-color: color-mix(in srgb, #9ca3af 20%, transparent);
-                color: color-mix(in srgb, #6b7280 40%, transparent);
-                border-color: transparent;
-                box-shadow: none;
-                text-shadow: none;
-            }
+    /* Size variants */
+    .btn.small {
+      height: 2rem;
+      padding-inline: 0.75rem;
+      font-size: 0.75rem;
+    }
 
-            /* Size variants */
-            .btn.small {
-                height: 2rem;
-                padding-inline: 0.75rem;
-                font-size: 0.75rem;
-            }
+    .btn.large {
+      height: 3rem;
+      padding-inline: 1.5rem;
+      font-size: 1rem;
+    }
 
-            .btn.large {
-                height: 3rem;
-                padding-inline: 1.5rem;
-                font-size: 1rem;
-            }
+    /* Style variants */
+    .btn.primary {
+      --btn-bg: #3b82f6;
+      --btn-fg: #ffffff;
+      --btn-border: #2563eb;
+    }
 
-            /* Style variants */
-            .btn.primary {
-                --btn-bg: #3b82f6;
-                --btn-fg: #ffffff;
-                --btn-border: #2563eb;
-            }
+    .btn.secondary {
+      --btn-bg: #6b7280;
+      --btn-fg: #ffffff;
+      --btn-border: #4b5563;
+    }
 
-            .btn.secondary {
-                --btn-bg: #6b7280;
-                --btn-fg: #ffffff;
-                --btn-border: #4b5563;
-            }
+    .btn.accent {
+      --btn-bg: #8b5cf6;
+      --btn-fg: #ffffff;
+      --btn-border: #7c3aed;
+    }
 
-            .btn.accent {
-                --btn-bg: #8b5cf6;
-                --btn-fg: #ffffff;
-                --btn-border: #7c3aed;
-            }
+    .btn.success {
+      --btn-bg: #10b981;
+      --btn-fg: #ffffff;
+      --btn-border: #059669;
+    }
 
-            .btn.success {
-                --btn-bg: #10b981;
-                --btn-fg: #ffffff;
-                --btn-border: #059669;
-            }
+    .btn.warning {
+      --btn-bg: #f59e0b;
+      --btn-fg: #ffffff;
+      --btn-border: #d97706;
+    }
 
-            .btn.warning {
-                --btn-bg: #f59e0b;
-                --btn-fg: #ffffff;
-                --btn-border: #d97706;
-            }
+    .btn.error {
+      --btn-bg: #ef4444;
+      --btn-fg: #ffffff;
+      --btn-border: #dc2626;
+    }
 
-            .btn.error {
-                --btn-bg: #ef4444;
-                --btn-fg: #ffffff;
-                --btn-border: #dc2626;
-            }
+    /* Ghost variant */
+    .btn.ghost {
+      --btn-bg: transparent;
+      --btn-border: transparent;
+      box-shadow: none;
+      text-shadow: none;
+    }
 
-            /* Ghost variant */
-            .btn.ghost {
-                --btn-bg: transparent;
-                --btn-border: transparent;
-                box-shadow: none;
-                text-shadow: none;
-            }
+    .btn.ghost:hover:not(:disabled) {
+      --btn-bg: rgba(0, 0, 0, 0.05);
+      box-shadow: none;
+    }
 
-            .btn.ghost:hover:not(:disabled) {
-                --btn-bg: rgba(0, 0, 0, 0.05);
-                box-shadow: none;
-            }
+    /* Outline variant */
+    .btn.outline {
+      --btn-bg: transparent;
+      --btn-fg: #374151;
+      --btn-border: #d1d5db;
+      box-shadow:
+        0 0.5px 0 0.5px rgba(255, 255, 255, 0.1) inset,
+        0 1px 2px rgba(0, 0, 0, 0.05);
+    }
 
-            /* Outline variant */
-            .btn.outline {
-                --btn-bg: transparent;
-                --btn-fg: #374151;
-                --btn-border: #d1d5db;
-                box-shadow:
-                    0 0.5px 0 0.5px rgba(255, 255, 255, 0.1) inset,
-                    0 1px 2px rgba(0, 0, 0, 0.05);
-            }
+    .btn.outline:hover:not(:disabled) {
+      --btn-bg: #f9fafb;
+    }
 
-            .btn.outline:hover:not(:disabled) {
-                --btn-bg: #f9fafb;
-            }
+    /* Link variant */
+    .btn.link {
+      --btn-bg: transparent;
+      --btn-border: transparent;
+      --btn-fg: #3b82f6;
+      box-shadow: none;
+      text-shadow: none;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
 
-            /* Link variant */
-            .btn.link {
-                --btn-bg: transparent;
-                --btn-border: transparent;
-                --btn-fg: #3b82f6;
-                box-shadow: none;
-                text-shadow: none;
-                text-decoration: underline;
-                text-underline-offset: 2px;
-            }
+    .btn.link:hover:not(:disabled) {
+      --btn-fg: #2563eb;
+      text-decoration: none;
 
-            .btn.link:hover:not(:disabled) {
-                --btn-fg: #2563eb;
-                text-decoration: none;
-            }
+    }
 
-            /* Loading state */
-            .btn.loading {
-                pointer-events: none;
-                position: relative;
-            }
+    /* Loading state */
+    .btn.loading {
+      pointer-events: none;
+      position: relative;
+    }
 
-            .btn.loading::before {
-                content: '';
-                position: absolute;
-                width: 1rem;
-                height: 1rem;
-                border: 2px solid transparent;
-                border-top: 2px solid currentColor;
-                border-radius: 50%;
-                animation: spin 1s linear infinite;
-            }
+    .btn.loading::before {
+      content: '';
+      position: absolute;
+      width: 1rem;
+      height: 1rem;
+      border: 2px solid transparent;
+      border-top: 2px solid currentColor;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
 
-            @keyframes spin {
-                to { transform: rotate(360deg); }
-            }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
 
-            /* Icon styling */
-            .btn svg {
-                width: 1rem;
-                height: 1rem;
-                fill: currentColor;
-                stroke: currentColor;
-                flex-shrink: 0;
-            }
+    /* Icon styling */
+    .btn svg {
+      width: 1rem;
+      height: 1rem;
+      fill: currentColor;
+      stroke: currentColor;
+      flex-shrink: 0;
+    }
 
-            .btn.small svg {
-                width: 0.875rem;
-                height: 0.875rem;
-            }
+    .btn.small svg {
+      width: 0.875rem;
+      height: 0.875rem;
+    }
 
-            .btn.large svg {
-                width: 1.125rem;
-                height: 1.125rem;
-            }
+    .btn.large svg {
+      width: 1.125rem;
+      height: 1.125rem;
+    }
 
-            /* Square variant for icon-only buttons */
-            .btn.square {
-                padding-inline: 0;
-                aspect-ratio: 1;
-            }
+    /* Square variant for icon-only buttons */
+    .btn.square {
+      padding-inline: 0;
+      aspect-ratio: 1;
+    }
 
-            /* Wide variant */
-            .btn.wide {
-                padding-inline: 2rem;
-            }
+    /* Wide variant */
+    .btn.wide {
+      padding-inline: 2rem;
+    }
 
-            .btn.block {
-                width: 100%;
-            }
+    .btn.block {
+      width: 100%;
+    }
 }
 
 
