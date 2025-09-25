@@ -167,20 +167,6 @@
 @layer css_7_components.base {
     :where(html) {  --conic-gradient-3: conic-gradient(from 0deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7, #ff6b6b); }
 
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-
-    body {
-        font-family: system-ui, -apple-system, sans-serif;
-        line-height: 1.5;
-        color: var(--text-1);
-        background: var(--surface-1);
-        padding: var(--size-4);
-    }
-
     .calendar-container {
         max-width: 800px;
         margin: 0 auto;
@@ -221,34 +207,53 @@
 
     .calendar-grid {
         display: grid;
-        grid-template-columns: repeat(7, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%/7), 1fr));
         gap: 1px;
         border-radius: var(--size-2);
         overflow: hidden;
         border: var(--border) solid var(--surface-4);
+        container-type: inline-size;
+    }
+
+    /* Force exactly 7 columns for calendar layout */
+    @supports (grid-template-columns: repeat(7, 1fr)) {
+        .calendar-grid {
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+        }
     }
 
     .day-header {
         padding: var(--size-3);
         font-weight: 600;
         text-align: center;
-        font-size: 0.9rem;
+        font-size: clamp(0.7rem, 2vw, 0.9rem);
         color: var(--text-2);
+        display: grid;
+        place-items: center;
     }
 
     .day-cell {
-        min-height: 120px;
+        min-height: clamp(80px, 15vw, 140px);
         padding: var(--size-2);
         border: none;
         position: relative;
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: var(--size-1);
+        container-type: inline-size;
     }
 
     .day-number {
         font-weight: 600;
-        margin-bottom: var(--size-1);
-        font-size: 0.9rem;
+        font-size: clamp(0.8rem, 2.5vw, 1rem);
+        justify-self: start;
+    }
+
+    .events-container {
+        display: grid;
+        gap: 2px;
+        align-content: start;
+        overflow: hidden;
     }
 
     .other-month {
@@ -266,12 +271,15 @@
     }
 
     .event {
-        font-size: 0.75rem;
-        padding: 2px var(--size-1);
-        margin-bottom: 2px;
+        font-size: clamp(0.65rem, 1.8vw, 0.75rem);
+        padding: clamp(1px, 0.5vw, 3px) var(--size-1);
         border-radius: 2px;
-        border-left: 3px solid;
+        border-left: clamp(2px, 0.5vw, 3px) solid;
         background: var(--surface-1);
+        line-height: 1.2;
+        min-height: 1.2em;
+        display: grid;
+        align-content: center;
     }
 
     .event.red {
@@ -295,26 +303,77 @@
     }
 
     .more-events {
-        font-size: 0.7rem;
+        font-size: clamp(0.6rem, 1.5vw, 0.7rem);
         color: var(--text-2);
         font-style: italic;
-        margin-top: auto;
+        justify-self: end;
+        align-self: end;
     }
 
-    /* Responsive design */
-    @media (max-width: 768px) {
-        .calendar-grid {
-            font-size: 0.8rem;
-        }
-
+    /* Container queries for ultra-responsive design */
+    @container (max-width: 120px) {
         .day-cell {
-            min-height: 80px;
             padding: var(--size-1);
         }
 
         .event {
-            font-size: 0.7rem;
-            padding: 1px var(--size-1);
+            font-size: 0.6rem;
+            padding: 1px 2px;
+        }
+
+        .day-number {
+            font-size: 0.75rem;
+        }
+    }
+
+    @container (min-width: 180px) {
+        .day-cell {
+            min-height: 160px;
+        }
+
+        .event {
+            font-size: 0.8rem;
+            padding: 4px var(--size-2);
+        }
+    }
+
+    /* Responsive design with modern techniques */
+    @media (max-width: 768px) {
+        .calendar-container {
+            padding: var(--size-2);
+        }
+
+        .calendar-header {
+            flex-direction: column;
+            gap: var(--size-2);
+            text-align: center;
+        }
+
+        .calendar-title {
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+        }
+
+        .nav-button {
+            padding: var(--size-2);
+            font-size: clamp(0.75rem, 2vw, 0.9rem);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .day-header {
+            font-size: 0.65rem;
+            padding: var(--size-1) var(--size-2);
+        }
+    }
+
+    /* Ultra-wide screen optimizations */
+    @media (min-width: 1200px) {
+        .calendar-container {
+            max-width: 1200px;
+        }
+
+        .day-cell {
+            min-height: 180px;
         }
     }
 }
