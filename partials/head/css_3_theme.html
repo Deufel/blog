@@ -4,6 +4,16 @@
     /* Default theme - already defined in tokens */
     :where(:root) {color-scheme: light dark;}
 
+    :root[data-theme-mode="system"] {
+        color-scheme: light dark;
+    }
+    :root[data-theme-mode="light"] {
+        color-scheme: light;
+    }
+    :root[data-theme-mode="dark"] {
+        color-scheme: dark;
+    }
+
     /* High contrast theme */
     [data-theme="high-contrast"] {
         --palette-chroma: 0.08; /* Reduced saturation */
