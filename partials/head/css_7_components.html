@@ -1,5 +1,6 @@
 <style id="css_7_components">
-@layer css_7_components {
+/*COLORS DEMO TODO FIX*/
+@layer css_7_components.base {
     .theme-demo {
         display: grid;
         gap: 1rem;
@@ -57,7 +58,8 @@
     }
 }
 
-@layer css_7_components.icon-btn {
+/*ICON BUTTON */
+@layer css_7_components.base {
   .icon-btn {
     /* Base structure */
     display: inline-flex;
@@ -115,7 +117,7 @@
 }
 
 
-/* Diviver maybe not the best idea here as someone could want to use hr, span, hr and not expect this probably should add class...i like it tho so im keeping it */
+/*DIVIDER*/
 @layer css_7_components.base {
     :where(hr) {
         background-color: var(--border-color);
@@ -150,6 +152,12 @@
     :where(hr:has(+ span + hr)) {
         display: none;
     }
+}
+
+
+/*CODE BLOCK*/
+@layer css_7_components.base {
+     .code-block { background: #f8f8f8; border: 1px solid #e1e1e1; border-radius: 4px; padding: 1rem; margin: 0.5rem 0; font-family: monospace; font-size: 0.9em; overflow-x: auto; }
 }
 
 </style>
