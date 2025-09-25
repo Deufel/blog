@@ -114,4 +114,42 @@
   }
 }
 
+
+/* Diviver maybe not the best idea here as someone could want to use hr, span, hr and not expect this probably should add class...i like it tho so im keeping it */
+@layer css_7_components.base {
+    :where(hr) {
+        background-color: var(--border-color);
+        block-size: var(--border-size-1);
+        margin-block: var(--size-fluid-0);
+    }
+
+    /* Target hr followed by span followed by hr */
+    :where(hr + span + hr) {
+        /* Hide the second hr since we'll style the container */
+        display: none;
+    }
+
+    /* Style span element when it's between two hrs */
+    :where(hr + span:has(+ hr)) {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 1rem;
+        margin: 1rem 0;
+    }
+
+    /* Create pseudo-elements for the lines */
+    :where(hr + span:has(+ hr))::before,
+    :where(hr + span:has(+ hr))::after {
+        content: "";
+        background-color: var(--border-color);
+        block-size: var(--border-size-1);
+    }
+
+    /* Hide the first hr when followed by this pattern */
+    :where(hr:has(+ span + hr)) {
+        display: none;
+    }
+}
+
 </style>
