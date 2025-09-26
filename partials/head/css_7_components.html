@@ -579,58 +579,23 @@
     /* ===================
         LAYOUT VARIANTS
         =================== */
-    .btn.square {
-        padding-inline: 0;
-        aspect-ratio: 1;
-    }
-
-    .btn.wide {
-        padding-inline: 2rem;
-    }
-
-    .btn.block {
-        width: 100%;
-    }
+    .btn.square { padding-inline: 0; aspect-ratio: 1; }
+    .btn.wide { padding-inline: 2rem; }
+    .btn.block { width: 100%; }
 
     /* ===================
         ICON STYLES
         =================== */
-    .btn svg {
-        width: 1rem;
-        height: 1rem;
-        fill: currentColor;
-        stroke: currentColor;
-        flex-shrink: 0;
-    }
-
-    .btn.small svg {
-        width: 0.875rem;
-        height: 0.875rem;
-    }
-
-    .btn.large svg {
-        width: 1.125rem;
-        height: 1.125rem;
-    }
-
+    .btn svg { width: 1rem; height: 1rem; fill: currentColor; stroke: currentColor; flex-shrink: 0; }
+    .btn.small svg { width: 0.875rem; height: 0.875rem; }
+    .btn.large svg { width: 1.125rem; height: 1.125rem; }
     /* ===================
         LOADING STATE WITH GRADIENT BORDER
         =================== */
-    @property --spinner-rotation {
-        syntax: "<angle>";
-        inherits: false;
-        initial-value: 0deg;
-    }
+    @property --spinner-rotation { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+    @keyframes spinner-rotate { to { --spinner-rotation: 360deg; } }
 
-    @keyframes spinner-rotate {
-        to { --spinner-rotation: 360deg; }
-    }
-
-    .btn.loading {
-        pointer-events: none;
-        position: relative;
-        animation: spinner-rotate 1.5s linear infinite;
-        border: 2px solid transparent;
+    .btn.loading { pointer-events: none; position: relative; animation: spinner-rotate 1.5s linear infinite; border: 3px solid transparent !important;
         background:
             linear-gradient(var(--btn-bg, #f3f4f6) 0 0) padding-box,
             conic-gradient(
@@ -638,26 +603,14 @@
                 transparent 0deg,
                 var(--loading-color, #3b82f6) 90deg,
                 transparent 180deg
-            ) border-box;
+            ) border-box !important;
 
         /* Override default button shadows during loading */
-        box-shadow: none;
-    }
+        box-shadow: none !important;
 
-    /* Loading color variants - matches button colors */
-    .btn.loading.primary { --loading-color: #3b82f6; }
-    .btn.loading.secondary { --loading-color: #6b7280; }
-    .btn.loading.accent { --loading-color: #8b5cf6; }
-    .btn.loading.success { --loading-color: #10b981; }
-    .btn.loading.warning { --loading-color: #f59e0b; }
-    .btn.loading.error { --loading-color: #ef4444; }
-
-    /* Disable hover/active states during loading */
-    .btn.loading:hover,
-    .btn.loading:active {
-        transform: none;
-        --btn-bg: var(--btn-bg);
-        --btn-border: var(--btn-border);
+        /* Ensure gradient isn't clipped */
+        background-clip: padding-box, border-box;
+        background-origin: padding-box, border-box;
     }
 }
 
