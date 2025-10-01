@@ -1,0 +1,862 @@
+<style id="css_7_components">
+/*COLORS DEMO TODO FIX*/
+@layer css_7_components.base {
+    .theme-demo {
+        display: grid;
+        gap: 1rem;
+        max-width: 800px;
+    }
+
+    .surface-showcase {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin: 2rem 0;
+    }
+
+    .surface-card {
+        padding: 1rem;
+        border-radius: 8px;
+        border: 1px solid var(--border-subtle);
+        text-align: center;
+        font-size: 0.875rem;
+    }
+
+    .surface-card.surface-1 { background: var(--surface-1); }
+    .surface-card.surface-2 { background: var(--surface-2); }
+    .surface-card.surface-3 { background: var(--surface-3); }
+    .surface-card.surface-4 { background: var(--surface-4); }
+    .surface-card.interactive { background: var(--surface-interactive); }
+    .surface-card.accent { background: var(--surface-accent); }
+
+    .theme-switcher {
+        display: flex;
+        gap: 0.5rem;
+        margin: 1rem 0;
+        flex-wrap: wrap;
+    }
+
+    .theme-button {
+        padding: 0.5rem 1rem;
+        background: var(--bg-button);
+        border: 1px solid var(--border-medium);
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.875rem;
+        color: var(--text-primary);
+    }
+
+    .theme-button:hover {
+        background: var(--bg-button-hover);
+    }
+
+    .color-info {
+        font-family: monospace;
+        font-size: 0.75rem;
+        opacity: 0.7;
+        margin-top: 0.5rem;
+    }
+}
+
+/*ICON BUTTON */
+@layer css_7_components.base {
+  .icon-btn {
+    /* Base structure */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Sizing */
+    width: var(--s3, 2rem);
+    height: var(--s3, 2rem);
+
+    /* Reset button styles */
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    /* Visual */
+    border-radius: var(--radius-2, 0.375rem);
+    transition: all var(--duration-2, 150ms) ease;
+
+    /* Typography */
+    font-size: var(--font-size-4, 1.125rem);
+    line-height: 1;
+
+    /* Interaction */
+    user-select: none;
+  }
+
+  /* Hover state */
+  .icon-btn:hover {
+    background: var(--color-hover, rgba(0, 0, 0, 0.05));
+    transform: scale(1.05);
+  }
+
+  /* Active state */
+  .icon-btn:active {
+    transform: scale(0.95);
+  }
+
+  /* Focus state */
+  .icon-btn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  /* Disabled state */
+  .icon-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .icon-btn:disabled:hover {
+    background: transparent;
+  }
+}
+
+
+/*DIVIDER*/
+@layer css_7_components.base {
+    :where(hr) {
+        background-color: var(--border-color);
+        block-size: var(--border-size-1);
+        margin-block: var(--size-fluid-0);
+    }
+
+    /* Target hr followed by span followed by hr */
+    :where(hr + span + hr) {
+        /* Hide the second hr since we'll style the container */
+        display: none;
+    }
+
+    /* Style span element when it's between two hrs */
+    :where(hr + span:has(+ hr)) {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 1rem;
+        margin: 1rem 0;
+    }
+
+    /* Create pseudo-elements for the lines */
+    :where(hr + span:has(+ hr))::before,
+    :where(hr + span:has(+ hr))::after {
+        content: "";
+        background-color: var(--border-color);
+        block-size: var(--border-size-1);
+    }
+
+    /* Hide the first hr when followed by this pattern */
+    :where(hr:has(+ span + hr)) {
+        display: none;
+    }
+}
+
+
+/*CODE BLOCK*/
+@layer css_7_components.base {
+     .code-block { background: #f8f8f8; border: 1px solid #e1e1e1; border-radius: 4px; padding: 1rem; margin: 0.5rem 0; font-family: monospace; font-size: 0.9em; overflow-x: auto; }
+}
+
+
+/* BUTTON */
+@layer css_7_components.base {
+    .btn {
+      /* Base layout */
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.375rem;
+      flex-wrap: nowrap;
+      flex-shrink: 0;
+
+      /* Sizing */
+      height: 2.5rem;
+      padding-inline: 1rem;
+      min-width: fit-content;
+
+      /* Typography */
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-align: center;
+      line-height: 1;
+
+      /* Appearance */
+      border-radius: 0.5rem;
+      border: 1px solid;
+      background-color: var(--btn-bg, #f3f4f6);
+      color: var(--btn-fg, #374151);
+      border-color: var(--btn-border, #d1d5db);
+
+      /* Depth effects */
+      box-shadow:
+        0 0.5px 0 0.5px rgba(255, 255, 255, 0.1) inset,
+        0 3px 2px -2px rgba(0, 0, 0, 0.1),
+        0 4px 3px -2px rgba(0, 0, 0, 0.05);
+      text-shadow: 0 0.5px rgba(255, 255, 255, 0.1);
+
+      /* Interaction */
+      cursor: pointer;
+      user-select: none;
+      touch-action: manipulation;
+      outline-offset: 2px;
+
+      /* Smooth transitions */
+      transition: all 0.2s cubic-bezier(0, 0, 0.2, 1);
+    }
+
+    /* Hover state */
+    @media (hover: hover) {
+      .btn:hover:not(:disabled) {
+        --btn-bg: color-mix(in srgb, var(--btn-bg, #f3f4f6), #000 7%);
+        transform: translateY(-1px);
+        box-shadow:
+          0 0.5px 0 0.5px rgba(255, 255, 255, 0.15) inset,
+          0 4px 6px -1px rgba(0, 0, 0, 0.15),
+          0 6px 8px -2px rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    /* Active state */
+    .btn:active:not(:disabled) {
+      --btn-bg: color-mix(in srgb, var(--btn-bg, #f3f4f6), #000 5%);
+      --btn-border: color-mix(in srgb, var(--btn-border, #d1d5db), #000 7%);
+      transform: translateY(0.5px);
+      box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.1) inset,
+        0 1px 1px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Focus state */
+    .btn:focus-visible {
+      outline: 2px solid #3b82f6;
+      outline-offset: 2px;
+    }
+
+    /* Disabled state */
+    .btn:disabled {
+      pointer-events: none;
+      background-color: color-mix(in srgb, #9ca3af 20%, transparent);
+      color: color-mix(in srgb, #6b7280 40%, transparent);
+      border-color: transparent;
+      box-shadow: none;
+      text-shadow: none;
+      cursor: not-allowed ;
+    }
+
+    /* Size variants */
+    .btn.small {
+      height: 2rem;
+      padding-inline: 0.75rem;
+      font-size: 0.75rem;
+    }
+
+    .btn.large {
+      height: 3rem;
+      padding-inline: 1.5rem;
+      font-size: 1rem;
+    }
+
+    /* Style variants */
+    .btn.primary {
+      --btn-bg: #3b82f6;
+      --btn-fg: #ffffff;
+      --btn-border: #2563eb;
+    }
+
+    .btn.secondary {
+      --btn-bg: #6b7280;
+      --btn-fg: #ffffff;
+      --btn-border: #4b5563;
+    }
+
+    .btn.accent {
+      --btn-bg: #8b5cf6;
+      --btn-fg: #ffffff;
+      --btn-border: #7c3aed;
+    }
+
+    .btn.success {
+      --btn-bg: #10b981;
+      --btn-fg: #ffffff;
+      --btn-border: #059669;
+    }
+
+    .btn.warning {
+      --btn-bg: #f59e0b;
+      --btn-fg: #ffffff;
+      --btn-border: #d97706;
+    }
+
+    .btn.error {
+      --btn-bg: #ef4444;
+      --btn-fg: #ffffff;
+      --btn-border: #dc2626;
+    }
+
+    /* Ghost variant */
+    .btn.ghost {
+      --btn-bg: transparent;
+      --btn-border: transparent;
+      box-shadow: none;
+      text-shadow: none;
+    }
+
+    .btn.ghost:hover:not(:disabled) {
+      --btn-bg: rgba(0, 0, 0, 0.05);
+      box-shadow: none;
+    }
+
+    /* Outline variant */
+    .btn.outline {
+      --btn-bg: transparent;
+      --btn-fg: #374151;
+      --btn-border: #d1d5db;
+      box-shadow:
+        0 0.5px 0 0.5px rgba(255, 255, 255, 0.1) inset,
+        0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    .btn.outline:hover:not(:disabled) {
+      --btn-bg: #f9fafb;
+    }
+
+    /* Link variant */
+    .btn.link {
+      --btn-bg: transparent;
+      --btn-border: transparent;
+      --btn-fg: #3b82f6;
+      box-shadow: none;
+      text-shadow: none;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .btn.link:hover:not(:disabled) {
+      --btn-fg: #2563eb;
+      text-decoration: none;
+
+    }
+
+    /* Loading state */
+    .btn.loading {
+      pointer-events: none;
+      position: relative;
+    }
+
+    .btn.loading::before {
+      content: '';
+      position: absolute;
+      width: 1rem;
+      height: 1rem;
+      border: 2px solid transparent;
+      border-top: 2px solid currentColor;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Icon styling */
+    .btn svg {
+      width: 1rem;
+      height: 1rem;
+      fill: currentColor;
+      stroke: currentColor;
+      flex-shrink: 0;
+    }
+
+    .btn.small svg {
+      width: 0.875rem;
+      height: 0.875rem;
+    }
+
+    .btn.large svg {
+      width: 1.125rem;
+      height: 1.125rem;
+    }
+
+    /* Square variant for icon-only buttons */
+    .btn.square {
+      padding-inline: 0;
+      aspect-ratio: 1;
+    }
+
+    /* Wide variant */
+    .btn.wide {
+      padding-inline: 2rem;
+    }
+
+    .btn.block {
+      width: 100%;
+    }
+    /* ===================
+        BASE BUTTON STYLES
+        =================== */
+    .btn {
+        /* Layout */
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.375rem;
+        flex-shrink: 0;
+
+        /* Sizing */
+        height: 2.5rem;
+        padding-inline: 1rem;
+        min-width: fit-content;
+
+        /* Typography */
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-align: center;
+        line-height: 1;
+        text-decoration: none;
+
+        /* Appearance */
+        border-radius: 0.5rem;
+        border: 1px solid;
+        background-color: var(--btn-bg, #f3f4f6);
+        color: var(--btn-fg, #374151);
+        border-color: var(--btn-border, #d1d5db);
+
+        /* Depth effects */
+        box-shadow:
+            0 0.5px 0 0.5px rgba(255, 255, 255, 0.1) inset,
+            0 3px 2px -2px rgba(0, 0, 0, 0.1),
+            0 4px 3px -2px rgba(0, 0, 0, 0.05);
+        text-shadow: 0 0.5px rgba(255, 255, 255, 0.1);
+
+        /* Interaction */
+        cursor: pointer;
+        user-select: none;
+        touch-action: manipulation;
+        outline-offset: 2px;
+
+        /* Smooth transitions */
+        transition: all 0.2s cubic-bezier(0, 0, 0.2, 1);
+    }
+
+    /* ===================
+        INTERACTION STATES
+        =================== */
+    @media (hover: hover) {
+        .btn:hover:not(:disabled) {
+            --btn-bg: color-mix(in srgb, var(--btn-bg, #f3f4f6), #000 7%);
+            transform: translateY(-1px);
+            box-shadow:
+                0 0.5px 0 0.5px rgba(255, 255, 255, 0.15) inset,
+                0 4px 6px -1px rgba(0, 0, 0, 0.15),
+                0 6px 8px -2px rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    .btn:active:not(:disabled) {
+        --btn-bg: color-mix(in srgb, var(--btn-bg, #f3f4f6), #000 5%);
+        --btn-border: color-mix(in srgb, var(--btn-border, #d1d5db), #000 7%);
+        transform: translateY(0.5px);
+        box-shadow:
+            0 1px 2px rgba(0, 0, 0, 0.1) inset,
+            0 1px 1px rgba(0, 0, 0, 0.05);
+    }
+
+    .btn:focus-visible {
+        outline: 2px solid #3b82f6;
+        outline-offset: 2px;
+    }
+
+    .btn:disabled {
+        pointer-events: none;
+        background-color: color-mix(in srgb, #9ca3af 20%, transparent);
+        color: color-mix(in srgb, #6b7280 40%, transparent);
+        border-color: transparent;
+        box-shadow: none;
+        text-shadow: none;
+        cursor: not-allowed;
+    }
+
+    /* ===================
+        SIZE VARIANTS
+        =================== */
+    .btn.small {
+        height: 2rem;
+        padding-inline: 0.75rem;
+        font-size: 0.75rem;
+    }
+
+    .btn.large {
+        height: 3rem;
+        padding-inline: 1.5rem;
+        font-size: 1rem;
+    }
+
+    /* ===================
+        COLOR VARIANTS
+        =================== */
+    .btn.primary {
+        --btn-bg: #3b82f6;
+        --btn-fg: #ffffff;
+        --btn-border: #2563eb;
+    }
+
+    .btn.secondary {
+        --btn-bg: #6b7280;
+        --btn-fg: #ffffff;
+        --btn-border: #4b5563;
+    }
+
+    .btn.accent {
+        --btn-bg: #8b5cf6;
+        --btn-fg: #ffffff;
+        --btn-border: #7c3aed;
+    }
+
+    .btn.success {
+        --btn-bg: #10b981;
+        --btn-fg: #ffffff;
+        --btn-border: #059669;
+    }
+
+    .btn.warning {
+        --btn-bg: #f59e0b;
+        --btn-fg: #ffffff;
+        --btn-border: #d97706;
+    }
+
+    .btn.error {
+        --btn-bg: #ef4444;
+        --btn-fg: #ffffff;
+        --btn-border: #dc2626;
+    }
+
+    /* ===================
+        STYLE VARIANTS
+        =================== */
+    .btn.ghost {
+        --btn-bg: transparent;
+        --btn-border: transparent;
+        box-shadow: none;
+        text-shadow: none;
+    }
+
+    .btn.ghost:hover:not(:disabled) {
+        --btn-bg: rgba(0, 0, 0, 0.05);
+        box-shadow: none;
+    }
+
+    .btn.outline {
+        --btn-bg: transparent;
+        --btn-fg: #374151;
+        --btn-border: #d1d5db;
+        box-shadow:
+            0 0.5px 0 0.5px rgba(255, 255, 255, 0.1) inset,
+            0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    .btn.outline:hover:not(:disabled) {
+        --btn-bg: #f9fafb;
+    }
+
+    .btn.link {
+        --btn-bg: transparent;
+        --btn-border: transparent;
+        --btn-fg: #3b82f6;
+        box-shadow: none;
+        text-shadow: none;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+
+    .btn.link:hover:not(:disabled) {
+        --btn-fg: #2563eb;
+        text-decoration: none;
+    }
+
+    /* ===================
+        LAYOUT VARIANTS
+        =================== */
+    .btn.square { padding-inline: 0; aspect-ratio: 1; }
+    .btn.wide { padding-inline: 2rem; }
+    .btn.block { width: 100%; }
+
+    /* ===================
+        ICON STYLES
+        =================== */
+    .btn svg { width: 1rem; height: 1rem; fill: currentColor; stroke: currentColor; flex-shrink: 0; }
+    .btn.small svg { width: 0.875rem; height: 0.875rem; }
+    .btn.large svg { width: 1.125rem; height: 1.125rem; }
+    /* ===================
+       LOADING STATE WITH GRADIENT BORDER
+       =================== */
+    @property --spinner-rotation {
+        syntax: "<angle>";
+        inherits: false;
+        initial-value: 0deg;
+    }
+
+    @keyframes spinner-rotate {
+        to { --spinner-rotation: 360deg; }
+    }
+
+    .btn.loading {
+        pointer-events: none;
+        position: relative;
+        animation: spinner-rotate 1.5s linear infinite;
+        border: 3px solid transparent !important;
+        background:
+            linear-gradient(var(--btn-bg, #f3f4f6) 0 0) padding-box,
+            conic-gradient(
+                from var(--spinner-rotation),
+                transparent 0deg,
+                var(--loading-color, #3b82f6) 90deg,
+                transparent 180deg
+            ) border-box !important;
+
+        /* Override default button shadows during loading */
+        box-shadow: none !important;
+
+        /* Ensure gradient isn't clipped */
+        background-clip: padding-box, border-box;
+        background-origin: padding-box, border-box;
+    }
+
+    /* Loading color variants - matches button colors */
+    .btn.loading.primary { --loading-color: #3b82f6; }
+    .btn.loading.secondary { --loading-color: #6b7280; }
+    .btn.loading.accent { --loading-color: #8b5cf6; }
+    .btn.loading.success { --loading-color: #10b981; }
+    .btn.loading.warning { --loading-color: #f59e0b; }
+    .btn.loading.error { --loading-color: #ef4444; }
+
+    /* Disable hover/active states during loading */
+    .btn.loading:hover,
+    .btn.loading:active {
+        transform: none;
+        --btn-bg: var(--btn-bg);
+        --btn-border: var(--btn-border);
+    }
+}
+
+
+/* CALENDAR */
+@layer css_7_components.base {
+    :where(html) {  --conic-gradient-3: conic-gradient(from 0deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7, #ff6b6b); }
+
+    .calendar-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--size-4);
+        padding: var(--size-3);
+        border-radius: var(--size-2);
+    }
+
+    .calendar-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .calendar-nav {
+        display: flex;
+        gap: var(--size-2);
+    }
+
+    .nav-button {
+        background: none;
+        border: var(--border) solid var(--surface-4);
+        border-radius: var(--size-1);
+        padding: var(--size-2) var(--size-3);
+        cursor: pointer;
+        color: var(--text-1);
+        font-size: 0.9rem;
+    }
+
+    .nav-button:hover {
+        background: var(--surface-2);
+    }
+
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%/7), 1fr));
+        gap: 1px;
+        border-radius: var(--size-2);
+        overflow: hidden;
+        border: var(--border) solid var(--surface-4);
+        container-type: inline-size;
+    }
+
+    /* Force exactly 7 columns for calendar layout */
+    @supports (grid-template-columns: repeat(7, 1fr)) {
+        .calendar-grid {
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+        }
+    }
+
+    .day-header {
+        padding: var(--size-3);
+        font-weight: 600;
+        text-align: center;
+        font-size: clamp(0.7rem, 2vw, 0.9rem);
+        color: var(--text-2);
+        display: grid;
+        place-items: center;
+    }
+
+    .day-cell {
+        min-height: clamp(80px, 15vw, 140px);
+        padding: var(--size-2);
+        border: none;
+        position: relative;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: var(--size-1);
+        container-type: inline-size;
+    }
+
+    .day-number {
+        font-weight: 600;
+        font-size: clamp(0.8rem, 2.5vw, 1rem);
+        justify-self: start;
+    }
+
+    .events-container {
+        display: grid;
+        gap: 2px;
+        align-content: start;
+        overflow: hidden;
+    }
+
+    .other-month {
+        color: var(--text-2);
+        opacity: 0.5;
+    }
+
+    .today {
+        background: var(--surface-2);
+    }
+
+    .today .day-number {
+        color: var(--blue);
+        font-weight: 700;
+    }
+
+    .event {
+        font-size: clamp(0.65rem, 1.8vw, 0.75rem);
+        padding: clamp(1px, 0.5vw, 3px) var(--size-1);
+        border-radius: 2px;
+        border-left: clamp(2px, 0.5vw, 3px) solid;
+        background: var(--surface-1);
+        line-height: 1.2;
+        min-height: 1.2em;
+        display: grid;
+        align-content: center;
+    }
+
+    .event.red {
+        border-left-color: var(--red);
+        background: color-mix(in oklch, var(--red) 10%, var(--surface-1));
+    }
+
+    .event.blue {
+        border-left-color: var(--blue);
+        background: color-mix(in oklch, var(--blue) 10%, var(--surface-1));
+    }
+
+    .event.green {
+        border-left-color: var(--green);
+        background: color-mix(in oklch, var(--green) 10%, var(--surface-1));
+    }
+
+    .event.orange {
+        border-left-color: var(--orange);
+        background: color-mix(in oklch, var(--orange) 10%, var(--surface-1));
+    }
+
+    .more-events {
+        font-size: clamp(0.6rem, 1.5vw, 0.7rem);
+        color: var(--text-2);
+        font-style: italic;
+        justify-self: end;
+        align-self: end;
+    }
+
+    /* Container queries for ultra-responsive design */
+    @container (max-width: 120px) {
+        .day-cell {
+            padding: var(--size-1);
+        }
+
+        .event {
+            font-size: 0.6rem;
+            padding: 1px 2px;
+        }
+
+        .day-number {
+            font-size: 0.75rem;
+        }
+    }
+
+    @container (min-width: 180px) {
+        .day-cell {
+            min-height: 160px;
+        }
+
+        .event {
+            font-size: 0.8rem;
+            padding: 4px var(--size-2);
+        }
+    }
+
+    /* Responsive design with modern techniques */
+    @media (max-width: 768px) {
+        .calendar-container {
+            padding: var(--size-2);
+        }
+
+        .calendar-header {
+            flex-direction: column;
+            gap: var(--size-2);
+            text-align: center;
+        }
+
+        .calendar-title {
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+        }
+
+        .nav-button {
+            padding: var(--size-2);
+            font-size: clamp(0.75rem, 2vw, 0.9rem);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .day-header {
+            font-size: 0.65rem;
+            padding: var(--size-1) var(--size-2);
+        }
+    }
+
+    /* Ultra-wide screen optimizations */
+    @media (min-width: 1200px) {
+        .calendar-container {
+            max-width: 1200px;
+        }
+
+        .day-cell {
+            min-height: 180px;
+        }
+    }
+}
+
+
+
+</style>

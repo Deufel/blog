@@ -1,108 +1,18 @@
 <style id="css_3_theme">
-/* ===== THEME VARIATIONS ===== */
+
 @layer css_3_themes {
-    /* Default theme - already defined in tokens */
-    :where(:root) {color-scheme: light dark;}
-
-    :root[data-theme-mode="system"] {
-        color-scheme: light dark;
-    }
-    :root[data-theme-mode="light"] {
-        color-scheme: light;
-    }
-    :root[data-theme-mode="dark"] {
-        color-scheme: dark;
-    }
-
-    /* High contrast theme */
-    [data-theme="high-contrast"] {
-        --palette-chroma: 0.08; /* Reduced saturation */
-
-        /* Override mixed colors with more gray-dominant versions */
-        --surface-1: light-dark(var(--gray-1), var(--gray-15));
-        --surface-2: light-dark(var(--gray-2), var(--gray-14));
-        --surface-3: light-dark(var(--gray-3), var(--gray-13));
-        --text-primary: light-dark(var(--gray-16), var(--gray-1));
-        --border-strong: light-dark(var(--gray-8), var(--gray-8));
-    }
-
-    /* Vibrant theme */
-    [data-theme="vibrant"] {
-        --palette-chroma: 0.25; /* Increased saturation */
-
-        /* More color in the mix */
-        --surface-2: light-dark(
-            color-mix(in srgb, var(--color-5), var(--gray-3) 85%),
-            color-mix(in srgb, var(--color-3), var(--gray-13) 85%)
-        );
-        --surface-accent: light-dark(
-            color-mix(in srgb, var(--color-9), var(--gray-6) 60%),
-            color-mix(in srgb, var(--color-7), var(--gray-9) 60%)
-        );
-    }
-
-    /* Warm theme */
-    [data-theme="warm"] {
-        --palette-hue: 25; /* Orange base */
-        --palette-hue-rotate-by: 2;
-    }
-
-    /* Cool theme */
-    [data-theme="cool"] {
-        --palette-hue: 200; /* Blue base */
-        --palette-hue-rotate-by: -1;
-
-    }
-
-    /* Nature theme */
-    [data-theme="nature"] {
-        --palette-hue: 140; /* Green base */
-        --palette-chroma: 0.18;
-        --palette-hue-rotate-by: 3;
-    }
-}
-
-/* ===== SEMANTIC MAPPINGS ===== */
-@layer css_3_themes {
-    :where(:root) {
-        /* Layout surfaces */
-
-        --bg-color-body: var(--surface-4);
-        --bg-color-header: var(--surface-3);
-        --bg-color-nav: var(--surface-2);
-        --bg-color-main: var(--surface-1);
-        --bg-color-aside: var(--surface-2);
-        --bg-color-footer: var(--surface-3);
-
-
-
-        /* Component surfaces */
-        --bg-card: var(--surface-2);
-        --bg-card-hover: var(--surface-3);
-        --bg-input: var(--surface-1);
-        --bg-input-focus: var(--surface-2);
-        --bg-button: var(--surface-interactive);
-        --bg-button-hover: var(--surface-interactive-hover);
-
-        /* State colors */
-        --color-success: oklch(70% 0.15 140);
-        --color-warning: oklch(75% 0.15 60);
-        --color-error: oklch(65% 0.15 15);
-        --color-info: var(--brand-primary);
-
-        /* Mixed state surfaces */
-        --surface-success: light-dark(
-            color-mix(in srgb, var(--color-success), var(--gray-2) 90%),
-            color-mix(in srgb, var(--color-success), var(--gray-14) 90%)
-        );
-        --surface-warning: light-dark(
-            color-mix(in srgb, var(--color-warning), var(--gray-2) 90%),
-            color-mix(in srgb, var(--color-warning), var(--gray-14) 90%)
-        );
-        --surface-error: light-dark(
-            color-mix(in srgb, var(--color-error), var(--gray-2) 90%),
-            color-mix(in srgb, var(--color-error), var(--gray-14) 90%)
-        );
+    :root, :host {
+        --gutter: var(--space-m-l);
+        --transition-base: 250ms ease;
+        --transition-movement: 200ms linear;
+        --transition-fade: 300ms ease;
+        --transition-bounce: 500ms cubic-bezier(0.5, 0.05, 0.2, 1.5);
+        --stroke: 1px dashed var(--color-mid);
+        --stroke-solid: 1px solid var(--color-mid);
+        --radius-s: 0.2rem;
+        --radius-m: 0.75rem;
+        --radius-l: 2.5rem;
+        --uppercase-kerning: 0.04ch;
     }
 }
 </style>
