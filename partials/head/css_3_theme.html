@@ -3,10 +3,38 @@
 /* ============================================
    LAYER 3: THEMES
    ============================================ */
-@layer themes {
+@layer css_3_themes {
   :root {
-      --color-bg: light-dark(var(--color-1), var(--color-9)
+      /* Button color strategies */
+    --btn-primary: var(--color-6);
+    --btn-secondary-tonal: var(--color-4); /* Lighter/same hue */
+    --btn-secondary-complementary: oklch(from var(--color-6) l c calc(h + 180)); /* Opposite hue */
+    --btn-secondary-analogous: oklch(from var(--color-6) l c calc(h + 40)); /* Adjacent hue */
+    --btn-secondary-triadic: oklch(from var(--color-6) l c calc(h + 120)); /* 120° shift */
+    --btn-secondary-desaturated: oklch(from var(--color-6) l calc(c * 0.3) h); /* Lower chroma */
+    --btn-secondary-outline: transparent;
 
+    --bg:        light-dark(var(--color-0), var(--color-9));
+    --surface-1: light-dark(var(--color-1), var(--color-6));
+    --surface-2: light-dark(var(--color-2), var(--color-7));
+    --surface-3: light-dark(var(--color-3), var(--color-8));
+    --border:    light-dark(var(--color-7), var(--color-2));
+    --accent:    light-dark(var(--color-6), var(--color-5));
+    --hover:     light-dark(var(--color-2), var(--color-7));
+    --primary:   light-dark(var(--color-6), var(--color-5));
+
+    --focus-color: var(--primary);
+
+    --bg-color-header: var(--bg);
+    --bg-color-nav:    var(--surface-2);
+    --bg-color-aside:  var(--surface-2);
+    --bg-color-main:   var(--surface-1);
+
+
+    :where(.red, .error, del) { --palette-hue: var(--oklch-red, 25); --palette-chroma: 1; --palette-hue-rotate-by: 1; }
+    :where(.blue, .ok, abbr, dfn) { --palette-hue: var(--oklch-blue, 210); --palette-chroma: 1; --palette-hue-rotate-by: 1; }
+    :where(.green, .good, ins) { --palette-hue: var(--oklch-green, 145); --palette-chroma: 1; --palette-hue-rotate-by: 1; }
+    :where(.orange, .warning) { --palette-hue: var(--oklch-orange, 75); --palette-chroma: 1; --palette-hue-rotate-by: 1; }
   }
 }
 

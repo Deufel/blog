@@ -343,3 +343,19 @@
     border-radius: var(--radius-round);
     overflow: clip;
 }
+--bg: var(--color-9);
+--surface-1: var(--color-6);
+--surface-2: var(--color-7);
+--surface-3: var(--color-8);
+--border: var(--color-7);
+--text-primary: var(--color-0);
+--text-secondary: var(--color-2);
+--text-muted: var(--color-3);
+--accent: var(--color-5);
+--accent-light: var(--color-7);
+--hover: var(--color-7);
+
+:empty {
+    display: none;
+    scrollbar-gutter: unset;
+}

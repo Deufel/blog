@@ -1,0 +1,27 @@
+<style id="css_6_layout">
+
+    @layer css_6_compositions{
+        .flow > * + * { margin-block-start: var(--flow-space, 1em); }
+        .cluster { display: flex; flex-wrap: wrap; gap: var(--gutter, var(--space-m)); justify-content: var(--cluster-horizontal-alignment, flex-start); align-items: var(--cluster-vertical-alignment, center); }
+        .switcher { display: flex; flex-wrap: wrap; gap: var(--gutter, var(--space-l)); align-items: var(--switcher-vertical-alignment, flex-start); }
+        .switcher > * { flex-grow: 1; flex-basis: calc((var(--switcher-target-container-width, 40rem) - 100%) * 999); }
+        .switcher > :nth-child(n + 3) { flex-basis: 100%; }
+        .wrapper { margin-inline: auto; max-width: var(--wrapper-max-width, 1360px); padding-left: var(--gutter); padding-right: var(--gutter); position: relative; }
+        .grid { display: grid; grid-template-columns: repeat( var(--grid-placement, auto-fill), minmax(var(--grid-min-item-size, 16rem), 1fr) ); gap: var(--gutter, var(--space-l)); }
+        /* A split 50/50 layout */
+        .grid[data-layout='50-50'] { --grid-placement: auto-fit; --grid-min-item-size: clamp(16rem, 50vw, 33rem); }
+        /* Three column grid layout */
+        .grid[data-layout='thirds'] { --grid-placement: auto-fit; --grid-min-item-size: clamp(16rem, 33%, 20rem); }
+        .sidebar { display: flex; flex-wrap: wrap; gap: var(--gutter, var(--space-s-l)); }
+        .sidebar:not([data-direction]) > :first-child { flex-basis: var(--sidebar-target-width, 20rem); flex-grow: 1; }
+        .sidebar:not([data-direction]) > :last-child { flex-basis: 0; flex-grow: 999; min-width: var(--sidebar-content-min-width, 50%); }
+        .sidebar[data-reversed] { flex-direction: row-reverse; }
+        .sidebar[data-direction='rtl'] > :last-child { flex-basis: var(--sidebar-target-width, 20rem); flex-grow: 1; }
+        .sidebar[data-direction='rtl'] > :first-child { flex-basis: 0; flex-grow: 999; min-width: var(--sidebar-content-min-width, 50%); }
+        .repel { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: var(--repel-vertical-alignment, center); gap: var(--gutter, var(--space-m)); }
+        .repel[data-nowrap] { flex-wrap: nowrap; }
+
+
+
+
+</style>
