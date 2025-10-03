@@ -21,7 +21,6 @@
     }
 
     body {
-        background: var(--bg);
         font-size: var(--size-step-1);
         font-family: var(--font-base);
         line-height: var(--leading-standard);
@@ -30,37 +29,35 @@
     }
 
     :is(h1, h2, h3, h4) {
-        line-height: var(--leading-fine);
+        line-height: var(--font-lineheight-3);
         text-wrap: balance;
     }
 
     h1 {
-        font-size: var(--size-step-6);
+        font-size: var(--font-size-6);
         max-width: 20ch;
     }
 
     h2 {
-        font-size: var(--size-step-5);
+        font-size: var(--font-size-5);
         max-width: 35ch;
     }
 
     h3 {
-        font-size: var(--size-step-4);
+        font-size: var(--font-size-4);
         max-width: 35ch;
     }
 
     :is(h4, h5, h6) {
-        font-size: var(--size-step-3);
+        font-size: var(--font-size-3);
     }
 
     small {
-        font-size: var(--size-step-0);
+        font-size: var(--font-size-0);
     }
 
     ins {
         text-decoration: none;
-        background: var(--color-primary);
-        color: var(--color-dark);
         padding-inline: 0.3em;
     }
 
@@ -102,7 +99,7 @@
 
     var {
         font-style: normal;
-        font-weight: var(--font-medium);
+        font-weight: var(--font-weight-3);
     }
 
     q {
@@ -115,11 +112,11 @@
     }
 
     ul:not([class]) > li {
-        padding-inline-start: var(--space-xs);
+        padding-inline-start: var(--size-1);
     }
 
     :is(ol, ul):not([class]) li + * {
-        margin-block-start: var(--flow-space, var(--space-xs));
+        margin-block-start: var(--flow-space, var(--size-1));
     }
 
     ul ::marker {
@@ -128,7 +125,7 @@
 
     ol ::marker {
         font-size: 1em;
-        font-weight: var(--font-bold);
+        font-weight: var(--font-weight-5);
     }
 
     /* Lists with classes and roles will be out of standard flow, so remove the default spacing */
@@ -139,15 +136,15 @@
     }
 
     dt {
-        font-weight: var(--font-medium);
+        font-weight: var(--font-weight-3);
     }
 
     dt + dd {
-        margin-block-start: var(--space-xs);
+        margin-block-start: var(--size-1);
     }
 
     dd + dt {
-        margin-block-start: var(--space-s);
+        margin-block-start: var(--size-1);
     }
 
     dd {
@@ -156,13 +153,12 @@
 
     blockquote {
         margin-inline: 0;
-        color: var(--color-light);
+        opacity: 0.9; font-size: 0.9rem;
     }
 
     blockquote footer {
-        margin-block-start: var(--space-s);
-        color: var(--color-primary);
-        font-size: var(--size-step-0);
+        margin-block-start: var(--size-1);
+        font-size: var(--font-size-2);
     }
 
     blockquote q {
@@ -184,50 +180,50 @@
 
     figcaption {
         padding-block-start: 0.5em;
-        font-size: var(--size-step-0);
+        font-size: var(--font-size-2);
         font-family: monospace;
     }
 
     table {
-        border: var(--stroke);
+        border: var(--border);
         border-collapse: collapse;
         width: 100%;
     }
 
     th {
         text-align: left;
-        font-weight: var(--font-bold);
-        line-height: var(--leading-fine);
+        font-weight: var(--font-weight-5);
+        line-height: var(--font-lineheight-3);
     }
 
     thead th {
-        padding-block: var(--space-s);
+        padding-block: var(--size-2);
     }
 
     td,
     th {
-        padding: var(--space-xs) var(--space-s);
+        padding: var(--size-0) var(--size-1);
     }
 
     th:not(:only-of-type) {
-        border-block-end: var(--stroke);
+        border-block-end: var(--border);
     }
 
     th:only-of-type {
-        border-inline-end: var(--stroke);
+        border-inline-end: var(--border);
     }
 
     :is(th, td) ~ :is(th, td) {
-        border-inline-start: var(--stroke);
+        border-inline-start: var(--border);
     }
 
     tr + tr :is(th, td) {
-        border-block-start: var(--stroke);
+        border-block-start: var(--border);
     }
 
     caption {
         caption-side: bottom;
-        margin-block-start: var(--space-s);
+        margin-block-start: var(--size-1);
     }
 
     a:not([class]):hover {
@@ -265,14 +261,14 @@
     }
 
     ::selection {
-        color: var(--color-dark);
-        background: var(--color-light);
+        color: var(--primary);
+        background: var(--color-primary-contrast);
     }
 
     hr {
         border: none;
-        border-block-start: var(--stroke);
-        margin-block: var(--flow-space, var(--space-xl));
+        border-block-start: var(--border);
+        margin-block: var(--flow-space, var(--size-4));
     }
 
     svg:not([class]) {
@@ -287,8 +283,8 @@
     svg[role="img"][width][height] {
         width: revert;
         height: revert;
-        background: var(--color-light);
-        padding: var(--space-xs);
+        background: light-dark(var(--color-1), var(--color-8));
+        padding: var(--size-0);
     }
 
     /* There's a .flow composition, but this prevents forms from having to have that applied where markup is harder to control in certain systems. It still uses the --flow-space variables though to make managing space easier */
@@ -313,8 +309,7 @@
         width: 100%;
 
         &::placeholder {
-            color: var(--color-mid);
-            opacity: 1;
+            opacity: 0.9;
         }
     }
 
