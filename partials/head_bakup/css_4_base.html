@@ -39,14 +39,17 @@
             "nav    main   aside"  1fr
         / auto   1fr    auto;
 
-        gap: var(--gap-body); /* TODO replace with conditional margins */
+        gap: var(--size-0);
+        min-height: 100svh;
+        max-height: 100svh;
+
 
 
         /* Layout component styles */
-        #header { background-color: var(--bg-color-header); grid-area: header;  }
-        #nav    { background-color: var(--bg-color-nav);    grid-area: nav;   overflow-y: auto;}
-        #aside  { background-color: var(--bg-color-aside);  grid-area: aside; overflow-y: auto;}
-        #main   { background-color: var(--bg-color-main);   grid-area: main;  overflow-y: auto;}
+        #header { grid-area: header;  }
+        #nav    { grid-area: nav;   overflow-y: auto; scrollbar-gutter: stable both-edges;}
+        #aside  { grid-area: aside; overflow-y: auto; scrollbar-gutter: stable both-edges;}
+        #main   { grid-area: main;  overflow-y: auto; scrollbar-gutter: stable both-edges;}
     }
 
 }
