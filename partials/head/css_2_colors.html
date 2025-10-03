@@ -1,0 +1,64 @@
+<style id="css_2_colors">
+
+@layer css_2_colors{
+
+    :root {
+        color-scheme: light dark;
+        --palette-hue: 250;
+        --palette-hue-rotate-by: 0;
+        --palette-chroma: 0.15;
+    }
+
+    * {
+        --color-0: oklch(98% calc(0.01 * var(--palette-chroma)) calc(var(--palette-hue) + 0 * var(--palette-hue-rotate-by)));
+        --color-1: oklch(95% calc(0.03 * var(--palette-chroma)) calc(var(--palette-hue) + 1 * var(--palette-hue-rotate-by)));
+        --color-2: oklch(90% calc(0.06 * var(--palette-chroma)) calc(var(--palette-hue) + 2 * var(--palette-hue-rotate-by)));
+        --color-3: oklch(84% calc(0.12 * var(--palette-chroma)) calc(var(--palette-hue) + 3 * var(--palette-hue-rotate-by)));
+        --color-4: oklch(76% calc(0.20 * var(--palette-chroma)) calc(var(--palette-hue) + 4 * var(--palette-hue-rotate-by)));
+        --color-5: oklch(66% calc(0.28 * var(--palette-chroma)) calc(var(--palette-hue) + 5 * var(--palette-hue-rotate-by)));
+        --color-6: oklch(56% calc(0.32 * var(--palette-chroma)) calc(var(--palette-hue) + 6 * var(--palette-hue-rotate-by)));
+        --color-7: oklch(46% calc(0.28 * var(--palette-chroma)) calc(var(--palette-hue) + 7 * var(--palette-hue-rotate-by)));
+        --color-8: oklch(36% calc(0.22 * var(--palette-chroma)) calc(var(--palette-hue) + 8 * var(--palette-hue-rotate-by)));
+        --color-9: oklch(22% calc(0.12 * var(--palette-chroma)) calc(var(--palette-hue) + 9 * var(--palette-hue-rotate-by)));
+    }
+
+    :root {
+        --bg:        light-dark(var(--color-0), var(--color-9));
+        --surface-1: light-dark(var(--color-1), var(--color-6));
+        --surface-2: light-dark(var(--color-2), var(--color-7));
+        --surface-3: light-dark(var(--color-3), var(--color-8));
+        --border:    light-dark(var(--color-7), var(--color-2));
+        --accent:    light-dark(var(--color-6), var(--color-5));
+        --hover:     light-dark(var(--color-2), var(--color-7));
+        --primary:   light-dark(var(--color-6), var(--color-5))
+    }
+
+    /* Surface system - KEY FIX: Initialize --_surface with actual value, not 'initial' */
+    .surface {
+        /* Set --_surface to surface-1 by default for light mode, surface-3 for dark mode */
+        --_surface: light-dark(var(--surface-1), var(--surface-3));
+
+        background: var(--_surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+
+        /* Calculate text color from --_surface */
+        color: oklch(from var(--_surface) calc(clamp(0, (l - 0.65) * 100, 1) * 0.22 + (1 - clamp(0, (l - 0.65) * 100, 1)) * 0.98) 0.01 h);
+    }
+
+    /* Light mode: reverse progression with :has() */
+    @media (prefers-color-scheme: light) {
+        .surface:has(.surface)          { --_surface: var(--surface-2); }
+        .surface:has(.surface .surface) { --_surface: var(--surface-3); }
+    }
+
+    /* Dark mode: normal progression */
+    @media (prefers-color-scheme: dark) {
+        .surface .surface          { --_surface: var(--surface-2); }
+        .surface .surface .surface { --_surface: var(--surface-1); }
+    }
+}
+
+</style>

@@ -1,32 +1,16 @@
 <style id="css_6_utilities">
 
 @layer css_6_utilities {
-    :is(.visually-hidden, .sr-only) { inline-size: 0; block-size: 0; overflow: hidden; }
-    .truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .gradient-border { border-width: var(--size-3); border-image-slice: 1; border-image-source: var(--conic-gradient-3); }
-    .border-between-inline > * + * { border-inline-start-width: var(--border); }
-    .border-between-block > * + * { border-block-start-width: var(--border); }
-
-    :where(.surface)                                   { --_surface: initial; background: var(--_surface, var(--surface-3)); }
-    :where(.surface) :where(.surface)                                                       { --_surface: var(--surface-2); }
-    :where(.surface) :where(.surface) :where(.surface)                                      { --_surface: var(--surface-1); }
+    /* single purpose helper classes */
+    :where(.round){aspect-ratio:1;border-radius:1000000000px;overflow:clip}
+    :where(.truncate) { white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+    :where(.visually-hidden, .sr-only) { block-size: 0; inline-size: 0; overflow: hidden; }
+    :where(.square) { aspect-ratio: 1; }
+    :where(.snap-stop) { scroll-snap-stop: always; }
+    :where(.gradient-text) { background: linear-gradient( to right in oklch,  oklch(70% 80% 240) 0%,  oklch(70% 80% 200) 100% ); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; color: transparent; }
+    :where(.muted) { opacity: 0.8; font-size: 0.9rem; }
 
 
 }
-
-@layer css_6_utilities.color {
-    :where(.red, .error, del)     { --palette-hue: var(--oklch-red, 25);    --palette-chroma: 1; --palette-hue-rotate-by: 1; }
-    :where(.blue, .ok, abbr, dfn) { --palette-hue: var(--oklch-blue, 210);  --palette-chroma: 1; --palette-hue-rotate-by: 1; }
-    :where(.green, .good, ins)    { --palette-hue: var(--oklch-green, 145); --palette-chroma: 1; --palette-hue-rotate-by: 1; }
-    :where(.orange, .warning)     { --palette-hue: var(--oklch-orange, 75); --palette-chroma: 1; --palette-hue-rotate-by: 1; }
-
-    :where(html) {
-        --red: oklch(from var(--color-9) l 0.2 25);
-        --blue: oklch(from var(--color-9) l 0.2 210);
-        --green: oklch(from var(--color-9) l 0.2 145);
-        --orange: oklch(from var(--color-7) l 0.2 75);
-    }
-}
-
 
 </style>
